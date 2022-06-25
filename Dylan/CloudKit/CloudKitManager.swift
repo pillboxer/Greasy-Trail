@@ -8,17 +8,6 @@
 import Foundation
 import CloudKit
 
-private enum DylanRecordType: CKRecord.RecordType {
-    case album = "Album"
-    case song = "Song"
-    case performance = "Performance"
-}
-
-private enum DylanReferenceType: CKRecord.RecordType {
-    case albums = "albums"
-    
-}
-
 class CloudKitManager {
     
     private static let container = CKContainer(identifier: "iCloud.Dylan")
@@ -32,7 +21,7 @@ class CloudKitManager {
         
         
         /// FIXME
-        let records = try! await Self.container.publicCloudDatabase.records(matching: query).matchResults
+        let records = try! await Self.container.publicCloudDatabase.recordTypes(matching: query).matchResults
         guard let firstResult = records.first?.1 else {
             fatalError()
         }
@@ -61,22 +50,5 @@ class CloudKitManager {
     
 }
 
-private extension CKQuery {
-    
-    convenience init (recordType: DylanRecordType, predicate: NSPredicate = .init(value: true)) {
-        self.init(recordType: recordType.rawValue, predicate: predicate)
-    }
-    
-}
-private extension CKRecord {
-    
-    func references(of referenceType: DylanReferenceType) -> [CKRecord.Reference] {
-        retrieve(type: [CKRecord.Reference].self, of: referenceType, defaultType: [])
-    }
-
-    private func retrieve<T>(type: T.Type, of referenceType: DylanReferenceType, defaultType: T) -> T {
-        self[referenceType.rawValue] as? T ?? defaultType
-    }
-}
 
 

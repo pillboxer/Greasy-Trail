@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import Dylan
 
 class DylanTests: XCTestCase {
 
@@ -29,10 +30,10 @@ class DylanTests: XCTestCase {
         }
     }
     
-    func testAlbumSearchContainsCorrectSong() {
-        let album = DylanData.Highway61Revisited
+    func testSongSearchProvidesCorrectData() {
         let song = DylanData.LikeARollingStone
-        XCTAssertTrue(album.contains(song))
+        let expected = SongDisplayModel(song: song)
+
     }
 
 }
