@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct Performance: Codable {
+    
+    let songs: [Song]
+    let date: Double
+    var LBNumber: Double?
+    
+}

@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+/// The Information Returned Upon Requesting Information About A Song
+struct SongDisplayModel {
+    
+    private let song: Song
+    
+    init(song: Song) {
+        self.song = song
+    }
+    
+}

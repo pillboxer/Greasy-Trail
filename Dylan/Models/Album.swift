@@ -6,3 +6,19 @@
 //
 
 import Foundation
+
+public struct Album: Codable {
+    
+    let title: String
+    let songs: [Song]
+    let releaseDate: Double
+    
+}
+
+extension Album {
+    
+   public func contains(_ song: Song) -> Bool {
+        songs.contains { $0 == song }
+    }
+    
+}

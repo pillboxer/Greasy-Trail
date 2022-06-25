@@ -11,7 +11,26 @@
 		866863EF2865EB6200510DDF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866863EE2865EB6200510DDF /* ContentView.swift */; };
 		866863F12865EB6400510DDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 866863F02865EB6400510DDF /* Assets.xcassets */; };
 		866863F42865EB6400510DDF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 866863F32865EB6400510DDF /* Preview Assets.xcassets */; };
+		866863FD2865EC0500510DDF /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 866863FC2865EC0500510DDF /* CloudKit.framework */; };
+		866864002865ED3800510DDF /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866863FF2865ED3800510DDF /* Song.swift */; };
+		866864042865ED8300510DDF /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866864032865ED8300510DDF /* Album.swift */; };
+		866864062865EDD700510DDF /* Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866864052865EDD700510DDF /* Performance.swift */; };
+		8668641028662E2B00510DDF /* DylanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668640F28662E2B00510DDF /* DylanTests.swift */; };
+		8668641728662F0F00510DDF /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641628662F0F00510DDF /* DummyModel.swift */; };
+		86686419286631B500510DDF /* Detective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86686418286631B400510DDF /* Detective.swift */; };
+		8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641B286709FB00510DDF /* CloudKitManager.swift */; };
+		8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641D28670A9800510DDF /* SongDisplayModel.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8668641128662E2B00510DDF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 866863E12865EB6200510DDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 866863E82865EB6200510DDF;
+			remoteInfo = Dylan;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		866863E92865EB6200510DDF /* Dylan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dylan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -20,10 +39,28 @@
 		866863F02865EB6400510DDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		866863F32865EB6400510DDF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		866863F52865EB6400510DDF /* Dylan.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Dylan.entitlements; sourceTree = "<group>"; };
+		866863FC2865EC0500510DDF /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		866863FF2865ED3800510DDF /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		866864032865ED8300510DDF /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		866864052865EDD700510DDF /* Performance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Performance.swift; sourceTree = "<group>"; };
+		8668640D28662E2B00510DDF /* DylanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DylanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8668640F28662E2B00510DDF /* DylanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DylanTests.swift; sourceTree = "<group>"; };
+		8668641628662F0F00510DDF /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
+		86686418286631B400510DDF /* Detective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detective.swift; sourceTree = "<group>"; };
+		8668641B286709FB00510DDF /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
+		8668641D28670A9800510DDF /* SongDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDisplayModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		866863E62865EB6200510DDF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				866863FD2865EC0500510DDF /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8668640A28662E2B00510DDF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,7 +74,9 @@
 			isa = PBXGroup;
 			children = (
 				866863EB2865EB6200510DDF /* Dylan */,
+				8668640E28662E2B00510DDF /* DylanTests */,
 				866863EA2865EB6200510DDF /* Products */,
+				866863FB2865EC0500510DDF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -45,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				866863E92865EB6200510DDF /* Dylan.app */,
+				8668640D28662E2B00510DDF /* DylanTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -52,6 +92,8 @@
 		866863EB2865EB6200510DDF /* Dylan */ = {
 			isa = PBXGroup;
 			children = (
+				8668641A286709ED00510DDF /* CloudKit */,
+				866863FE2865ED1100510DDF /* Models */,
 				866863EC2865EB6200510DDF /* DylanApp.swift */,
 				866863EE2865EB6200510DDF /* ContentView.swift */,
 				866863F02865EB6400510DDF /* Assets.xcassets */,
@@ -67,6 +109,43 @@
 				866863F32865EB6400510DDF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		866863FB2865EC0500510DDF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				866863FC2865EC0500510DDF /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		866863FE2865ED1100510DDF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				866863FF2865ED3800510DDF /* Song.swift */,
+				8668641D28670A9800510DDF /* SongDisplayModel.swift */,
+				866864032865ED8300510DDF /* Album.swift */,
+				866864052865EDD700510DDF /* Performance.swift */,
+				86686418286631B400510DDF /* Detective.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8668640E28662E2B00510DDF /* DylanTests */ = {
+			isa = PBXGroup;
+			children = (
+				8668640F28662E2B00510DDF /* DylanTests.swift */,
+				8668641628662F0F00510DDF /* DummyModel.swift */,
+			);
+			path = DylanTests;
+			sourceTree = "<group>";
+		};
+		8668641A286709ED00510DDF /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				8668641B286709FB00510DDF /* CloudKitManager.swift */,
+			);
+			path = CloudKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -89,6 +168,24 @@
 			productReference = 866863E92865EB6200510DDF /* Dylan.app */;
 			productType = "com.apple.product-type.application";
 		};
+		8668640C28662E2B00510DDF /* DylanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8668641328662E2B00510DDF /* Build configuration list for PBXNativeTarget "DylanTests" */;
+			buildPhases = (
+				8668640928662E2B00510DDF /* Sources */,
+				8668640A28662E2B00510DDF /* Frameworks */,
+				8668640B28662E2B00510DDF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8668641228662E2B00510DDF /* PBXTargetDependency */,
+			);
+			name = DylanTests;
+			productName = DylanTests;
+			productReference = 8668640D28662E2B00510DDF /* DylanTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -101,6 +198,10 @@
 				TargetAttributes = {
 					866863E82865EB6200510DDF = {
 						CreatedOnToolsVersion = 13.2;
+					};
+					8668640C28662E2B00510DDF = {
+						CreatedOnToolsVersion = 13.2;
+						TestTargetID = 866863E82865EB6200510DDF;
 					};
 				};
 			};
@@ -118,6 +219,7 @@
 			projectRoot = "";
 			targets = (
 				866863E82865EB6200510DDF /* Dylan */,
+				8668640C28662E2B00510DDF /* DylanTests */,
 			);
 		};
 /* End PBXProject section */
@@ -132,6 +234,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8668640B28662E2B00510DDF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -139,12 +248,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				866864062865EDD700510DDF /* Performance.swift in Sources */,
+				86686419286631B500510DDF /* Detective.swift in Sources */,
+				866864002865ED3800510DDF /* Song.swift in Sources */,
 				866863EF2865EB6200510DDF /* ContentView.swift in Sources */,
+				8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,
+				866864042865ED8300510DDF /* Album.swift in Sources */,
+				8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8668640928662E2B00510DDF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8668641728662F0F00510DDF /* DummyModel.swift in Sources */,
+				8668641028662E2B00510DDF /* DylanTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8668641228662E2B00510DDF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 866863E82865EB6200510DDF /* Dylan */;
+			targetProxy = 8668641128662E2B00510DDF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		866863F62865EB6400510DDF /* Debug */ = {
@@ -316,6 +448,40 @@
 			};
 			name = Release;
 		};
+		8668641428662E2B00510DDF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZUT4ATB28X;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sixeye.DylanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dylan.app/Contents/MacOS/Dylan";
+			};
+			name = Debug;
+		};
+		8668641528662E2B00510DDF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZUT4ATB28X;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sixeye.DylanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dylan.app/Contents/MacOS/Dylan";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -333,6 +499,15 @@
 			buildConfigurations = (
 				866863F92865EB6400510DDF /* Debug */,
 				866863FA2865EB6400510DDF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8668641328662E2B00510DDF /* Build configuration list for PBXNativeTarget "DylanTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8668641428662E2B00510DDF /* Debug */,
+				8668641528662E2B00510DDF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

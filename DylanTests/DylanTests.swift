@@ -28,5 +28,11 @@ class DylanTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testAlbumSearchContainsCorrectSong() {
+        let album = DylanData.Highway61Revisited
+        let song = DylanData.LikeARollingStone
+        XCTAssertTrue(album.contains(song))
+    }
 
 }

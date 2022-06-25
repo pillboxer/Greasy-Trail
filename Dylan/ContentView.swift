@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var detective = Detective()
     var body: some View {
         Text("Hello, world!")
             .padding()
+            .task {
+                await detective.search(song: "Like A Rolling Stone")
+            }
     }
 }
 

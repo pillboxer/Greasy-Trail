@@ -6,3 +6,22 @@
 //
 
 import Foundation
+
+public struct Song: Codable {
+    
+    let title: String
+    var author: String?
+    var firstLivePerformance: Performance?
+    var albums: [Album]?
+    
+    
+    
+}
+
+extension Song: Equatable {
+    
+    public static func == (lhs: Song, rhs: Song) -> Bool {
+        lhs.title == rhs.title
+    }
+    
+}
