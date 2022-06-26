@@ -9,11 +9,21 @@ import CloudKit
 
 extension CKRecord: RecordType {
     
-    func references(of referenceType: DylanReferenceType) -> [CKRecord.Reference] {
-        retrieve(type: [CKRecord.Reference].self, of: referenceType, defaultType: [])
+    func references(of referenceType: DylanReferenceType) -> [ReferenceType] {
+        retrieve(type: [CKRecord.Reference].self, fromPath: referenceType.rawValue, defaultType: [])
     }
-
-    private func retrieve<T>(type: T.Type, of referenceType: DylanReferenceType, defaultType: T) -> T {
-        self[referenceType.rawValue] as? T ?? defaultType
+    
+    func referenceName(for parameter: String) -> String? {
+        (self[parameter] as? CKRecord.Reference)?.recordID.recordName
+    }
+    
+    func string(for field: DylanRecordField) -> String {
+        retrieve(type: String.self, fromPath: field.rawValue, defaultType: "")
+    }
+    
+    private func retrieve<T>(type: T.Type, fromPath path: String, defaultType: T) -> T {
+        self[path] as? T ?? defaultType
     }
 }
+
+extension CKRecord.Reference: ReferenceType {}

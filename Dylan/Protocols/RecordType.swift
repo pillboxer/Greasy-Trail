@@ -8,5 +8,7 @@
 import CloudKit
 
 protocol RecordType {
-    func references(of referenceType: DylanReferenceType) -> [CKRecord.Reference]
+    func references(of referenceType: DylanReferenceType) -> [ReferenceType]
+    var recordID: CKRecord.ID { get }
+    func string(for field: DylanRecordField) -> String
 }

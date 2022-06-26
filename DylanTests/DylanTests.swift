@@ -30,10 +30,13 @@ class DylanTests: XCTestCase {
         }
     }
     
-    func testSongSearchProvidesCorrectData() {
-        let song = DylanData.LikeARollingStone
-        let expected = SongDisplayModel(song: song)
-
+    func testSongSearchProvidesCorrectData() async {
+        let albumReferences = [MockAlbumReference(title: "Highway 61 Revisited"), MockAlbumReference(title: "Before The Flood"), MockAlbumReference(title: "Real Live")]
+        let record = MockSongRecord(title: "Highway 61 Revisited", references: albumReferences)
+        let database = MockSongDatabase(record)
+        let detective = Detective(database)
+        let model = await detective.search(song: "Highway 61 Revisited")!
+        XCTAssert(model.numberOfAlbums == albumReferences.count)
     }
 
 }

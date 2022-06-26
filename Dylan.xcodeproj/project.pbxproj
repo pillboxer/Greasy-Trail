@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8656A307286784070013F595 /* MockCloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A306286784070013F595 /* MockCloudKitManager.swift */; };
+		8607123128685D8B00E54209 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123028685D8B00E54209 /* Globals.swift */; };
+		860712332868604300E54209 /* ReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860712322868604300E54209 /* ReferenceType.swift */; };
+		8607123628686CA000E54209 /* MockRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123528686CA000E54209 /* MockRecord.swift */; };
+		8607123828686CB900E54209 /* MockSongDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123728686CB900E54209 /* MockSongDatabase.swift */; };
+		8607123A28686D0400E54209 /* MockReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123928686D0400E54209 /* MockReference.swift */; };
 		8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */; };
 		8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30E28679BFE0013F595 /* DatabaseType.swift */; };
 		8656A31128679C540013F595 /* RecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A31028679C540013F595 /* RecordType.swift */; };
@@ -40,7 +44,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8656A306286784070013F595 /* MockCloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCloudKitManager.swift; sourceTree = "<group>"; };
+		8607123028685D8B00E54209 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		860712322868604300E54209 /* ReferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceType.swift; sourceTree = "<group>"; };
+		8607123528686CA000E54209 /* MockRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRecord.swift; sourceTree = "<group>"; };
+		8607123728686CB900E54209 /* MockSongDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSongDatabase.swift; sourceTree = "<group>"; };
+		8607123928686D0400E54209 /* MockReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReference.swift; sourceTree = "<group>"; };
 		8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKDatabase+Extensions.swift"; sourceTree = "<group>"; };
 		8656A30E28679BFE0013F595 /* DatabaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseType.swift; sourceTree = "<group>"; };
 		8656A31028679C540013F595 /* RecordType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordType.swift; sourceTree = "<group>"; };
@@ -84,6 +92,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8607123428686C9300E54209 /* Mocking */ = {
+			isa = PBXGroup;
+			children = (
+				8607123528686CA000E54209 /* MockRecord.swift */,
+				8607123728686CB900E54209 /* MockSongDatabase.swift */,
+				8607123928686D0400E54209 /* MockReference.swift */,
+			);
+			path = Mocking;
+			sourceTree = "<group>";
+		};
 		8656A30A28679BA50013F595 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +117,7 @@
 			children = (
 				8656A30E28679BFE0013F595 /* DatabaseType.swift */,
 				8656A31028679C540013F595 /* RecordType.swift */,
+				860712322868604300E54209 /* ReferenceType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -157,6 +176,7 @@
 		866863FE2865ED1100510DDF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8607123028685D8B00E54209 /* Globals.swift */,
 				866863FF2865ED3800510DDF /* Song.swift */,
 				8668641D28670A9800510DDF /* SongDisplayModel.swift */,
 				866864032865ED8300510DDF /* Album.swift */,
@@ -170,9 +190,9 @@
 		8668640E28662E2B00510DDF /* DylanTests */ = {
 			isa = PBXGroup;
 			children = (
+				8607123428686C9300E54209 /* Mocking */,
 				8668640F28662E2B00510DDF /* DylanTests.swift */,
 				8668641628662F0F00510DDF /* DummyModel.swift */,
-				8656A306286784070013F595 /* MockCloudKitManager.swift */,
 			);
 			path = DylanTests;
 			sourceTree = "<group>";
@@ -231,7 +251,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					866863E82865EB6200510DDF = {
 						CreatedOnToolsVersion = 13.2;
@@ -293,12 +313,14 @@
 				8656A31328679C880013F595 /* CKRecord+Extensions.swift in Sources */,
 				8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */,
 				866863EF2865EB6200510DDF /* ContentView.swift in Sources */,
+				8607123128685D8B00E54209 /* Globals.swift in Sources */,
 				8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,
 				8656A31528679CE50013F595 /* CKQuery+Extensions.swift in Sources */,
 				866864042865ED8300510DDF /* Album.swift in Sources */,
 				8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */,
 				8656A31128679C540013F595 /* RecordType.swift in Sources */,
+				860712332868604300E54209 /* ReferenceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,8 +328,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8607123628686CA000E54209 /* MockRecord.swift in Sources */,
+				8607123A28686D0400E54209 /* MockReference.swift in Sources */,
+				8607123828686CB900E54209 /* MockSongDatabase.swift in Sources */,
 				8668641728662F0F00510DDF /* DummyModel.swift in Sources */,
-				8656A307286784070013F595 /* MockCloudKitManager.swift in Sources */,
 				8668641028662E2B00510DDF /* DylanTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,6 +381,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -418,6 +443,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -444,9 +470,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Dylan/Dylan.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Dylan/Preview Content\"";
 				DEVELOPMENT_TEAM = ZUT4ATB28X;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -460,6 +488,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sixeye.Dylan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -471,9 +500,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Dylan/Dylan.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Dylan/Preview Content\"";
 				DEVELOPMENT_TEAM = ZUT4ATB28X;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -487,6 +518,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sixeye.Dylan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -498,6 +530,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ZUT4ATB28X;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
@@ -515,6 +548,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = ZUT4ATB28X;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;

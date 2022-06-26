@@ -24,5 +24,9 @@ extension SongDisplayModel {
         song.albums?.first
     }
     
+    var numberOfAlbums: Int {
+        song.albums?.count ?? 0
+    }
+    
     
 }
