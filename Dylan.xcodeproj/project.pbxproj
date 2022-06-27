@@ -31,6 +31,7 @@
 		86686419286631B500510DDF /* Detective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86686418286631B400510DDF /* Detective.swift */; };
 		8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641B286709FB00510DDF /* CloudKitManager.swift */; };
 		8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641D28670A9800510DDF /* SongDisplayModel.swift */; };
+		8678FD2F2869AC8B00DF1E69 /* CloudKitManager+Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		86686418286631B400510DDF /* Detective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detective.swift; sourceTree = "<group>"; };
 		8668641B286709FB00510DDF /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
 		8668641D28670A9800510DDF /* SongDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDisplayModel.swift; sourceTree = "<group>"; };
+		8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Albums.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				8668641B286709FB00510DDF /* CloudKitManager.swift */,
+				8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				8607123128685D8B00E54209 /* Globals.swift in Sources */,
 				8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,
+				8678FD2F2869AC8B00DF1E69 /* CloudKitManager+Albums.swift in Sources */,
 				8656A31528679CE50013F595 /* CKQuery+Extensions.swift in Sources */,
 				866864042865ED8300510DDF /* Album.swift in Sources */,
 				8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */,

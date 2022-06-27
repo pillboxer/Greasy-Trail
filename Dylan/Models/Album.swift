@@ -7,11 +7,15 @@
 
 import Foundation
 
-public struct Album: Codable {
+public struct Album: Codable, Equatable, Identifiable {
     
     let title: String
     let songs: [Song]
     let releaseDate: Double
+    
+    public var id: String {
+        title + String(releaseDate)
+    }
     
 }
 

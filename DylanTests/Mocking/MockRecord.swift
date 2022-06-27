@@ -32,11 +32,17 @@ class MockSongRecord: RecordType, CustomStringConvertible {
         """
     }
     
-    func string(for field: DylanRecordField) -> String {
+    func string(for field: DylanRecordField) -> String? {
         switch field {
         case .title:
             return title
+        default:
+            return nil
         }
+    }
+    
+    func double(for field: DylanRecordField) -> Double? {
+        nil
     }
     
 }

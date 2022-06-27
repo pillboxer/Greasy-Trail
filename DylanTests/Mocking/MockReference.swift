@@ -8,41 +8,55 @@
 import CloudKit
 @testable import Dylan
 
-class MockAlbumReference: ReferenceType {
+struct MockAlbumReference: ReferenceType {
     
     let recordName = UUID().uuidString
     let title: String
-    init(title: String) {
+    let releaseDate: Double
+    
+    init(title: String, releaseDate: Double) {
         self.title = title
+        self.releaseDate = releaseDate
     }
     
-    var record: MockAlbumRecord { MockAlbumRecord(title: title) }
+    var record: MockAlbumRecord { MockAlbumRecord(title: title, releaseDate: releaseDate) }
     var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
 }
 
-class MockAlbumRecord: RecordType, CustomStringConvertible {
+struct MockAlbumRecord: RecordType, CustomStringConvertible {
+    
+    let title: String
+    let releaseDate: Double
+    let recordName = UUID().uuidString
+    
+    init(title: String, releaseDate: Double) {
+        self.title = title
+        self.releaseDate = releaseDate
+    }
+    
+    func string(for field: DylanRecordField) -> String? {
+        switch field {
+        case .title:
+            return title
+        default:
+            return nil
+        }
+    }
+    
+    func double(for field: DylanRecordField) -> Double? {
+        switch field {
+        case .releaseDate:
+            return releaseDate
+        default:
+            return nil
+        }
+    }
     
     // For the moment returning no songs
     func references(of referenceType: Dylan.DylanReferenceType) -> [Dylan.ReferenceType] {
         []
     }
-    
-    func string(for field: DylanRecordField) -> String {
-        switch field {
-        case .title:
-            return title
-        }
-    }
-    
-    
-    let title: String
-    let recordName = UUID().uuidString
-
-    init(title: String) {
-        self.title = title
-    }
-    
-    
+        
     var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
 
     var description: String {

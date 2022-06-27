@@ -11,10 +11,10 @@ import CloudKit
 
 class MockSongDatabase: DatabaseType {
     
-    var songRecord: MockSongRecord
+    var songRecord: MockSongRecord?
     var referenceRecords: [MockAlbumRecord]?
     
-    init(_ songRecord: MockSongRecord) {
+    init(_ songRecord: MockSongRecord?) {
         self.songRecord = songRecord
     }
     
@@ -29,6 +29,7 @@ class MockSongDatabase: DatabaseType {
             }
         }
         else {
+            guard let songRecord = songRecord else { return ([], nil) }
             let recordsToAdd = songRecord.references.compactMap { $0.record }
             referenceRecords = recordsToAdd
             let result = Result<RecordType, Error>.success(songRecord)

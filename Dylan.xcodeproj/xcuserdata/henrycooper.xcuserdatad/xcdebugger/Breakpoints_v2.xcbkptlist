@@ -14,10 +14,88 @@
             filePath = "Dylan/CloudKit/CloudKitManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "CloudKitManager"
             landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8A50D997-8D1A-4B06-97CC-2B9689437A8E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DylanTests/DylanTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "testSongThatDoesntExistProvidesNilData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8A50D997-8D1A-4B06-97CC-2B9689437A8E - fa7af82f3ab1ab92"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for DylanTests.DylanTests.testSongThatDoesntExistProvidesNilData() async -&gt; ()"
+                  moduleName = "DylanTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/DylanTests/DylanTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  uuid = "8A50D997-8D1A-4B06-97CC-2B9689437A8E - 2759c386d8b02588"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for DylanTests.DylanTests.testSongThatDoesntExistProvidesNilData() async -&gt; ()"
+                  moduleName = "DylanTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/DylanTests/DylanTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "8A50D997-8D1A-4B06-97CC-2B9689437A8E - e3805ce0e09f6794"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for DylanTests.DylanTests.testSongThatDoesntExistProvidesNilData() async -&gt; ()"
+                  moduleName = "DylanTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/DylanTests/DylanTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "80">
+               </Location>
+               <Location
+                  uuid = "8A50D997-8D1A-4B06-97CC-2B9689437A8E - e3805ce0e09f6794"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for DylanTests.DylanTests.testSongThatDoesntExistProvidesNilData() async -&gt; ()"
+                  moduleName = "DylanTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/DylanTests/DylanTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "300">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -10,7 +10,7 @@ import Foundation
 /// The Information Returned Upon Requesting Information About A Song
 public struct SongDisplayModel {
     
-    private let song: Song
+    let song: Song
     
     init(song: Song) {
         self.song = song
@@ -26,6 +26,10 @@ extension SongDisplayModel {
     
     var numberOfAlbums: Int {
         song.albums?.count ?? 0
+    }
+    
+    var albums: [Album]? {
+        song.albums
     }
     
     

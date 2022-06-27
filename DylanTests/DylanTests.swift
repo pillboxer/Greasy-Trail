@@ -31,12 +31,22 @@ class DylanTests: XCTestCase {
     }
     
     func testSongSearchProvidesCorrectData() async {
-        let albumReferences = [MockAlbumReference(title: "Highway 61 Revisited"), MockAlbumReference(title: "Before The Flood"), MockAlbumReference(title: "Real Live")]
-        let record = MockSongRecord(title: "Highway 61 Revisited", references: albumReferences)
+        let expectedAlbums = [DummyModel.hw61AlbumRepresentation, DummyModel.beforeTheFloodAlbumRepresentation, DummyModel.realLiveAlbumRepresentation]
+        let record = DummyModel.hw61SongRecord
         let database = MockSongDatabase(record)
         let detective = Detective(database)
         let model = await detective.search(song: "Highway 61 Revisited")!
-        XCTAssert(model.numberOfAlbums == albumReferences.count)
+        guard model.song == DummyModel.hw61Song else {
+            return XCTAssert(false)
+        }
+        XCTAssert(expectedAlbums == model.albums)
+    }
+    
+    func testSongThatDoesntExistProvidesNilData() async {
+        let database = MockSongDatabase(nil)
+        let detective = Detective(database)
+        let model = await detective.search(song: "Not Exist")
+        XCTAssert(model == nil)
     }
 
 }
