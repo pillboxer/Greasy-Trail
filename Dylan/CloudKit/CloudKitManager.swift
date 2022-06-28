@@ -7,6 +7,9 @@
 
 import Foundation
 import CloudKit
+import OSLog
+
+
 
 class CloudKitManager {
     
@@ -18,6 +21,8 @@ class CloudKitManager {
     
     // Should throw
     func fetch(song title: String) async -> SongDisplayModel? {
+        
+        os_log("Fetching song with title: %@", log: Log_CloudKit, title)
         
         // Fetch The Song
         let predicate = NSPredicate(format: "title == %@", title)

@@ -31,23 +31,31 @@ struct SearchView: View {
     
     @State private var text: String = ""
     @Binding var model: SongDisplayModel?
-
+    
     @StateObject private var detective = Detective()
-
+    
     var body: some View {
-        HStack {
-            TextField.init("Search", text: $text)
+        VStack {
+            Spacer()
+            HStack{
+                Spacer()
+                NSTextFieldRepresentable(placeholder: "search_placeholder", text: $text)
+                    .padding(.horizontal)
+                    .frame(width: 600 / 4)
+                Spacer()
+            }
             Button {
+                let savedText = text
+                text = ""
                 Task {
-                  model = await detective.search(song: text)
+                    model = await detective.search(song: savedText)
                 }
             } label: {
                 Text("Go")
             }
-
         }
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(.bottom, 16)
+        .frame(width: 600, height: 400)
     }
     
 }
@@ -55,7 +63,7 @@ struct SearchView: View {
 struct ResultView: View {
     
     let model: SongDisplayModel
-
+    
     var body: some View {
         VStack {
             
@@ -71,7 +79,7 @@ struct ResultView: View {
             else {
                 Text("Never released on an album")
             }
-
+            
             
         }
     }
