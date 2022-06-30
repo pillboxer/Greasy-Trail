@@ -9,7 +9,7 @@ import Foundation
 
 extension CloudKitManager {
     
-    func createAlbums(from record: RecordType) async -> [Album] {
+    func createSongAlbums(from record: RecordType) async -> [Album] {
         var albums: [Album] = []
         
         let albumReferences = record.references(of: .albums)
@@ -28,6 +28,6 @@ extension CloudKitManager {
             let album = Album(title: title, songs: [], releaseDate: releaseDate)
             albums.append(album)
         }
-        return albums
+        return albums.sorted { $0.releaseDate < $1.releaseDate }
     }
 }

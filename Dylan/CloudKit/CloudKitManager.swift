@@ -41,9 +41,11 @@ class CloudKitManager {
             guard let songTitle = record.string(for: .title) else {
                 return nil
             }
-            let albums = await createAlbums(from: record)
+            let albums = await createSongAlbums(from: record)
+            let performance = await createSongFirstPerformance(from: record)
             // Fetch The Albums it appeared on
-            let newSong = Song(title: songTitle, albums: albums)
+            
+            let newSong = Song(title: songTitle, firstLivePerformance: performance, albums: albums)
             return SongDisplayModel(song: newSong)
         default:
             return nil
@@ -57,6 +59,7 @@ class CloudKitManager {
         let albums = results?.compactMap { try? $0.get() }
         return albums
     }
+
     
 }
 

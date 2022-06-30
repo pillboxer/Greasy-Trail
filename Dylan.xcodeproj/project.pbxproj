@@ -33,7 +33,9 @@
 		8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641D28670A9800510DDF /* SongDisplayModel.swift */; };
 		8678FD2F2869AC8B00DF1E69 /* CloudKitManager+Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */; };
 		8678FD312869F76700DF1E69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8678FD302869F76700DF1E69 /* Localizable.strings */; };
-		8678FD362869FABE00DF1E69 /* NSTextFieldRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8678FD352869FABE00DF1E69 /* NSTextFieldRepresentable.swift */; };
+		86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */; };
+		86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B49419286DDEBC00B0C4EC /* Formatter.swift */; };
+		86B4941C286E0F0900B0C4EC /* CloudKitManager+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B4941B286E0F0900B0C4EC /* CloudKitManager+Performances.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +78,9 @@
 		8668641D28670A9800510DDF /* SongDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongDisplayModel.swift; sourceTree = "<group>"; };
 		8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Albums.swift"; sourceTree = "<group>"; };
 		8678FD302869F76700DF1E69 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		8678FD352869FABE00DF1E69 /* NSTextFieldRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NSTextFieldRepresentable.swift; path = ../../../../NSTextFieldRepresentable.swift; sourceTree = "<group>"; };
+		86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTextFieldRepresentable.swift; sourceTree = "<group>"; };
+		86B49419286DDEBC00B0C4EC /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		86B4941B286E0F0900B0C4EC /* CloudKitManager+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Performances.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,7 @@
 		866863EB2865EB6200510DDF /* Dylan */ = {
 			isa = PBXGroup;
 			children = (
+				86B49418286DDEB300B0C4EC /* Formatting */,
 				8678FD322869FA6200DF1E69 /* Views */,
 				8656A30D28679BE60013F595 /* Protocols */,
 				8656A30A28679BA50013F595 /* Extensions */,
@@ -209,6 +214,7 @@
 			children = (
 				8668641B286709FB00510DDF /* CloudKitManager.swift */,
 				8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */,
+				86B4941B286E0F0900B0C4EC /* CloudKitManager+Performances.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -233,9 +239,17 @@
 		8678FD342869FA7200DF1E69 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8678FD352869FABE00DF1E69 /* NSTextFieldRepresentable.swift */,
+				86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		86B49418286DDEB300B0C4EC /* Formatting */ = {
+			isa = PBXGroup;
+			children = (
+				86B49419286DDEBC00B0C4EC /* Formatter.swift */,
+			);
+			path = Formatting;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,11 +354,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8656A31728679D960013F595 /* ConvenienceEnums.swift in Sources */,
+				86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */,
 				866864062865EDD700510DDF /* Performance.swift in Sources */,
 				86686419286631B500510DDF /* Detective.swift in Sources */,
-				8678FD362869FABE00DF1E69 /* NSTextFieldRepresentable.swift in Sources */,
+				86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */,
 				8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */,
 				866864002865ED3800510DDF /* Song.swift in Sources */,
+				86B4941C286E0F0900B0C4EC /* CloudKitManager+Performances.swift in Sources */,
 				8656A31328679C880013F595 /* CKRecord+Extensions.swift in Sources */,
 				8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */,
 				866863EF2865EB6200510DDF /* ContentView.swift in Sources */,

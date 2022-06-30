@@ -12,10 +12,7 @@ public struct Song: Codable {
     let title: String
     var author: String?
     var firstLivePerformance: Performance?
-    var albums: [Album]?
-    
-    
-    
+    var albums: [Album]?    
 }
 
 extension Song: Equatable {
