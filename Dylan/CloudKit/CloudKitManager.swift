@@ -9,11 +9,9 @@ import Foundation
 import CloudKit
 import OSLog
 
-
-
 class CloudKitManager {
     
-    private let database: DatabaseType
+    let database: DatabaseType
     
     init(_ database: DatabaseType) {
         self.database = database
@@ -27,10 +25,10 @@ class CloudKitManager {
         // Fetch The Song
         let predicate = NSPredicate(format: "title == %@", title)
         let query = CKQuery(recordType: .song, predicate: predicate)
-                
+        
         /// FIXME
         let records = try! await database.recordTypes(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: CKQueryOperation.maximumResults).matchResults
-       
+        os_log("Found %@ records matching", String(describing: records.count))
         guard let firstResult = records.first?.1 else {
             return nil
         }
@@ -41,11 +39,11 @@ class CloudKitManager {
             guard let songTitle = record.string(for: .title) else {
                 return nil
             }
-            let albums = await createSongAlbums(from: record)
-            let performance = await createSongFirstPerformance(from: record)
+            let asReference = CKRecord.Reference(recordID: record.recordID, action: .none)
+            let albums = try! await albumsThatIncludeSong(asReference)
             // Fetch The Albums it appeared on
             
-            let newSong = Song(title: songTitle, firstLivePerformance: performance, albums: albums)
+            let newSong = Song(title: songTitle, firstLivePerformance: nil, albums: albums)
             return SongDisplayModel(song: newSong)
         default:
             return nil
@@ -59,7 +57,6 @@ class CloudKitManager {
         let albums = results?.compactMap { try? $0.get() }
         return albums
     }
-
     
 }
 

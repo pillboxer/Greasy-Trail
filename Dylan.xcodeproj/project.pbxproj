@@ -35,7 +35,12 @@
 		8678FD312869F76700DF1E69 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8678FD302869F76700DF1E69 /* Localizable.strings */; };
 		86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */; };
 		86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B49419286DDEBC00B0C4EC /* Formatter.swift */; };
-		86B4941C286E0F0900B0C4EC /* CloudKitManager+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B4941B286E0F0900B0C4EC /* CloudKitManager+Performances.swift */; };
+		86C52692286F02E50035DD31 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C52691286F02E50035DD31 /* SearchView.swift */; };
+		86C52694286F048A0035DD31 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C52693286F048A0035DD31 /* ResultView.swift */; };
+		86C52697286F04EE0035DD31 /* ResultOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C52696286F04EE0035DD31 /* ResultOverviewView.swift */; };
+		86C52699286F06780035DD31 /* OnTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C52698286F06780035DD31 /* OnTapButton.swift */; };
+		86C5269B286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */; };
+		86C5269D286F07920035DD31 /* ResultAlbumsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5269C286F07920035DD31 /* ResultAlbumsTableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +85,12 @@
 		8678FD302869F76700DF1E69 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTextFieldRepresentable.swift; sourceTree = "<group>"; };
 		86B49419286DDEBC00B0C4EC /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
-		86B4941B286E0F0900B0C4EC /* CloudKitManager+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Performances.swift"; sourceTree = "<group>"; };
+		86C52691286F02E50035DD31 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		86C52693286F048A0035DD31 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
+		86C52696286F04EE0035DD31 /* ResultOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultOverviewView.swift; sourceTree = "<group>"; };
+		86C52698286F06780035DD31 /* OnTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTapButton.swift; sourceTree = "<group>"; };
+		86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultInformationTitleAndDetailView.swift; sourceTree = "<group>"; };
+		86C5269C286F07920035DD31 /* ResultAlbumsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAlbumsTableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,7 +224,6 @@
 			children = (
 				8668641B286709FB00510DDF /* CloudKitManager.swift */,
 				8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */,
-				86B4941B286E0F0900B0C4EC /* CloudKitManager+Performances.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -231,7 +240,9 @@
 		8678FD332869FA6700DF1E69 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				86C52695286F04CD0035DD31 /* Results */,
 				866863EE2865EB6200510DDF /* ContentView.swift */,
+				86C52691286F02E50035DD31 /* SearchView.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -240,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */,
+				86C52698286F06780035DD31 /* OnTapButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -250,6 +262,17 @@
 				86B49419286DDEBC00B0C4EC /* Formatter.swift */,
 			);
 			path = Formatting;
+			sourceTree = "<group>";
+		};
+		86C52695286F04CD0035DD31 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				86C52693286F048A0035DD31 /* ResultView.swift */,
+				86C52696286F04EE0035DD31 /* ResultOverviewView.swift */,
+				86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */,
+				86C5269C286F07920035DD31 /* ResultAlbumsTableView.swift */,
+			);
+			path = Results;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -353,18 +376,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C52697286F04EE0035DD31 /* ResultOverviewView.swift in Sources */,
 				8656A31728679D960013F595 /* ConvenienceEnums.swift in Sources */,
+				86C5269B286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift in Sources */,
 				86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */,
 				866864062865EDD700510DDF /* Performance.swift in Sources */,
 				86686419286631B500510DDF /* Detective.swift in Sources */,
 				86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */,
 				8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */,
 				866864002865ED3800510DDF /* Song.swift in Sources */,
-				86B4941C286E0F0900B0C4EC /* CloudKitManager+Performances.swift in Sources */,
 				8656A31328679C880013F595 /* CKRecord+Extensions.swift in Sources */,
+				86C52699286F06780035DD31 /* OnTapButton.swift in Sources */,
 				8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */,
+				86C52692286F02E50035DD31 /* SearchView.swift in Sources */,
 				866863EF2865EB6200510DDF /* ContentView.swift in Sources */,
 				8607123128685D8B00E54209 /* Globals.swift in Sources */,
+				86C52694286F048A0035DD31 /* ResultView.swift in Sources */,
 				8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,
 				8678FD2F2869AC8B00DF1E69 /* CloudKitManager+Albums.swift in Sources */,
@@ -372,6 +399,7 @@
 				866864042865ED8300510DDF /* Album.swift in Sources */,
 				8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */,
 				8656A31128679C540013F595 /* RecordType.swift in Sources */,
+				86C5269D286F07920035DD31 /* ResultAlbumsTableView.swift in Sources */,
 				860712332868604300E54209 /* ReferenceType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
