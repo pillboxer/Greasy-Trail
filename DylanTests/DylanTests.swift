@@ -30,23 +30,37 @@ class DylanTests: XCTestCase {
         }
     }
     
-    func testSongSearchProvidesCorrectData() async {
-        let expectedAlbums = [DummyModel.hw61AlbumRepresentation, DummyModel.beforeTheFloodAlbumRepresentation, DummyModel.realLiveAlbumRepresentation]
-        let record = DummyModel.hw61SongRecord
-        let database = MockSongDatabase(record)
+    private func searchTombstoneBlues() async -> SongDisplayModel? {
+        let songToSearch = "Tombstone Blues"
+        let mockSongRecord = DummyModel.tombstoneBluesRecord
+        let mockAlbumRecords = [DummyModel.hw61AlbumRecord, DummyModel.realLiveAlbumRecord]
+        let database = MockSongDatabase(songRecord: mockSongRecord, albums: mockAlbumRecords)
         let detective = Detective(database)
-        let model = await detective.search(song: "Highway 61 Revisited")!
-        guard model.song == DummyModel.hw61Song else {
-            return XCTAssert(false)
-        }
-        XCTAssert(expectedAlbums == model.albums)
+        return await detective.search(song: songToSearch)
     }
     
-    func testSongThatDoesntExistProvidesNilData() async {
-        let database = MockSongDatabase(nil)
-        let detective = Detective(database)
-        let model = await detective.search(song: "Not Exist")
-        XCTAssert(model == nil)
+    func testSongSearchReturnsCorrectAlbums() async {
+        let result = await searchTombstoneBlues()
+        let albums = result?.albums
+        XCTAssert(albums == DummyModel.expectedAlbumsForTombstoneBlues && result?.numberOfAlbums == DummyModel.expectedAlbumsForTombstoneBlues.count)
     }
+    
+    func testSongSearchReturnsCorrectFirstAlbumAppearance() async {
+        let result = await searchTombstoneBlues()
+        XCTAssert(result?.firstAlbumAppearance == DummyModel.expectedAlbumsForTombstoneBlues.first)
+    }
+    
+    func testSongSearchReturnsCorrectAuthor() async {
+        let result = await searchTombstoneBlues()
+        XCTAssert(result?.author == "Bob Dylan")
+    }
+    
+    func testUnknownSongReturnsNilDisplayModel() async {
+        let database = MockSongDatabase(songRecord: nil, albums: [])
+        let detective = Detective(database)
+        let result = await detective.search(song: "Brown Sugar")
+        XCTAssertNil(result)
+    }
+    
 
 }

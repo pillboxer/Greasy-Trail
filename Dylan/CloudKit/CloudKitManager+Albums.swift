@@ -11,9 +11,9 @@ extension CloudKitManager {
     
     func albumsThatIncludeSong(_ songReferenceToMatch: CKRecord.Reference) async throws -> [Album] {
         var albums: [Album] = []
-        let predicate = NSPredicate(format: "songs CONTAINS %@", songReferenceToMatch)
+        let predicate = NSPredicate(format: "songs == %@", songReferenceToMatch)
         let query = CKQuery(recordType: .album, predicate: predicate)
-        let results = try await database.recordTypes(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: CKQueryOperation.maximumResults).matchResults
+        let results = try await database.referenceRecordTypes(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: CKQueryOperation.maximumResults).matchResults
         let recordTypes = results.compactMap { try? $0.1.get() }
         let albumTitles = recordTypes.compactMap { $0.string(for: .title) }
         let albumReleaseDates = recordTypes.compactMap { $0.double(for: .releaseDate)}

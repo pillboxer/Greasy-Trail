@@ -1,35 +1,44 @@
 //
-//  MockRecord.swift
+//  MockSongRecord.swift
 //  DylanTests
 //
-//  Created by Henry Cooper on 26/06/2022.
+//  Created by Henry Cooper on 02/07/2022.
 //
 
+import Foundation
 @testable import Dylan
 import CloudKit
 
-class MockSongRecord: RecordType, CustomStringConvertible {
+class MockSongRecord {
     
-    let recordName = UUID().uuidString
-    let references: [MockAlbumReference]
-    
+    private let recordName = UUID().uuidString
     let title: String
     
     var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
 
-    init(title: String, references: [MockAlbumReference]) {
+    init(title: String) {
         self.title = title
-        self.references = references
     }
+}
+
+extension MockSongRecord: CustomStringConvertible {
     
-    func references(of referenceType: Dylan.DylanReferenceType) -> [Dylan.ReferenceType] {
-        references
-    }
- 
     var description: String {
         """
             song title: \(title)
         """
+    }
+    
+}
+
+extension MockSongRecord: RecordType {
+    
+    func references(of referenceType: Dylan.DylanReferenceType) -> [Dylan.ReferenceType] {
+        []
+    }
+    
+    func reference(of referenceType: Dylan.DylanReferenceType) -> Dylan.ReferenceType? {
+        nil
     }
     
     func string(for field: DylanRecordField) -> String? {

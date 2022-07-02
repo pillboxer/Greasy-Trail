@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		8607123128685D8B00E54209 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123028685D8B00E54209 /* Globals.swift */; };
 		860712332868604300E54209 /* ReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860712322868604300E54209 /* ReferenceType.swift */; };
-		8607123628686CA000E54209 /* MockRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123528686CA000E54209 /* MockRecord.swift */; };
-		8607123828686CB900E54209 /* MockSongDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123728686CB900E54209 /* MockSongDatabase.swift */; };
-		8607123A28686D0400E54209 /* MockReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123928686D0400E54209 /* MockReference.swift */; };
 		8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */; };
 		8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30E28679BFE0013F595 /* DatabaseType.swift */; };
 		8656A31128679C540013F595 /* RecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A31028679C540013F595 /* RecordType.swift */; };
@@ -41,6 +38,9 @@
 		86C52699286F06780035DD31 /* OnTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C52698286F06780035DD31 /* OnTapButton.swift */; };
 		86C5269B286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */; };
 		86C5269D286F07920035DD31 /* ResultAlbumsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5269C286F07920035DD31 /* ResultAlbumsTableView.swift */; };
+		86C5269F287080160035DD31 /* MockDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5269E287080160035DD31 /* MockDatabase.swift */; };
+		86C526A12870828B0035DD31 /* MockAlbumRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526A02870828B0035DD31 /* MockAlbumRecord.swift */; };
+		86C526A32870863B0035DD31 /* MockSongRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526A22870863A0035DD31 /* MockSongRecord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,9 +56,6 @@
 /* Begin PBXFileReference section */
 		8607123028685D8B00E54209 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		860712322868604300E54209 /* ReferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceType.swift; sourceTree = "<group>"; };
-		8607123528686CA000E54209 /* MockRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRecord.swift; sourceTree = "<group>"; };
-		8607123728686CB900E54209 /* MockSongDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSongDatabase.swift; sourceTree = "<group>"; };
-		8607123928686D0400E54209 /* MockReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockReference.swift; sourceTree = "<group>"; };
 		8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKDatabase+Extensions.swift"; sourceTree = "<group>"; };
 		8656A30E28679BFE0013F595 /* DatabaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseType.swift; sourceTree = "<group>"; };
 		8656A31028679C540013F595 /* RecordType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordType.swift; sourceTree = "<group>"; };
@@ -91,6 +88,9 @@
 		86C52698286F06780035DD31 /* OnTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTapButton.swift; sourceTree = "<group>"; };
 		86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultInformationTitleAndDetailView.swift; sourceTree = "<group>"; };
 		86C5269C286F07920035DD31 /* ResultAlbumsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAlbumsTableView.swift; sourceTree = "<group>"; };
+		86C5269E287080160035DD31 /* MockDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabase.swift; sourceTree = "<group>"; };
+		86C526A02870828B0035DD31 /* MockAlbumRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlbumRecord.swift; sourceTree = "<group>"; };
+		86C526A22870863A0035DD31 /* MockSongRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSongRecord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,9 +115,9 @@
 		8607123428686C9300E54209 /* Mocking */ = {
 			isa = PBXGroup;
 			children = (
-				8607123528686CA000E54209 /* MockRecord.swift */,
-				8607123728686CB900E54209 /* MockSongDatabase.swift */,
-				8607123928686D0400E54209 /* MockReference.swift */,
+				86C5269E287080160035DD31 /* MockDatabase.swift */,
+				86C526A02870828B0035DD31 /* MockAlbumRecord.swift */,
+				86C526A22870863A0035DD31 /* MockSongRecord.swift */,
 			);
 			path = Mocking;
 			sourceTree = "<group>";
@@ -408,11 +408,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8607123628686CA000E54209 /* MockRecord.swift in Sources */,
-				8607123A28686D0400E54209 /* MockReference.swift in Sources */,
-				8607123828686CB900E54209 /* MockSongDatabase.swift in Sources */,
 				8668641728662F0F00510DDF /* DummyModel.swift in Sources */,
+				86C5269F287080160035DD31 /* MockDatabase.swift in Sources */,
+				86C526A12870828B0035DD31 /* MockAlbumRecord.swift in Sources */,
 				8668641028662E2B00510DDF /* DylanTests.swift in Sources */,
+				86C526A32870863B0035DD31 /* MockSongRecord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

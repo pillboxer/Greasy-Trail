@@ -12,42 +12,40 @@ import Foundation
 class DummyModel {
     
     // Public
-    
-    static var hw61SongRecord: MockSongRecord {
-        MockSongRecord(title: hw61Title, references: [hw61AlbumRepresentationReference, beforeTheFloodAlbumRepresentationReference, realLiveAlbumRepresentationReference])
-    }
-    
     static var hw61Song: Song {
         Song(title: hw61Title, albums: [hw61AlbumRepresentation, beforeTheFloodAlbumRepresentation, realLiveAlbumRepresentation])
-    }
-    
-    static var hw61AlbumRepresentationReference: MockAlbumReference {
-        MockAlbumReference(title: hw61Title, releaseDate: hw61ReleaseDate)
     }
     
     static var hw61AlbumRepresentation: Album {
         Album(title: hw61Title, songs: [], releaseDate: hw61ReleaseDate)
     }
     
-    static var beforeTheFloodAlbumRepresentationReference: MockAlbumReference {
-        MockAlbumReference(title: beforeTheFloodTitle, releaseDate: beforeTheFloodReleaseDate)
-    }
-    
     static var beforeTheFloodAlbumRepresentation: Album {
         Album(title: beforeTheFloodTitle, songs: [], releaseDate: beforeTheFloodReleaseDate)
-    }
-    
-    static var realLiveAlbumRepresentationReference: MockAlbumReference {
-        MockAlbumReference(title: realLiveTitle, releaseDate: realLiveReleaseDate)
     }
     
     static var realLiveAlbumRepresentation: Album {
         Album(title: realLiveTitle, songs: [], releaseDate: realLiveReleaseDate)
     }
     
+    static var tombstoneBluesRecord: MockSongRecord {
+        MockSongRecord(title: "Tombstone Blues")
+    }
+    
+    static var hw61AlbumRecord: MockAlbumRecord {
+        MockAlbumRecord(title: hw61Title, releaseDate: hw61ReleaseDate)
+    }
+    
+    static var realLiveAlbumRecord: MockAlbumRecord {
+        MockAlbumRecord(title: realLiveTitle, releaseDate: realLiveReleaseDate)
+    }
+    
+    static let expectedAlbumsForTombstoneBlues = [hw61AlbumRepresentation, realLiveAlbumRepresentation]
+
+    
     // Private
     
-    private static var hw61Title: String {
+    static var hw61Title: String {
         "Highway 61 Revisited"
     }
     
@@ -70,7 +68,5 @@ class DummyModel {
     private static var realLiveReleaseDate: Double {
         470534400
     }
-    
-    
-    
+        
 }

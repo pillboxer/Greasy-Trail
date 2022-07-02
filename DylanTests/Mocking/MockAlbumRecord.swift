@@ -1,28 +1,13 @@
 //
-//  MockReference.swift
+//  MockAlbumRecord.swift
 //  DylanTests
 //
-//  Created by Henry Cooper on 26/06/2022.
+//  Created by Henry Cooper on 02/07/2022.
 //
 
-import CloudKit
+import Foundation
 @testable import Dylan
-
-struct MockAlbumReference: ReferenceType {
-    
-    let recordName = UUID().uuidString
-    let title: String
-    let releaseDate: Double
-    
-    init(title: String, releaseDate: Double) {
-        self.title = title
-        self.releaseDate = releaseDate
-    }
-    
-    var record: MockAlbumRecord { MockAlbumRecord(title: title, releaseDate: releaseDate) }
-    var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
-}
-
+import CloudKit
 struct MockAlbumRecord: RecordType, CustomStringConvertible {
     
     let title: String
@@ -55,6 +40,10 @@ struct MockAlbumRecord: RecordType, CustomStringConvertible {
     // For the moment returning no songs
     func references(of referenceType: Dylan.DylanReferenceType) -> [Dylan.ReferenceType] {
         []
+    }
+    
+    func reference(of referenceType: DylanReferenceType) -> ReferenceType? {
+        nil
     }
         
     var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }

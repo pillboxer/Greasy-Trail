@@ -22,8 +22,10 @@ enum DylanRecordField: String {
     // Song
     case title
     case firstLivePerformance
+
+    // Album
     case releaseDate
-    
+
     // Performance
     case venue
     case date

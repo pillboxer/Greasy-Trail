@@ -38,9 +38,6 @@ struct ResultOverviewView: View {
     private var albumInformationView: some View {
         if let first = model.firstAlbumAppearance {
             ResultsInformationTitleAndDetailView(title: "results_information_title_first_appearance", detail: first.title)
-            if let performance = model.firstLivePerformance {
-                ResultsInformationTitleAndDetailView(title: "results_information_title_first_live_performance", detail: formatter.formatted(performance: performance))
-            }
         }
         else {
             Text("Never released on an album")

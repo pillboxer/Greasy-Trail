@@ -16,6 +16,7 @@ extension CKRecord: RecordType {
     func reference(of referenceType: DylanReferenceType) -> ReferenceType? {
         retrieve(type: CKRecord.Reference.self, fromPath: referenceType.rawValue) ?? nil
     }
+    
     func referenceName(for parameter: String) -> String? {
         (self[parameter] as? CKRecord.Reference)?.recordID.recordName
     }
