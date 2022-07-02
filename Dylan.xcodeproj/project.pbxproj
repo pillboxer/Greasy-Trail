@@ -41,6 +41,7 @@
 		86C5269F287080160035DD31 /* MockDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5269E287080160035DD31 /* MockDatabase.swift */; };
 		86C526A12870828B0035DD31 /* MockAlbumRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526A02870828B0035DD31 /* MockAlbumRecord.swift */; };
 		86C526A32870863B0035DD31 /* MockSongRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526A22870863A0035DD31 /* MockSongRecord.swift */; };
+		86C526A5287092A70035DD31 /* CloudKitManager+Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526A4287092A70035DD31 /* CloudKitManager+Song.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		86C5269E287080160035DD31 /* MockDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabase.swift; sourceTree = "<group>"; };
 		86C526A02870828B0035DD31 /* MockAlbumRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlbumRecord.swift; sourceTree = "<group>"; };
 		86C526A22870863A0035DD31 /* MockSongRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSongRecord.swift; sourceTree = "<group>"; };
+		86C526A4287092A70035DD31 /* CloudKitManager+Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Song.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +226,7 @@
 			children = (
 				8668641B286709FB00510DDF /* CloudKitManager.swift */,
 				8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */,
+				86C526A4287092A70035DD31 /* CloudKitManager+Song.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,
 				8678FD2F2869AC8B00DF1E69 /* CloudKitManager+Albums.swift in Sources */,
+				86C526A5287092A70035DD31 /* CloudKitManager+Song.swift in Sources */,
 				8656A31528679CE50013F595 /* CKQuery+Extensions.swift in Sources */,
 				866864042865ED8300510DDF /* Album.swift in Sources */,
 				8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */,

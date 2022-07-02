@@ -6,12 +6,17 @@
 //
 
 import CloudKit
+import OSLog
 
 extension CloudKitManager {
     
+    func fetch(album title: String) {
+        os_log("Fetching album with title: %@", log: Log_CloudKit, title)
+    }
+    
     func albumsThatIncludeSong(_ songReferenceToMatch: CKRecord.Reference) async throws -> [Album] {
         var albums: [Album] = []
-        let predicate = NSPredicate(format: "songs == %@", songReferenceToMatch)
+        let predicate = NSPredicate(format: "songs CONTAINS %@", songReferenceToMatch)
         let query = CKQuery(recordType: .album, predicate: predicate)
         let results = try await database.referenceRecordTypes(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: CKQueryOperation.maximumResults).matchResults
         let recordTypes = results.compactMap { try? $0.1.get() }
