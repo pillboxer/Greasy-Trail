@@ -24,10 +24,8 @@ struct ResultAlbumOverviewView: View{
                     .font(.headline)
                 Spacer()
             }
- 
             Spacer()
             List {
-                
                 ForEach(model?.songTitles ?? [], id: \.self) { title in
                     if let index = model?.songTitles.firstIndex(of: title) {
                         ResultsInformationTitleAndDetailView(title: "\(String(index + 1)).", detail: title)

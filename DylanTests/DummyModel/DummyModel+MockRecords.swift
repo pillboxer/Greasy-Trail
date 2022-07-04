@@ -8,7 +8,7 @@
 import Foundation
 
 // Songs
-private extension DummyModel {
+extension DummyModel {
     
     static var msLikeARollingStone: MockSongRecord {
         MockSongRecord(title: tLikeARollingStone)

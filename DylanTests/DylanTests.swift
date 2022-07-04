@@ -32,9 +32,9 @@ class DylanTests: XCTestCase {
     
     private func searchTombstoneBlues() async -> SongDisplayModel? {
         let songToSearch = "Tombstone Blues"
-        let mockSongRecord = DummyModel.tombstoneBluesRecord
+        let mockSongRecord = DummyModel.msTombstoneBlues
         let mockAlbumRecords = [DummyModel.hw61AlbumRecord, DummyModel.realLiveAlbumRecord]
-        let database = MockDatabase(songRecord: mockSongRecord, albums: mockAlbumRecords)
+        let database = MockSongDatabase(songRecord: mockSongRecord, albums: mockAlbumRecords)
         let detective = Detective(database)
         return await detective.search(song: songToSearch)
     }
@@ -56,7 +56,7 @@ class DylanTests: XCTestCase {
     }
     
     func testUnknownSongReturnsNilDisplayModel() async {
-        let database = MockDatabase(songRecord: nil, albums: [])
+        let database = MockSongDatabase(songRecord: nil, albums: [])
         let detective = Detective(database)
         let result = await detective.search(song: "Brown Sugar")
         XCTAssertNil(result)
