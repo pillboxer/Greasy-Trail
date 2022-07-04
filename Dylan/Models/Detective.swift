@@ -9,16 +9,20 @@ import Foundation
 import CloudKit
 
 public class Detective: ObservableObject {
-    
+        
     let manager: CloudKitManager
     
     init(_ database: DatabaseType = DylanDatabase) {
         self.manager = CloudKitManager(database)
     }
     
-    /// Finds live performances of the given song
+    /// Search a song
     func search(song title: String) async -> SongDisplayModel? {
-        return await manager.fetch(song: title)
+        try! await manager.fetch(song: title)
+    }
+    
+    func search(album title: String) async -> AlbumDisplayModel? {
+        try! await manager.fetch(album: title)
     }
     
 }

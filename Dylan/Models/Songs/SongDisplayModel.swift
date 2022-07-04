@@ -8,17 +8,21 @@
 import Foundation
 
 /// The Information Returned Upon Requesting Information About A Song
-public struct SongDisplayModel {
+struct SongDisplayModel {
     
-    let song: Song
+    private let song: Song
     
     init(song: Song) {
         self.song = song
     }
-    
+        
 }
 
 extension SongDisplayModel {
+    
+    var title: String {
+        song.title
+    }
     
     var firstAlbumAppearance: Album? {
         song.albums?.first

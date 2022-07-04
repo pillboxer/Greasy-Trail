@@ -7,19 +7,30 @@
 
 import SwiftUI
 
+typealias Search = (title: String, type: DylanSearchType)
+
 struct ContentView: View {
     
     private let formatter = Formatter()
 
     @State var songModel: SongDisplayModel?
+    @State var albumModel: AlbumDisplayModel?
+    @State private var nextSearch: Search?
+    
     var body: some View {
         Group {
-            if let songModel = songModel {
-                ResultView(model: songModel)
+            if let _ = nextSearch {
+                SearchView(songModel: $songModel, albumModel: $albumModel, nextSearch: $nextSearch)
+            }
+            else if let _ = songModel {
+                ResultView(songModel: $songModel, nextSearch: $nextSearch)
                     .environmentObject(formatter)
             }
+            else if let _ = albumModel {
+                ResultView(albumModel: $albumModel, nextSearch: $nextSearch)
+            }
             else {
-                SearchView(model: $songModel)
+                SearchView(songModel: $songModel, albumModel: $albumModel, nextSearch: $nextSearch)
             }
         }
         .frame(width: 600, height: 400)

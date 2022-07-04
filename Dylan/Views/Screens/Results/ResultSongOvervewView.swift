@@ -7,22 +7,31 @@
 
 import SwiftUI
 
-struct ResultOverviewView: View {
+struct ResultSongOvervewView: View {
     
-    let model: SongDisplayModel
+    @Binding var model: SongDisplayModel?
     @Binding var currentViewType: ResultView.ResultViewType
     @EnvironmentObject var formatter: Formatter
     
     var body: some View {
         VStack(spacing: 16) {
-            Text(model.song.title)
-                .font(.headline)
+            HStack {
+                Image(systemName: "house")
+                    .onTapGesture {
+                        model = nil
+                    }
+                Spacer()
+                Text(model?.title ?? "")
+                    .font(.headline)
+                Spacer()
+            }
+
             Spacer()
-            ResultsInformationTitleAndDetailView(title: "results_information_title_song_author", detail: model.author)
+            ResultsInformationTitleAndDetailView(title: "results_information_title_song_author", detail: model?.author ?? "")
             albumInformationView
             Spacer()
             Spacer()
-            if let albums = model.albums, albums.count > 1 {
+            if let albums = model?.albums, albums.count > 1 {
                 HStack {
                     OnTapButton(text: "Albums") {
                         currentViewType = .albums(albums)
@@ -36,7 +45,7 @@ struct ResultOverviewView: View {
     
     @ViewBuilder
     private var albumInformationView: some View {
-        if let first = model.firstAlbumAppearance {
+        if let first = model?.firstAlbumAppearance {
             ResultsInformationTitleAndDetailView(title: "results_information_title_first_appearance", detail: first.title)
         }
         else {

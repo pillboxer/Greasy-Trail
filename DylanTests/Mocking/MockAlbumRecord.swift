@@ -8,15 +8,39 @@
 import Foundation
 @testable import Dylan
 import CloudKit
-struct MockAlbumRecord: RecordType, CustomStringConvertible {
+
+struct MockAlbumRecord: CustomStringConvertible {
     
     let title: String
     let releaseDate: Double
     let recordName = UUID().uuidString
+    let references: [ReferenceType]?
     
-    init(title: String, releaseDate: Double) {
+    init(title: String, releaseDate: Double, references: [ReferenceType]? = nil) {
         self.title = title
         self.releaseDate = releaseDate
+        self.references = references
+    }
+    
+    var description: String {
+        """
+        album title: \(title)
+        """
+    }
+    
+    
+}
+
+extension MockAlbumRecord: MockRecordType {
+    
+    var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
+    
+    func references(of referenceType: Dylan.DylanReferenceType) -> [Dylan.ReferenceType] {
+        references ?? []
+    }
+    
+    func asReferenceType() -> MockReferenceType {
+        MockReferenceType(title: title, recordID: recordID)
     }
     
     func string(for field: DylanRecordField) -> String? {
@@ -36,23 +60,4 @@ struct MockAlbumRecord: RecordType, CustomStringConvertible {
             return nil
         }
     }
-    
-    // For the moment returning no songs
-    func references(of referenceType: Dylan.DylanReferenceType) -> [Dylan.ReferenceType] {
-        []
-    }
-    
-    func reference(of referenceType: DylanReferenceType) -> ReferenceType? {
-        nil
-    }
-        
-    var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
-
-    var description: String {
-        """
-        album title: \(title)
-        """
-    }
-    
-    
 }

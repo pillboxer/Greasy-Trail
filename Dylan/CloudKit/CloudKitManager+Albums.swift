@@ -10,8 +10,32 @@ import OSLog
 
 extension CloudKitManager {
     
-    func fetch(album title: String) {
-        os_log("Fetching album with title: %@", log: Log_CloudKit, title)
+    func fetch(album title: String) async throws -> AlbumDisplayModel? {
+        let records = try await fetch(with: title, recordType: .album)
+        
+        guard let firstResult = records.first?.1,
+              case .success(let record) = firstResult,
+              let title = record.string(for: .title) else {
+            return nil
+        }
+        // FIXME:
+        let releaseDate = record.double(for: .releaseDate) ?? -1
+        
+        let songReferences = record.references(of: .songs)
+        let ids = songReferences.compactMap { $0.recordID }
+        
+        let dict = try await database.recordTypes(for: ids, desiredKeys: nil)
+        var ordered: [RecordType] = []
+        ids.forEach { id in
+            if let recordType = try? dict[id]?.get() {
+                ordered.append(recordType)
+            }
+        }
+        let songTitles = ordered.compactMap { $0.string(for: .title) }
+        let songs = songTitles.compactMap { Song(title: $0) }
+        let album = Album(title: title, songs: songs, releaseDate: releaseDate)
+        let model = AlbumDisplayModel(album: album)
+        return model
     }
     
     func albumsThatIncludeSong(_ songReferenceToMatch: CKRecord.Reference) async throws -> [Album] {

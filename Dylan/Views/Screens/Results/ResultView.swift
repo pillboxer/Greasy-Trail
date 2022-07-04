@@ -11,20 +11,31 @@ import SwiftUI
 struct ResultView: View {
 
     enum ResultViewType {
-        case overview
+        case songOverview
+        case albumOverview
         case albums([Album])
     }
     
-    let model: SongDisplayModel
-    @State private var currentViewType: ResultViewType = .overview
+    @Binding var songModel: SongDisplayModel?
+    @Binding var albumModel: AlbumDisplayModel?
+    @State private var currentViewType: ResultViewType
+    @Binding var nextSearch: Search?
+    
+    init(songModel: Binding<SongDisplayModel?> = .constant(nil), albumModel: Binding<AlbumDisplayModel?> = .constant(nil), nextSearch: Binding<Search?>) {
+        _songModel = songModel
+        _albumModel = albumModel
+        self.currentViewType = songModel.wrappedValue != nil ? .songOverview : .albumOverview
+        self._nextSearch = nextSearch
+    }
     
     var body: some View {
-        
         switch currentViewType {
-        case .overview:
-            ResultOverviewView(model: model, currentViewType: $currentViewType)
+        case .songOverview:
+            ResultSongOvervewView(model: $songModel, currentViewType: $currentViewType)
         case .albums(let albums):
-            ResultAlbumsTableView(albums: albums)
+            ResultAlbumsTableView(albums: albums, model: $songModel, nextSearch: $nextSearch, currentViewType: $currentViewType)
+        case .albumOverview:
+            ResultAlbumOverviewView(model: $albumModel, nextSearch: $nextSearch)
         }
     }
     

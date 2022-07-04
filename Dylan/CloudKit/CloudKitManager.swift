@@ -11,10 +11,23 @@ import OSLog
 
 class CloudKitManager {
     
-    internal let database: DatabaseType
+    let database: DatabaseType
     
     init(_ database: DatabaseType) {
         self.database = database
+    }
+    
+    func fetch(with title: String, recordType: DylanRecordType) async throws -> [(CKRecord.ID, Result<RecordType, Error>)] {
+        os_log("Fetching %@ with title: %@", log: Log_CloudKit, recordType.rawValue.lowercased(), title)
+        
+        // Fetch The Song
+        let predicate = NSPredicate(format: "title == %@", title)
+        let query = CKQuery(recordType: recordType, predicate: predicate)
+        
+        let records = try await database.recordTypes(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: CKQueryOperation.maximumResults).matchResults
+        
+        os_log("Found %@ records matching", log: Log_CloudKit, String(describing: records.count))
+        return records
     }
     
 }

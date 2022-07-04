@@ -7,17 +7,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0AB7CB84-9C11-4F64-A303-36150B281AF0"
+            uuid = "BBB67369-1745-4263-9E53-B2535B513392"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dylan/Extensions/CKDatabase+Extensions.swift"
+            filePath = "Dylan/CloudKit/CloudKitManager+Albums.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "recordTypes(matching:inZoneWith:desiredKeys:resultsLimit:)"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "albumsThatIncludeSong(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BBB67369-1745-4263-9E53-B2535B513392 - 56cefa2f15780cf0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Dylan.CloudKitManager.albumsThatIncludeSong(__C.CKReference) async throws -&gt; Swift.Array&lt;Dylan.Album&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/CloudKit/CloudKitManager+Albums.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "252">
+               </Location>
+               <Location
+                  uuid = "BBB67369-1745-4263-9E53-B2535B513392 - 516ed10b269018c8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 ((__C.CKRecordID, Swift.Result&lt;Dylan.RecordType, Swift.Error&gt;)) -&gt; Swift.Optional&lt;Dylan.RecordType&gt; in Dylan.CloudKitManager.albumsThatIncludeSong(__C.CKReference) async throws -&gt; Swift.Array&lt;Dylan.Album&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/CloudKit/CloudKitManager+Albums.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
+                  offsetFromSymbolStart = "40">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

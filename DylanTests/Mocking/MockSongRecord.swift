@@ -37,10 +37,6 @@ extension MockSongRecord: RecordType {
         []
     }
     
-    func reference(of referenceType: Dylan.DylanReferenceType) -> Dylan.ReferenceType? {
-        nil
-    }
-    
     func string(for field: DylanRecordField) -> String? {
         switch field {
         case .title:
@@ -52,6 +48,14 @@ extension MockSongRecord: RecordType {
     
     func double(for field: DylanRecordField) -> Double? {
         nil
+    }
+    
+}
+
+extension MockSongRecord: MockRecordType {
+    
+    func asReferenceType() -> MockReferenceType {
+        MockReferenceType(title: title, recordID: recordID)
     }
     
 }

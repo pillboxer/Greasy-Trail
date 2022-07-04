@@ -47,8 +47,6 @@ class NoCursorTextField: NSTextField {
         editor.insertionPointColor = .clear
         return editor
     }
-
-    
 }
 
 class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {

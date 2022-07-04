@@ -9,7 +9,7 @@ import Foundation
 @testable import Dylan
 import CloudKit
 
-class MockSongDatabase: DatabaseType {
+class MockSongDatabase {
     
     private let songRecord: MockSongRecord?
     private let albums: [MockAlbumRecord]
@@ -17,6 +17,14 @@ class MockSongDatabase: DatabaseType {
     init(songRecord: MockSongRecord?, albums: [MockAlbumRecord]) {
         self.songRecord = songRecord
         self.albums = albums
+    }
+    
+}
+
+extension MockSongDatabase: DatabaseType {
+    
+    func recordTypes(for ids: [CKRecord.ID], desiredKeys: [CKRecord.FieldKey]?) async throws -> [CKRecord.ID : Result<Dylan.RecordType, Error>] {
+        [:]
     }
     
     func recordTypes(matching query: CKQuery, inZoneWith zoneID: CKRecordZone.ID?, desiredKeys: [CKRecord.FieldKey]?, resultsLimit: Int) async throws -> (matchResults: [(CKRecord.ID,
