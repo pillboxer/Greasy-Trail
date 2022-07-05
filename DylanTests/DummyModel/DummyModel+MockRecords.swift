@@ -52,7 +52,7 @@ extension DummyModel {
 // Albums
 extension DummyModel {
     
-    private static var highway61RevisitedAlbumSongRecords: [MockSongRecord] {
+    static var highway61RevisitedAlbumSongRecords: [MockSongRecord] {
         [msLikeARollingStone,
          msTombstoneBlues,
          msItTakesALotToLaugh,

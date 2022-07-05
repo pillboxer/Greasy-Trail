@@ -11,7 +11,6 @@ struct ResultSongOvervewView: View {
     
     @Binding var model: SongDisplayModel?
     @Binding var currentViewType: ResultView.ResultViewType
-    @EnvironmentObject var formatter: Formatter
     
     var body: some View {
         VStack(spacing: 16) {

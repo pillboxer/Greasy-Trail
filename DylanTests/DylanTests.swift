@@ -64,7 +64,10 @@ class DylanTests: XCTestCase {
     
     func testAlbumSearchReturnsCorrectAlbum() async {
         let expectedAlbum = DummyModel.aHighway61Revisited
-//        let database = MockDatabase(songRecord: <#T##MockSongRecord?#>, albums: <#T##[MockAlbumRecord]#>)
+        let database = MockAlbumDatabase(albumRecord: DummyModel.hw61AlbumRecord, songRecords: DummyModel.highway61RevisitedAlbumSongRecords)
+        let detective = Detective(database)
+        let result = await detective.search(album: DummyModel.tHighway61Revisited)
+        XCTAssert(expectedAlbum == result?.album)
     }
     
 

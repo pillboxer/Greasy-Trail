@@ -46,7 +46,6 @@ struct ResultAlbumsTableView: View {
             }
         }
         .padding()
-
     }
     
 }

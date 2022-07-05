@@ -52,6 +52,8 @@
 		86C526B82873418E0035DD31 /* DummyModel+Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526B72873418E0035DD31 /* DummyModel+Albums.swift */; };
 		86C526BA287341B00035DD31 /* DummyModel+AlbumRepresentations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526B9287341B00035DD31 /* DummyModel+AlbumRepresentations.swift */; };
 		86C526BD287342770035DD31 /* DummyModel+MockRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */; };
+		86C526C0287488BF0035DD31 /* MockAlbumDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526BF287488BF0035DD31 /* MockAlbumDatabase.swift */; };
+		86C526C328748F980035DD31 /* DisplayModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C228748F980035DD31 /* DisplayModelManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +115,8 @@
 		86C526B72873418E0035DD31 /* DummyModel+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+Albums.swift"; sourceTree = "<group>"; };
 		86C526B9287341B00035DD31 /* DummyModel+AlbumRepresentations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+AlbumRepresentations.swift"; sourceTree = "<group>"; };
 		86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+MockRecords.swift"; sourceTree = "<group>"; };
+		86C526BF287488BF0035DD31 /* MockAlbumDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlbumDatabase.swift; sourceTree = "<group>"; };
+		86C526C228748F980035DD31 /* DisplayModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayModelManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +146,7 @@
 				86C526A02870828B0035DD31 /* MockAlbumRecord.swift */,
 				86C526A22870863A0035DD31 /* MockSongRecord.swift */,
 				86C526B128733B6A0035DD31 /* MockReferenceType.swift */,
+				86C526BF287488BF0035DD31 /* MockAlbumDatabase.swift */,
 			);
 			path = Mocking;
 			sourceTree = "<group>";
@@ -188,6 +193,7 @@
 		866863EB2865EB6200510DDF /* Dylan */ = {
 			isa = PBXGroup;
 			children = (
+				86C526C128748F870035DD31 /* Managers */,
 				86B49418286DDEB300B0C4EC /* Formatting */,
 				8678FD322869FA6200DF1E69 /* Views */,
 				8656A30D28679BE60013F595 /* Protocols */,
@@ -340,6 +346,14 @@
 			path = DummyModel;
 			sourceTree = "<group>";
 		};
+		86C526C128748F870035DD31 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				86C526C228748F980035DD31 /* DisplayModelManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -451,6 +465,7 @@
 				86686419286631B500510DDF /* Detective.swift in Sources */,
 				86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */,
 				8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */,
+				86C526C328748F980035DD31 /* DisplayModelManager.swift in Sources */,
 				866864002865ED3800510DDF /* Song.swift in Sources */,
 				8656A31328679C880013F595 /* CKRecord+Extensions.swift in Sources */,
 				86C52699286F06780035DD31 /* OnTapButton.swift in Sources */,
@@ -488,6 +503,7 @@
 				86C526B428733E290035DD31 /* MockRecordType.swift in Sources */,
 				86C526B228733B6A0035DD31 /* MockReferenceType.swift in Sources */,
 				8668641028662E2B00510DDF /* DylanTests.swift in Sources */,
+				86C526C0287488BF0035DD31 /* MockAlbumDatabase.swift in Sources */,
 				86C526A32870863B0035DD31 /* MockSongRecord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
