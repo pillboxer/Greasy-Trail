@@ -14,6 +14,7 @@ struct ResultView: View {
         case songOverview
         case albumOverview
         case albums([Album])
+        case performances([Performance])
     }
     
     @Binding var songModel: SongDisplayModel?
@@ -31,11 +32,15 @@ struct ResultView: View {
     var body: some View {
         switch currentViewType {
         case .songOverview:
-            ResultSongOvervewView(model: $songModel, currentViewType: $currentViewType)
+            ResultSongOverviewView(model: $songModel, currentViewType: $currentViewType)
         case .albums(let albums):
-            ResultAlbumsTableView(albums: albums, model: $songModel, nextSearch: $nextSearch, currentViewType: $currentViewType)
+            let models = albums.compactMap { TableDisplayModel(column1Value: $0.title, column2Value: $0.releaseDate) }
+            TwoColumnTableView(models: models, songDisplayModel: $songModel, nextSearch: $nextSearch, currentViewType: $currentViewType)
         case .albumOverview:
             ResultAlbumOverviewView(model: $albumModel, nextSearch: $nextSearch)
+        case .performances(let performances):
+            let models = performances.compactMap { TableDisplayModel(column1Value: $0.venue, column2Value: $0.date ?? -1)  }
+            TwoColumnTableView(models: models, songDisplayModel: $songModel, nextSearch: $nextSearch, currentViewType: $currentViewType)
         }
     }
     

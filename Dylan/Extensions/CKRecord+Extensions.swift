@@ -25,6 +25,10 @@ extension CKRecord: RecordType {
         retrieve(type: Double.self, fromPath: field.rawValue)
     }
     
+    func ints(for field: DylanRecordField) -> [Int]? {
+        retrieve(type: [Int].self, fromPath: field.rawValue)
+    }
+    
     private func retrieve<T>(type: T.Type, fromPath path: String) -> T? {
         self[path] as? T
     }

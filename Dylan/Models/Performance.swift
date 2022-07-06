@@ -10,8 +10,12 @@ import Foundation
 struct Performance: Codable {
     
     let venue: String
-    let songs: [Song]
+    let songs: [Song]?
     let date: Double?
-    var LBNumber: Double?
+    var LBNumbers: [Double]?
+    
+    var id: String {
+        venue + String(date ?? 0) 
+    }
     
 }

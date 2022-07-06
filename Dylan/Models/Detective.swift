@@ -16,13 +16,18 @@ public class Detective: ObservableObject {
         self.manager = CloudKitManager(database)
     }
     
-    /// Search a song
     func search(song title: String) async -> SongDisplayModel? {
-        try! await manager.fetch(song: title)
+        try? await manager.fetch(song: title)
     }
     
     func search(album title: String) async -> AlbumDisplayModel? {
-        try! await manager.fetch(album: title)
+        try? await manager.fetch(album: title)
+    }
+    
+    // FIXME:
+    func search(performance date: String) async -> AlbumDisplayModel? {
+        print("Looking for date \(date)")
+        return nil
     }
     
 }

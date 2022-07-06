@@ -21,6 +21,10 @@ class Formatter: ObservableObject {
         return dateFormatter.string(from: date)
     }
     
+    func date(from string: String) -> Double? {
+        return dateFormatter.date(from: string)?.timeIntervalSince1970
+    }
+    
     func formatted(performance: Performance) -> String {
         let prefix = performance.venue
         var suffix = "Unknown date"

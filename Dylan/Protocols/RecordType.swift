@@ -11,5 +11,6 @@ protocol RecordType {
     func references(of referenceType: DylanReferenceType) -> [ReferenceType]
     var recordID: CKRecord.ID { get }
     func string(for field: DylanRecordField) -> String?
+    func ints(for field: DylanRecordField) -> [Int]?
     func double(for field: DylanRecordField) -> Double?
 }

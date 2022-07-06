@@ -11,7 +11,7 @@ public struct Song: Codable {
     
     let title: String
     var author: String?
-    var firstLivePerformance: Performance?
+    var performances: [Performance]?
     var albums: [Album]?    
 }
 

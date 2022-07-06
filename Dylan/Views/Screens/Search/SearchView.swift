@@ -11,6 +11,7 @@ import SwiftUI
 enum DylanSearchType {
     case song
     case album
+    case performance
 }
 
 struct SearchView: View {
@@ -31,7 +32,11 @@ struct SearchView: View {
     var body: some View {
         switch searchDisplayType {
         case .search:
-            SearchFieldView(text: $text, nextSearch: $nextSearch, songModel: $songModel, albumModel: $albumModel, searchDisplayType: $searchDisplayType)
+            SearchFieldView(text: $text,
+                            nextSearch: $nextSearch,
+                            songModel: $songModel,
+                            albumModel: $albumModel,
+                            searchDisplayType: $searchDisplayType)
         case .searching:
             SearchingView()
         case .noResultsFound(let title):

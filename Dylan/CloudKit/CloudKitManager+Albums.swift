@@ -38,7 +38,7 @@ extension CloudKitManager {
         return model
     }
     
-    func albumsThatIncludeSong(_ songReferenceToMatch: CKRecord.Reference) async throws -> [Album] {
+    func albumsThatInclude(song songReferenceToMatch: CKRecord.Reference) async throws -> [Album] {
         var albums: [Album] = []
         let predicate = NSPredicate(format: "songs CONTAINS %@", songReferenceToMatch)
         let query = CKQuery(recordType: .album, predicate: predicate)

@@ -7,16 +7,174 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "22131B06-748D-4BEF-BC94-703C5E133E16"
+            uuid = "6151B748-0907-41A4-9CBC-D2AE0B18D65F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DylanTests/DylanTests.swift"
+            filePath = "Dylan/Models/Detective.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "testAlbumSearchReturnsCorrectAlbum()"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "search(song:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6151B748-0907-41A4-9CBC-D2AE0B18D65F - 6e5941ced0e9423"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Dylan.Detective.search(song: Swift.String) async -&gt; Swift.Optional&lt;Dylan.SongDisplayModel&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Models/Detective.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "76">
+               </Location>
+               <Location
+                  uuid = "6151B748-0907-41A4-9CBC-D2AE0B18D65F - d6defb75431a463c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Dylan.Detective.search(song: Swift.String) async -&gt; Swift.Optional&lt;Dylan.SongDisplayModel&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Models/Detective.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "6151B748-0907-41A4-9CBC-D2AE0B18D65F - 4d7280cc2fc8482d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Dylan.Detective.search(song: Swift.String) async -&gt; Swift.Optional&lt;Dylan.SongDisplayModel&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Models/Detective.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "6151B748-0907-41A4-9CBC-D2AE0B18D65F - e8c93925c16b1612"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Dylan.Detective.search(song: Swift.String) async -&gt; Swift.Optional&lt;Dylan.SongDisplayModel&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Models/Detective.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4CEABF43-0FB0-4A89-9857-7A88C5A2F90D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dylan/CloudKit/CloudKitManager+Song.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "fetch(song:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9CF680B3-B927-4B2A-ADE0-903699DCE195"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dylan/Extensions/CKDatabase+Extensions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "recordTypes(matching:inZoneWith:desiredKeys:resultsLimit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E5445364-B5BA-45D2-997B-B03DC5FE4683"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dylan/CloudKit/CloudKitManager+Song.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "fetch(song:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E5445364-B5BA-45D2-997B-B03DC5FE4683 - 2a9eeb30faa13cff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Dylan.CloudKitManager.fetch(song: Swift.String) async throws -&gt; Swift.Optional&lt;Dylan.SongDisplayModel&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/CloudKit/CloudKitManager+Song.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "160">
+               </Location>
+               <Location
+                  uuid = "E5445364-B5BA-45D2-997B-B03DC5FE4683 - 8423e666166a5a04"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for Dylan.CloudKitManager.fetch(song: Swift.String) async throws -&gt; Swift.Optional&lt;Dylan.SongDisplayModel&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/CloudKit/CloudKitManager+Song.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "15"
+                  endingLineNumber = "15"
+                  offsetFromSymbolStart = "64">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1DD35EF4-C157-412C-9A70-70F4F146D2B4"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dylan/CloudKit/CloudKitManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "fetch(with:recordType:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

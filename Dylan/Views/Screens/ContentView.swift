@@ -24,7 +24,6 @@ struct ContentView: View {
             }
             else if let _ = songModel {
                 ResultView(songModel: $songModel, nextSearch: $nextSearch)
-                    .environmentObject(formatter)
             }
             else if let _ = albumModel {
                 ResultView(albumModel: $albumModel, nextSearch: $nextSearch)
@@ -33,6 +32,7 @@ struct ContentView: View {
                 SearchView(songModel: $songModel, albumModel: $albumModel, nextSearch: $nextSearch)
             }
         }
+        .environmentObject(formatter)
         .frame(width: 600, height: 400)
 
     }

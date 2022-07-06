@@ -21,10 +21,10 @@ extension CloudKitManager {
         }
         
         let asReference = CKRecord.Reference(recordID: record.recordID, action: .none)
-        let albums = try await albumsThatIncludeSong(asReference)
-        // Fetch The Albums it appeared on
+        let albums = try await albumsThatInclude(song: asReference)
+        let performances = try await performancesThatInclude(song: asReference)
         
-        let newSong = Song(title: title, firstLivePerformance: nil, albums: albums)
+        let newSong = Song(title: title, performances: performances, albums: albums)
         return SongDisplayModel(song: newSong)
         
     }

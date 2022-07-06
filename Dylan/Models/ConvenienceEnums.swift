@@ -15,14 +15,12 @@ enum DylanRecordType: CKRecord.RecordType {
 
 enum DylanReferenceType: CKRecord.RecordType {
     case albums = "albums"
-    case firstLivePerformance = "firstLivePerformance"
     case songs = "songs"
 }
 
 enum DylanRecordField: String {
     // Song
     case title
-    case firstLivePerformance
 
     // Album
     case releaseDate
@@ -30,6 +28,7 @@ enum DylanRecordField: String {
     // Performance
     case venue
     case date
+    case LBNumbers
     
 }
 

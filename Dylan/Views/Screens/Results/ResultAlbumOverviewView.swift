@@ -36,7 +36,6 @@ struct ResultAlbumOverviewView: View{
                     }
                 }
             }
-
         }
         .padding()
     }

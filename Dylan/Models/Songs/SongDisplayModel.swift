@@ -39,4 +39,13 @@ extension SongDisplayModel {
     var author: String {
         song.author ?? NSLocalizedString("default_author", comment: "")
     }
+    
+    var performances: [Performance]? {
+        song.performances
+    }
+    
+    var firstPerformance: Performance? {
+        performances?.first
+    }
+
 }
