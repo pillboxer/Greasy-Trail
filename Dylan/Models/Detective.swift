@@ -25,9 +25,8 @@ public class Detective: ObservableObject {
     }
     
     // FIXME:
-    func search(performance date: String) async -> AlbumDisplayModel? {
-        print("Looking for date \(date)")
-        return nil
+    func search(performance date: Double) async -> PerformanceDisplayModel? {
+        try? await manager.fetch(performance: date)
     }
     
 }

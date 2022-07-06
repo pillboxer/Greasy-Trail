@@ -10,6 +10,12 @@ import CloudKit
 
 extension CloudKitManager {
     
+    func fetch(performance date: Double) async throws -> PerformanceDisplayModel? {
+        
+        let records = try await fetch(with: date, recordType: .performance)
+        return nil
+    }
+    
     func performancesThatInclude(song songReferenceToMatch: CKRecord.Reference) async throws -> [Performance] {
         var performances: [Performance] = []
         let predicate = NSPredicate(format: "songs CONTAINS %@", songReferenceToMatch)

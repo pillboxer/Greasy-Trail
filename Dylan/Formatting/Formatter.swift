@@ -32,7 +32,6 @@ class Formatter: ObservableObject {
             suffix = dateString(of: date)
         }
         return "\(prefix) (\(suffix))"
-        
     }
     
 }

@@ -13,14 +13,15 @@ struct ContentView: View {
     
     private let formatter = Formatter()
 
-    @State var songModel: SongDisplayModel?
-    @State var albumModel: AlbumDisplayModel?
+    @State private var songModel: SongDisplayModel?
+    @State private var albumModel: AlbumDisplayModel?
+    @State private var performanceModel: PerformanceDisplayModel?
     @State private var nextSearch: Search?
     
     var body: some View {
         Group {
             if let _ = nextSearch {
-                SearchView(songModel: $songModel, albumModel: $albumModel, nextSearch: $nextSearch)
+                SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
             }
             else if let _ = songModel {
                 ResultView(songModel: $songModel, nextSearch: $nextSearch)
@@ -29,7 +30,7 @@ struct ContentView: View {
                 ResultView(albumModel: $albumModel, nextSearch: $nextSearch)
             }
             else {
-                SearchView(songModel: $songModel, albumModel: $albumModel, nextSearch: $nextSearch)
+                SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
             }
         }
         .environmentObject(formatter)

@@ -13,6 +13,7 @@ struct SearchFieldView: View {
     @Binding var nextSearch: Search?
     @Binding var songModel: SongDisplayModel?
     @Binding var albumModel: AlbumDisplayModel?
+    @Binding var performanceModel: PerformanceDisplayModel?
     @Binding var searchDisplayType: SearchView.SearchDisplayType
 
     @EnvironmentObject var formatter: Formatter
@@ -52,8 +53,9 @@ struct SearchFieldView: View {
         else if let result = await detective.search(song: text) {
             songModel = result
         }
-        else if let formatted = formatter.date(from: text) {
-            print("Trying \(formatted)")
+        else if let formatted = formatter.date(from: text),
+                    let result = await detective.search(performance: formatted) {
+            performanceModel = result
         }
         else {
             searchDisplayType = .noResultsFound(title: text)
@@ -81,8 +83,9 @@ struct SearchFieldView: View {
                 searchDisplayType = .noResultsFound(title: text)
             }
         case .performance:
-            if let result = await detective.search(performance: text) {
-                
+            if let formatted = formatter.date(from: text),
+                let result = await detective.search(performance: formatted) {
+                performanceModel = result
             }
             else {
                 searchDisplayType = .noResultsFound(title: text)

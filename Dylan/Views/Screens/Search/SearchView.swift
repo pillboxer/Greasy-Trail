@@ -19,6 +19,7 @@ struct SearchView: View {
     @State private var text: String = ""
     @Binding var songModel: SongDisplayModel?
     @Binding var albumModel: AlbumDisplayModel?
+    @Binding var performanceModel: PerformanceDisplayModel?
     @Binding var nextSearch: Search?
     
     @State private var searchDisplayType: SearchDisplayType = .search
@@ -36,6 +37,7 @@ struct SearchView: View {
                             nextSearch: $nextSearch,
                             songModel: $songModel,
                             albumModel: $albumModel,
+                            performanceModel: $performanceModel,
                             searchDisplayType: $searchDisplayType)
         case .searching:
             SearchingView()
