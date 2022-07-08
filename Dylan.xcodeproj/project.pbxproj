@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		8607123128685D8B00E54209 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123028685D8B00E54209 /* Globals.swift */; };
 		860712332868604300E54209 /* ReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860712322868604300E54209 /* ReferenceType.swift */; };
+		86563C50287829F700104879 /* DylanTests+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C4F287829F700104879 /* DylanTests+CoreData.swift */; };
+		86563C5328782AE100104879 /* Detective+Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5228782AE100104879 /* Detective+Songs.swift */; };
+		86563C5528782B2500104879 /* Detective+Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5428782B2500104879 /* Detective+Albums.swift */; };
+		86563C5728782BA600104879 /* Detective+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5628782BA600104879 /* Detective+Performances.swift */; };
+		86563C59287831D300104879 /* MockDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C58287831D300104879 /* MockDatabase.swift */; };
+		86563C5B287835AD00104879 /* MockPerformanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5A287835AD00104879 /* MockPerformanceRecord.swift */; };
+		86563C5D2878373900104879 /* DummyModel+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5C2878373900104879 /* DummyModel+Performances.swift */; };
 		8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */; };
 		8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30E28679BFE0013F595 /* DatabaseType.swift */; };
 		8656A31128679C540013F595 /* RecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A31028679C540013F595 /* RecordType.swift */; };
@@ -24,7 +31,7 @@
 		866864002865ED3800510DDF /* sSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866863FF2865ED3800510DDF /* sSong.swift */; };
 		866864042865ED8300510DDF /* sAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866864032865ED8300510DDF /* sAlbum.swift */; };
 		866864062865EDD700510DDF /* sPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866864052865EDD700510DDF /* sPerformance.swift */; };
-		8668641028662E2B00510DDF /* DylanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668640F28662E2B00510DDF /* DylanTests.swift */; };
+		8668641028662E2B00510DDF /* DylanTests+Detective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668640F28662E2B00510DDF /* DylanTests+Detective.swift */; };
 		8668641728662F0F00510DDF /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641628662F0F00510DDF /* DummyModel.swift */; };
 		86686419286631B500510DDF /* Detective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86686418286631B400510DDF /* Detective.swift */; };
 		8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641B286709FB00510DDF /* CloudKitManager.swift */; };
@@ -44,7 +51,6 @@
 		86C52697286F04EE0035DD31 /* ResultSongOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C52696286F04EE0035DD31 /* ResultSongOverviewView.swift */; };
 		86C52699286F06780035DD31 /* OnTapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C52698286F06780035DD31 /* OnTapButton.swift */; };
 		86C5269B286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */; };
-		86C5269F287080160035DD31 /* MockSongDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5269E287080160035DD31 /* MockSongDatabase.swift */; };
 		86C526A12870828B0035DD31 /* MockAlbumRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526A02870828B0035DD31 /* MockAlbumRecord.swift */; };
 		86C526A32870863B0035DD31 /* MockSongRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526A22870863A0035DD31 /* MockSongRecord.swift */; };
 		86C526A5287092A70035DD31 /* CloudKitManager+Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526A4287092A70035DD31 /* CloudKitManager+Song.swift */; };
@@ -58,7 +64,6 @@
 		86C526B82873418E0035DD31 /* DummyModel+Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526B72873418E0035DD31 /* DummyModel+Albums.swift */; };
 		86C526BA287341B00035DD31 /* DummyModel+AlbumRepresentations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526B9287341B00035DD31 /* DummyModel+AlbumRepresentations.swift */; };
 		86C526BD287342770035DD31 /* DummyModel+MockRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */; };
-		86C526C0287488BF0035DD31 /* MockAlbumDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526BF287488BF0035DD31 /* MockAlbumDatabase.swift */; };
 		86C526C328748F980035DD31 /* DisplayModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C228748F980035DD31 /* DisplayModelManager.swift */; };
 		86C526C52874C2E70035DD31 /* CloudKitManager+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */; };
 		86C526C72875C0EA0035DD31 /* TwoColumnTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C62875C0EA0035DD31 /* TwoColumnTableView.swift */; };
@@ -84,6 +89,13 @@
 /* Begin PBXFileReference section */
 		8607123028685D8B00E54209 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		860712322868604300E54209 /* ReferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceType.swift; sourceTree = "<group>"; };
+		86563C4F287829F700104879 /* DylanTests+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+CoreData.swift"; sourceTree = "<group>"; };
+		86563C5228782AE100104879 /* Detective+Songs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detective+Songs.swift"; sourceTree = "<group>"; };
+		86563C5428782B2500104879 /* Detective+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detective+Albums.swift"; sourceTree = "<group>"; };
+		86563C5628782BA600104879 /* Detective+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detective+Performances.swift"; sourceTree = "<group>"; };
+		86563C58287831D300104879 /* MockDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabase.swift; sourceTree = "<group>"; };
+		86563C5A287835AD00104879 /* MockPerformanceRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPerformanceRecord.swift; sourceTree = "<group>"; };
+		86563C5C2878373900104879 /* DummyModel+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+Performances.swift"; sourceTree = "<group>"; };
 		8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKDatabase+Extensions.swift"; sourceTree = "<group>"; };
 		8656A30E28679BFE0013F595 /* DatabaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseType.swift; sourceTree = "<group>"; };
 		8656A31028679C540013F595 /* RecordType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordType.swift; sourceTree = "<group>"; };
@@ -102,7 +114,7 @@
 		866864032865ED8300510DDF /* sAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sAlbum.swift; sourceTree = "<group>"; };
 		866864052865EDD700510DDF /* sPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sPerformance.swift; sourceTree = "<group>"; };
 		8668640D28662E2B00510DDF /* DylanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DylanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8668640F28662E2B00510DDF /* DylanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DylanTests.swift; sourceTree = "<group>"; };
+		8668640F28662E2B00510DDF /* DylanTests+Detective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+Detective.swift"; sourceTree = "<group>"; };
 		8668641628662F0F00510DDF /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		86686418286631B400510DDF /* Detective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detective.swift; sourceTree = "<group>"; };
 		8668641B286709FB00510DDF /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
@@ -122,7 +134,6 @@
 		86C52696286F04EE0035DD31 /* ResultSongOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSongOverviewView.swift; sourceTree = "<group>"; };
 		86C52698286F06780035DD31 /* OnTapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnTapButton.swift; sourceTree = "<group>"; };
 		86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultInformationTitleAndDetailView.swift; sourceTree = "<group>"; };
-		86C5269E287080160035DD31 /* MockSongDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSongDatabase.swift; sourceTree = "<group>"; };
 		86C526A02870828B0035DD31 /* MockAlbumRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlbumRecord.swift; sourceTree = "<group>"; };
 		86C526A22870863A0035DD31 /* MockSongRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSongRecord.swift; sourceTree = "<group>"; };
 		86C526A4287092A70035DD31 /* CloudKitManager+Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Song.swift"; sourceTree = "<group>"; };
@@ -136,7 +147,6 @@
 		86C526B72873418E0035DD31 /* DummyModel+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+Albums.swift"; sourceTree = "<group>"; };
 		86C526B9287341B00035DD31 /* DummyModel+AlbumRepresentations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+AlbumRepresentations.swift"; sourceTree = "<group>"; };
 		86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+MockRecords.swift"; sourceTree = "<group>"; };
-		86C526BF287488BF0035DD31 /* MockAlbumDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAlbumDatabase.swift; sourceTree = "<group>"; };
 		86C526C228748F980035DD31 /* DisplayModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayModelManager.swift; sourceTree = "<group>"; };
 		86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Performances.swift"; sourceTree = "<group>"; };
 		86C526C62875C0EA0035DD31 /* TwoColumnTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoColumnTableView.swift; sourceTree = "<group>"; };
@@ -171,14 +181,33 @@
 		8607123428686C9300E54209 /* Mocking */ = {
 			isa = PBXGroup;
 			children = (
-				86C5269E287080160035DD31 /* MockSongDatabase.swift */,
 				86C526B328733E290035DD31 /* MockRecordType.swift */,
 				86C526A02870828B0035DD31 /* MockAlbumRecord.swift */,
 				86C526A22870863A0035DD31 /* MockSongRecord.swift */,
 				86C526B128733B6A0035DD31 /* MockReferenceType.swift */,
-				86C526BF287488BF0035DD31 /* MockAlbumDatabase.swift */,
+				86563C58287831D300104879 /* MockDatabase.swift */,
+				86563C5A287835AD00104879 /* MockPerformanceRecord.swift */,
 			);
 			path = Mocking;
+			sourceTree = "<group>";
+		};
+		86563C4E2878278100104879 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				86563C4F287829F700104879 /* DylanTests+CoreData.swift */,
+			);
+			path = "Core Data";
+			sourceTree = "<group>";
+		};
+		86563C5128782AD100104879 /* Detective */ = {
+			isa = PBXGroup;
+			children = (
+				86686418286631B400510DDF /* Detective.swift */,
+				86563C5228782AE100104879 /* Detective+Songs.swift */,
+				86563C5428782B2500104879 /* Detective+Albums.swift */,
+				86563C5628782BA600104879 /* Detective+Performances.swift */,
+			);
+			path = Detective;
 			sourceTree = "<group>";
 		};
 		8656A30A28679BA50013F595 /* Extensions */ = {
@@ -232,21 +261,22 @@
 		866863EB2865EB6200510DDF /* Dylan */ = {
 			isa = PBXGroup;
 			children = (
-				865C451A287615B20056E01A /* PropertyWrappers */,
-				86C526D12875F5430035DD31 /* CoreData */,
-				86C526C128748F870035DD31 /* Managers */,
-				86B49418286DDEB300B0C4EC /* Formatting */,
-				8678FD322869FA6200DF1E69 /* Views */,
-				8656A30D28679BE60013F595 /* Protocols */,
-				8656A30A28679BA50013F595 /* Extensions */,
-				8668641A286709ED00510DDF /* CloudKit */,
-				866863FE2865ED1100510DDF /* Models */,
-				866863EC2865EB6200510DDF /* DylanApp.swift */,
-				86C526DA2875F91A0035DD31 /* AppDelegate.swift */,
-				8678FD302869F76700DF1E69 /* Localizable.strings */,
-				866863F02865EB6400510DDF /* Assets.xcassets */,
 				866863F52865EB6400510DDF /* Dylan.entitlements */,
+				8678FD302869F76700DF1E69 /* Localizable.strings */,
+				86C526DA2875F91A0035DD31 /* AppDelegate.swift */,
+				866863EC2865EB6200510DDF /* DylanApp.swift */,
+				866863F02865EB6400510DDF /* Assets.xcassets */,
+				8668641A286709ED00510DDF /* CloudKit */,
+				86C526D12875F5430035DD31 /* CoreData */,
+				86563C5128782AD100104879 /* Detective */,
+				8656A30A28679BA50013F595 /* Extensions */,
+				86B49418286DDEB300B0C4EC /* Formatting */,
+				86C526C128748F870035DD31 /* Managers */,
+				866863FE2865ED1100510DDF /* Models */,
 				866863F22865EB6400510DDF /* Preview Content */,
+				865C451A287615B20056E01A /* PropertyWrappers */,
+				8656A30D28679BE60013F595 /* Protocols */,
+				8678FD322869FA6200DF1E69 /* Views */,
 			);
 			path = Dylan;
 			sourceTree = "<group>";
@@ -275,7 +305,6 @@
 				86C526A72870CEFB0035DD31 /* Songs */,
 				86C526A62870CEF50035DD31 /* Albums */,
 				8607123028685D8B00E54209 /* Globals.swift */,
-				86686418286631B400510DDF /* Detective.swift */,
 				8656A31628679D960013F595 /* ConvenienceEnums.swift */,
 			);
 			path = Models;
@@ -284,7 +313,8 @@
 		8668640E28662E2B00510DDF /* DylanTests */ = {
 			isa = PBXGroup;
 			children = (
-				8668640F28662E2B00510DDF /* DylanTests.swift */,
+				86563C4E2878278100104879 /* Core Data */,
+				8668640F28662E2B00510DDF /* DylanTests+Detective.swift */,
 				86C526BB287342460035DD31 /* DummyModel */,
 				8607123428686C9300E54209 /* Mocking */,
 			);
@@ -391,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				8668641628662F0F00510DDF /* DummyModel.swift */,
+				86563C5C2878373900104879 /* DummyModel+Performances.swift */,
 				86C526B9287341B00035DD31 /* DummyModel+AlbumRepresentations.swift */,
 				86C526B72873418E0035DD31 /* DummyModel+Albums.swift */,
 				86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */,
@@ -545,6 +576,7 @@
 				866864062865EDD700510DDF /* sPerformance.swift in Sources */,
 				86C526AE2872F7B30035DD31 /* SearchingView.swift in Sources */,
 				86686419286631B500510DDF /* Detective.swift in Sources */,
+				86563C5528782B2500104879 /* Detective+Albums.swift in Sources */,
 				86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */,
 				8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */,
 				86C526DB2875F91A0035DD31 /* AppDelegate.swift in Sources */,
@@ -562,8 +594,10 @@
 				868C12242876D89C0054FF2D /* Album+CoreDataProperties.swift in Sources */,
 				8607123128685D8B00E54209 /* Globals.swift in Sources */,
 				86C52694286F048A0035DD31 /* ResultView.swift in Sources */,
+				86563C5328782AE100104879 /* Detective+Songs.swift in Sources */,
 				8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,
+				86563C5728782BA600104879 /* Detective+Performances.swift in Sources */,
 				8678FD2F2869AC8B00DF1E69 /* CloudKitManager+Albums.swift in Sources */,
 				86C526DE28760AAA0035DD31 /* Song+CoreDataClass.swift in Sources */,
 				86C526D92875F5B00035DD31 /* PersistenceController.swift in Sources */,
@@ -586,16 +620,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				8668641728662F0F00510DDF /* DummyModel.swift in Sources */,
-				86C5269F287080160035DD31 /* MockSongDatabase.swift in Sources */,
+				86563C50287829F700104879 /* DylanTests+CoreData.swift in Sources */,
 				86C526B82873418E0035DD31 /* DummyModel+Albums.swift in Sources */,
 				86C526BA287341B00035DD31 /* DummyModel+AlbumRepresentations.swift in Sources */,
 				86C526A12870828B0035DD31 /* MockAlbumRecord.swift in Sources */,
 				86C526B6287340560035DD31 /* DummyModel+Songs.swift in Sources */,
 				86C526BD287342770035DD31 /* DummyModel+MockRecords.swift in Sources */,
+				86563C5D2878373900104879 /* DummyModel+Performances.swift in Sources */,
+				86563C5B287835AD00104879 /* MockPerformanceRecord.swift in Sources */,
+				86563C59287831D300104879 /* MockDatabase.swift in Sources */,
 				86C526B428733E290035DD31 /* MockRecordType.swift in Sources */,
 				86C526B228733B6A0035DD31 /* MockReferenceType.swift in Sources */,
-				8668641028662E2B00510DDF /* DylanTests.swift in Sources */,
-				86C526C0287488BF0035DD31 /* MockAlbumDatabase.swift in Sources */,
+				8668641028662E2B00510DDF /* DylanTests+Detective.swift in Sources */,
 				86C526A32870863B0035DD31 /* MockSongRecord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -802,7 +838,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dylan.app/Contents/MacOS/Dylan";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dylan.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dylan";
 			};
 			name = Debug;
 		};
@@ -820,7 +856,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dylan.app/Contents/MacOS/Dylan";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dylan.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dylan";
 			};
 			name = Release;
 		};

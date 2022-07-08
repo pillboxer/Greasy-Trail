@@ -21,7 +21,7 @@ extension CloudKitManager {
         // Store titles and release dates
         let venues = records.compactMap { $0.string(for: .venue) }
         let dates = records.compactMap { $0.double(for: .date) }
-        let lbNumbers = records.map { $0.ints(for: .LBNumbers) }
+        let lbNumbers = records.map { $0.ints(for: .lbNumbers) }
         
         for (index, record) in records.enumerated() {
             
@@ -34,7 +34,7 @@ extension CloudKitManager {
             let ordered = try await getOrderedSongRecords(from: record)
             // Get the Song objects
             let songTitles = ordered.compactMap { $0.string(for: .title) }
-            let context = PersistenceController.shared.newBackgroundContext()
+            let context = container.newBackgroundContext()
             let correspondingSongs = songTitles.compactMap { title in
                 let predicate = NSPredicate(format: "title == %@", title)
                 return context.fetchAndWait(Song.self, with: predicate).first
@@ -62,19 +62,6 @@ extension CloudKitManager {
 
         let records = try await fetch(with: date, recordType: .performance)
         return nil
-    }
-
-    
-    func performancesThatInclude(song: Song) -> [sPerformance] {
-        let context = PersistenceController.shared.newBackgroundContext()
-        var toReturn: [sPerformance] = []
-        let objects = objects(Performance.self, including: song, context: context)
-        context.performAndWait {
-            os_log("%@ found on %@ performances(s)", song.title!, String(describing: objects.count))
-            let sPerformances = objects.compactMap { sPerformance(venue: $0.venue!, songs:[], date: $0.date) }
-            toReturn = sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
-        }
-        return toReturn
     }
     
 }

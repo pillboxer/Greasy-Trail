@@ -7,48 +7,96 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "78A4DAA0-3302-48A7-81DB-4275F3B3CE6D"
+            uuid = "0653EA91-CF0C-41C4-A4C4-AB10402EDF2C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dylan/CloudKit/CloudKitManager.swift"
+            filePath = "Dylan/Detective/Detective+Albums.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
-            landmarkName = "objects(_:including:context:)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "albumsThatInclude(song:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "09BB5AFE-629D-4940-9A95-C85352DE3ED3"
+            uuid = "6537920B-AF83-44D1-B4E7-C2C1B278B555"
             shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dylan/Detective/Detective+Albums.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "albumsThatInclude(song:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6537920B-AF83-44D1-B4E7-C2C1B278B555 - c99822768bb6de77"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Dylan.Detective.albumsThatInclude(song: __C.NSManagedObjectID) -&gt; Swift.Array&lt;Dylan.sAlbum&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Detective/Detective+Albums.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "6537920B-AF83-44D1-B4E7-C2C1B278B555 - c99822768bb6de77"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in Dylan.Detective.albumsThatInclude(song: __C.NSManagedObjectID) -&gt; Swift.Array&lt;Dylan.sAlbum&gt;"
+                  moduleName = "Dylan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Detective/Detective+Albums.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "39"
+                  endingLineNumber = "39"
+                  offsetFromSymbolStart = "428">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B59F78EE-E0C8-4C5F-846E-14FB10744657"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dylan/CloudKit/CloudKitManager+Song.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "fetch(song:)"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "fetchLatestSongs()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D4CAAD82-133D-4C43-B7E1-88700F18DF58"
+            uuid = "79074C0D-9FEE-4432-AC71-9E9F74387790"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dylan/CloudKit/CloudKitManager+Albums.swift"
+            filePath = "DylanTests/DylanTests+Detective.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "fetchLatestAlbums()"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "testStartingCloudKitWithFullDatabaseResultsInFullLocalDatabase()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

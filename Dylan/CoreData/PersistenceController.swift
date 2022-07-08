@@ -7,7 +7,6 @@
 
 import CoreData
 
-
 struct PersistenceController {
     
     static let shared = PersistenceController()
@@ -18,7 +17,7 @@ struct PersistenceController {
         container = NSPersistentContainer(name: "Main")
         container.loadPersistentStores { _, error in
             if let error = error {
-                fatalError("Error configuring Core Data")
+                fatalError("Error configuring Core Data: \(error.localizedDescription)")
             }
         }
     }

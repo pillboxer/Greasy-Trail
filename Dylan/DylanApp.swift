@@ -16,7 +16,6 @@ struct DylanApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(appDelegate.cloudKitManager)
-                .environmentObject(appDelegate.detective)
         }
     }
 }

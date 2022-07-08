@@ -10,15 +10,15 @@
 extension DummyModel {
     
     static var beforeTheFloodAlbumRepresentation: sAlbum {
-        sAlbum(title: tBeforeTheFlood, songs: [], releaseDate: rBeforeTheFlood)
+        sAlbum(title: tBeforeTheFlood, songs: [], releaseDate: dBeforeTheFlood)
     }
     
     static var realLiveAlbumRepresentation: sAlbum {
-        sAlbum(title: tRealLive, songs: [], releaseDate: rRealLive)
+        sAlbum(title: tRealLive, songs: [], releaseDate: dRealLive)
     }
     
     static var hw61AlbumRepresentation: sAlbum {
-        sAlbum(title: tHighway61Revisited, songs: [], releaseDate: rHighway61Revisited)
+        sAlbum(title: tHighway61Revisited, songs: [], releaseDate: dHighway61Revisited)
     }
     
     
@@ -26,7 +26,7 @@ extension DummyModel {
 
 extension DummyModel {
     
-    static var rHighway61Revisited: Double {
+    static var dHighway61Revisited: Double {
         -139622400
     }
     
@@ -34,7 +34,7 @@ extension DummyModel {
         "Before The Flood"
     }
     
-    static var rBeforeTheFlood: Double {
+    static var dBeforeTheFlood: Double {
         140918400
     }
     
@@ -42,7 +42,7 @@ extension DummyModel {
         "Real Live"
     }
     
-    static var rRealLive: Double {
+    static var dRealLive: Double {
         470534400
     }
     

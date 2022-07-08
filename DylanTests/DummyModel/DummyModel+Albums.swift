@@ -20,7 +20,7 @@ extension DummyModel {
                      sHighway61Revisited,
                      sJustLikeTomThumbsBlues,
                      sDesolationRow]
-        return sAlbum(title: tHighway61Revisited, songs: songs, releaseDate: rHighway61Revisited)
+        return sAlbum(title: tHighway61Revisited, songs: songs, releaseDate: dHighway61Revisited)
     }
     
 }

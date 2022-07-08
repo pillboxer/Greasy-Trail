@@ -44,6 +44,10 @@ extension DummyModel {
     static var sDesolationRow: sSong {
         sSong(title: tDesolationRow)
     }
+    
+    static var sMaggiesFarm: sSong {
+        sSong(title: tMaggiesFarm)
+    }
 }
 
 extension DummyModel {
@@ -82,6 +86,10 @@ extension DummyModel {
     
     static var tDesolationRow: String {
         "Desolation Row"
+    }
+    
+    static var tMaggiesFarm: String {
+        "Maggies Farm"
     }
     
     

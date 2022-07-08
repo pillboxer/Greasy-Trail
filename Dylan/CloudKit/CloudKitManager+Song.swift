@@ -22,7 +22,7 @@ extension CloudKitManager {
         let authors = records.map { $0.string(for: .author) }
         
         os_log("%@ songs fetched", String(describing: records.count))
-        let context = PersistenceController.shared.newBackgroundContext()
+        let context = container.newBackgroundContext()
         for (index, _) in records.enumerated() {
             let title = titles[index]
             let author = authors[index]
@@ -33,24 +33,6 @@ extension CloudKitManager {
                 try? context.save()
             }
         }
-    }
-    
-    func fetch(song title: String) throws -> SongDisplayModel? {
-        let context = PersistenceController.shared.newBackgroundContext()
-        var toReturn: SongDisplayModel?
-        let predicate = NSPredicate(format: "title == %@", title)
-        guard let song = context.fetchAndWait(Song.self, with: predicate).first else {
-            toReturn = nil
-            return nil
-        }
-        let id = song.objectID
-        context.performAndWait{
-            let albums = albumsThatInclude(song: id)
-            let performances = performancesThatInclude(song: song)
-            let sSong = sSong(title: song.title!, performances: performances, albums: albums)
-            toReturn = SongDisplayModel(song: sSong)
-        }
-        return toReturn
     }
     
     func getOrderedSongRecords(from record: RecordType) async throws -> [RecordType] {

@@ -14,9 +14,9 @@ struct MockAlbumRecord: CustomStringConvertible {
     let title: String
     let releaseDate: Double
     let recordName = UUID().uuidString
-    let references: [ReferenceType]?
+    let references: [ReferenceType]
     
-    init(title: String, releaseDate: Double, references: [ReferenceType]? = nil) {
+    init(title: String, releaseDate: Double, references: [ReferenceType]) {
         self.title = title
         self.releaseDate = releaseDate
         self.references = references
@@ -33,10 +33,18 @@ struct MockAlbumRecord: CustomStringConvertible {
 
 extension MockAlbumRecord: MockRecordType {
     
+    func ints(for field: Dylan.DylanRecordField) -> [Int]? {
+        nil
+    }
+    
+    var modificationDate: Date? {
+        .distantPast
+    }
+    
     var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
     
     func references(of referenceType: Dylan.DylanReferenceType) -> [Dylan.ReferenceType] {
-        references ?? []
+        references
     }
     
     func asReferenceType() -> MockReferenceType {

@@ -45,6 +45,10 @@ extension DummyModel {
     static var msDesolationRow: MockSongRecord {
         MockSongRecord(title: tDesolationRow)
     }
+    
+    static var msMaggiesFarm: MockSongRecord {
+        MockSongRecord(title: tMaggiesFarm)
+    }
 
     
 }
@@ -64,13 +68,23 @@ extension DummyModel {
          msDesolationRow]
     }
     
-    static var hw61AlbumRecord: MockAlbumRecord {
+    static var maHighway61Revisited: MockAlbumRecord {
         let songReferences = highway61RevisitedAlbumSongRecords.map { $0.asReferenceType() }
-        return MockAlbumRecord(title: tHighway61Revisited, releaseDate: rHighway61Revisited, references: songReferences)
+        return MockAlbumRecord(title: tHighway61Revisited, releaseDate: dHighway61Revisited, references: songReferences)
     }
     
-    static var realLiveAlbumRecord: MockAlbumRecord {
-        MockAlbumRecord(title: tRealLive, releaseDate: rRealLive)
+}
+
+// Performances
+extension DummyModel {
+    
+    static var newport1965SongRecords: [MockSongRecord] {
+        [msMaggiesFarm, msItTakesALotToLaugh, msLikeARollingStone]
+    }
+        
+    static var mpNewport1965: MockPerformanceRecord {
+        let songReferences = newport1965SongRecords.map { $0.asReferenceType() }
+        return MockPerformanceRecord(venue: tNewport1965, date: dNewport1965, lbNumbers: lbNewport1965, references: songReferences)
     }
     
 }

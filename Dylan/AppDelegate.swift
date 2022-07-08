@@ -7,18 +7,24 @@
 
 import Cocoa
 
+class TestHelper: NSObject {
+    
+    static var isRunningTests: Bool {
+       ProcessInfo.processInfo.environment["XCTestSessionIdentifier"] != nil
+    }
+}
+
 class AppDelegate: NSObject, NSApplicationDelegate {
     
     let cloudKitManager = CloudKitManager(DylanDatabase)
     
-    lazy var detective: Detective = {
-        Detective(cloudKitManager)
-    }()
-    
     func applicationDidFinishLaunching(_ notification: Notification) {
-        let _ = PersistenceController.shared
-        Task {
-            try await cloudKitManager.start()
+        if !TestHelper.isRunningTests {
+            let _ = PersistenceController.shared
+            Task {
+                try await cloudKitManager.start()
+            }
         }
+
     }
 }

@@ -17,7 +17,8 @@ struct SearchFieldView: View {
     @Binding var searchDisplayType: SearchView.SearchDisplayType
 
     @EnvironmentObject private var formatter: Formatter
-    @EnvironmentObject private var detective: Detective
+    
+    @StateObject private var detective = Detective()
 
     var body: some View {
         VStack {
@@ -47,16 +48,13 @@ struct SearchFieldView: View {
     
     private func searchBlind() async {
         searchDisplayType = .searching
-        if let result = await detective.search(album: text) {
+        if let result = detective.search(album: text) {
             albumModel = result
         }
-        else if let result = await detective.search(song: text) {
+        else if let result = detective.search(song: text) {
             songModel = result
         }
-        else if let formatted = formatter.date(from: text),
-                    let result = await detective.search(performance: formatted) {
-            performanceModel = result
-        }
+        else if let formatted = formatter.date(from: text){} // FIXME:
         else {
             searchDisplayType = .noResultsFound(title: text)
         }
@@ -69,24 +67,22 @@ struct SearchFieldView: View {
         }
         switch nextSearch.type {
         case .album:
-            if let result = await detective.search(album: text) {
+            if let result = detective.search(album: text) {
                 albumModel = result
             }
             else {
                 searchDisplayType = .noResultsFound(title: text)
             }
         case .song:
-            if let result = await detective.search(song: text) {
+            if let result = detective.search(song: text) {
                 songModel = result
             }
             else {
                 searchDisplayType = .noResultsFound(title: text)
             }
         case .performance:
-            if let formatted = formatter.date(from: text),
-                let result = await detective.search(performance: formatted) {
-                performanceModel = result
-            }
+            if let formatted = formatter.date(from: text) {}
+            // FIXME
             else {
                 searchDisplayType = .noResultsFound(title: text)
             }
