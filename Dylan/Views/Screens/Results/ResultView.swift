@@ -13,8 +13,8 @@ struct ResultView: View {
     enum ResultViewType {
         case songOverview
         case albumOverview
-        case albums([Album])
-        case performances([Performance])
+        case albums([sAlbum])
+        case performances([sPerformance])
     }
     
     @Binding var songModel: SongDisplayModel?

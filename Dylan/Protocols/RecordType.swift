@@ -13,4 +13,5 @@ protocol RecordType {
     func string(for field: DylanRecordField) -> String?
     func ints(for field: DylanRecordField) -> [Int]?
     func double(for field: DylanRecordField) -> Double?
+    var modificationDate: Date? { get }
 }

@@ -9,9 +9,9 @@ import Foundation
 
 struct AlbumDisplayModel {
     
-    let album: Album
+    let album: sAlbum
     
-    init(album: Album) {
+    init(album: sAlbum) {
         self.album = album
     }
     

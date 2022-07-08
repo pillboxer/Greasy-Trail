@@ -11,4 +11,7 @@
 "results_information_title_first_appearance" = "First appearance";
 "results_information_title_song_author" = "Written by";
 "results_information_title_first_live_performance" = "First live performance";
+"cloud_kit_fetch_songs_progress_description" = "Fetching latest songs";
+"cloud_kit_fetch_albums_progress_description" = "Fetching latest albums";
+"cloud_kit_fetch_performances_progress_description" = "Fetching latest performances";
 

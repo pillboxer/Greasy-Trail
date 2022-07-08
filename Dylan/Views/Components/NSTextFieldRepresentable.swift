@@ -62,13 +62,4 @@ class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
         textField.text.wrappedValue = (obj.object as? NSTextField)?.stringValue ?? ""
     }
     
-    func control(_ control: NSControl, textShouldBeginEditing fieldEditor: NSText) -> Bool {
-        print(#function)
-        return true
-    }
-    
-    func controlTextDidBeginEditing(_ obj: Notification) {
-        print(#function)
-    }
-    
 }

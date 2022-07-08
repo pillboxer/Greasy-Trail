@@ -13,6 +13,8 @@ struct ContentView: View {
     
     private let formatter = Formatter()
 
+    @EnvironmentObject private var cloudKitManager: CloudKitManager
+    
     @State private var songModel: SongDisplayModel?
     @State private var albumModel: AlbumDisplayModel?
     @State private var performanceModel: PerformanceDisplayModel?
@@ -20,7 +22,10 @@ struct ContentView: View {
     
     var body: some View {
         Group {
-            if let _ = nextSearch {
+            if let step = cloudKitManager.currentStep {
+                FetchProgressView(step: step)
+            }
+            else if let _ = nextSearch {
                 SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
             }
             else if let _ = songModel {
@@ -34,6 +39,7 @@ struct ContentView: View {
             }
         }
         .environmentObject(formatter)
+        .environmentObject(cloudKitManager)
         .frame(width: 600, height: 400)
 
     }

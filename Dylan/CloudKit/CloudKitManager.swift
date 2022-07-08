@@ -7,14 +7,57 @@
 
 import Foundation
 import CloudKit
+import CoreData
 import OSLog
 
-class CloudKitManager {
+class CloudKitManager: ObservableObject {
     
+    @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
+    @Published private(set) var currentStep: CloudKitFetchStep? = nil
     let database: DatabaseType
+    
+    enum CloudKitFetchStep: Int, CaseIterable {
+        case songs 
+        case albums
+        case performances
+    }
     
     init(_ database: DatabaseType) {
         self.database = database
+    }
+    
+    func start() async throws {
+        let date = Date()
+        do {
+            lastFetchDate = nil
+            await setCurrentStep(to: .songs)
+            try await fetchLatestSongs()
+            await setCurrentStep(to: .albums)
+            try await fetchLatestAlbums()
+            await setCurrentStep(to: .performances)
+            try await fetchLatestPerformances()
+            await setCurrentStep(to: nil)
+            lastFetchDate = date
+        }
+        catch {
+            fatalError("Failed at start")
+        }
+    }
+    
+    @MainActor
+    private func setCurrentStep(to step: CloudKitFetchStep?) {
+        currentStep = step
+    }
+    
+    func fetchRecords(of type: DylanRecordType) async throws -> [RecordType] {
+        // Ensure we only get
+        let predicate = NSPredicate(format: "modificationDate > %@", (lastFetchDate ?? .distantPast) as NSDate)
+        let query = CKQuery(recordType: type, predicate: predicate)
+        
+        // Fetch all Albums
+        let array = try await database.recordTypes(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: CKQueryOperation.maximumResults).matchResults
+        let records = array.compactMap { try? $0.1.get() }
+        return records
     }
     
     func fetch(with title: String, recordType: DylanRecordType) async throws -> [(CKRecord.ID, Result<RecordType, Error>)] {
@@ -39,6 +82,17 @@ class CloudKitManager {
         
         os_log("Found %@ records matching", log: Log_CloudKit, String(describing: records.count))
         return records
+    }
+    
+    func objects<T: NSManagedObject>(_ object: T.Type, including song: Song, context: NSManagedObjectContext) -> [T] {
+        var toReturn: [T] = []
+        context.performAndWait {
+            // Find all albums which contain a given song
+            let predicate = NSPredicate(format: "songs CONTAINS %@", song)
+            let objects = context.fetchAndWait(T.self, with: predicate)
+            toReturn = objects
+        }
+        return toReturn
     }
     
 }

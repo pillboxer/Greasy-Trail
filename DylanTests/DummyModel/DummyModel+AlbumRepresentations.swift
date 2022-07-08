@@ -9,16 +9,16 @@
 
 extension DummyModel {
     
-    static var beforeTheFloodAlbumRepresentation: Album {
-        Album(title: tBeforeTheFlood, songs: [], releaseDate: rBeforeTheFlood)
+    static var beforeTheFloodAlbumRepresentation: sAlbum {
+        sAlbum(title: tBeforeTheFlood, songs: [], releaseDate: rBeforeTheFlood)
     }
     
-    static var realLiveAlbumRepresentation: Album {
-        Album(title: tRealLive, songs: [], releaseDate: rRealLive)
+    static var realLiveAlbumRepresentation: sAlbum {
+        sAlbum(title: tRealLive, songs: [], releaseDate: rRealLive)
     }
     
-    static var hw61AlbumRepresentation: Album {
-        Album(title: tHighway61Revisited, songs: [], releaseDate: rHighway61Revisited)
+    static var hw61AlbumRepresentation: sAlbum {
+        sAlbum(title: tHighway61Revisited, songs: [], releaseDate: rHighway61Revisited)
     }
     
     

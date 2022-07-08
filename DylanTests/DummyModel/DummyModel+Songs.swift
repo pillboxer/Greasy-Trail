@@ -9,40 +9,40 @@
 
 extension DummyModel {
     
-    static var sLikeARollingStone: Song {
-        Song(title: tLikeARollingStone)
+    static var sLikeARollingStone: sSong {
+        sSong(title: tLikeARollingStone)
     }
     
-    static var sTombstoneBlues: Song {
-        Song(title: tTombstoneBlues)
+    static var sTombstoneBlues: sSong {
+        sSong(title: tTombstoneBlues)
     }
     
-    static var sItTakesALotToLaugh: Song {
-        Song(title: tItTakesALotToLaugh)
+    static var sItTakesALotToLaugh: sSong {
+        sSong(title: tItTakesALotToLaugh)
     }
     
-    static var sFromABuick6: Song {
-        Song(title: tFromABuick6)
+    static var sFromABuick6: sSong {
+        sSong(title: tFromABuick6)
     }
     
-    static var sBalladOfAThinMan: Song {
-        Song(title: tBalladOfAThinMan)
+    static var sBalladOfAThinMan: sSong {
+        sSong(title: tBalladOfAThinMan)
     }
     
-    static var sQueenJaneApproximately: Song {
-        Song(title: tQueenJaneApproximately)
+    static var sQueenJaneApproximately: sSong {
+        sSong(title: tQueenJaneApproximately)
     }
     
-    static var sHighway61Revisited: Song {
-        Song(title: tHighway61Revisited)
+    static var sHighway61Revisited: sSong {
+        sSong(title: tHighway61Revisited)
     }
     
-    static var sJustLikeTomThumbsBlues: Song {
-        Song(title: tJustLikeTomThumbsBlues)
+    static var sJustLikeTomThumbsBlues: sSong {
+        sSong(title: tJustLikeTomThumbsBlues)
     }
     
-    static var sDesolationRow: Song {
-        Song(title: tDesolationRow)
+    static var sDesolationRow: sSong {
+        sSong(title: tDesolationRow)
     }
 }
 

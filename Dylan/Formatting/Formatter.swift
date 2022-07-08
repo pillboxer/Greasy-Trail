@@ -25,7 +25,7 @@ class Formatter: ObservableObject {
         return dateFormatter.date(from: string)?.timeIntervalSince1970
     }
     
-    func formatted(performance: Performance) -> String {
+    func formatted(performance: sPerformance) -> String {
         let prefix = performance.venue
         var suffix = "Unknown date"
         if let date = performance.date {

@@ -6,53 +6,83 @@
 //
 
 import CloudKit
+import CoreData
 import OSLog
 
 extension CloudKitManager {
     
-    func fetch(album title: String) async throws -> AlbumDisplayModel? {
-        let records = try await fetch(with: title, recordType: .album)
+    func fetchLatestAlbums() async throws {
         
-        guard let firstResult = records.first?.1,
-              case .success(let record) = firstResult,
-              let title = record.string(for: .title) else {
-            return nil
-        }
-        // FIXME:
-        let releaseDate = record.double(for: .releaseDate) ?? -1
+        os_log("Fetching latest albums", Log_CloudKit)
+        let records = try await  fetchRecords(of: .album)
+        os_log("Found %@ albums", String(describing: records.count), Log_CloudKit)
         
-        let songReferences = record.references(of: .songs)
-        let ids = songReferences.compactMap { $0.recordID }
+        // Store titles and release dates
+        let titles = records.compactMap { $0.string(for: .title) }
+        let releaseDates = records.map { $0.double(for: .releaseDate) }
         
-        let dict = try await database.recordTypes(for: ids, desiredKeys: nil)
-        var ordered: [RecordType] = []
-        ids.forEach { id in
-            if let recordType = try? dict[id]?.get() {
-                ordered.append(recordType)
+        for (index, record) in records.enumerated() {
+            
+            // Get the title and release date of the album
+            let title = titles[index]
+            let releaseDate = releaseDates[index]
+            
+            let ordered = try await getOrderedSongRecords(from: record)
+            let context = PersistenceController.shared.newBackgroundContext()
+            // Get the Song objects
+            let songTitles = ordered.compactMap { $0.string(for: .title) }
+            let correspondingSongs = songTitles.compactMap { title in
+                let predicate = NSPredicate(format: "title == %@", title)
+                return context.fetchAndWait(Song.self, with: predicate).first
+            }
+
+            await context.perform {
+                // Check for existing album
+                let predicate = NSPredicate(format: "title == %@", title)
+                let existingAlbum = context.fetchAndWait(Album.self, with: predicate).first
+                // Create or update album
+                let album = existingAlbum ?? Album(context: context)
+                album.title = title
+                album.releaseDate = releaseDate ?? -1
+                os_log("Adding %@ songs to album", String(describing: correspondingSongs.count), Log_CloudKit)
+                // Add the songs to the Album
+                let orderedSet = NSOrderedSet(array: correspondingSongs)
+                album.songs = orderedSet
+                try? context.save()
             }
         }
-        let songTitles = ordered.compactMap { $0.string(for: .title) }
-        let songs = songTitles.compactMap { Song(title: $0) }
-        let album = Album(title: title, songs: songs, releaseDate: releaseDate)
-        let model = AlbumDisplayModel(album: album)
-        return model
+    }
+        
+    
+    func fetch(album title: String) -> AlbumDisplayModel? {
+        let context = PersistenceController.shared.newBackgroundContext()
+        var toReturn: AlbumDisplayModel?
+        context.performAndWait {
+            // Fetch album with given title
+            let predicate = NSPredicate(format: "title == %@", title)
+            guard let album = context.fetchAndWait(Album.self, with: predicate).first else {
+                toReturn = nil
+                return
+            }
+            // Get the songs
+            let songs = album.songs?.array as? [Song] ?? []
+            let sSongs = songs.compactMap { sSong(title: $0.title!, author: $0.author) }
+            let sAlbum = sAlbum(title: album.title!, songs: sSongs, releaseDate: album.releaseDate)
+            toReturn = AlbumDisplayModel(album: sAlbum)
+        }
+        return toReturn
     }
     
-    func albumsThatInclude(song songReferenceToMatch: CKRecord.Reference) async throws -> [Album] {
-        var albums: [Album] = []
-        let predicate = NSPredicate(format: "songs CONTAINS %@", songReferenceToMatch)
-        let query = CKQuery(recordType: .album, predicate: predicate)
-        let results = try await database.referenceRecordTypes(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: CKQueryOperation.maximumResults).matchResults
-        let recordTypes = results.compactMap { try? $0.1.get() }
-        let albumTitles = recordTypes.compactMap { $0.string(for: .title) }
-        let albumReleaseDates = recordTypes.compactMap { $0.double(for: .releaseDate)}
-        
-        for (index, _) in recordTypes.enumerated() {
-            let title = albumTitles[index]
-            let releaseDate = albumReleaseDates[index]
-            let album = Album(title: title, songs: [], releaseDate: releaseDate)
-            albums.append(album)
+    func albumsThatInclude(song objectID: NSManagedObjectID) -> [sAlbum] {
+        let context = PersistenceController.shared.newBackgroundContext()
+        var toReturn: [sAlbum] = []
+        context.performAndWait {
+            let song = context.object(with: objectID) as! Song
+            let objects = objects(Album.self, including: song, context: context)
+            os_log("%@ found on %@ album(s)", song.title!, String(describing: objects.count))
+            let sAlbums = objects.compactMap { sAlbum(title: $0.title!, songs:[], releaseDate: $0.releaseDate) }
+            toReturn = sAlbums.sorted { $0.releaseDate < $1.releaseDate }
         }
-        return albums.sorted { $0.releaseDate < $1.releaseDate }        
+        return toReturn
     }
 }

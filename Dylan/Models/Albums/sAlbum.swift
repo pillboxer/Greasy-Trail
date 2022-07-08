@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct Album: Codable, Equatable, Identifiable {
+public struct sAlbum: Codable, Equatable, Identifiable {
     
     let title: String
-    let songs: [Song]
+    let songs: [sSong]
     let releaseDate: Double
     
     public var id: String {
@@ -19,9 +19,9 @@ public struct Album: Codable, Equatable, Identifiable {
     
 }
 
-extension Album {
+extension sAlbum {
     
-   public func contains(_ song: Song) -> Bool {
+   public func contains(_ song: sSong) -> Bool {
         songs.contains { $0 == song }
     }
     

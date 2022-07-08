@@ -10,9 +10,9 @@ import Foundation
 /// The Information Returned Upon Requesting Information About A Song
 struct SongDisplayModel {
     
-    private let song: Song
+    private let song: sSong
     
-    init(song: Song) {
+    init(song: sSong) {
         self.song = song
     }
         
@@ -24,7 +24,7 @@ extension SongDisplayModel {
         song.title
     }
     
-    var firstAlbumAppearance: Album? {
+    var firstAlbumAppearance: sAlbum? {
         song.albums?.first
     }
     
@@ -32,7 +32,7 @@ extension SongDisplayModel {
         song.albums?.count ?? 0
     }
     
-    var albums: [Album]? {
+    var albums: [sAlbum]? {
         song.albums
     }
     
@@ -40,11 +40,11 @@ extension SongDisplayModel {
         song.author ?? NSLocalizedString("default_author", comment: "")
     }
     
-    var performances: [Performance]? {
+    var performances: [sPerformance]? {
         song.performances
     }
     
-    var firstPerformance: Performance? {
+    var firstPerformance: sPerformance? {
         performances?.first
     }
 

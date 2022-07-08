@@ -16,8 +16,8 @@ struct SearchFieldView: View {
     @Binding var performanceModel: PerformanceDisplayModel?
     @Binding var searchDisplayType: SearchView.SearchDisplayType
 
-    @EnvironmentObject var formatter: Formatter
-    @StateObject private var detective = Detective()
+    @EnvironmentObject private var formatter: Formatter
+    @EnvironmentObject private var detective: Detective
 
     var body: some View {
         VStack {

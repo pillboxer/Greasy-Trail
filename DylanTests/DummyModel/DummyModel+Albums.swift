@@ -10,7 +10,7 @@
 
 extension DummyModel {
     
-    static var aHighway61Revisited: Album {
+    static var aHighway61Revisited: sAlbum {
         let songs = [sLikeARollingStone,
                      sTombstoneBlues,
                      sItTakesALotToLaugh,
@@ -20,7 +20,7 @@ extension DummyModel {
                      sHighway61Revisited,
                      sJustLikeTomThumbsBlues,
                      sDesolationRow]
-        return Album(title: tHighway61Revisited, songs: songs, releaseDate: rHighway61Revisited)
+        return sAlbum(title: tHighway61Revisited, songs: songs, releaseDate: rHighway61Revisited)
     }
     
 }
