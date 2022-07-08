@@ -16,6 +16,7 @@
 		86563C59287831D300104879 /* MockDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C58287831D300104879 /* MockDatabase.swift */; };
 		86563C5B287835AD00104879 /* MockPerformanceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5A287835AD00104879 /* MockPerformanceRecord.swift */; };
 		86563C5D2878373900104879 /* DummyModel+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5C2878373900104879 /* DummyModel+Performances.swift */; };
+		86563C6228787B0500104879 /* ResultPerformanceOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C6128787B0400104879 /* ResultPerformanceOverviewView.swift */; };
 		8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */; };
 		8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30E28679BFE0013F595 /* DatabaseType.swift */; };
 		8656A31128679C540013F595 /* RecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A31028679C540013F595 /* RecordType.swift */; };
@@ -96,6 +97,7 @@
 		86563C58287831D300104879 /* MockDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDatabase.swift; sourceTree = "<group>"; };
 		86563C5A287835AD00104879 /* MockPerformanceRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockPerformanceRecord.swift; sourceTree = "<group>"; };
 		86563C5C2878373900104879 /* DummyModel+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+Performances.swift"; sourceTree = "<group>"; };
+		86563C6128787B0400104879 /* ResultPerformanceOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPerformanceOverviewView.swift; sourceTree = "<group>"; };
 		8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKDatabase+Extensions.swift"; sourceTree = "<group>"; };
 		8656A30E28679BFE0013F595 /* DatabaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseType.swift; sourceTree = "<group>"; };
 		8656A31028679C540013F595 /* RecordType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordType.swift; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */,
 				86C526AA2870D2C10035DD31 /* ResultAlbumOverviewView.swift */,
 				86C526C62875C0EA0035DD31 /* TwoColumnTableView.swift */,
+				86563C6128787B0400104879 /* ResultPerformanceOverviewView.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 				86C526C52874C2E70035DD31 /* CloudKitManager+Performances.swift in Sources */,
 				868C122728772F860054FF2D /* Progress.swift in Sources */,
 				86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */,
+				86563C6228787B0500104879 /* ResultPerformanceOverviewView.swift in Sources */,
 				86C526A92870CF130035DD31 /* AlbumDisplayModel.swift in Sources */,
 				866864062865EDD700510DDF /* sPerformance.swift in Sources */,
 				86C526AE2872F7B30035DD31 /* SearchingView.swift in Sources */,

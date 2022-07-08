@@ -19,6 +19,10 @@ struct AlbumDisplayModel {
 
 extension AlbumDisplayModel {
     
+    var title: String {
+        album.title
+    }
+    
     var songTitles: [String] {
         album.songs.compactMap { $0.title }
     }

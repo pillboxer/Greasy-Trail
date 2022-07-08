@@ -1,15 +1,15 @@
 //
-//  ResultAlbumOverviewView.swift
+//  ResultPerformanceOverviewView.swift
 //  Dylan
 //
-//  Created by Henry Cooper on 02/07/2022.
+//  Created by Henry Cooper on 08/07/2022.
 //
 
 import SwiftUI
 
-struct ResultAlbumOverviewView: View{
+struct ResultPerformanceOverviewView: View {
     
-    @Binding var model: AlbumDisplayModel?
+    @Binding var model: PerformanceDisplayModel?
     @Binding var nextSearch: Search?
     
     var body: some View {
@@ -20,7 +20,7 @@ struct ResultAlbumOverviewView: View{
                         model = nil
                     }
                 Spacer()
-                Text(model?.title ?? "")
+                Text(model?.venue ?? "")
                     .font(.headline)
                 Spacer()
             }

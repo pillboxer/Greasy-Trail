@@ -14,20 +14,7 @@ class DylanTests: XCTestCase {
     var container: NSPersistentContainer!
     
     override func setUpWithError() throws {
-        guard let modelURL = Bundle.main.url(forResource: "Main", withExtension: "momd") else {
-            fatalError("Core Data model MOMD not found")
-        }
-        let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL)!
-        
-        let container = NSPersistentContainer(name: "Main", managedObjectModel: managedObjectModel)
-        container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
-        let description = NSPersistentStoreDescription()
-        description.type = NSInMemoryStoreType
-        container.persistentStoreDescriptions = [description]
-        container.loadPersistentStores { _, error in
-            self.container = container
-        }
-        NSApplication.shared.delegate = nil
+        container = PersistenceController(inMemory: true).container
     }
 
     override func tearDownWithError() throws {

@@ -7,14 +7,34 @@
 
 import CoreData
 
-struct PersistenceController {
+class PersistenceController {
     
     static let shared = PersistenceController()
     
-    let container: NSPersistentContainer
+    static var managedObjectModel: NSManagedObjectModel = {
+        let bundle = Bundle(for: PersistenceController.self)
+        
+        guard let url = bundle.url(forResource: "Main", withExtension: "momd") else {
+            fatalError("Failed to locate momd file for xcdatamodeld")
+        }
+        
+        guard let model = NSManagedObjectModel(contentsOf: url) else {
+            fatalError("Failed to load momd file for xcdatamodeld")
+        }
+        
+        return model
+    }()
     
-    init() {
-        container = NSPersistentContainer(name: "Main")
+    let container: NSPersistentContainer
+        
+    init(inMemory: Bool = false) {
+        container = NSPersistentContainer(name: "Main", managedObjectModel: Self.managedObjectModel)
+        if inMemory {
+            container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
+            let description = NSPersistentStoreDescription()
+            description.type = NSInMemoryStoreType
+            container.persistentStoreDescriptions = [description]
+        }
         container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Error configuring Core Data: \(error.localizedDescription)")

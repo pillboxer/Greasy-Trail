@@ -29,10 +29,13 @@ struct ContentView: View {
                 SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
             }
             else if let _ = songModel {
-                ResultView(songModel: $songModel, nextSearch: $nextSearch)
+                ResultView(songModel: $songModel, nextSearch: $nextSearch, currentViewType: .songOverview)
             }
             else if let _ = albumModel {
-                ResultView(albumModel: $albumModel, nextSearch: $nextSearch)
+                ResultView(albumModel: $albumModel, nextSearch: $nextSearch, currentViewType: .albumOverview)
+            }
+            else if let _ = performanceModel {
+                ResultView(performanceModel: $performanceModel, nextSearch: $nextSearch, currentViewType: .performanceOverview)
             }
             else {
                 SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)

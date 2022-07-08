@@ -10,6 +10,25 @@ import CoreData
 
 extension Detective {
 
+    func fetch(performance date: Double) -> PerformanceDisplayModel? {
+        let context = container.newBackgroundContext()
+        var toReturn: PerformanceDisplayModel?
+        context.performAndWait {
+            // Fetch album with given title
+            let predicate = NSPredicate(format: "date == %d", Int(date))
+            guard let performance = context.fetchAndWait(Performance.self, with: predicate).first else {
+                toReturn = nil
+                return
+            }
+            // Get the songs
+            let songs = performance.songs?.array as? [Song] ?? []
+            let sSongs = songs.compactMap { sSong(title: $0.title!, author: $0.author) }
+            let sPerformance = sPerformance(venue: performance.venue!, songs: sSongs, date: performance.date)
+            toReturn = PerformanceDisplayModel(sPerformance: sPerformance)
+        }
+        return toReturn
+    }
+
     func performancesThatInclude(song: Song) -> [sPerformance] {
         let context = container.newBackgroundContext()
         var toReturn: [sPerformance] = []

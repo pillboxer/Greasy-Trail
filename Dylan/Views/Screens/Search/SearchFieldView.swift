@@ -54,7 +54,10 @@ struct SearchFieldView: View {
         else if let result = detective.search(song: text) {
             songModel = result
         }
-        else if let formatted = formatter.date(from: text){} // FIXME:
+        else if let formatted = formatter.date(from: text),
+                    let result = detective.fetch(performance: formatted) {
+            performanceModel = result
+        }
         else {
             searchDisplayType = .noResultsFound(title: text)
         }
@@ -81,8 +84,10 @@ struct SearchFieldView: View {
                 searchDisplayType = .noResultsFound(title: text)
             }
         case .performance:
-            if let formatted = formatter.date(from: text) {}
-            // FIXME
+            if let formatted = formatter.date(from: text),
+               let result = detective.fetch(performance: formatted) {
+                performanceModel = result
+            }
             else {
                 searchDisplayType = .noResultsFound(title: text)
             }

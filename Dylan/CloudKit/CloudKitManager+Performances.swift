@@ -57,11 +57,4 @@ extension CloudKitManager {
             }
         }
     }
-    
-    func fetch(performance date: Double) async throws -> PerformanceDisplayModel? {
-
-        let records = try await fetch(with: date, recordType: .performance)
-        return nil
-    }
-    
 }

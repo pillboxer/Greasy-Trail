@@ -7,4 +7,24 @@
 
 import Foundation
 
-struct PerformanceDisplayModel {}
+struct PerformanceDisplayModel {
+    
+    let sPerformance: sPerformance
+    
+    init(sPerformance: sPerformance) {
+        self.sPerformance = sPerformance
+    }
+    
+}
+
+extension PerformanceDisplayModel {
+    
+    var songTitles: [String] {
+        sPerformance.songs.compactMap { $0.title }
+    }
+    
+    var venue: String {
+        sPerformance.venue
+    }
+    
+}

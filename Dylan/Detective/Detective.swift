@@ -24,6 +24,10 @@ public class Detective: ObservableObject {
     func search(album title: String) -> AlbumDisplayModel? {
         fetch(album: title)
     }
+    
+    func search(performance date: Double) -> PerformanceDisplayModel? {
+        fetch(performance: date)
+    }
 
     func objects<T: NSManagedObject>(_ object: T.Type, including song: Song, context: NSManagedObjectContext) -> [T] {
         var toReturn: [T] = []
