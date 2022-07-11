@@ -25,9 +25,6 @@ struct ContentView: View {
             if let step = cloudKitManager.currentStep {
                 FetchProgressView(step: step)
             }
-            else if let _ = nextSearch {
-                SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
-            }
             else if let _ = songModel {
                 ResultView(songModel: $songModel, nextSearch: $nextSearch, currentViewType: .songOverview)
             }
@@ -37,13 +34,17 @@ struct ContentView: View {
             else if let _ = performanceModel {
                 ResultView(performanceModel: $performanceModel, nextSearch: $nextSearch, currentViewType: .performanceOverview)
             }
+            else if let _ = nextSearch {
+                SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
+            }
             else {
                 SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
             }
         }
         .environmentObject(formatter)
         .environmentObject(cloudKitManager)
-        .frame(width: 600, height: 400)
+        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .frame(minWidth: 600, minHeight: 400)
 
     }
 }

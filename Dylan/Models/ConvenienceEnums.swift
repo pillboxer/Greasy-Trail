@@ -29,7 +29,7 @@ enum DylanRecordField: String {
     // Performance
     case venue
     case date
-    case lbNumbers
+    case lbNumbers = "LBNumbers"
         
     case modificationDate
 }

@@ -26,21 +26,18 @@ struct SearchView: View {
     
     enum SearchDisplayType {
         case search
-        case searching
         case noResultsFound(title: String)
     }
     
     var body: some View {
         switch searchDisplayType {
         case .search:
-            SearchFieldView(text: $text,
-                            nextSearch: $nextSearch,
-                            songModel: $songModel,
-                            albumModel: $albumModel,
-                            performanceModel: $performanceModel,
-                            searchDisplayType: $searchDisplayType)
-        case .searching:
-            SearchingView()
+            HomeView(text: $text,
+                     searchDisplayType: $searchDisplayType,
+                     songModel: $songModel,
+                     albumModel: $albumModel,
+                     performanceModel: $performanceModel,
+                     nextSearch: $nextSearch)
         case .noResultsFound(let title):
             Text("No results found for \(title)")
             Button("OK") {

@@ -14,4 +14,7 @@
 "cloud_kit_fetch_songs_progress_description" = "Fetching latest songs";
 "cloud_kit_fetch_albums_progress_description" = "Fetching latest albums";
 "cloud_kit_fetch_performances_progress_description" = "Fetching latest performances";
+"picker_value_0" = "Latest Albums";
+"picker_value_1" = "Latest Performances";
+
 

@@ -27,4 +27,9 @@ extension PerformanceDisplayModel {
         sPerformance.venue
     }
     
+    var lbNumbers: [Int] {
+        sPerformance.lbNumbers ?? []
+    }
+
+    
 }

@@ -23,7 +23,10 @@ extension Detective {
             // Get the songs
             let songs = performance.songs?.array as? [Song] ?? []
             let sSongs = songs.compactMap { sSong(title: $0.title!, author: $0.author) }
-            let sPerformance = sPerformance(venue: performance.venue!, songs: sSongs, date: performance.date)
+            let sPerformance = sPerformance(venue: performance.venue!,
+                                            songs: sSongs,
+                                            date: performance.date,
+                                            lbNumbers: performance.lbNumbers)
             toReturn = PerformanceDisplayModel(sPerformance: sPerformance)
         }
         return toReturn

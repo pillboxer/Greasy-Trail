@@ -34,7 +34,6 @@ struct TwoColumnTableView: View {
                             selection = model.id
                             nextSearch = (nextSearchType == .album ? model.column1Value : String(model.column2Value), nextSearchType)
                             self.songDisplayModel = nil
-                            
                         })
                         .simultaneousGesture(TapGesture()
                             .onEnded {

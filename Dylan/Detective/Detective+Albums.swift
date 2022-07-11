@@ -16,7 +16,7 @@ extension Detective {
         var toReturn: AlbumDisplayModel?
         context.performAndWait {
             // Fetch album with given title
-            let predicate = NSPredicate(format: "title == %@", title)
+            let predicate = NSPredicate(format: "title =[c] %@", title)
             guard let album = context.fetchAndWait(Album.self, with: predicate).first else {
                 toReturn = nil
                 return

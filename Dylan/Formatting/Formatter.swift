@@ -13,6 +13,7 @@ class Formatter: ObservableObject {
     private lazy var dateFormatter: DateFormatter = {
        let formatter = DateFormatter()
         formatter.dateFormat = "MMMM d, yyyy"
+        formatter.timeZone = .init(identifier: "GMT")
         return formatter
     }()
     

@@ -15,39 +15,38 @@ struct SearchFieldView: View {
     @Binding var albumModel: AlbumDisplayModel?
     @Binding var performanceModel: PerformanceDisplayModel?
     @Binding var searchDisplayType: SearchView.SearchDisplayType
-
+    
     @EnvironmentObject private var formatter: Formatter
     
     @StateObject private var detective = Detective()
-
+    
     var body: some View {
-        VStack {
-            HStack{
-                Spacer()
-                NSTextFieldRepresentable(placeholder: "search_placeholder", text: $text)
-                    .frame(maxWidth: 250)
-                Spacer()
-            }
-            HStack(spacing: 16) {
-                OnTapButton(text: "Search") {
-                    Task { await searchBlind() }
+        if let nextSearch = nextSearch {
+            SearchingView()
+                .onAppear {
+                    searchNextSearch(nextSearch.title)
                 }
-            }
         }
-        .padding(.bottom, 16)
-        .onAppear {
-            if let nextSearch = nextSearch {
-                text = nextSearch.title
-                Task { await searchNextSearch() }
+        else {
+            HStack{
+                NSTextFieldRepresentable(placeholder: "search_placeholder", text: $text) {
+                    searchBlind()
+                }
+                .frame(maxWidth: 250)
+                
+                OnTapButton(systemImage: "magnifyingglass.circle") {
+                    searchBlind()
+                }
+                .buttonStyle(PlainButtonStyle())
             }
+            .padding(4)
         }
     }
     
-    private func prepareToSearch() {
-    }
-    
-    private func searchBlind() async {
-        searchDisplayType = .searching
+    private func searchBlind() {
+        guard !text.isEmpty else {
+            return
+        }
         if let result = detective.search(album: text) {
             albumModel = result
         }
@@ -55,7 +54,7 @@ struct SearchFieldView: View {
             songModel = result
         }
         else if let formatted = formatter.date(from: text),
-                    let result = detective.fetch(performance: formatted) {
+                let result = detective.fetch(performance: formatted) {
             performanceModel = result
         }
         else {
@@ -63,36 +62,37 @@ struct SearchFieldView: View {
         }
     }
     
-    private func searchNextSearch() async {
-        searchDisplayType = .searching
+    private func searchNextSearch(_ text: String) {
         guard let nextSearch = nextSearch else {
             return
         }
-        switch nextSearch.type {
-        case .album:
-            if let result = detective.search(album: text) {
-                albumModel = result
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            switch nextSearch.type {
+            case .album:
+                if let result = detective.search(album: text) {
+                    albumModel = result
+                }
+                else {
+                    searchDisplayType = .noResultsFound(title: text)
+                }
+            case .song:
+                if let result = detective.search(song: text) {
+                    songModel = result
+                }
+                else {
+                    searchDisplayType = .noResultsFound(title: text)
+                }
+            case .performance:
+                if let double = Double(text),
+                   let result = detective.fetch(performance: double) {
+                    performanceModel = result
+                }
+                else {
+                    searchDisplayType = .noResultsFound(title: text)
+                }
             }
-            else {
-                searchDisplayType = .noResultsFound(title: text)
-            }
-        case .song:
-            if let result = detective.search(song: text) {
-                songModel = result
-            }
-            else {
-                searchDisplayType = .noResultsFound(title: text)
-            }
-        case .performance:
-            if let formatted = formatter.date(from: text),
-               let result = detective.fetch(performance: formatted) {
-                performanceModel = result
-            }
-            else {
-                searchDisplayType = .noResultsFound(title: text)
-            }
+            self.nextSearch = nil
         }
-        self.nextSearch = nil
     }
     
 }

@@ -12,7 +12,7 @@ extension Detective {
     func fetch(song title: String) -> SongDisplayModel? {
         let context = container.newBackgroundContext()
         var toReturn: SongDisplayModel?
-        let predicate = NSPredicate(format: "title == %@", title)
+        let predicate = NSPredicate(format: "title =[c] %@", title)
         guard let song = context.fetchAndWait(Song.self, with: predicate).first else {
             toReturn = nil
             return nil

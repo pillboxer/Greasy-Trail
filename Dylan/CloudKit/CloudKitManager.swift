@@ -32,7 +32,6 @@ class CloudKitManager: ObservableObject {
     func start() async throws {
         let date = Date()
         do {
-            lastFetchDate = nil
             await setCurrentStep(to: .songs)
             try await fetchLatestSongs()
             await setCurrentStep(to: .albums)

@@ -12,7 +12,7 @@
     </entity>
     <entity name="Performance" representedClassName="Performance" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="lbNumbers" optional="YES" attributeType="Binary"/>
+        <attribute name="lbNumbers" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
         <attribute name="venue" optional="YES" attributeType="String"/>
         <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Song" inverseName="performances" inverseEntity="Song"/>
         <uniquenessConstraints>
@@ -34,7 +34,7 @@
     </entity>
     <elements>
         <element name="Album" positionX="-63" positionY="9" width="128" height="74"/>
-        <element name="Song" positionX="-63" positionY="-18" width="128" height="89"/>
         <element name="Performance" positionX="-54" positionY="27" width="128" height="89"/>
+        <element name="Song" positionX="-63" positionY="-18" width="128" height="89"/>
     </elements>
 </model>

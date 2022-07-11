@@ -12,9 +12,10 @@ struct NSTextFieldRepresentable: NSViewRepresentable {
     
     let placeholder: String
     var text: Binding<String>
+    var onCommit: () -> Void
     
-    func makeNSView(context: Context) -> NoCursorTextField {
-        let view = NoCursorTextField()
+    func makeNSView(context: Context) -> NSTextField {
+        let view = NSTextField()
         view.delegate = context.coordinator
         return view
     }
@@ -23,32 +24,27 @@ struct NSTextFieldRepresentable: NSViewRepresentable {
         NSTextFieldCoordinator(textField: self)
     }
     
-    func updateNSView(_ nsView: NoCursorTextField, context: Context) {
+    func updateNSView(_ nsView: NSTextField, context: Context) {
         customize(nsView)
         nsView.stringValue = text.wrappedValue
     }
     
     func customize(_ textField: NSTextField) {
         textField.placeholderString = NSLocalizedString(placeholder, comment: "")
-        textField.drawsBackground = false
-        textField.isBezeled = false
         textField.focusRingType = .none
-        
-    }
-    
-}
-
-class NoCursorTextField: NSTextField {
-    
-    override func currentEditor() -> NSText? {
-        guard let editor = super.currentEditor() as? NSTextView else {
-            return nil
+        textField.wantsLayer = true
+        textField.layer?.borderColor = NSColor.lightGray.cgColor
+        textField.layer?.borderWidth = 0.8
+        textField.layer?.cornerRadius = 4.0
+        DispatchQueue.main.async {
+            if let responder = textField.window?.firstResponder,
+               !(responder is NSTextView) {
+                textField.window?.makeFirstResponder(textField)
+            }
         }
-        editor.insertionPointColor = .clear
-        return editor
     }
+    
 }
-
 class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
     
     var textField: NSTextFieldRepresentable
@@ -57,6 +53,15 @@ class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
         self.textField = textField
     }
 
+    
+    func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        if (commandSelector == #selector(NSResponder.insertNewline(_:))) {
+            // Do something against ENTER key
+            textField.onCommit()
+            return true
+        }
+        return false
+    }
     
     func controlTextDidChange(_ obj: Notification) {
         textField.text.wrappedValue = (obj.object as? NSTextField)?.stringValue ?? ""

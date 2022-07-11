@@ -11,6 +11,7 @@ struct ResultPerformanceOverviewView: View {
     
     @Binding var model: PerformanceDisplayModel?
     @Binding var nextSearch: Search?
+    @Binding var currentViewType: ResultView.ResultViewType
     
     var body: some View {
         VStack(spacing: 16) {
@@ -34,6 +35,11 @@ struct ResultPerformanceOverviewView: View {
                                 model = nil
                             }
                     }
+                }
+            }
+            if let _ = model?.lbNumbers {
+                Button("LBs") {
+                    currentViewType = .lbs
                 }
             }
         }

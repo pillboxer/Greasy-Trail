@@ -48,7 +48,7 @@ extension CloudKitManager {
                 let performance = existingPerformance ?? Performance(context: context)
                 performance.venue = venue
                 performance.date = date
-                performance.lbNumbers = try? NSKeyedArchiver.archivedData(withRootObject: lbs as Any, requiringSecureCoding: true)
+                performance.lbNumbers = lbs
                 os_log("Adding %@ songs to performances", String(describing: correspondingSongs.count), Log_CloudKit)
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)

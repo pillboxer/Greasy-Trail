@@ -2,7 +2,7 @@
 //  Performance+CoreDataProperties.swift
 //  Dylan
 //
-//  Created by Henry Cooper on 07/07/2022.
+//  Created by Henry Cooper on 08/07/2022.
 //
 //
 
@@ -17,26 +17,44 @@ extension Performance {
     }
 
     @NSManaged public var date: Double
+    @NSManaged public var lbNumbers: [Int]?
     @NSManaged public var venue: String?
-    @NSManaged public var lbNumbers: Data?
     @NSManaged public var songs: NSOrderedSet?
 
 }
 
-// MARK: Generated accessors for song
+// MARK: Generated accessors for songs
 extension Performance {
 
-    @objc(addSongObject:)
-    @NSManaged public func addToSong(_ value: Song)
+    @objc(insertObject:inSongsAtIndex:)
+    @NSManaged public func insertIntoSongs(_ value: Song, at idx: Int)
 
-    @objc(removeSongObject:)
-    @NSManaged public func removeFromSong(_ value: Song)
+    @objc(removeObjectFromSongsAtIndex:)
+    @NSManaged public func removeFromSongs(at idx: Int)
 
-    @objc(addSong:)
-    @NSManaged public func addToSong(_ values: NSSet)
+    @objc(insertSongs:atIndexes:)
+    @NSManaged public func insertIntoSongs(_ values: [Song], at indexes: NSIndexSet)
 
-    @objc(removeSong:)
-    @NSManaged public func removeFromSong(_ values: NSSet)
+    @objc(removeSongsAtIndexes:)
+    @NSManaged public func removeFromSongs(at indexes: NSIndexSet)
+
+    @objc(replaceObjectInSongsAtIndex:withObject:)
+    @NSManaged public func replaceSongs(at idx: Int, with value: Song)
+
+    @objc(replaceSongsAtIndexes:withSongs:)
+    @NSManaged public func replaceSongs(at indexes: NSIndexSet, with values: [Song])
+
+    @objc(addSongsObject:)
+    @NSManaged public func addToSongs(_ value: Song)
+
+    @objc(removeSongsObject:)
+    @NSManaged public func removeFromSongs(_ value: Song)
+
+    @objc(addSongs:)
+    @NSManaged public func addToSongs(_ values: NSOrderedSet)
+
+    @objc(removeSongs:)
+    @NSManaged public func removeFromSongs(_ values: NSOrderedSet)
 
 }
 
