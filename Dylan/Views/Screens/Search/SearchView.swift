@@ -42,6 +42,7 @@ struct SearchView: View {
             Text("No results found for \(title)")
             Button("OK") {
                 searchDisplayType = .search
+                nextSearch = nil
             }
         
         }

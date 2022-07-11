@@ -26,5 +26,10 @@ extension AlbumDisplayModel {
     var songTitles: [String] {
         album.songs.compactMap { $0.title }
     }
+    
+    var songsIgnoringBreaks: [String] {
+        songTitles.filter { $0 != "BREAK" }
+    }
+
 
 }

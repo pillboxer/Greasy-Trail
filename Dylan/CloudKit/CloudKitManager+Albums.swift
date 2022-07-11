@@ -15,7 +15,7 @@ extension CloudKitManager {
         
         os_log("Fetching latest albums", Log_CloudKit)
         let records = try await fetchRecords(of: .album)
-        os_log("Found %@ albums", String(describing: records.count), Log_CloudKit)
+        os_log("Found %@ albums", log: Log_CloudKit, String(describing: records.count))
         
         // Store titles and release dates
         let titles = records.compactMap { $0.string(for: .title) }
@@ -44,7 +44,7 @@ extension CloudKitManager {
                 let album = existingAlbum ?? Album(context: context)
                 album.title = title
                 album.releaseDate = releaseDate ?? -1
-                os_log("Adding %@ songs to album", String(describing: correspondingSongs.count), Log_CloudKit)
+                os_log("Adding %@ songs to album", log: Log_CloudKit, String(describing: correspondingSongs.count))
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 album.songs = orderedSet

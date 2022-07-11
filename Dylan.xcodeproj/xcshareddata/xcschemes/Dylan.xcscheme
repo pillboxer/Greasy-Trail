@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "866863E82865EB6200510DDF"
-               BuildableName = "Dylan.app"
-               BlueprintName = "Dylan"
+               BuildableName = "Greasy Trail.app"
+               BlueprintName = "Greasy Trail"
                ReferencedContainer = "container:Dylan.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -56,8 +56,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "866863E82865EB6200510DDF"
-            BuildableName = "Dylan.app"
-            BlueprintName = "Dylan"
+            BuildableName = "Greasy Trail.app"
+            BlueprintName = "Greasy Trail"
             ReferencedContainer = "container:Dylan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -79,8 +79,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "866863E82865EB6200510DDF"
-            BuildableName = "Dylan.app"
-            BlueprintName = "Dylan"
+            BuildableName = "Greasy Trail.app"
+            BlueprintName = "Greasy Trail"
             ReferencedContainer = "container:Dylan.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

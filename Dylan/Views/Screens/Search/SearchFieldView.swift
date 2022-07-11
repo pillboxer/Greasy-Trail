@@ -26,6 +26,9 @@ struct SearchFieldView: View {
                 .onAppear {
                     searchNextSearch(nextSearch.title)
                 }
+                .onChange(of: nextSearch) { newValue in
+                    searchNextSearch(newValue.title)
+                }
         }
         else {
             HStack{
@@ -33,7 +36,6 @@ struct SearchFieldView: View {
                     searchBlind()
                 }
                 .frame(maxWidth: 250)
-                
                 OnTapButton(systemImage: "magnifyingglass.circle") {
                     searchBlind()
                 }
@@ -47,19 +49,7 @@ struct SearchFieldView: View {
         guard !text.isEmpty else {
             return
         }
-        if let result = detective.search(album: text) {
-            albumModel = result
-        }
-        else if let result = detective.search(song: text) {
-            songModel = result
-        }
-        else if let formatted = formatter.date(from: text),
-                let result = detective.fetch(performance: formatted) {
-            performanceModel = result
-        }
-        else {
-            searchDisplayType = .noResultsFound(title: text)
-        }
+        nextSearch = Search(title: text, type: .album)
     }
     
     private func searchNextSearch(_ text: String) {
@@ -71,28 +61,31 @@ struct SearchFieldView: View {
             case .album:
                 if let result = detective.search(album: text) {
                     albumModel = result
+                    self.nextSearch = nil
                 }
                 else {
-                    searchDisplayType = .noResultsFound(title: text)
+                    self.nextSearch = Search(title: text, type: .song)
                 }
             case .song:
                 if let result = detective.search(song: text) {
                     songModel = result
+                    self.nextSearch = nil
                 }
                 else {
-                    searchDisplayType = .noResultsFound(title: text)
+                    self.nextSearch = Search(title: text, type: .performance)
                 }
             case .performance:
-                if let double = Double(text),
-                   let result = detective.fetch(performance: double) {
+                if let toFetch = Double(text) ?? formatter.date(from: text),
+                   let result = detective.fetch(performance: toFetch) {
                     performanceModel = result
+                    self.nextSearch = nil
                 }
                 else {
                     searchDisplayType = .noResultsFound(title: text)
                 }
             }
-            self.nextSearch = nil
+            
         }
     }
-    
+
 }

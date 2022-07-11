@@ -16,7 +16,7 @@ extension CloudKitManager {
         
         os_log("Fetching latest performances", Log_CloudKit)
         let records = try await fetchRecords(of: .performance)
-        os_log("Found %@ performances", String(describing: records.count), Log_CloudKit)
+        os_log("Found %@ performances", log: Log_CloudKit, String(describing: records.count))
         
         // Store titles and release dates
         let venues = records.compactMap { $0.string(for: .venue) }
@@ -49,11 +49,11 @@ extension CloudKitManager {
                 performance.venue = venue
                 performance.date = date
                 performance.lbNumbers = lbs
-                os_log("Adding %@ songs to performances", String(describing: correspondingSongs.count), Log_CloudKit)
+                os_log("Adding %@ songs to performances", log: Log_CloudKit, String(describing: correspondingSongs.count))
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 performance.songs = orderedSet
-                try? context.save()
+                try! context.save()
             }
         }
     }

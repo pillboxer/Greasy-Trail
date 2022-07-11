@@ -32,7 +32,7 @@ struct TwoColumnTableView: View {
                     Text(model.column1Value)
                         .gesture(TapGesture(count: 2).onEnded {
                             selection = model.id
-                            nextSearch = (nextSearchType == .album ? model.column1Value : String(model.column2Value), nextSearchType)
+                            nextSearch = Search(title: nextSearchType == .album ? model.column1Value : String(model.column2Value), type: nextSearchType)
                             self.songDisplayModel = nil
                         })
                         .simultaneousGesture(TapGesture()

@@ -7,7 +7,11 @@
 
 import SwiftUI
 
-typealias Search = (title: String, type: DylanSearchType)
+#warning("MOVE ME")
+struct Search: Equatable {
+    let title: String
+    let type: DylanSearchType
+}
 
 struct ContentView: View {
     

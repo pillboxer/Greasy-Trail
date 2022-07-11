@@ -18,15 +18,18 @@ public class Detective: ObservableObject {
     }
     
     func search(song title: String) -> SongDisplayModel? {
-        fetch(song: title)
+        os_log("Searching song: %@", log: Log_Detective, title)
+        return fetch(song: title)
     }
     
     func search(album title: String) -> AlbumDisplayModel? {
-        fetch(album: title)
+        os_log("Searching album: %@", log: Log_Detective, title)
+        return fetch(album: title)
     }
     
     func search(performance date: Double) -> PerformanceDisplayModel? {
-        fetch(performance: date)
+        os_log("Searching date: %@", log: Log_Detective, String(describing: date))
+        return fetch(performance: date)
     }
 
     func objects<T: NSManagedObject>(_ object: T.Type, including song: Song, context: NSManagedObjectContext) -> [T] {

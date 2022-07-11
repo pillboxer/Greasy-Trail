@@ -22,6 +22,7 @@
 		86563C68287C21AA00104879 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C67287C21AA00104879 /* HomeView.swift */; };
 		86563C6B287C70FC00104879 /* RecentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C6A287C70FC00104879 /* RecentsView.swift */; };
 		86563C6D287C716E00104879 /* RecentPerformanceView(FIX)⛔️.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C6C287C716E00104879 /* RecentPerformanceView(FIX)⛔️.swift */; };
+		86563C70287CA8FA00104879 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C6F287CA8FA00104879 /* TestHelper.swift */; };
 		8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */; };
 		8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30E28679BFE0013F595 /* DatabaseType.swift */; };
 		8656A31128679C540013F595 /* RecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A31028679C540013F595 /* RecordType.swift */; };
@@ -69,7 +70,6 @@
 		86C526B82873418E0035DD31 /* DummyModel+Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526B72873418E0035DD31 /* DummyModel+Albums.swift */; };
 		86C526BA287341B00035DD31 /* DummyModel+AlbumRepresentations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526B9287341B00035DD31 /* DummyModel+AlbumRepresentations.swift */; };
 		86C526BD287342770035DD31 /* DummyModel+MockRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */; };
-		86C526C328748F980035DD31 /* DisplayModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C228748F980035DD31 /* DisplayModelManager.swift */; };
 		86C526C52874C2E70035DD31 /* CloudKitManager+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */; };
 		86C526C72875C0EA0035DD31 /* TwoColumnTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C62875C0EA0035DD31 /* TwoColumnTableView.swift */; };
 		86C526C92875C3690035DD31 /* TableDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C82875C3690035DD31 /* TableDisplayModel.swift */; };
@@ -107,6 +107,7 @@
 		86563C67287C21AA00104879 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		86563C6A287C70FC00104879 /* RecentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsView.swift; sourceTree = "<group>"; };
 		86563C6C287C716E00104879 /* RecentPerformanceView(FIX)⛔️.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecentPerformanceView(FIX)⛔️.swift"; sourceTree = "<group>"; };
+		86563C6F287CA8FA00104879 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKDatabase+Extensions.swift"; sourceTree = "<group>"; };
 		8656A30E28679BFE0013F595 /* DatabaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseType.swift; sourceTree = "<group>"; };
 		8656A31028679C540013F595 /* RecordType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordType.swift; sourceTree = "<group>"; };
@@ -114,7 +115,7 @@
 		8656A31428679CE40013F595 /* CKQuery+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKQuery+Extensions.swift"; sourceTree = "<group>"; };
 		8656A31628679D960013F595 /* ConvenienceEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvenienceEnums.swift; sourceTree = "<group>"; };
 		865C451B287615BD0056E01A /* UserDefaultsBacked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsBacked.swift; sourceTree = "<group>"; };
-		866863E92865EB6200510DDF /* Dylan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dylan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		866863E92865EB6200510DDF /* Greasy Trail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Greasy Trail.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		866863EC2865EB6200510DDF /* DylanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DylanApp.swift; sourceTree = "<group>"; };
 		866863EE2865EB6200510DDF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		866863F02865EB6400510DDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -157,7 +158,6 @@
 		86C526B72873418E0035DD31 /* DummyModel+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+Albums.swift"; sourceTree = "<group>"; };
 		86C526B9287341B00035DD31 /* DummyModel+AlbumRepresentations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+AlbumRepresentations.swift"; sourceTree = "<group>"; };
 		86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+MockRecords.swift"; sourceTree = "<group>"; };
-		86C526C228748F980035DD31 /* DisplayModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayModelManager.swift; sourceTree = "<group>"; };
 		86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Performances.swift"; sourceTree = "<group>"; };
 		86C526C62875C0EA0035DD31 /* TwoColumnTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoColumnTableView.swift; sourceTree = "<group>"; };
 		86C526C82875C3690035DD31 /* TableDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDisplayModel.swift; sourceTree = "<group>"; };
@@ -230,6 +230,14 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		86563C6E287CA8DF00104879 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				86563C6F287CA8FA00104879 /* TestHelper.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		8656A30A28679BA50013F595 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,7 +280,7 @@
 		866863EA2865EB6200510DDF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				866863E92865EB6200510DDF /* Dylan.app */,
+				866863E92865EB6200510DDF /* Greasy Trail.app */,
 				8668640D28662E2B00510DDF /* DylanTests.xctest */,
 			);
 			name = Products;
@@ -291,8 +299,8 @@
 				86563C5128782AD100104879 /* Detective */,
 				8656A30A28679BA50013F595 /* Extensions */,
 				86B49418286DDEB300B0C4EC /* Formatting */,
-				86C526C128748F870035DD31 /* Managers */,
 				866863FE2865ED1100510DDF /* Models */,
+				86563C6E287CA8DF00104879 /* Other */,
 				866863F22865EB6400510DDF /* Preview Content */,
 				865C451A287615B20056E01A /* PropertyWrappers */,
 				8656A30D28679BE60013F595 /* Protocols */,
@@ -453,14 +461,6 @@
 			path = DummyModel;
 			sourceTree = "<group>";
 		};
-		86C526C128748F870035DD31 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				86C526C228748F980035DD31 /* DisplayModelManager.swift */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
 		86C526CA2875D6250035DD31 /* Performances */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,14 +473,14 @@
 		86C526D12875F5430035DD31 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				868BAF7E2876D3640055576D /* Album+CoreDataClass.swift */,
+				868C12232876D89C0054FF2D /* Album+CoreDataProperties.swift */,
 				868C1228287737780054FF2D /* Performance+CoreDataClass.swift */,
 				86563C632878D59C00104879 /* Performance+CoreDataProperties.swift */,
-				86C526D52875F55C0035DD31 /* Main.xcdatamodeld */,
 				86C526D82875F5B00035DD31 /* PersistenceController.swift */,
 				86C526DC28760AAA0035DD31 /* Song+CoreDataClass.swift */,
 				86C526DD28760AAA0035DD31 /* Song+CoreDataProperties.swift */,
-				868BAF7E2876D3640055576D /* Album+CoreDataClass.swift */,
-				868C12232876D89C0054FF2D /* Album+CoreDataProperties.swift */,
+				86C526D52875F55C0035DD31 /* Main.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -488,9 +488,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		866863E82865EB6200510DDF /* Dylan */ = {
+		866863E82865EB6200510DDF /* Greasy Trail */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 866863F82865EB6400510DDF /* Build configuration list for PBXNativeTarget "Dylan" */;
+			buildConfigurationList = 866863F82865EB6400510DDF /* Build configuration list for PBXNativeTarget "Greasy Trail" */;
 			buildPhases = (
 				866863E52865EB6200510DDF /* Sources */,
 				866863E62865EB6200510DDF /* Frameworks */,
@@ -500,9 +500,9 @@
 			);
 			dependencies = (
 			);
-			name = Dylan;
+			name = "Greasy Trail";
 			productName = Dylan;
-			productReference = 866863E92865EB6200510DDF /* Dylan.app */;
+			productReference = 866863E92865EB6200510DDF /* Greasy Trail.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8668640C28662E2B00510DDF /* DylanTests */ = {
@@ -555,7 +555,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				866863E82865EB6200510DDF /* Dylan */,
+				866863E82865EB6200510DDF /* Greasy Trail */,
 				8668640C28662E2B00510DDF /* DylanTests */,
 			);
 		};
@@ -605,13 +605,13 @@
 				86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */,
 				8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */,
 				86C526DB2875F91A0035DD31 /* AppDelegate.swift in Sources */,
-				86C526C328748F980035DD31 /* DisplayModelManager.swift in Sources */,
 				86C526DF28760AAA0035DD31 /* Song+CoreDataProperties.swift in Sources */,
 				866864002865ED3800510DDF /* sSong.swift in Sources */,
 				8656A31328679C880013F595 /* CKRecord+Extensions.swift in Sources */,
 				86C52699286F06780035DD31 /* OnTapButton.swift in Sources */,
 				868C12222876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift in Sources */,
 				8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */,
+				86563C70287CA8FA00104879 /* TestHelper.swift in Sources */,
 				86C52692286F02E50035DD31 /* SearchView.swift in Sources */,
 				86C526AB2870D2C10035DD31 /* ResultAlbumOverviewView.swift in Sources */,
 				866863EF2865EB6200510DDF /* ContentView.swift in Sources */,
@@ -669,7 +669,7 @@
 /* Begin PBXTargetDependency section */
 		8668641228662E2B00510DDF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 866863E82865EB6200510DDF /* Dylan */;
+			target = 866863E82865EB6200510DDF /* Greasy Trail */;
 			targetProxy = 8668641128662E2B00510DDF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -900,7 +900,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		866863F82865EB6400510DDF /* Build configuration list for PBXNativeTarget "Dylan" */ = {
+		866863F82865EB6400510DDF /* Build configuration list for PBXNativeTarget "Greasy Trail" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				866863F92865EB6400510DDF /* Debug */,

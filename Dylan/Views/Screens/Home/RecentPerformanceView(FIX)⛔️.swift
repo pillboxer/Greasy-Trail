@@ -21,7 +21,7 @@ struct RecentPerformanceRow: View {
                 OnTapButton(systemImage: "chevron.forward.square.fill") {
 
                     withAnimation {
-                        nextSearch = (String(date), .performance)
+                        nextSearch = Search(title: String(date), type: .performance)
                     }
                 }
                 .buttonStyle(PlainButtonStyle())
@@ -47,7 +47,7 @@ struct RecentAlbumRow: View {
                 Spacer()
                 OnTapButton(systemImage: "chevron.forward.square.fill") {
                     withAnimation {
-                        nextSearch = (String(title), .album)
+                        nextSearch = Search(title: String(title), type: .album)
 
                     }
                 }

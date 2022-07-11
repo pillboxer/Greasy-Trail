@@ -23,47 +23,63 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8D27EE8C-D3F3-401D-BF22-C095DD3F66C9"
+            uuid = "CD4693AB-7C74-4432-806C-7FA66A500AE3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dylan/Views/Screens/Search/SearchFieldView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "body"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "searchBlind()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B9C78B0-033F-46A2-A488-49BEFC60EAC5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dylan/Models/Performances/PerformanceDisplayModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "songTitles"
             landmarkType = "24">
             <Locations>
                <Location
-                  uuid = "8D27EE8C-D3F3-401D-BF22-C095DD3F66C9 - 3d4541a7c7734b7d"
+                  uuid = "0B9C78B0-033F-46A2-A488-49BEFC60EAC5 - b5ac63a05129f9bb"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.buttonStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.PrimitiveButtonStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in Dylan.SearchFieldView.body.getter : some"
-                  moduleName = "Dylan"
+                  symbolName = "Greasy_Trail.PerformanceDisplayModel.songTitles.getter : Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "Greasy Trail"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Views/Screens/Search/SearchFieldView.swift"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Models/Performances/PerformanceDisplayModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "444">
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "72">
                </Location>
                <Location
-                  uuid = "8D27EE8C-D3F3-401D-BF22-C095DD3F66C9 - 2c5b00f6ee926f1d"
+                  uuid = "0B9C78B0-033F-46A2-A488-49BEFC60EAC5 - f2589ed1586cf2f3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.frame(minWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxWidth: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, minHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, idealHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, maxHeight: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.buttonStyle&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.PrimitiveButtonStyle&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0)&gt; in Dylan.SearchFieldView.body.getter : some"
-                  moduleName = "Dylan"
+                  symbolName = "closure #1 (Greasy_Trail.sSong) -&gt; Swift.Optional&lt;Swift.String&gt; in Greasy_Trail.PerformanceDisplayModel.songTitles.getter : Swift.Array&lt;Swift.String&gt;"
+                  moduleName = "Greasy Trail"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Views/Screens/Search/SearchFieldView.swift"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Models/Performances/PerformanceDisplayModel.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "28">
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -71,63 +87,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "41589BD5-D476-4D54-97CD-BDB397412399"
+            uuid = "55459FF6-6158-440F-8823-EDE20D5C9F9B"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dylan/Views/Screens/Results/ResultPerformanceOverviewView.swift"
+            filePath = "Dylan/Detective/Detective+Performances.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "36468022-B603-4080-AA5C-DAFA67EB6C02"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dylan/Views/Screens/Results/ResultPerformanceOverviewView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "fetch(performance:)"
+            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "36468022-B603-4080-AA5C-DAFA67EB6C02 - ba762ab43132ae67"
+                  uuid = "55459FF6-6158-440F-8823-EDE20D5C9F9B - c702b404796dc8f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Dylan.ResultPerformanceOverviewView.body.getter : some"
-                  moduleName = "Dylan"
+                  symbolName = "closure #1 () -&gt; () in Greasy_Trail.Detective.fetch(performance: Swift.Double) -&gt; Swift.Optional&lt;Greasy_Trail.PerformanceDisplayModel&gt;"
+                  moduleName = "Greasy Trail"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Views/Screens/Results/ResultPerformanceOverviewView.swift"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Detective/Detective+Performances.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "692">
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "1308">
                </Location>
                <Location
-                  uuid = "36468022-B603-4080-AA5C-DAFA67EB6C02 - d407bcd319aba9db"
+                  uuid = "55459FF6-6158-440F-8823-EDE20D5C9F9B - c702b404796dc8f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, SwiftUI.Text, SwiftUI.Spacer)&gt;&gt;, SwiftUI.Spacer, SwiftUI.List&lt;Swift.Never, SwiftUI.ForEach&lt;Swift.Array&lt;Swift.String&gt;, Swift.String, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.onTapGesture(count: Swift.Int, perform: () -&gt; ()) -&gt; some&gt;&gt;.0&gt;&gt;&gt;, Swift.Optional&lt;SwiftUI.Button&lt;SwiftUI.Text&gt;&gt;)&gt; in Dylan.ResultPerformanceOverviewView.body.getter : some"
-                  moduleName = "Dylan"
+                  symbolName = "closure #1 () -&gt; () in Greasy_Trail.Detective.fetch(performance: Swift.Double) -&gt; Swift.Optional&lt;Greasy_Trail.PerformanceDisplayModel&gt;"
+                  moduleName = "Greasy Trail"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Views/Screens/Results/ResultPerformanceOverviewView.swift"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Detective/Detective+Performances.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "17"
-                  endingLineNumber = "17"
-                  offsetFromSymbolStart = "1112">
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "1580">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -27,13 +27,17 @@ struct ResultAlbumOverviewView: View{
             Spacer()
             List {
                 ForEach(model?.songTitles ?? [], id: \.self) { title in
-                    if let index = model?.songTitles.firstIndex(of: title) {
+                    if title == "BREAK" {
+                        Divider()
+                    }
+                    if let index = model?.songsIgnoringBreaks.firstIndex(of: title) {
                         ResultsInformationTitleAndDetailView(title: "\(String(index + 1)).", detail: title)
                             .onTapGesture {
-                                nextSearch = (title, .song)
+                                nextSearch = Search(title: title, type: .song)
                                 model = nil
                             }
                     }
+                    
                 }
             }
         }

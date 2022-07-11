@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-// FIXME: These two structs should be the same
 struct RecentsView: View {
     
     @Binding var nextSearch: Search?
 
-    @State private var selection: HomeView.RecentViewType = .performances
+    @State private var selection: HomeView.RecentViewType
     
     @FetchRequest private var performances: FetchedResults<Performance>
     @FetchRequest private var albums: FetchedResults<Album>
@@ -29,26 +28,36 @@ struct RecentsView: View {
         _albums = FetchRequest(fetchRequest: aRequest)
         _performances = FetchRequest(fetchRequest: pRequest)
         _nextSearch = nextSearch
+        let int = UserDefaults.standard.integer(forKey: "last_selected_recents_view")
+        _selection = State(initialValue: HomeView.RecentViewType(rawValue: int) ?? .albums)
     }
     
     
     var body: some View {
-        Picker("", selection: $selection) {
-            ForEach(HomeView.RecentViewType.allCases, id: \.self) {
-                Text(LocalizedStringKey($0.pickerValue))
+        VStack {
+            Picker("", selection: $selection) {
+                ForEach(HomeView.RecentViewType.allCases, id: \.self) {
+                    Text(LocalizedStringKey($0.pickerValue))
+                }
+            }
+            .pickerStyle(SegmentedPickerStyle())
+           
+            if selection == .performances {
+                List(performances) { performance in
+                    RecentPerformanceRow(venue: performance.venue!, date: performance.date, nextSearch: $nextSearch)
+                }
+            }
+            else if selection == .albums {
+                List(albums) { album in
+                    RecentAlbumRow(title: album.title!, date: album.releaseDate, nextSearch: $nextSearch)
+                }
             }
         }
-        .pickerStyle(SegmentedPickerStyle())
-        if selection == .performances {
-            List(performances) { performance in
-                RecentPerformanceRow(venue: performance.venue!, date: performance.date, nextSearch: $nextSearch)
-            }
+        .onChange(of: selection) { newValue in
+            print("Setting to \(newValue)")
+            UserDefaults.standard.set(newValue.rawValue, forKey: "last_selected_recents_view")
         }
-        else if selection == .albums {
-            List(albums) { album in
-                RecentAlbumRow(title: album.title!, date: album.releaseDate, nextSearch: $nextSearch)
-            }
-        }
+
     }
     
 }

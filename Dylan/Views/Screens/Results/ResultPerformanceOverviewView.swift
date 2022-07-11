@@ -31,7 +31,7 @@ struct ResultPerformanceOverviewView: View {
                     if let index = model?.songTitles.firstIndex(of: title) {
                         ResultsInformationTitleAndDetailView(title: "\(String(index + 1)).", detail: title)
                             .onTapGesture {
-                                nextSearch = (title, .song)
+                                nextSearch = Search(title: title, type: .song)
                                 model = nil
                             }
                     }
