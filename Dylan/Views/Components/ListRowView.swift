@@ -11,7 +11,7 @@ struct ListRowView: View {
 
     @EnvironmentObject var viewModel: NavigationViewModel
     
-    let selection: String
+    @State var selection: String
     @Binding var nextSearch: Search?
 
     var body: some View {
