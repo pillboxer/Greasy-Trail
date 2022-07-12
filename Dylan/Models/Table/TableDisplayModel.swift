@@ -10,10 +10,10 @@ import Foundation
 struct TableDisplayModel: Identifiable {
     
     let column1Value: String
-    let column2Value: String
+    let column2Value: Double
     
     var id: String {
-        column1Value + column2Value
+        column1Value + String(column2Value)
     }
     
 }

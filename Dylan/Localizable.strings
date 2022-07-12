@@ -20,4 +20,10 @@
 "table_column_title_songs_0" = "Title";
 "table_column_title_songs_1" = "Author";
 
+"table_column_title_albums_0" = "Title";
+"table_column_title_albums_1" = "Release Date";
+
+"table_column_title_performances_0" = "Venue";
+"table_column_title_performances_1" = "Date";
+
 

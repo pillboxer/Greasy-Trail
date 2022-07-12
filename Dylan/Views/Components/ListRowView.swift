@@ -30,8 +30,10 @@ struct ListRowView: View {
                     .padding()
             case .songs:
                 AllSongsView(nextSearch: $nextSearch)
-            default:
-                Text("Hello")
+            case .albums:
+                AllAlbumsView(nextSearch: $nextSearch)
+            case .performances:
+                AllPerformancesView(nextSearch: $nextSearch)
             }
         }
         else {

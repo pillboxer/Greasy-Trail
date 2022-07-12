@@ -22,15 +22,15 @@ struct AllSongsView: View {
     var body: some View {
         
         Table(tableData, selection: $selection, sortOrder: $sortOrder) {
-            TableColumn(LocalizedStringKey("table_column_title_songs_0")) { song in
+            TableColumn(LocalizedStringKey("table_column_title_songs_0"), value: \.title!) { song in
                 let title = song.title!
                 Text(title)
                     .gesture(doubleTap(on: title, id: song.id))
                     .simultaneousGesture(singleTap(id: title))
             }
-            TableColumn(LocalizedStringKey("table_column_title_songs_1")) { song in
+            TableColumn(LocalizedStringKey("table_column_title_songs_1"), value: \.songAuthor) { song in
                 let title = song.title!
-                Text(song.author ?? "Bob Dylan")
+                Text(song.songAuthor)
                     .gesture(doubleTap(on: title, id: song.id))
                     .simultaneousGesture(singleTap(id: title))
             }
@@ -57,10 +57,6 @@ extension AllSongsView: TwoColumnTableViewType {
                 selection.insert(id)
             }
     }
-    
-    var tableData: [Song] {
-        return fetched.sorted(using: sortOrder)
-    }
-    
+
 }
 

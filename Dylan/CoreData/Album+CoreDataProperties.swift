@@ -41,4 +41,8 @@ extension Album {
 
 extension Album : Identifiable {
 
+    
+    public var id: String {
+        title ?? "" + String(releaseDate)
+    }
 }

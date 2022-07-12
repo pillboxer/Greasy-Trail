@@ -13,9 +13,18 @@ protocol TwoColumnTableViewType: View {
     associatedtype T: NSManagedObject, Identifiable
     var nextSearch: Search? { get }
     var selection: Set<T.ID>  { get set }
-    var tableData: [T] { get }
     func doubleTap(on string: String, id: T.ID) -> _EndedGesture<TapGesture>
     func singleTap(id: T.ID) -> _EndedGesture<TapGesture>
     var fetched: FetchedResults<T> { get }
     var sortOrder: [KeyPathComparator<T>] { get }
+}
+
+extension TwoColumnTableViewType {
+    
+    var tableData: [T] {
+        return fetched.sorted(using: sortOrder)
+    }
+    
+    
+    
 }
