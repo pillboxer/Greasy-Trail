@@ -79,6 +79,7 @@
 		86C526DB2875F91A0035DD31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526DA2875F91A0035DD31 /* AppDelegate.swift */; };
 		86C526DE28760AAA0035DD31 /* Song+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526DC28760AAA0035DD31 /* Song+CoreDataClass.swift */; };
 		86C526DF28760AAA0035DD31 /* Song+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526DD28760AAA0035DD31 /* Song+CoreDataProperties.swift */; };
+		86D9C2A9287D6D0000D5A0D3 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2A8287D6D0000D5A0D3 /* Search.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +168,7 @@
 		86C526DA2875F91A0035DD31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86C526DC28760AAA0035DD31 /* Song+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song+CoreDataClass.swift"; sourceTree = "<group>"; };
 		86C526DD28760AAA0035DD31 /* Song+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		86D9C2A8287D6D0000D5A0D3 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -328,6 +330,7 @@
 		866863FE2865ED1100510DDF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				86D9C2A7287D6CF500D5A0D3 /* Search */,
 				86C526CA2875D6250035DD31 /* Performances */,
 				86C526C82875C3690035DD31 /* TableDisplayModel.swift */,
 				86C526A72870CEFB0035DD31 /* Songs */,
@@ -485,6 +488,14 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		86D9C2A7287D6CF500D5A0D3 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				86D9C2A8287D6D0000D5A0D3 /* Search.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -608,6 +619,7 @@
 				86C526DF28760AAA0035DD31 /* Song+CoreDataProperties.swift in Sources */,
 				866864002865ED3800510DDF /* sSong.swift in Sources */,
 				8656A31328679C880013F595 /* CKRecord+Extensions.swift in Sources */,
+				86D9C2A9287D6D0000D5A0D3 /* Search.swift in Sources */,
 				86C52699286F06780035DD31 /* OnTapButton.swift in Sources */,
 				868C12222876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift in Sources */,
 				8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */,

@@ -53,7 +53,7 @@ extension CloudKitManager {
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 performance.songs = orderedSet
-                try! context.save()
+                try? context.save()
             }
         }
     }

@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-#warning("MOVE ME")
-struct Search: Equatable {
-    let title: String
-    let type: DylanSearchType
-}
-
 struct ContentView: View {
     
     private let formatter = Formatter()
