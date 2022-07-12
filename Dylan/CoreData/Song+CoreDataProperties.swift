@@ -22,5 +22,9 @@ extension Song {
 }
 
 extension Song : Identifiable {
+    
+    public var id: String {
+        title ?? UUID().uuidString
+    }
 
 }

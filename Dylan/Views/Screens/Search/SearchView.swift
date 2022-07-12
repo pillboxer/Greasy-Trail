@@ -32,19 +32,19 @@ struct SearchView: View {
     var body: some View {
         switch searchDisplayType {
         case .search:
-            HomeView(text: $text,
-                     searchDisplayType: $searchDisplayType,
-                     songModel: $songModel,
-                     albumModel: $albumModel,
-                     performanceModel: $performanceModel,
-                     nextSearch: $nextSearch)
+            SearchFieldView(text: $text,
+                            nextSearch: $nextSearch,
+                            songModel: $songModel,
+                            albumModel: $albumModel,
+                            performanceModel: $performanceModel,
+                            searchDisplayType: $searchDisplayType)
         case .noResultsFound(let title):
             Text("No results found for \(title)")
             Button("OK") {
                 searchDisplayType = .search
                 nextSearch = nil
+                text = ""
             }
-        
         }
     }
     

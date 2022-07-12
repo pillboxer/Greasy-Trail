@@ -41,7 +41,7 @@ struct TwoColumnTableView: View {
                             })
                 }
                 TableColumn(column2Header) { model in
-                    Text(formatter.dateString(of: model.column2Value))
+                    Text(formatter.dateString(of: -999))
                 }
             }
         }

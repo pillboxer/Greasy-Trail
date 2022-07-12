@@ -17,4 +17,7 @@
 "picker_value_0" = "Latest Albums";
 "picker_value_1" = "Latest Performances";
 
+"table_column_title_songs_0" = "Title";
+"table_column_title_songs_1" = "Author";
+
 

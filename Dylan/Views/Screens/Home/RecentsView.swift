@@ -8,9 +8,18 @@
 import SwiftUI
 struct RecentsView: View {
     
+    enum RecentViewType: Int, CaseIterable {
+        case albums
+        case performances
+        
+        var pickerValue: String {
+                "picker_value_\(String(rawValue))"
+            }
+    }
+    
     @Binding var nextSearch: Search?
 
-    @State private var selection: HomeView.RecentViewType
+    @State private var selection: RecentViewType
     
     @FetchRequest private var performances: FetchedResults<Performance>
     @FetchRequest private var albums: FetchedResults<Album>
@@ -29,14 +38,14 @@ struct RecentsView: View {
         _performances = FetchRequest(fetchRequest: pRequest)
         _nextSearch = nextSearch
         let int = UserDefaults.standard.integer(forKey: "last_selected_recents_view")
-        _selection = State(initialValue: HomeView.RecentViewType(rawValue: int) ?? .albums)
+        _selection = State(initialValue: RecentViewType(rawValue: int) ?? .albums)
     }
     
     
     var body: some View {
         VStack {
             Picker("", selection: $selection) {
-                ForEach(HomeView.RecentViewType.allCases, id: \.self) {
+                ForEach(RecentViewType.allCases, id: \.self) {
                     Text(LocalizedStringKey($0.pickerValue))
                 }
             }
@@ -54,7 +63,6 @@ struct RecentsView: View {
             }
         }
         .onChange(of: selection) { newValue in
-            print("Setting to \(newValue)")
             UserDefaults.standard.set(newValue.rawValue, forKey: "last_selected_recents_view")
         }
 
