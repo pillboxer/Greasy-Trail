@@ -27,7 +27,9 @@ extension CloudKitManager {
             let title = titles[index]
             let author = authors[index]
             await context.perform {
-                let song = Song(context: context)
+                let predicate = NSPredicate(format: "title == %@", title ?? "")
+                let existingSong = context.fetchAndWait(Song.self, with: predicate).first
+                let song = existingSong ?? Song(context: context)
                 song.title = title
                 song.author = author
                 try? context.save()
