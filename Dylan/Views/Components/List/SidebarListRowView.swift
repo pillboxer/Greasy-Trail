@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ListRowView: View {
+struct SidebarListRowView: View {
 
     @EnvironmentObject var viewModel: NavigationViewModel
     
@@ -25,9 +25,6 @@ struct ListRowView: View {
     func destinationFor(_ selection: String) -> some View {
         if let section = NavigationViewModel.NavigationSection(rawValue: selection) {
             switch section {
-            case .recents:
-                RecentsView(nextSearch: $nextSearch)
-                    .padding()
             case .songs:
                 AllSongsView(nextSearch: $nextSearch)
             case .albums:

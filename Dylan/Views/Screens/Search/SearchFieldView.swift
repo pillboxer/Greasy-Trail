@@ -39,7 +39,7 @@ struct SearchFieldView: View {
                 OnTapButton(systemImage: "magnifyingglass.circle") {
                     searchBlind()
                 }
-                .buttonStyle(PlainButtonStyle())
+                .buttonStyle(.plain)
             }
             .padding(4)
         }

@@ -16,7 +16,6 @@ struct ResultView: View {
         case albums([sAlbum])
         case performances([sPerformance])
         case performanceOverview
-        case lbs
     }
     
     @Binding var songModel: SongDisplayModel?
@@ -48,8 +47,6 @@ struct ResultView: View {
             TwoColumnTableView(models: models, songDisplayModel: $songModel, nextSearch: $nextSearch, currentViewType: $currentViewType)
         case .performanceOverview:
             ResultPerformanceOverviewView(model: $performanceModel, nextSearch: $nextSearch, currentViewType: $currentViewType)
-        case .lbs:
-            LBsDisplayView(model: $performanceModel, currentViewType: $currentViewType)
         }
     }
     

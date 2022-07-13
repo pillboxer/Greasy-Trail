@@ -18,9 +18,6 @@
 		86563C5D2878373900104879 /* DummyModel+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5C2878373900104879 /* DummyModel+Performances.swift */; };
 		86563C6228787B0500104879 /* ResultPerformanceOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C6128787B0400104879 /* ResultPerformanceOverviewView.swift */; };
 		86563C642878D59C00104879 /* Performance+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C632878D59C00104879 /* Performance+CoreDataProperties.swift */; };
-		86563C66287A21B900104879 /* LBsDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C65287A21B900104879 /* LBsDisplayView.swift */; };
-		86563C6B287C70FC00104879 /* RecentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C6A287C70FC00104879 /* RecentsView.swift */; };
-		86563C6D287C716E00104879 /* RecentPerformanceView(FIX)⛔️.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C6C287C716E00104879 /* RecentPerformanceView(FIX)⛔️.swift */; };
 		86563C70287CA8FA00104879 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C6F287CA8FA00104879 /* TestHelper.swift */; };
 		8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */; };
 		8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30E28679BFE0013F595 /* DatabaseType.swift */; };
@@ -81,9 +78,12 @@
 		86D9C2A9287D6D0000D5A0D3 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2A8287D6D0000D5A0D3 /* Search.swift */; };
 		86D9C2AB287DCF5200D5A0D3 /* TwoColumnTableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2AA287DCF5200D5A0D3 /* TwoColumnTableViewType.swift */; };
 		86D9C2AE287DD00700D5A0D3 /* AllSongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2AD287DD00700D5A0D3 /* AllSongsView.swift */; };
-		86D9C2B1287DD04400D5A0D3 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2B0287DD04400D5A0D3 /* ListRowView.swift */; };
+		86D9C2B1287DD04400D5A0D3 /* SidebarListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2B0287DD04400D5A0D3 /* SidebarListRowView.swift */; };
 		86D9C2B6287DFFAE00D5A0D3 /* AllAlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2B5287DFFAE00D5A0D3 /* AllAlbumsView.swift */; };
 		86D9C2B9287E0D3200D5A0D3 /* AllPerformancesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2B8287E0D3200D5A0D3 /* AllPerformancesView.swift */; };
+		86D9C2BE287ECAE800D5A0D3 /* SongListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2BD287ECAE800D5A0D3 /* SongListView.swift */; };
+		86D9C2C0287ECB1D00D5A0D3 /* LBListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2BF287ECB1D00D5A0D3 /* LBListView.swift */; };
+		86D9C2C2287ED26700D5A0D3 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C1287ED26700D5A0D3 /* ListRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,9 +108,6 @@
 		86563C5C2878373900104879 /* DummyModel+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+Performances.swift"; sourceTree = "<group>"; };
 		86563C6128787B0400104879 /* ResultPerformanceOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPerformanceOverviewView.swift; sourceTree = "<group>"; };
 		86563C632878D59C00104879 /* Performance+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Performance+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		86563C65287A21B900104879 /* LBsDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBsDisplayView.swift; sourceTree = "<group>"; };
-		86563C6A287C70FC00104879 /* RecentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsView.swift; sourceTree = "<group>"; };
-		86563C6C287C716E00104879 /* RecentPerformanceView(FIX)⛔️.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecentPerformanceView(FIX)⛔️.swift"; sourceTree = "<group>"; };
 		86563C6F287CA8FA00104879 /* TestHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestHelper.swift; sourceTree = "<group>"; };
 		8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKDatabase+Extensions.swift"; sourceTree = "<group>"; };
 		8656A30E28679BFE0013F595 /* DatabaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseType.swift; sourceTree = "<group>"; };
@@ -174,9 +171,12 @@
 		86D9C2A8287D6D0000D5A0D3 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		86D9C2AA287DCF5200D5A0D3 /* TwoColumnTableViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoColumnTableViewType.swift; sourceTree = "<group>"; };
 		86D9C2AD287DD00700D5A0D3 /* AllSongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSongsView.swift; sourceTree = "<group>"; };
-		86D9C2B0287DD04400D5A0D3 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
+		86D9C2B0287DD04400D5A0D3 /* SidebarListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarListRowView.swift; sourceTree = "<group>"; };
 		86D9C2B5287DFFAE00D5A0D3 /* AllAlbumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAlbumsView.swift; sourceTree = "<group>"; };
 		86D9C2B8287E0D3200D5A0D3 /* AllPerformancesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllPerformancesView.swift; sourceTree = "<group>"; };
+		86D9C2BD287ECAE800D5A0D3 /* SongListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListView.swift; sourceTree = "<group>"; };
+		86D9C2BF287ECB1D00D5A0D3 /* LBListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBListView.swift; sourceTree = "<group>"; };
+		86D9C2C1287ED26700D5A0D3 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,15 +228,6 @@
 				86563C5628782BA600104879 /* Detective+Performances.swift */,
 			);
 			path = Detective;
-			sourceTree = "<group>";
-		};
-		86563C69287C70C700104879 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				86563C6A287C70FC00104879 /* RecentsView.swift */,
-				86563C6C287C716E00104879 /* RecentPerformanceView(FIX)⛔️.swift */,
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 		86563C6E287CA8DF00104879 /* Other */ = {
@@ -386,7 +377,6 @@
 			children = (
 				86D9C2B7287E0C7900D5A0D3 /* Performances */,
 				86D9C2B4287DFF9100D5A0D3 /* Albums */,
-				86563C69287C70C700104879 /* Home */,
 				868C122528772F3F0054FF2D /* Progress */,
 				86C52695286F04CD0035DD31 /* Results */,
 				86C526AC2872F7A40035DD31 /* Search */,
@@ -398,9 +388,12 @@
 		8678FD342869FA7200DF1E69 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				86D9C2BB287ECAD500D5A0D3 /* Albums */,
+				86D9C2BC287ECADB00D5A0D3 /* LBNumbers */,
+				86D9C2C3287ED2C200D5A0D3 /* List */,
 				86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */,
 				86C52698286F06780035DD31 /* OnTapButton.swift */,
-				86D9C2B0287DD04400D5A0D3 /* ListRowView.swift */,
+				86D9C2BA287ECACD00D5A0D3 /* Songs */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -430,7 +423,6 @@
 				86C526AA2870D2C10035DD31 /* ResultAlbumOverviewView.swift */,
 				86C526C62875C0EA0035DD31 /* TwoColumnTableView.swift */,
 				86563C6128787B0400104879 /* ResultPerformanceOverviewView.swift */,
-				86563C65287A21B900104879 /* LBsDisplayView.swift */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -540,6 +532,38 @@
 			path = Performances;
 			sourceTree = "<group>";
 		};
+		86D9C2BA287ECACD00D5A0D3 /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				86D9C2BD287ECAE800D5A0D3 /* SongListView.swift */,
+			);
+			path = Songs;
+			sourceTree = "<group>";
+		};
+		86D9C2BB287ECAD500D5A0D3 /* Albums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Albums;
+			sourceTree = "<group>";
+		};
+		86D9C2BC287ECADB00D5A0D3 /* LBNumbers */ = {
+			isa = PBXGroup;
+			children = (
+				86D9C2BF287ECB1D00D5A0D3 /* LBListView.swift */,
+			);
+			path = LBNumbers;
+			sourceTree = "<group>";
+		};
+		86D9C2C3287ED2C200D5A0D3 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				86D9C2B0287DD04400D5A0D3 /* SidebarListRowView.swift */,
+				86D9C2C1287ED26700D5A0D3 /* ListRowView.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -642,11 +666,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				86C52697286F04EE0035DD31 /* ResultSongOverviewView.swift in Sources */,
-				86563C6B287C70FC00104879 /* RecentsView.swift in Sources */,
 				8656A31728679D960013F595 /* ConvenienceEnums.swift in Sources */,
 				86C5269B286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift in Sources */,
+				86D9C2C0287ECB1D00D5A0D3 /* LBListView.swift in Sources */,
 				86C526C92875C3690035DD31 /* TableDisplayModel.swift in Sources */,
 				86C526D72875F55C0035DD31 /* Main.xcdatamodeld in Sources */,
+				86D9C2C2287ED26700D5A0D3 /* ListRowView.swift in Sources */,
 				868C122A287737780054FF2D /* Performance+CoreDataClass.swift in Sources */,
 				86C526C52874C2E70035DD31 /* CloudKitManager+Performances.swift in Sources */,
 				868C122728772F860054FF2D /* Progress.swift in Sources */,
@@ -660,6 +685,7 @@
 				86563C5528782B2500104879 /* Detective+Albums.swift in Sources */,
 				86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */,
 				8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */,
+				86D9C2BE287ECAE800D5A0D3 /* SongListView.swift in Sources */,
 				86C526DB2875F91A0035DD31 /* AppDelegate.swift in Sources */,
 				86C526DF28760AAA0035DD31 /* Song+CoreDataProperties.swift in Sources */,
 				866864002865ED3800510DDF /* sSong.swift in Sources */,
@@ -672,7 +698,6 @@
 				86C52692286F02E50035DD31 /* SearchView.swift in Sources */,
 				86C526AB2870D2C10035DD31 /* ResultAlbumOverviewView.swift in Sources */,
 				866863EF2865EB6200510DDF /* ContentView.swift in Sources */,
-				86563C66287A21B900104879 /* LBsDisplayView.swift in Sources */,
 				86C526C72875C0EA0035DD31 /* TwoColumnTableView.swift in Sources */,
 				86D9C2B6287DFFAE00D5A0D3 /* AllAlbumsView.swift in Sources */,
 				868C12242876D89C0054FF2D /* Album+CoreDataProperties.swift in Sources */,
@@ -688,7 +713,6 @@
 				86C526D92875F5B00035DD31 /* PersistenceController.swift in Sources */,
 				86D9C2AE287DD00700D5A0D3 /* AllSongsView.swift in Sources */,
 				86C526A5287092A70035DD31 /* CloudKitManager+Song.swift in Sources */,
-				86563C6D287C716E00104879 /* RecentPerformanceView(FIX)⛔️.swift in Sources */,
 				868BAF802876D3640055576D /* Album+CoreDataClass.swift in Sources */,
 				8656A31528679CE50013F595 /* CKQuery+Extensions.swift in Sources */,
 				866864042865ED8300510DDF /* sAlbum.swift in Sources */,
@@ -696,7 +720,7 @@
 				86D9C2AB287DCF5200D5A0D3 /* TwoColumnTableViewType.swift in Sources */,
 				8656A31128679C540013F595 /* RecordType.swift in Sources */,
 				865C451C287615BD0056E01A /* UserDefaultsBacked.swift in Sources */,
-				86D9C2B1287DD04400D5A0D3 /* ListRowView.swift in Sources */,
+				86D9C2B1287DD04400D5A0D3 /* SidebarListRowView.swift in Sources */,
 				86C526CC2875D63E0035DD31 /* PerformanceDisplayModel.swift in Sources */,
 				860712332868604300E54209 /* ReferenceType.swift in Sources */,
 				86C526B02872F7D70035DD31 /* SearchFieldView.swift in Sources */,

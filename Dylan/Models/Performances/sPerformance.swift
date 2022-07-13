@@ -19,3 +19,5 @@ struct sPerformance: Codable {
     }
     
 }
+
+extension sPerformance: Hashable {}
