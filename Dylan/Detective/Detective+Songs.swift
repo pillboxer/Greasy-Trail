@@ -21,7 +21,7 @@ extension Detective {
         context.performAndWait{
             let albums = albumsThatInclude(song: id)
             let performances = performancesThatInclude(song: song)
-            let sSong = sSong(title: song.title!, performances: performances, albums: albums)
+            let sSong = sSong(title: song.title!, author: song.songAuthor, performances: performances, albums: albums)
             toReturn = SongDisplayModel(song: sSong)
         }
         return toReturn

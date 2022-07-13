@@ -22,7 +22,12 @@ extension Detective {
             }
             // Get the songs
             let songs = performance.songs?.array as? [Song] ?? []
-            let sSongs = songs.compactMap { sSong(title: $0.title!, author: $0.author) }
+            var sSongs: [sSong] = []
+            for song in songs {
+                let id = song.objectID
+                let albums = albumsThatInclude(song: id)
+                sSongs.append(sSong(title: song.title!, author: song.songAuthor, albums: albums))
+            }
             let sPerformance = sPerformance(venue: performance.venue!,
                                             songs: sSongs,
                                             date: performance.date,

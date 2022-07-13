@@ -10,13 +10,12 @@ import SwiftUI
 class NavigationViewModel: ObservableObject {
     
     enum NavigationSection: String, CaseIterable {
-        case recents
         case songs
         case albums
         case performances
     }
     
-    @Published var selectedID: String? = NavigationSection.recents.rawValue
+    @Published var selectedID: String? = NavigationSection.songs.rawValue
     var sidebarSections: [String] {
         NavigationSection.allCases.map { $0.rawValue }
     }
@@ -55,7 +54,7 @@ struct ContentView: View {
                     VStack {
                         List(viewModel.sidebarSections, id: \.self) { item in
                             HStack {
-                                ListRowView(selection: item, nextSearch: $nextSearch)
+                                SidebarListRowView(selection: item, nextSearch: $nextSearch)
                                     .environmentObject(viewModel)
                             }
                             .padding(4)

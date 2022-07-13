@@ -22,6 +22,10 @@ struct ResultAlbumOverviewView: View{
                 Spacer()
                 Text(model?.title ?? "")
                     .font(.headline)
+                OnTapButton(systemImage: "globe") {
+                    NSWorkspace.shared.open(model!.officialURL())
+                }
+                .buttonStyle(.link)
                 Spacer()
             }
             Spacer()

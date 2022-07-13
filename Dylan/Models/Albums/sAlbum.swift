@@ -25,6 +25,5 @@ extension sAlbum {
         songs.contains { $0 == song }
     }
     
-    
-    
 }
+extension sAlbum: Hashable {}

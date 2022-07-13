@@ -23,54 +23,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0B9C78B0-033F-46A2-A488-49BEFC60EAC5"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dylan/Models/Performances/PerformanceDisplayModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "songTitles"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "0B9C78B0-033F-46A2-A488-49BEFC60EAC5 - b5ac63a05129f9bb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Greasy_Trail.PerformanceDisplayModel.songTitles.getter : Swift.Array&lt;Swift.String&gt;"
-                  moduleName = "Greasy Trail"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Models/Performances/PerformanceDisplayModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "72">
-               </Location>
-               <Location
-                  uuid = "0B9C78B0-033F-46A2-A488-49BEFC60EAC5 - f2589ed1586cf2f3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Greasy_Trail.sSong) -&gt; Swift.Optional&lt;Swift.String&gt; in Greasy_Trail.PerformanceDisplayModel.songTitles.getter : Swift.Array&lt;Swift.String&gt;"
-                  moduleName = "Greasy Trail"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Models/Performances/PerformanceDisplayModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23"
-                  offsetFromSymbolStart = "20">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "003773DF-C181-4139-8339-39B225883CB9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -97,22 +49,6 @@
             startingLineNumber = "26"
             endingLineNumber = "26"
             landmarkName = "date(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4C1EF6B6-340B-4ED2-897A-3EA88C92BFE3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dylan/Detective/Detective+Performances.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "fetch(performance:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

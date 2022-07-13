@@ -7,6 +7,41 @@
 
 import SwiftUI
 
+struct AlbumsListView: View {
+    
+    let albums: [sAlbum]
+    private var titles: [String] {
+        albums.map { $0.title }
+    }
+        
+    private var uniqueAlbums: [sAlbum] {
+        Array(Set(albums))
+    }
+    
+    
+    let onTap: (String) -> Void
+    private let formatter = Formatter()
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text("Albums").font(.title)
+                .padding(.bottom)
+            ScrollView {
+                ForEach(uniqueAlbums, id: \.self) { album in
+                    let appearances = albums.filter { $0.title == album.title }.count
+                    let title = "\(album.title) (\(appearances))"
+                    HStack(alignment: .top) {
+                        ListRowView(headline: title, subHeadline: formatter.dateString(of: album.releaseDate)) {
+                            onTap(album.title)
+                        }
+                    }
+                    .padding(2)
+                }
+            }
+        }
+    }
+}
+
 struct ResultPerformanceOverviewView: View {
     
     @Binding var model: PerformanceDisplayModel?
@@ -23,25 +58,40 @@ struct ResultPerformanceOverviewView: View {
                 Spacer()
                 Text(model?.venue ?? "")
                     .font(.headline)
+                if let url = model?.officialURL() {
+                    OnTapButton(systemImage: "globe") {
+                        NSWorkspace.shared.open(url)
+                    }
+                    .buttonStyle(.link)
+                }
                 Spacer()
             }
             Spacer()
-            List {
-                ForEach(model?.songTitles ?? [], id: \.self) { title in
-                    if let index = model?.songTitles.firstIndex(of: title) {
-                        ResultsInformationTitleAndDetailView(title: "\(String(index + 1)).", detail: title)
-                            .onTapGesture {
-                                nextSearch = Search(title: title, type: .song)
-                                model = nil
-                            }
+
+            HStack {
+                SongsListView(songs: model?.songs ?? []) { title in
+                    nextSearch = Search(title: title, type: .song)
+                    model = nil
+                }
+                AlbumsListView(albums: model?.albums ?? []) { title in
+                    nextSearch = Search(title: title, type: .album)
+                    model = nil
+                }
+                if let lbNumbers = model?.lbNumbers {
+                    LBsListView(lbs: lbNumbers) { url in
+                        NSWorkspace.shared.open(url)
                     }
                 }
+                Spacer()
+     
             }
-            if let _ = model?.lbNumbers {
-                Button("LBs") {
-                    currentViewType = .lbs
-                }
+
+            HStack {
+    
+                Spacer()
+  
             }
+
         }
         .padding()
     }

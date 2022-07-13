@@ -23,7 +23,7 @@ extension Detective {
             }
             // Get the songs
             let songs = album.songs?.array as? [Song] ?? []
-            let sSongs = songs.compactMap { sSong(title: $0.title!, author: $0.author) }
+            let sSongs = songs.compactMap { sSong(title: $0.title!, author: $0.songAuthor) }
             let sAlbum = sAlbum(title: album.title!, songs: sSongs, releaseDate: album.releaseDate)
             toReturn = AlbumDisplayModel(album: sAlbum)
         }
