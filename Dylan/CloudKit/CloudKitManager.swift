@@ -58,7 +58,7 @@ class CloudKitManager: ObservableObject {
         os_log("Fetching records of type %@", log: Log_CloudKit, String(describing: type))
         let predicate = NSPredicate(format: "modificationDate > %@", (lastFetchDate ?? .distantPast) as NSDate)
         let query = CKQuery(recordType: type, predicate: predicate)
-        let array = try await database.recordTypes(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: CKQueryOperation.maximumResults).matchResults
+        let array = await database.fetchPagedResults(with: query)
         let records = array.compactMap { try? $0.1.get() }
         return records
     }

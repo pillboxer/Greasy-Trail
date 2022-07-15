@@ -72,6 +72,5 @@ struct ContentView: View {
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         .environmentObject(formatter)
         .frame(minWidth: 600, minHeight: 600)
-
     }
 }

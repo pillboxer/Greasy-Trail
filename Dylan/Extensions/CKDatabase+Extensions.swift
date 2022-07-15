@@ -6,6 +6,7 @@
 //
 
 import CloudKit
+import OSLog
 
 extension CKDatabase: DatabaseType {
     
@@ -20,17 +21,19 @@ extension CKDatabase: DatabaseType {
         return toReturn
     }
     
-    
-    func recordTypes(matching query: CKQuery, inZoneWith zoneID: CKRecordZone.ID? = nil, desiredKeys: [CKRecord.FieldKey]? = nil, resultsLimit: Int = CKQueryOperation.maximumResults) async throws -> (matchResults: [(CKRecord.ID, Result<RecordType, Error>)], queryCursor: CKQueryOperation.Cursor?) {
-        let oldReturn = try await self.records(matching: query, inZoneWith: zoneID, desiredKeys: desiredKeys, resultsLimit: resultsLimit)
-        let oldResults = oldReturn.matchResults
-        var new: [(CKRecord.ID, Result<RecordType, Error>)] = []
-        for result in oldResults {
-            let newSuccess = result.1.map { $0 as RecordType }
-            new.append((result.0, newSuccess))
+    func fetchPagedResults(with query: CKQuery) async -> ([(CKRecord.ID, Result<RecordType, Error>)]) {
+        await withCheckedContinuation { contination in
+            let operation = CKPagingQueryOperation(query: query, database: self)
+            operation.pagingCompletionBlock = { results in
+                contination.resume(returning: results)
+            }
+            operation.errorBlock = { error in
+                contination.resume(returning: [])
+            }
+            operation.start()
         }
-        
-        return (new, oldReturn.queryCursor)
+
     }
+
     
 }

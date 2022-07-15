@@ -16,7 +16,7 @@ extension CloudKitManager {
         let predicate = NSPredicate(format: "modificationDate > %@", (lastFetchDate ?? .distantPast) as NSDate)
         let query = CKQuery(recordType: .song, predicate: predicate)
         
-        let array = try await database.recordTypes(matching: query, inZoneWith: nil, desiredKeys: nil, resultsLimit: CKQueryOperation.maximumResults).matchResults
+        let array = await database.fetchPagedResults(with: query)
         let records = array.compactMap { try? $0.1.get() }
         let titles = records.map { $0.string(for: .title) }
         let authors = records.map { $0.string(for: .author) }

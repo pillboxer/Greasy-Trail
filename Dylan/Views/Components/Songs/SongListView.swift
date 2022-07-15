@@ -13,6 +13,10 @@ struct SongsListView: View {
     private var titles: [String] {
         songs.map { $0.title }
     }
+    
+    var titlesWithoutBreaks: [sSong] {
+        songs.filter { $0.title != "BREAK" }
+    }
     let onTap: (String) -> Void
     
     var body: some View {
@@ -22,14 +26,20 @@ struct SongsListView: View {
             ScrollView {
                 ForEach(songs, id: \.self) { song in
                     let title = song.title
-                    let index = titles.firstIndex(of: title) ?? 0
-                    HStack(alignment: .top) {
-                        Text("\(index + 1).")
-                        ListRowView(headline: title, subHeadline: song.author) {
-                            onTap(title)
-                        }
+                    if title == "BREAK" {
+                        Divider()
                     }
-                    .padding(2)
+                    else {
+                        let index = (titlesWithoutBreaks.firstIndex(of: song) ?? 0)
+                        HStack(alignment: .top) {
+                            Text("\(index + 1).")
+                            ListRowView(headline: title, subHeadline: song.author) {
+                                onTap(title)
+                            }
+                        }
+                        .padding(2)
+                    }
+       
                 }
             }
         }

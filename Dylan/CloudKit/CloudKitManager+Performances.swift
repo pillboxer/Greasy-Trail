@@ -49,7 +49,6 @@ extension CloudKitManager {
                 performance.venue = venue
                 performance.date = date
                 performance.lbNumbers = lbs
-                os_log("Adding %@ songs to performances", log: Log_CloudKit, String(describing: correspondingSongs.count))
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 performance.songs = orderedSet

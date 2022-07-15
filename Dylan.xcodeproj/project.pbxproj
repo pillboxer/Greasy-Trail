@@ -84,6 +84,9 @@
 		86D9C2BE287ECAE800D5A0D3 /* SongListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2BD287ECAE800D5A0D3 /* SongListView.swift */; };
 		86D9C2C0287ECB1D00D5A0D3 /* LBListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2BF287ECB1D00D5A0D3 /* LBListView.swift */; };
 		86D9C2C2287ED26700D5A0D3 /* ListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C1287ED26700D5A0D3 /* ListRowView.swift */; };
+		86D9C2C5287F0C0A00D5A0D3 /* AlbumsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C4287F0C0A00D5A0D3 /* AlbumsListView.swift */; };
+		86D9C2C7288155CB00D5A0D3 /* CKPagingQueryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */; };
+		86D9C2C92881604F00D5A0D3 /* CKQueryOperation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +180,9 @@
 		86D9C2BD287ECAE800D5A0D3 /* SongListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongListView.swift; sourceTree = "<group>"; };
 		86D9C2BF287ECB1D00D5A0D3 /* LBListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBListView.swift; sourceTree = "<group>"; };
 		86D9C2C1287ED26700D5A0D3 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
+		86D9C2C4287F0C0A00D5A0D3 /* AlbumsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsListView.swift; sourceTree = "<group>"; };
+		86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPagingQueryOperation.swift; sourceTree = "<group>"; };
+		86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKQueryOperation+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +253,7 @@
 				8656A31228679C880013F595 /* CKRecord+Extensions.swift */,
 				8656A31428679CE40013F595 /* CKQuery+Extensions.swift */,
 				868C12212876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift */,
+				86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -358,6 +365,7 @@
 				8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */,
 				86C526A4287092A70035DD31 /* CloudKitManager+Song.swift */,
 				86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */,
+				86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -543,6 +551,7 @@
 		86D9C2BB287ECAD500D5A0D3 /* Albums */ = {
 			isa = PBXGroup;
 			children = (
+				86D9C2C4287F0C0A00D5A0D3 /* AlbumsListView.swift */,
 			);
 			path = Albums;
 			sourceTree = "<group>";
@@ -671,6 +680,7 @@
 				86D9C2C0287ECB1D00D5A0D3 /* LBListView.swift in Sources */,
 				86C526C92875C3690035DD31 /* TableDisplayModel.swift in Sources */,
 				86C526D72875F55C0035DD31 /* Main.xcdatamodeld in Sources */,
+				86D9C2C5287F0C0A00D5A0D3 /* AlbumsListView.swift in Sources */,
 				86D9C2C2287ED26700D5A0D3 /* ListRowView.swift in Sources */,
 				868C122A287737780054FF2D /* Performance+CoreDataClass.swift in Sources */,
 				86C526C52874C2E70035DD31 /* CloudKitManager+Performances.swift in Sources */,
@@ -684,6 +694,7 @@
 				86686419286631B500510DDF /* Detective.swift in Sources */,
 				86563C5528782B2500104879 /* Detective+Albums.swift in Sources */,
 				86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */,
+				86D9C2C92881604F00D5A0D3 /* CKQueryOperation+Extensions.swift in Sources */,
 				8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */,
 				86D9C2BE287ECAE800D5A0D3 /* SongListView.swift in Sources */,
 				86C526DB2875F91A0035DD31 /* AppDelegate.swift in Sources */,
@@ -695,6 +706,7 @@
 				868C12222876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift in Sources */,
 				8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */,
 				86563C70287CA8FA00104879 /* TestHelper.swift in Sources */,
+				86D9C2C7288155CB00D5A0D3 /* CKPagingQueryOperation.swift in Sources */,
 				86C52692286F02E50035DD31 /* SearchView.swift in Sources */,
 				86C526AB2870D2C10035DD31 /* ResultAlbumOverviewView.swift in Sources */,
 				866863EF2865EB6200510DDF /* ContentView.swift in Sources */,

@@ -16,6 +16,7 @@ struct SearchFieldView: View {
     @Binding var performanceModel: PerformanceDisplayModel?
     @Binding var searchDisplayType: SearchView.SearchDisplayType
     
+    @EnvironmentObject var cloudKitManager: CloudKitManager
     @EnvironmentObject private var formatter: Formatter
     
     @StateObject private var detective = Detective()
@@ -31,7 +32,11 @@ struct SearchFieldView: View {
                 }
         }
         else {
-            HStack{
+            HStack {
+                OnTapButton(systemImage: "arrow.clockwise") {
+                    self.refresh()
+                }
+                .buttonStyle(.plain)
                 NSTextFieldRepresentable(placeholder: "search_placeholder", text: $text) {
                     searchBlind()
                 }
@@ -42,6 +47,12 @@ struct SearchFieldView: View {
                 .buttonStyle(.plain)
             }
             .padding(4)
+        }
+    }
+    
+    private func refresh() {
+        Task {
+            try? await cloudKitManager.start()
         }
     }
     

@@ -22,26 +22,13 @@ struct ResultAlbumOverviewView: View{
                 Spacer()
                 Text(model?.title ?? "")
                     .font(.headline)
-                OnTapButton(systemImage: "globe") {
-                    NSWorkspace.shared.open(model!.officialURL())
-                }
-                .buttonStyle(.link)
                 Spacer()
             }
             Spacer()
-            List {
-                ForEach(model?.songTitles ?? [], id: \.self) { title in
-                    if title == "BREAK" {
-                        Divider()
-                    }
-                    if let index = model?.songsIgnoringBreaks.firstIndex(of: title) {
-                        ResultsInformationTitleAndDetailView(title: "\(String(index + 1)).", detail: title)
-                            .onTapGesture {
-                                nextSearch = Search(title: title, type: .song)
-                                model = nil
-                            }
-                    }
-                    
+            HStack {
+                SongsListView(songs: model?.songs ?? []) { title in
+                    nextSearch = Search(title: title, type: .song)
+                    model = nil
                 }
             }
         }

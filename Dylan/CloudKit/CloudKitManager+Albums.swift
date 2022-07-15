@@ -44,7 +44,6 @@ extension CloudKitManager {
                 let album = existingAlbum ?? Album(context: context)
                 album.title = title
                 album.releaseDate = releaseDate ?? -1
-                os_log("Adding %@ songs to album", log: Log_CloudKit, String(describing: correspondingSongs.count))
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 album.songs = orderedSet

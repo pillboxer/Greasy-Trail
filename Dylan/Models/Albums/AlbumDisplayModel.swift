@@ -23,19 +23,8 @@ extension AlbumDisplayModel {
         album.title
     }
     
-    var songTitles: [String] {
-        album.songs.compactMap { $0.title }
+    var songs: [sSong] {
+        album.songs
     }
     
-    var songsIgnoringBreaks: [String] {
-        songTitles.filter { $0 != "BREAK" }
-    }
-    
-    func officialURL() -> URL {
-        let components = title.lowercased().components(separatedBy: " ")
-        let joined = components.joined(separator: "-")
-        return URL(string: "https://www.bobdylan.com/albums/\(joined)")!
-    }
-
-
 }
