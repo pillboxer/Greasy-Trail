@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AllPerformancesView {
     
-    
     @Binding var nextSearch: Search?
     @State var selection: Set<Performance.ID> = []
     @FetchRequest(entity: Performance.entity(), sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)]) var fetched: FetchedResults<Performance>

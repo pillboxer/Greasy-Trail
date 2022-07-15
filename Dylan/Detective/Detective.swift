@@ -33,14 +33,9 @@ public class Detective: ObservableObject {
     }
 
     func objects<T: NSManagedObject>(_ object: T.Type, including song: Song, context: NSManagedObjectContext) -> [T] {
-        var toReturn: [T] = []
-        context.performAndWait {
-            // Find all albums which contain a given song
-            let predicate = NSPredicate(format: "songs CONTAINS %@", song)
-            let objects = context.fetchAndWait(T.self, with: predicate)
-            toReturn = objects
-        }
-        return toReturn
+        let predicate = NSPredicate(format: "songs CONTAINS %@", song)
+        let objects = context.fetchAndWait(T.self, with: predicate)
+        return objects
     }
     
     

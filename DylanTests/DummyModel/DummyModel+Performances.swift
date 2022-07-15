@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import Dylan
+@testable import Greasy_Trail
 extension DummyModel {
     
     static var tNewport1965: String {

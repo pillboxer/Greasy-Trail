@@ -34,7 +34,7 @@
 		866864002865ED3800510DDF /* sSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866863FF2865ED3800510DDF /* sSong.swift */; };
 		866864042865ED8300510DDF /* sAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866864032865ED8300510DDF /* sAlbum.swift */; };
 		866864062865EDD700510DDF /* sPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866864052865EDD700510DDF /* sPerformance.swift */; };
-		8668641028662E2B00510DDF /* DylanTests+Detective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668640F28662E2B00510DDF /* DylanTests+Detective.swift */; };
+		8668641028662E2B00510DDF /* DylanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668640F28662E2B00510DDF /* DylanTests.swift */; };
 		8668641728662F0F00510DDF /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641628662F0F00510DDF /* DummyModel.swift */; };
 		86686419286631B500510DDF /* Detective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86686418286631B400510DDF /* Detective.swift */; };
 		8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641B286709FB00510DDF /* CloudKitManager.swift */; };
@@ -87,6 +87,8 @@
 		86D9C2C5287F0C0A00D5A0D3 /* AlbumsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C4287F0C0A00D5A0D3 /* AlbumsListView.swift */; };
 		86D9C2C7288155CB00D5A0D3 /* CKPagingQueryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */; };
 		86D9C2C92881604F00D5A0D3 /* CKQueryOperation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */; };
+		86D9C2CC2881C1D100D5A0D3 /* PerformancesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2CB2881C1D100D5A0D3 /* PerformancesListView.swift */; };
+		86D9C2CE2881F7A800D5A0D3 /* DummyModel+DisplayModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2CD2881F7A800D5A0D3 /* DummyModel+DisplayModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,7 +132,7 @@
 		866864032865ED8300510DDF /* sAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sAlbum.swift; sourceTree = "<group>"; };
 		866864052865EDD700510DDF /* sPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sPerformance.swift; sourceTree = "<group>"; };
 		8668640D28662E2B00510DDF /* DylanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DylanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8668640F28662E2B00510DDF /* DylanTests+Detective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+Detective.swift"; sourceTree = "<group>"; };
+		8668640F28662E2B00510DDF /* DylanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DylanTests.swift; sourceTree = "<group>"; };
 		8668641628662F0F00510DDF /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		86686418286631B400510DDF /* Detective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detective.swift; sourceTree = "<group>"; };
 		8668641B286709FB00510DDF /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
@@ -183,6 +185,8 @@
 		86D9C2C4287F0C0A00D5A0D3 /* AlbumsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsListView.swift; sourceTree = "<group>"; };
 		86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKPagingQueryOperation.swift; sourceTree = "<group>"; };
 		86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKQueryOperation+Extensions.swift"; sourceTree = "<group>"; };
+		86D9C2CB2881C1D100D5A0D3 /* PerformancesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformancesListView.swift; sourceTree = "<group>"; };
+		86D9C2CD2881F7A800D5A0D3 /* DummyModel+DisplayModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+DisplayModels.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -351,7 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				86563C4E2878278100104879 /* Core Data */,
-				8668640F28662E2B00510DDF /* DylanTests+Detective.swift */,
+				8668640F28662E2B00510DDF /* DylanTests.swift */,
 				86C526BB287342460035DD31 /* DummyModel */,
 				8607123428686C9300E54209 /* Mocking */,
 			);
@@ -396,6 +400,7 @@
 		8678FD342869FA7200DF1E69 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				86D9C2CA2881C1BC00D5A0D3 /* Performances */,
 				86D9C2BB287ECAD500D5A0D3 /* Albums */,
 				86D9C2BC287ECADB00D5A0D3 /* LBNumbers */,
 				86D9C2C3287ED2C200D5A0D3 /* List */,
@@ -472,6 +477,7 @@
 				86C526B72873418E0035DD31 /* DummyModel+Albums.swift */,
 				86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */,
 				86C526B5287340560035DD31 /* DummyModel+Songs.swift */,
+				86D9C2CD2881F7A800D5A0D3 /* DummyModel+DisplayModels.swift */,
 			);
 			path = DummyModel;
 			sourceTree = "<group>";
@@ -571,6 +577,14 @@
 				86D9C2C1287ED26700D5A0D3 /* ListRowView.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		86D9C2CA2881C1BC00D5A0D3 /* Performances */ = {
+			isa = PBXGroup;
+			children = (
+				86D9C2CB2881C1D100D5A0D3 /* PerformancesListView.swift */,
+			);
+			path = Performances;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -702,6 +716,7 @@
 				866864002865ED3800510DDF /* sSong.swift in Sources */,
 				8656A31328679C880013F595 /* CKRecord+Extensions.swift in Sources */,
 				86D9C2A9287D6D0000D5A0D3 /* Search.swift in Sources */,
+				86D9C2CC2881C1D100D5A0D3 /* PerformancesListView.swift in Sources */,
 				86C52699286F06780035DD31 /* OnTapButton.swift in Sources */,
 				868C12222876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift in Sources */,
 				8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */,
@@ -743,6 +758,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86D9C2CE2881F7A800D5A0D3 /* DummyModel+DisplayModels.swift in Sources */,
 				8668641728662F0F00510DDF /* DummyModel.swift in Sources */,
 				86563C50287829F700104879 /* DylanTests+CoreData.swift in Sources */,
 				86C526B82873418E0035DD31 /* DummyModel+Albums.swift in Sources */,
@@ -755,7 +771,7 @@
 				86563C59287831D300104879 /* MockDatabase.swift in Sources */,
 				86C526B428733E290035DD31 /* MockRecordType.swift in Sources */,
 				86C526B228733B6A0035DD31 /* MockReferenceType.swift in Sources */,
-				8668641028662E2B00510DDF /* DylanTests+Detective.swift in Sources */,
+				8668641028662E2B00510DDF /* DylanTests.swift in Sources */,
 				86C526A32870863B0035DD31 /* MockSongRecord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -915,6 +931,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TEST_HOST = DylanTests;
 			};
 			name = Debug;
 		};
@@ -945,6 +962,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TEST_HOST = DylanTests;
 			};
 			name = Release;
 		};
@@ -962,7 +980,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dylan.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dylan";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Greasy Trail.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Greasy Trail";
 			};
 			name = Debug;
 		};
@@ -980,7 +998,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Dylan.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Dylan";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Greasy Trail.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Greasy Trail";
 			};
 			name = Release;
 		};

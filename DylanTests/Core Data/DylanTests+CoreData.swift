@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-@testable import Dylan
+@testable import Greasy_Trail
 
 extension DylanTests {
     

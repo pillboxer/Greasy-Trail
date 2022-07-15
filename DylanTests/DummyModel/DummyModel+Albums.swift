@@ -5,7 +5,7 @@
 //  Created by Henry Cooper on 04/07/2022.
 //
 
-@testable import Dylan
+@testable import Greasy_Trail
 
 
 extension DummyModel {

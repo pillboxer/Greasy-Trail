@@ -36,7 +36,7 @@ struct ResultView: View {
     var body: some View {
         switch currentViewType {
         case .songOverview:
-            ResultSongOverviewView(model: $songModel, currentViewType: $currentViewType)
+            ResultSongOverviewView(model: $songModel, currentViewType: $currentViewType, nextSearch: $nextSearch)
         case .albums(let albums):
             let models = albums.compactMap { TableDisplayModel(column1Value: $0.title, column2Value: $0.releaseDate) }
             TwoColumnTableView(models: models, songDisplayModel: $songModel, nextSearch: $nextSearch, currentViewType: $currentViewType)

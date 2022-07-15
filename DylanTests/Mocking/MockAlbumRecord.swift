@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import Dylan
+@testable import Greasy_Trail
 import CloudKit
 
 struct MockAlbumRecord: CustomStringConvertible {
@@ -33,7 +33,7 @@ struct MockAlbumRecord: CustomStringConvertible {
 
 extension MockAlbumRecord: MockRecordType {
     
-    func ints(for field: Dylan.DylanRecordField) -> [Int]? {
+    func ints(for field: DylanRecordField) -> [Int]? {
         nil
     }
     
@@ -43,7 +43,7 @@ extension MockAlbumRecord: MockRecordType {
     
     var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
     
-    func references(of referenceType: Dylan.DylanReferenceType) -> [Dylan.ReferenceType] {
+    func references(of referenceType: DylanReferenceType) -> [ReferenceType] {
         references
     }
     

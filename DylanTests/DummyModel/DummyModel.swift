@@ -7,7 +7,7 @@
 
 import Foundation
 
-@testable import Dylan
+@testable import Greasy_Trail
 
 class DummyModel {
         

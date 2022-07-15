@@ -7,7 +7,7 @@
 
 import Foundation
 
-@testable import Dylan
+@testable import Greasy_Trail
 import CloudKit
 
 class MockDatabase: DatabaseType {
@@ -26,40 +26,44 @@ class MockDatabase: DatabaseType {
         self.performanceSongs = performanceSongs
     }
     
-    func recordTypes(matching query: CKQuery, inZoneWith zoneID: CKRecordZone.ID?, desiredKeys: [CKRecord.FieldKey]?, resultsLimit: Int) async throws -> (matchResults: [(CKRecord.ID, Result<Dylan.RecordType, Error>)], queryCursor: CKQueryOperation.Cursor?) {
-        var results: [(CKRecord.ID, Result<Dylan.RecordType, Error>)] = []
+    func add(_ operation: CKDatabaseOperation) {
+        //
+    }
+    
+    func fetchPagedResults(with query: CKQuery) async -> ([(CKRecord.ID, Result<RecordType, Error>)]) {
+        var results: [(CKRecord.ID, Result<RecordType, Error>)] = []
         if let songs = songs {
             for song in songs {
                 let result = Result<RecordType, Error>.success(song)
                 results.append((song.recordID, result))
             }
             self.songs = nil
-            return (results, nil)
+            return results
         }
         else if let albums = albums {
-            var results: [(CKRecord.ID, Result<Dylan.RecordType, Error>)] = []
+            var results: [(CKRecord.ID, Result<RecordType, Error>)] = []
             for album in albums {
                 let result = Result<RecordType, Error>.success(album)
                 results.append((album.recordID, result))
             }
             self.albums = nil
-            return (results, nil)
+            return results
         }
         else if let performances = performances {
-            var results: [(CKRecord.ID, Result<Dylan.RecordType, Error>)] = []
+            var results: [(CKRecord.ID, Result<RecordType, Error>)] = []
             for performance in performances {
                 let result = Result<RecordType, Error>.success(performance)
                 results.append((performance.recordID, result))
-                return (results, nil)
+                return results
             }
             self.performances = nil
-            return (results, nil)
+            return results
         }
         
-        return (results, nil)
+        return results
     }
     
-    func recordTypes(for ids: [CKRecord.ID], desiredKeys: [CKRecord.FieldKey]?) async throws -> [CKRecord.ID : Result<Dylan.RecordType, Error>] {
+    func recordTypes(for ids: [CKRecord.ID], desiredKeys: [CKRecord.FieldKey]?) async throws -> [CKRecord.ID : Result<RecordType, Error>] {
         var toReturn: [CKRecord.ID : Result<RecordType, Error>] = [:]
         for (index, id) in ids.enumerated() {
             toReturn[id] = Result.success((albumSongs ?? performanceSongs ?? [])[index])

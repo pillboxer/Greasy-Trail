@@ -49,3 +49,8 @@ extension SongDisplayModel {
     }
 
 }
+
+extension SongDisplayModel: Equatable {
+    
+    
+}

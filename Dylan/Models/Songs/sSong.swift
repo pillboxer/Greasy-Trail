@@ -10,7 +10,7 @@ import Foundation
 public struct sSong: Codable {
     
     let title: String
-    var author: String
+    var author: String = NSLocalizedString("default_other", comment: "")
     var performances: [sPerformance]?
     var albums: [sAlbum]?    
 }

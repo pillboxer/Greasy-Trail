@@ -11,10 +11,12 @@ struct ResultSongOverviewView: View {
     
     @Binding var model: SongDisplayModel?
     @Binding var currentViewType: ResultView.ResultViewType
+    @Binding var nextSearch: Search?
+
     @EnvironmentObject var formatter: Formatter
     
     var body: some View {
-        VStack(spacing: 16) {
+        VStack {
             HStack {
                 Image(systemName: "house")
                     .onTapGesture {
@@ -25,25 +27,27 @@ struct ResultSongOverviewView: View {
                     .font(.headline)
                 Spacer()
             }
-            Spacer()
-            ResultsInformationTitleAndDetailView(title: "results_information_title_song_author", detail: model?.author ?? "")
-            albumInformationView
-            Spacer()
+            .padding(.bottom)
             Spacer()
             HStack {
-                if let albums = model?.albums, albums.count > 1 {
-                    OnTapButton(text: "Albums") {
-                        currentViewType = .albums(albums)
+                if let albums = model?.albums, !albums.isEmpty {
+                    AlbumsListView(albums: albums) { title in
+                        nextSearch = Search(title: title, type: .album)
+                        model = nil
                     }
-                    Spacer()
                 }
-                if let performances = model?.performances, performances.count > 1  {
-                    Spacer()
-                        OnTapButton(text: "Performances") {
-                            currentViewType = .performances(performances)
+                if let performances = model?.performances, !performances.isEmpty {
+                    PerformancesListView(performances: performances) { date in
+                        nextSearch = Search(title: date, type: .performance)
+                        model = nil
                     }
                 }
             }
+            Text("results_information_title_song_author")
+                .font(.footnote)
+                .bold()
+            Text(model?.author ?? "default_author")
+                .font(.caption)
         }
         .padding()
     }

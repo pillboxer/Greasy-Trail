@@ -17,7 +17,10 @@ class Formatter: ObservableObject {
         return formatter
     }()
     
-    func dateString(of double: Double) -> String {
+    func dateString(of double: Double?) -> String {
+        guard let double = double else {
+            return "Unknown date"
+        }
         let date = Date(timeIntervalSince1970: double)
         return dateFormatter.string(from: date)
     }

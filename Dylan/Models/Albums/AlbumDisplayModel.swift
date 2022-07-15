@@ -28,3 +28,5 @@ extension AlbumDisplayModel {
     }
     
 }
+
+extension AlbumDisplayModel: Equatable {}

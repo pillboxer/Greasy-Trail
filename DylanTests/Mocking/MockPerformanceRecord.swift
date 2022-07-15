@@ -7,7 +7,7 @@
 
 import Foundation
 import CloudKit
-@testable import Dylan
+@testable import Greasy_Trail
 
 class MockPerformanceRecord {
     

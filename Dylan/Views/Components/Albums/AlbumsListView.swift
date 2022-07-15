@@ -10,12 +10,14 @@ import SwiftUI
 struct AlbumsListView: View {
     
     let albums: [sAlbum]
+    var showingAppearances: Bool = false
     private var titles: [String] {
         albums.map { $0.title }
     }
         
     private var uniqueAlbums: [sAlbum] {
-        Array(Set(albums))
+        let sorted = albums.sorted { $0.releaseDate < $1.releaseDate }
+        return Array(Set(sorted))
     }
     
     
@@ -29,7 +31,9 @@ struct AlbumsListView: View {
             ScrollView {
                 ForEach(uniqueAlbums, id: \.self) { album in
                     let appearances = albums.filter { $0.title == album.title }.count
-                    let title = "\(album.title) (\(appearances))"
+                    let prefix = album.title
+                    let suffix = showingAppearances ? "(\(String(appearances)))" : ""
+                    let title = "\(prefix) \(suffix)"
                     HStack(alignment: .top) {
                         ListRowView(headline: title, subHeadline: formatter.dateString(of: album.releaseDate)) {
                             onTap(album.title)

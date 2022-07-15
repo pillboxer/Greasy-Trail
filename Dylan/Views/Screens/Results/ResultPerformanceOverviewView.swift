@@ -37,7 +37,7 @@ struct ResultPerformanceOverviewView: View {
                     nextSearch = Search(title: title, type: .song)
                     model = nil
                 }
-                AlbumsListView(albums: model?.albums ?? []) { title in
+                AlbumsListView(albums: model?.albums ?? [], showingAppearances: true) { title in
                     nextSearch = Search(title: title, type: .album)
                     model = nil
                 }

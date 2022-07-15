@@ -6,24 +6,33 @@
   
 */
 
+//Misc
 "search_placeholder" = "Enter your search term";
 "default_author" = "Bob Dylan";
 "results_information_title_first_appearance" = "First appearance";
 "results_information_title_song_author" = "Written by";
-"results_information_title_first_live_performance" = "First live performance";
+
+// CloudKit
 "cloud_kit_fetch_songs_progress_description" = "Fetching latest songs";
 "cloud_kit_fetch_albums_progress_description" = "Fetching latest albums";
 "cloud_kit_fetch_performances_progress_description" = "Fetching latest performances";
-"picker_value_0" = "Latest Albums";
-"picker_value_1" = "Latest Performances";
 
+// Songs
 "table_column_title_songs_0" = "Title";
 "table_column_title_songs_1" = "Author";
+"songs_list_title" = "Songs";
 
+// Albums
 "table_column_title_albums_0" = "Title";
 "table_column_title_albums_1" = "Release Date";
+"albums_list_empty" = "This song appears on no albums";
+"albums_list_title" = "Albums";
 
+// Performances
 "table_column_title_performances_0" = "Venue";
 "table_column_title_performances_1" = "Date";
+"performances_list_empty" = "Not performed yet!";
+"performances_list_title" = "Performances";
+
 
 
