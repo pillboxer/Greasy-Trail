@@ -34,7 +34,7 @@
 		866864002865ED3800510DDF /* sSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866863FF2865ED3800510DDF /* sSong.swift */; };
 		866864042865ED8300510DDF /* sAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866864032865ED8300510DDF /* sAlbum.swift */; };
 		866864062865EDD700510DDF /* sPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 866864052865EDD700510DDF /* sPerformance.swift */; };
-		8668641028662E2B00510DDF /* DylanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668640F28662E2B00510DDF /* DylanTests.swift */; };
+		8668641028662E2B00510DDF /* DylanTests+Detective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668640F28662E2B00510DDF /* DylanTests+Detective.swift */; };
 		8668641728662F0F00510DDF /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641628662F0F00510DDF /* DummyModel.swift */; };
 		86686419286631B500510DDF /* Detective.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86686418286631B400510DDF /* Detective.swift */; };
 		8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8668641B286709FB00510DDF /* CloudKitManager.swift */; };
@@ -89,6 +89,9 @@
 		86D9C2C92881604F00D5A0D3 /* CKQueryOperation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */; };
 		86D9C2CC2881C1D100D5A0D3 /* PerformancesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2CB2881C1D100D5A0D3 /* PerformancesListView.swift */; };
 		86D9C2CE2881F7A800D5A0D3 /* DummyModel+DisplayModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2CD2881F7A800D5A0D3 /* DummyModel+DisplayModels.swift */; };
+		86D9C2D02882C42500D5A0D3 /* DylanTests+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2CF2882C42500D5A0D3 /* DylanTests+CloudKit.swift */; };
+		86D9C2D22882C4A100D5A0D3 /* DylanTests+DisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2D12882C4A100D5A0D3 /* DylanTests+DisplayModel.swift */; };
+		86D9C2D42882C64500D5A0D3 /* DylanTests+sPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2D32882C64500D5A0D3 /* DylanTests+sPerformance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,7 +135,7 @@
 		866864032865ED8300510DDF /* sAlbum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sAlbum.swift; sourceTree = "<group>"; };
 		866864052865EDD700510DDF /* sPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sPerformance.swift; sourceTree = "<group>"; };
 		8668640D28662E2B00510DDF /* DylanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DylanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8668640F28662E2B00510DDF /* DylanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DylanTests.swift; sourceTree = "<group>"; };
+		8668640F28662E2B00510DDF /* DylanTests+Detective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+Detective.swift"; sourceTree = "<group>"; };
 		8668641628662F0F00510DDF /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		86686418286631B400510DDF /* Detective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Detective.swift; sourceTree = "<group>"; };
 		8668641B286709FB00510DDF /* CloudKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitManager.swift; sourceTree = "<group>"; };
@@ -187,6 +190,9 @@
 		86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKQueryOperation+Extensions.swift"; sourceTree = "<group>"; };
 		86D9C2CB2881C1D100D5A0D3 /* PerformancesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformancesListView.swift; sourceTree = "<group>"; };
 		86D9C2CD2881F7A800D5A0D3 /* DummyModel+DisplayModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+DisplayModels.swift"; sourceTree = "<group>"; };
+		86D9C2CF2882C42500D5A0D3 /* DylanTests+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+CloudKit.swift"; sourceTree = "<group>"; };
+		86D9C2D12882C4A100D5A0D3 /* DylanTests+DisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+DisplayModel.swift"; sourceTree = "<group>"; };
+		86D9C2D32882C64500D5A0D3 /* DylanTests+sPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+sPerformance.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,12 +227,16 @@
 			path = Mocking;
 			sourceTree = "<group>";
 		};
-		86563C4E2878278100104879 /* Core Data */ = {
+		86563C4E2878278100104879 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				8668640F28662E2B00510DDF /* DylanTests+Detective.swift */,
+				86D9C2CF2882C42500D5A0D3 /* DylanTests+CloudKit.swift */,
 				86563C4F287829F700104879 /* DylanTests+CoreData.swift */,
+				86D9C2D12882C4A100D5A0D3 /* DylanTests+DisplayModel.swift */,
+				86D9C2D32882C64500D5A0D3 /* DylanTests+sPerformance.swift */,
 			);
-			path = "Core Data";
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		86563C5128782AD100104879 /* Detective */ = {
@@ -354,8 +364,7 @@
 		8668640E28662E2B00510DDF /* DylanTests */ = {
 			isa = PBXGroup;
 			children = (
-				86563C4E2878278100104879 /* Core Data */,
-				8668640F28662E2B00510DDF /* DylanTests.swift */,
+				86563C4E2878278100104879 /* Tests */,
 				86C526BB287342460035DD31 /* DummyModel */,
 				8607123428686C9300E54209 /* Mocking */,
 			);
@@ -761,17 +770,20 @@
 				86D9C2CE2881F7A800D5A0D3 /* DummyModel+DisplayModels.swift in Sources */,
 				8668641728662F0F00510DDF /* DummyModel.swift in Sources */,
 				86563C50287829F700104879 /* DylanTests+CoreData.swift in Sources */,
+				86D9C2D42882C64500D5A0D3 /* DylanTests+sPerformance.swift in Sources */,
 				86C526B82873418E0035DD31 /* DummyModel+Albums.swift in Sources */,
 				86C526BA287341B00035DD31 /* DummyModel+AlbumRepresentations.swift in Sources */,
+				86D9C2D22882C4A100D5A0D3 /* DylanTests+DisplayModel.swift in Sources */,
 				86C526A12870828B0035DD31 /* MockAlbumRecord.swift in Sources */,
 				86C526B6287340560035DD31 /* DummyModel+Songs.swift in Sources */,
 				86C526BD287342770035DD31 /* DummyModel+MockRecords.swift in Sources */,
 				86563C5D2878373900104879 /* DummyModel+Performances.swift in Sources */,
+				86D9C2D02882C42500D5A0D3 /* DylanTests+CloudKit.swift in Sources */,
 				86563C5B287835AD00104879 /* MockPerformanceRecord.swift in Sources */,
 				86563C59287831D300104879 /* MockDatabase.swift in Sources */,
 				86C526B428733E290035DD31 /* MockRecordType.swift in Sources */,
 				86C526B228733B6A0035DD31 /* MockReferenceType.swift in Sources */,
-				8668641028662E2B00510DDF /* DylanTests.swift in Sources */,
+				8668641028662E2B00510DDF /* DylanTests+Detective.swift in Sources */,
 				86C526A32870863B0035DD31 /* MockSongRecord.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

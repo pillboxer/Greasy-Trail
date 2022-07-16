@@ -53,3 +53,5 @@ extension PerformanceDisplayModel {
 
     
 }
+
+extension PerformanceDisplayModel: Equatable {}

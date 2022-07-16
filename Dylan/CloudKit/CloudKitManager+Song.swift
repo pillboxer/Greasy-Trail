@@ -46,10 +46,19 @@ extension CloudKitManager {
         var ordered: [RecordType] = []
         
         // Ensure songs are in the correct order
-        ids.forEach { id in
-            if let recordType = try? dict[id]?.get() {
-                ordered.append(recordType)
+        for id in ids {
+            guard let result = dict[id] else {
+                print("** NO RESULT **")
+                continue
             }
+            guard let recordType = try? result.get() else {
+                let album = record.string(for: .title) ?? record.string(for: .venue)
+                let badName = id.recordName
+                
+                print("TITLE: \(album!) || BAD NAME: \(badName)")
+                continue
+            }
+            ordered.append(recordType)
         }
         return ordered
     }

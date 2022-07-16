@@ -17,10 +17,20 @@ extension DummyModel {
 
 }
 
+// Albums
 extension DummyModel {
     
     static var admHighway61Revisited: AlbumDisplayModel {
         AlbumDisplayModel(album: aHighway61Revisited)
+    }
+    
+}
+
+// Performances
+extension DummyModel {
+    
+    static var pdmNewport1965: PerformanceDisplayModel {
+        PerformanceDisplayModel(sPerformance: pNewport1965)
     }
     
 }

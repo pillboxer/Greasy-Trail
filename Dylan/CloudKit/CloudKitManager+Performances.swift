@@ -42,7 +42,7 @@ extension CloudKitManager {
             
             await context.perform {
                 // Check for existing performance
-                let predicate = NSPredicate(format: "date == %d", date)
+                let predicate = NSPredicate(format: "date == %d", Int(date))
                 let existingPerformance = context.fetchAndWait(Performance.self, with: predicate).first
                 // Create or update performance
                 let performance = existingPerformance ?? Performance(context: context)

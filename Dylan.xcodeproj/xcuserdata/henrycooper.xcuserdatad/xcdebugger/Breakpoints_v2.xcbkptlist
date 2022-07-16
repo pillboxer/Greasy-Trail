@@ -7,49 +7,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "32F7D46F-1C1B-4E1C-9257-C51AD960A586"
+            uuid = "6B1E4B0F-F8B1-46CE-8BD0-73A7788B51F8"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Dylan/Detective/Detective+Albums.swift"
+            filePath = "Dylan/CloudKit/CloudKitManager+Song.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "albumsThatInclude(song:)"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "getOrderedSongRecords(from:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "32F7D46F-1C1B-4E1C-9257-C51AD960A586 - f660dc34b616ffe4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Greasy_Trail.Detective.albumsThatInclude(song: __C.NSManagedObjectID) -&gt; Swift.Array&lt;Greasy_Trail.sAlbum&gt;"
-                  moduleName = "Greasy Trail"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Detective/Detective+Albums.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "304">
-               </Location>
-               <Location
-                  uuid = "32F7D46F-1C1B-4E1C-9257-C51AD960A586 - f660dc34b616ffe4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Greasy_Trail.Detective.albumsThatInclude(song: __C.NSManagedObjectID) -&gt; Swift.Array&lt;Greasy_Trail.sAlbum&gt;"
-                  moduleName = "Greasy Trail"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/Detective/Detective+Albums.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "428">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3FA2FBF3-1586-439D-B498-95BF80A53E9F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DylanTests/DylanTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "testSearchPerformanceResultsInCorrectDisplayModel()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -16,12 +16,12 @@ extension Detective {
         context.performAndWait {
             // Fetch album with given title
             let predicate = NSPredicate(format: "date == %d", Int(date))
-            guard let performance = context.fetchAndWait(Performance.self, with: predicate).first else {
+            guard let performance = context.fetchAndWait(Performance.self, with: predicate).first,
+                  let songs = performance.songs?.array as? [Song] else {
                 toReturn = nil
                 return
             }
             // Get the songs
-            let songs = performance.songs?.array as? [Song] ?? []
             var sSongs: [sSong] = []
             for song in songs {
                 let id = song.objectID

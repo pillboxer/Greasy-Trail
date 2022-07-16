@@ -32,6 +32,7 @@ class CloudKitManager: ObservableObject {
         let date = Date()
         os_log("CloudKitManager starting. Upon successful fetch, fetch time will be set to %@", log: Log_CloudKit, String(describing: date))
         do {
+            lastFetchDate = nil
             await setCurrentStep(to: .songs)
             try await fetchLatestSongs()
             await setCurrentStep(to: .albums)

@@ -28,7 +28,7 @@ extension DummyModel {
     }
     
     static var pNewport1965: sPerformance {
-        sPerformance(venue: tNewport1965, songs: [sMaggiesFarm, sItTakesALotToLaugh, sDesolationRow], date: dNewport1965)
+        sPerformance(venue: tNewport1965, songs: [sMaggiesFarm, sLikeARollingStone, sItTakesALotToLaugh], date: dNewport1965, lbNumbers: lbNewport1965)
     }
 
 }
