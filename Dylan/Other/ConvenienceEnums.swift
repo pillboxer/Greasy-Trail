@@ -11,6 +11,10 @@ enum DylanRecordType: CKRecord.RecordType {
     case album = "Album"
     case song = "Song"
     case performance = "Performance"
+    
+    var plural: String {
+        rawValue + "s"
+    }
 }
 
 enum DylanReferenceType: CKRecord.RecordType {
@@ -25,6 +29,7 @@ enum DylanRecordField: String {
 
     // Album
     case releaseDate
+    case metadata
 
     // Performance
     case venue

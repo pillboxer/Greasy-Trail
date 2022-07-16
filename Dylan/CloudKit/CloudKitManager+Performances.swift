@@ -14,6 +14,7 @@ extension CloudKitManager {
     
     func fetchLatestPerformances() async throws {
         
+        let formatter = Formatter()
         os_log("Fetching latest performances", Log_CloudKit)
         let records = try await fetchRecords(of: .performance)
         os_log("Found %@ performances", log: Log_CloudKit, String(describing: records.count))
@@ -29,6 +30,7 @@ extension CloudKitManager {
             let venue = venues[index]
             let date = dates[index]
             let lbs = lbNumbers[index]
+            await setCurrentStep(to: .performances(venue + " " + formatter.dateString(of: date)))
             
             // Fetch the records
             let ordered = try await getOrderedSongRecords(from: record)

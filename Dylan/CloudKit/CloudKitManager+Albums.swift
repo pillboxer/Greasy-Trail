@@ -26,6 +26,10 @@ extension CloudKitManager {
             // Get the title and release date of the album
             let title = titles[index]
             let releaseDate = releaseDates[index]
+            if let metadata = record.data(for: .metadata) {
+                print(metadata)
+            }
+            await setCurrentStep(to: .albums(title))
             
             let ordered = try await getOrderedSongRecords(from: record)
             let context = container.newBackgroundContext()

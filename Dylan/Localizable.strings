@@ -13,7 +13,8 @@
 "results_information_title_song_author" = "Written by";
 
 // CloudKit
-"cloud_kit_fetch_songs_progress_description" = "Fetching latest songs";
+"cloud_kit_fetch_songs_progress_description" = "Starting fetch of type %@";
+"cloud_kit_progress_description" = "Processing %@";
 "cloud_kit_fetch_albums_progress_description" = "Fetching latest albums";
 "cloud_kit_fetch_performances_progress_description" = "Fetching latest performances";
 

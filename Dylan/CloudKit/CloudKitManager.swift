@@ -17,10 +17,11 @@ class CloudKitManager: ObservableObject {
     let database: DatabaseType
     let container: NSPersistentContainer
     
-    enum CloudKitFetchStep: Int, CaseIterable {
-        case songs 
-        case albums
-        case performances
+    enum CloudKitFetchStep {
+        case fetching(String)
+        case songs(String)
+        case albums(String)
+        case performances(String)
     }
     
     init(_ database: DatabaseType, container: NSPersistentContainer = PersistenceController.shared.container) {
@@ -32,12 +33,11 @@ class CloudKitManager: ObservableObject {
         let date = Date()
         os_log("CloudKitManager starting. Upon successful fetch, fetch time will be set to %@", log: Log_CloudKit, String(describing: date))
         do {
-            lastFetchDate = nil
-            await setCurrentStep(to: .songs)
+            await setCurrentStep(to: .fetching(DylanRecordType.song.rawValue))
             try await fetchLatestSongs()
-            await setCurrentStep(to: .albums)
+            await setCurrentStep(to: .fetching(DylanRecordType.album.rawValue))
             try await fetchLatestAlbums()
-            await setCurrentStep(to: .performances)
+            await setCurrentStep(to: .fetching(DylanRecordType.performance.rawValue))
             try await fetchLatestPerformances()
             await setCurrentStep(to: nil)
             lastFetchDate = date
@@ -48,7 +48,7 @@ class CloudKitManager: ObservableObject {
     }
     
     @MainActor
-    private func setCurrentStep(to step: CloudKitFetchStep?) {
+    func setCurrentStep(to step: CloudKitFetchStep?) {
         let description = step == nil ? "nil" : String(describing: step!)
         os_log("Setting next fetch step to %@", log: Log_CloudKit, description)
         currentStep = step

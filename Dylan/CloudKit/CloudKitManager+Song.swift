@@ -19,17 +19,33 @@ extension CloudKitManager {
         let array = await database.fetchPagedResults(with: query)
         let records = array.compactMap { try? $0.1.get() }
         let titles = records.map { $0.string(for: .title) }
+        let tuple = records.map { (title: $0.string(for: .title)!, id: $0.recordID.recordName) }
         let authors = records.map { $0.string(for: .author) }
+        
+        // LOUISE
+//        let sorted = tuple.sorted { $0.title < $1.title }
+//        for tuple in sorted {
+//            print("TITLE: \(tuple.title) || ID: \(tuple.id)")
+//            print("")
+//        }
         
         os_log("%@ songs fetched", log: Log_CloudKit, String(describing: records.count))
         let context = container.newBackgroundContext()
-        for (index, _) in records.enumerated() {
-            let title = titles[index]
+        for (index, record) in records.enumerated() {
+            let title = titles[index] ?? "Unknown Title"
+            await setCurrentStep(to: .songs(title))
             let author = authors[index]
             await context.perform {
-                let predicate = NSPredicate(format: "title == %@", title ?? "")
-                let existingSong = context.fetchAndWait(Song.self, with: predicate).first
-                let song = existingSong ?? Song(context: context)
+                let predicate = NSPredicate(format: "title == %@", title)
+                let song: Song
+                if let existingSong = context.fetchAndWait(Song.self, with: predicate).first {
+                    os_log("Existing song found, updating %@", log: Log_CloudKit, title)
+                    song = existingSong
+                }
+                else {
+                    os_log("Creating new song %@", log: Log_CloudKit, title)
+                    song = Song(context: context)
+                }
                 song.title = title
                 song.author = author
                 try? context.save()

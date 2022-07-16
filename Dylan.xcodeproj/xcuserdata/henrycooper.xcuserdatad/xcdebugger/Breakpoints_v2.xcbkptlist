@@ -14,8 +14,8 @@
             filePath = "Dylan/CloudKit/CloudKitManager+Song.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "getOrderedSongRecords(from:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -34,6 +34,54 @@
             endingLineNumber = "102"
             landmarkName = "testSearchPerformanceResultsInCorrectDisplayModel()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F162B87-45C2-4494-8BA2-DB7B375ACA93"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dylan/CloudKit/CloudKitManager+Albums.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "fetchLatestAlbums()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0F162B87-45C2-4494-8BA2-DB7B375ACA93 - 162dd6bb23f6a8bc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Greasy_Trail.CloudKitManager.fetchLatestAlbums() async throws -&gt; ()"
+                  moduleName = "Greasy Trail"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/CloudKit/CloudKitManager+Albums.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "1372">
+               </Location>
+               <Location
+                  uuid = "0F162B87-45C2-4494-8BA2-DB7B375ACA93 - 45ab1a5573ca34b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(9) suspend resume partial function for Greasy_Trail.CloudKitManager.fetchLatestAlbums() async throws -&gt; ()"
+                  moduleName = "Greasy Trail"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/CloudKit/CloudKitManager+Albums.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "860">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
