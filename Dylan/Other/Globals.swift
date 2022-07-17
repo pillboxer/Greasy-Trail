@@ -17,3 +17,5 @@ let subsystem = "com.Dylan"
 let Log_CloudKit = OSLog(subsystem: subsystem, category: "CloudKit Fetch")
 let Log_AppDelegate = OSLog(subsystem: subsystem, category: "App Delegate")
 let Log_Detective = OSLog(subsystem: subsystem, category: "Detective")
+let Log_CoreData = OSLog(subsystem: subsystem, category: "Core Data")
+

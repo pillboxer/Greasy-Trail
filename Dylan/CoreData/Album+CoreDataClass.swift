@@ -13,3 +13,5 @@ import CoreData
 public class Album: NSManagedObject {
 
 }
+
+extension Album: Deletable {}

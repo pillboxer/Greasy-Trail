@@ -17,3 +17,5 @@ public class Song: NSManagedObject {
     }
 
 }
+
+extension Song: Deletable {}

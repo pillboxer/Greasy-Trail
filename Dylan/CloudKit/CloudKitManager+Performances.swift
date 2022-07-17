@@ -51,6 +51,8 @@ extension CloudKitManager {
                 performance.venue = venue
                 performance.date = date
                 performance.lbNumbers = lbs
+                performance.uuid = record.recordID.recordName
+
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 performance.songs = orderedSet

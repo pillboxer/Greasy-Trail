@@ -13,3 +13,5 @@ import CoreData
 public class Performance: NSManagedObject {
 
 }
+
+extension Performance: Deletable {}

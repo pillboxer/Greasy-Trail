@@ -19,6 +19,9 @@ extension Album {
     @NSManaged public var releaseDate: Double
     @NSManaged public var title: String?
     @NSManaged public var songs: NSOrderedSet?
+    @NSManaged public var markedAsDeleted: Bool
+    @NSManaged public var uuid: String?
+
 
 }
 

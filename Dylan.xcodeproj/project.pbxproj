@@ -98,6 +98,8 @@
 		86D9C2DE288406A000D5A0D3 /* PerformanceUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2DD288406A000D5A0D3 /* PerformanceUploadView.swift */; };
 		86D9C2E128840A7800D5A0D3 /* UploadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */; };
 		86D9C2E32884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */; };
+		86D9C2E72884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E62884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift */; };
+		86D9C2E928847E7200D5A0D3 /* Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E828847E7200D5A0D3 /* Deletable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +207,8 @@
 		86D9C2DD288406A000D5A0D3 /* PerformanceUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceUploadView.swift; sourceTree = "<group>"; };
 		86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFailureView.swift; sourceTree = "<group>"; };
 		86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKBisectingModifyRecordsOperation.swift; sourceTree = "<group>"; };
+		86D9C2E62884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Subscriptions.swift"; sourceTree = "<group>"; };
+		86D9C2E828847E7200D5A0D3 /* Deletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deletable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +296,7 @@
 				860712322868604300E54209 /* ReferenceType.swift */,
 				86D9C2AA287DCF5200D5A0D3 /* TwoColumnTableViewType.swift */,
 				86D9C2D7288402C600D5A0D3 /* UploadError.swift */,
+				86D9C2E828847E7200D5A0D3 /* Deletable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -393,6 +398,7 @@
 				86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */,
 				86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */,
 				86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */,
+				86D9C2E62884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -774,6 +780,7 @@
 				868C12222876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift in Sources */,
 				8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */,
 				86563C70287CA8FA00104879 /* TestHelper.swift in Sources */,
+				86D9C2E928847E7200D5A0D3 /* Deletable.swift in Sources */,
 				86D9C2C7288155CB00D5A0D3 /* CKPagingQueryOperation.swift in Sources */,
 				86C52692286F02E50035DD31 /* SearchView.swift in Sources */,
 				86C526AB2870D2C10035DD31 /* ResultAlbumOverviewView.swift in Sources */,
@@ -796,6 +803,7 @@
 				86C526A5287092A70035DD31 /* CloudKitManager+Song.swift in Sources */,
 				86D9C2DE288406A000D5A0D3 /* PerformanceUploadView.swift in Sources */,
 				868BAF802876D3640055576D /* Album+CoreDataClass.swift in Sources */,
+				86D9C2E72884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift in Sources */,
 				8656A31528679CE50013F595 /* CKQuery+Extensions.swift in Sources */,
 				866864042865ED8300510DDF /* sAlbum.swift in Sources */,
 				8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */,

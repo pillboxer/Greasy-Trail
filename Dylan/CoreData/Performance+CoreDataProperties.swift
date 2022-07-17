@@ -20,6 +20,8 @@ extension Performance {
     @NSManaged public var lbNumbers: [Int]?
     @NSManaged public var venue: String?
     @NSManaged public var songs: NSOrderedSet?
+    @NSManaged public var markedAsDeleted: Bool
+    @NSManaged public var uuid: String?
 
 }
 

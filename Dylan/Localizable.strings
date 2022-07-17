@@ -17,6 +17,9 @@
 "cloud_kit_progress_description" = "Processing %@";
 "cloud_kit_fetch_albums_progress_description" = "Fetching latest albums";
 "cloud_kit_fetch_performances_progress_description" = "Fetching latest performances";
+"cloud_kit_subscription_songs" = "SONGS-V1";
+"cloud_kit_subscription_albums" = "ALBUMS-V1";
+"cloud_kit_subscription_performances" = "PERFORMANCES-V1";
 
 // Songs
 "table_column_title_songs_0" = "Title";

@@ -19,6 +19,7 @@ extension Song {
     @NSManaged public var title: String?
     @NSManaged public var author: String?
     @NSManaged public var uuid: String?
+    @NSManaged public var markedAsDeleted: Bool
 
 }
 

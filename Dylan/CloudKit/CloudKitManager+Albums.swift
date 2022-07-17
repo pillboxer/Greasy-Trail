@@ -48,6 +48,7 @@ extension CloudKitManager {
                 let album = existingAlbum ?? Album(context: context)
                 album.title = title
                 album.releaseDate = releaseDate ?? -1
+                album.uuid = record.recordID.recordName
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 album.songs = orderedSet
