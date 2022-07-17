@@ -13,15 +13,17 @@ import OSLog
 class CloudKitManager: ObservableObject {
     
     @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
-    @Published private(set) var currentStep: CloudKitFetchStep? = nil
+    @Published private(set) var currentStep: CloudKitStep? = nil
     let database: DatabaseType
     let container: NSPersistentContainer
     
-    enum CloudKitFetchStep {
+    enum CloudKitStep {
         case fetching(String)
         case songs(String)
         case albums(String)
         case performances(String)
+        case uploading(String)
+        case failure(String)
     }
     
     init(_ database: DatabaseType, container: NSPersistentContainer = PersistenceController.shared.container) {
@@ -48,7 +50,7 @@ class CloudKitManager: ObservableObject {
     }
     
     @MainActor
-    func setCurrentStep(to step: CloudKitFetchStep?) {
+    func setCurrentStep(to step: CloudKitStep?) {
         let description = step == nil ? "nil" : String(describing: step!)
         os_log("Setting next fetch step to %@", log: Log_CloudKit, description)
         currentStep = step

@@ -13,11 +13,20 @@ struct SidebarListRowView: View {
     
     @State var selection: String
     @Binding var nextSearch: Search?
+    @Binding var addingType: NavigationViewModel.NavigationSection?
 
     var body: some View {
         NavigationLink(destination: destinationFor(selection), tag: selection, selection: $viewModel.selectedID) {
-            Text(selection.capitalized)
-                .font(.headline)
+            HStack {
+                Text(selection.capitalized)
+                    .font(.headline)
+                Spacer()
+                OnTapButton(systemImage: "cross.fill") {
+                    addingType = addingType == viewModel.selectedSection ? nil : NavigationViewModel.NavigationSection(rawValue: selection)!
+                }
+                .buttonStyle(.plain)
+            }
+ 
         }
     }
     

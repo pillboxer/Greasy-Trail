@@ -16,8 +16,7 @@ struct AlbumsListView: View {
     }
         
     private var uniqueAlbums: [sAlbum] {
-        let sorted = albums.sorted { $0.releaseDate < $1.releaseDate }
-        return Array(Set(sorted))
+        Array(Set(albums)).sorted { $0.releaseDate < $1.releaseDate }
     }
     
     

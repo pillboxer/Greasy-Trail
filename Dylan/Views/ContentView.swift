@@ -13,9 +13,28 @@ class NavigationViewModel: ObservableObject {
         case songs
         case albums
         case performances
+        
+        var recordType: DylanRecordType {
+            switch self {
+            case .songs:
+                return .song
+            case .albums:
+                return .album
+            case .performances:
+                return .performance
+            }
+        }
     }
     
     @Published var selectedID: String? = NavigationSection.songs.rawValue
+    
+    var selectedSection: NavigationSection? {
+        guard let id = selectedID else {
+            return nil
+        }
+        return NavigationSection(rawValue: id)
+    }
+    
     var sidebarSections: [String] {
         NavigationSection.allCases.map { $0.rawValue }
     }
@@ -30,6 +49,8 @@ struct ContentView: View {
     @State private var performanceModel: PerformanceDisplayModel?
     @State private var nextSearch: Search?
 
+    @State private var addingType: NavigationViewModel.NavigationSection?
+    
     @EnvironmentObject private var cloudKitManager: CloudKitManager
     @ObservedObject var viewModel = NavigationViewModel()
     
@@ -38,7 +59,12 @@ struct ContentView: View {
     var body: some View {
         Group {
             if let step = cloudKitManager.currentStep {
-                FetchProgressView(step: step)
+                if case let .failure(error) = step {
+                   UploadFailureView(error: error)
+                }
+                else {
+                    FetchProgressView(step: step)
+                }
             }
             else if let _ = songModel {
                 ResultView(songModel: $songModel, nextSearch: $nextSearch, currentViewType: .songOverview)
@@ -54,14 +80,15 @@ struct ContentView: View {
                     VStack {
                         List(viewModel.sidebarSections, id: \.self) { item in
                             HStack {
-                                SidebarListRowView(selection: item, nextSearch: $nextSearch)
+                                SidebarListRowView(selection: item, nextSearch: $nextSearch, addingType: $addingType)
                                     .environmentObject(viewModel)
                             }
                             .padding(4)
+                            
                         }
-                        .padding(.vertical)
-                        .frame(width: 250)
-                        Spacer()
+                        if let recordType = addingType?.recordType {
+                            UploadView(recordType: recordType)
+                        }
                         SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
                             .padding()
                     }
@@ -71,6 +98,6 @@ struct ContentView: View {
         }
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         .environmentObject(formatter)
-        .frame(minWidth: 600, minHeight: 600)
+        .frame(width: 900, height: 600)
     }
 }

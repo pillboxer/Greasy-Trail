@@ -41,6 +41,10 @@ extension MockSongRecord: RecordType {
         .distantPast
     }
     
+    func data(for field: DylanRecordField) -> Data? {
+        nil
+    }
+    
     
     func references(of referenceType: DylanReferenceType) -> [ReferenceType] {
         []

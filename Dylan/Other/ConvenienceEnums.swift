@@ -7,7 +7,7 @@
 
 import CloudKit
 
-enum DylanRecordType: CKRecord.RecordType {
+enum DylanRecordType: CKRecord.RecordType, CaseIterable {
     case album = "Album"
     case song = "Song"
     case performance = "Performance"

@@ -19,7 +19,7 @@ public class Detective: ObservableObject {
     
     func search(song title: String) -> SongDisplayModel? {
         os_log("Searching song: %@", log: Log_Detective, title)
-        return fetch(song: title)
+        return fetchModel(for: title)
     }
     
     func search(album title: String) -> AlbumDisplayModel? {

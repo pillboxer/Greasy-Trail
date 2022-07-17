@@ -43,6 +43,10 @@ extension MockPerformanceRecord: RecordType {
         date
     }
     
+    func data(for field: DylanRecordField) -> Data? {
+        nil
+    }
+    
     var modificationDate: Date? {
         .distantPast
     }

@@ -24,6 +24,7 @@
     <entity name="Song" representedClassName="Song" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uuid" optional="YES" attributeType="String"/>
         <relationship name="albums" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="songs" inverseEntity="Album"/>
         <relationship name="performances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Performance" inverseName="songs" inverseEntity="Performance"/>
         <uniquenessConstraints>
@@ -35,6 +36,6 @@
     <elements>
         <element name="Album" positionX="-63" positionY="9" width="128" height="74"/>
         <element name="Performance" positionX="-54" positionY="27" width="128" height="89"/>
-        <element name="Song" positionX="-63" positionY="-18" width="128" height="89"/>
+        <element name="Song" positionX="-63" positionY="-18" width="128" height="104"/>
     </elements>
 </model>

@@ -92,6 +92,11 @@
 		86D9C2D02882C42500D5A0D3 /* DylanTests+CloudKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2CF2882C42500D5A0D3 /* DylanTests+CloudKit.swift */; };
 		86D9C2D22882C4A100D5A0D3 /* DylanTests+DisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2D12882C4A100D5A0D3 /* DylanTests+DisplayModel.swift */; };
 		86D9C2D42882C64500D5A0D3 /* DylanTests+sPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2D32882C64500D5A0D3 /* DylanTests+sPerformance.swift */; };
+		86D9C2D62884027900D5A0D3 /* PerformanceUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2D52884027900D5A0D3 /* PerformanceUploadModel.swift */; };
+		86D9C2D8288402C600D5A0D3 /* UploadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2D7288402C600D5A0D3 /* UploadError.swift */; };
+		86D9C2DB2884065700D5A0D3 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2DA2884065700D5A0D3 /* UploadView.swift */; };
+		86D9C2DE288406A000D5A0D3 /* PerformanceUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2DD288406A000D5A0D3 /* PerformanceUploadView.swift */; };
+		86D9C2E128840A7800D5A0D3 /* UploadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +198,11 @@
 		86D9C2CF2882C42500D5A0D3 /* DylanTests+CloudKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+CloudKit.swift"; sourceTree = "<group>"; };
 		86D9C2D12882C4A100D5A0D3 /* DylanTests+DisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+DisplayModel.swift"; sourceTree = "<group>"; };
 		86D9C2D32882C64500D5A0D3 /* DylanTests+sPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+sPerformance.swift"; sourceTree = "<group>"; };
+		86D9C2D52884027900D5A0D3 /* PerformanceUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceUploadModel.swift; sourceTree = "<group>"; };
+		86D9C2D7288402C600D5A0D3 /* UploadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadError.swift; sourceTree = "<group>"; };
+		86D9C2DA2884065700D5A0D3 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
+		86D9C2DD288406A000D5A0D3 /* PerformanceUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceUploadView.swift; sourceTree = "<group>"; };
+		86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFailureView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +289,7 @@
 				8656A31028679C540013F595 /* RecordType.swift */,
 				860712322868604300E54209 /* ReferenceType.swift */,
 				86D9C2AA287DCF5200D5A0D3 /* TwoColumnTableViewType.swift */,
+				86D9C2D7288402C600D5A0D3 /* UploadError.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -396,6 +407,7 @@
 		8678FD332869FA6700DF1E69 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				86D9C2D92884064B00D5A0D3 /* Upload */,
 				86D9C2B7287E0C7900D5A0D3 /* Performances */,
 				86D9C2B4287DFF9100D5A0D3 /* Albums */,
 				868C122528772F3F0054FF2D /* Progress */,
@@ -496,6 +508,7 @@
 			children = (
 				866864052865EDD700510DDF /* sPerformance.swift */,
 				86C526CB2875D63E0035DD31 /* PerformanceDisplayModel.swift */,
+				86D9C2D52884027900D5A0D3 /* PerformanceUploadModel.swift */,
 			);
 			path = Performances;
 			sourceTree = "<group>";
@@ -594,6 +607,32 @@
 				86D9C2CB2881C1D100D5A0D3 /* PerformancesListView.swift */,
 			);
 			path = Performances;
+			sourceTree = "<group>";
+		};
+		86D9C2D92884064B00D5A0D3 /* Upload */ = {
+			isa = PBXGroup;
+			children = (
+				86D9C2DF28840A6A00D5A0D3 /* Failure */,
+				86D9C2DC2884068800D5A0D3 /* Performance */,
+				86D9C2DA2884065700D5A0D3 /* UploadView.swift */,
+			);
+			path = Upload;
+			sourceTree = "<group>";
+		};
+		86D9C2DC2884068800D5A0D3 /* Performance */ = {
+			isa = PBXGroup;
+			children = (
+				86D9C2DD288406A000D5A0D3 /* PerformanceUploadView.swift */,
+			);
+			path = Performance;
+			sourceTree = "<group>";
+		};
+		86D9C2DF28840A6A00D5A0D3 /* Failure */ = {
+			isa = PBXGroup;
+			children = (
+				86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */,
+			);
+			path = Failure;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -716,8 +755,10 @@
 				86C526AE2872F7B30035DD31 /* SearchingView.swift in Sources */,
 				86686419286631B500510DDF /* Detective.swift in Sources */,
 				86563C5528782B2500104879 /* Detective+Albums.swift in Sources */,
+				86D9C2DB2884065700D5A0D3 /* UploadView.swift in Sources */,
 				86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */,
 				86D9C2C92881604F00D5A0D3 /* CKQueryOperation+Extensions.swift in Sources */,
+				86D9C2E128840A7800D5A0D3 /* UploadFailureView.swift in Sources */,
 				8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */,
 				86D9C2BE287ECAE800D5A0D3 /* SongListView.swift in Sources */,
 				86C526DB2875F91A0035DD31 /* AppDelegate.swift in Sources */,
@@ -743,12 +784,14 @@
 				8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */,
 				86563C642878D59C00104879 /* Performance+CoreDataProperties.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,
+				86D9C2D8288402C600D5A0D3 /* UploadError.swift in Sources */,
 				86563C5728782BA600104879 /* Detective+Performances.swift in Sources */,
 				8678FD2F2869AC8B00DF1E69 /* CloudKitManager+Albums.swift in Sources */,
 				86C526DE28760AAA0035DD31 /* Song+CoreDataClass.swift in Sources */,
 				86C526D92875F5B00035DD31 /* PersistenceController.swift in Sources */,
 				86D9C2AE287DD00700D5A0D3 /* AllSongsView.swift in Sources */,
 				86C526A5287092A70035DD31 /* CloudKitManager+Song.swift in Sources */,
+				86D9C2DE288406A000D5A0D3 /* PerformanceUploadView.swift in Sources */,
 				868BAF802876D3640055576D /* Album+CoreDataClass.swift in Sources */,
 				8656A31528679CE50013F595 /* CKQuery+Extensions.swift in Sources */,
 				866864042865ED8300510DDF /* sAlbum.swift in Sources */,
@@ -760,6 +803,7 @@
 				86C526CC2875D63E0035DD31 /* PerformanceDisplayModel.swift in Sources */,
 				860712332868604300E54209 /* ReferenceType.swift in Sources */,
 				86C526B02872F7D70035DD31 /* SearchFieldView.swift in Sources */,
+				86D9C2D62884027900D5A0D3 /* PerformanceUploadModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

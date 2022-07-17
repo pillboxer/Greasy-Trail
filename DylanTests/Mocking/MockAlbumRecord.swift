@@ -51,6 +51,10 @@ extension MockAlbumRecord: MockRecordType {
         MockReferenceType(title: title, recordID: recordID)
     }
     
+    func data(for field: DylanRecordField) -> Data? {
+        nil
+    }
+    
     func string(for field: DylanRecordField) -> String? {
         switch field {
         case .title:

@@ -58,4 +58,49 @@ extension CloudKitManager {
             }
         }
     }
+    
+    func upload(_ performanceUploadModel: PerformanceUploadModel) async {
+        let result = await _upload(performanceUploadModel)
+        switch result {
+        case .success(()):
+            await setCurrentStep(to: nil)
+        case .failure(let error):
+            await setCurrentStep(to: .failure(String(describing: error)))
+        }
+    }
+    
+    func _upload(_ performanceUploadModel: PerformanceUploadModel) async -> Result<Void, Error> {
+        await setCurrentStep(to: .uploading(performanceUploadModel.venue))
+        return await withCheckedContinuation { continuation in
+            _upload(performanceUploadModel) { result in
+                continuation.resume(returning: result)
+            }
+        }
+    }
+    
+    
+    func _upload(_ performanceUploadModel: PerformanceUploadModel, completion: @escaping (Result<Void, Error>) -> Void) {
+        let record = CKRecord(recordType: DylanRecordType.performance.rawValue)
+        record["venue"] = performanceUploadModel.venue
+        record["date"] = performanceUploadModel.date
+        var refs: [CKRecord.Reference] = []
+        for uuid in performanceUploadModel.uuids {
+            let reference = CKRecord.Reference(recordID: CKRecord.ID(recordName: uuid), action: .none)
+            refs.append(reference)
+        }
+        record["songs"] = refs
+        let operation = CKModifyRecordsOperation(recordsToSave: [record])
+        operation.qualityOfService = .userInitiated
+        database.add(operation)
+        operation.modifyRecordsResultBlock = { result in
+            switch result {
+            case .success(_):
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+            
+        }
+    }
+    
 }

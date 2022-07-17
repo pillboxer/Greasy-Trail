@@ -11,7 +11,7 @@ struct FetchProgressView: View {
     
     private let viewModel: CloudKitFetchStepViewModel
     
-    init(step: CloudKitManager.CloudKitFetchStep) {
+    init(step: CloudKitManager.CloudKitStep) {
         self.viewModel = CloudKitFetchStepViewModel(step: step)
     }
     
@@ -27,7 +27,7 @@ struct FetchProgressView: View {
 
 private struct CloudKitFetchStepViewModel {
     
-    let step: CloudKitManager.CloudKitFetchStep
+    let step: CloudKitManager.CloudKitStep
     
     var text: String {
         switch step {
@@ -43,6 +43,10 @@ private struct CloudKitFetchStepViewModel {
         case .performances(let title):
             let localized = NSLocalizedString("cloud_kit_progress_description", comment: "")
             return String(format: localized, arguments: [title])
+        case .uploading(let string):
+            return "Uploading \(string)"
+        case .failure(let string):
+            return "ERROR"
         }
     }
     

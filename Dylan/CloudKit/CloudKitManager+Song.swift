@@ -19,10 +19,11 @@ extension CloudKitManager {
         let array = await database.fetchPagedResults(with: query)
         let records = array.compactMap { try? $0.1.get() }
         let titles = records.map { $0.string(for: .title) }
-        let tuple = records.map { (title: $0.string(for: .title)!, id: $0.recordID.recordName) }
         let authors = records.map { $0.string(for: .author) }
         
         // LOUISE
+//        let tuple = records.map { (title: $0.string(for: .title)!, id: $0.recordID.recordName) }
+
 //        let sorted = tuple.sorted { $0.title < $1.title }
 //        for tuple in sorted {
 //            print("TITLE: \(tuple.title) || ID: \(tuple.id)")
@@ -48,6 +49,7 @@ extension CloudKitManager {
                 }
                 song.title = title
                 song.author = author
+                song.uuid = record.recordID.recordName
                 try? context.save()
             }
         }
