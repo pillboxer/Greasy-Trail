@@ -12,6 +12,26 @@ import OSLog
 
 class CloudKitManager: ObservableObject {
     
+    func uploadAllSongs() {
+        let context = container.newBackgroundContext()
+        let allSongs = context.fetchAndWait(Song.self)
+        var newRecords: [CKRecord] = []
+        context.performAndWait {
+            for song in allSongs {
+                let id = song.objectID
+                let safeSong = context.object(with: id) as! Song
+                let newRecord = CKRecord(recordType: DylanRecordType.song.rawValue)
+                os_log("Creating %@", safeSong.title ?? "")
+                newRecord["title"] = safeSong.title
+                newRecord["author"] = safeSong.author
+                newRecords.append(newRecord)
+            }
+            
+            let operation = CKBisectingModifyRecordsOperation(recordsToSave: newRecords, recordIDsToDelete: nil, database: database)
+            operation.start()
+        }
+    }
+    
     @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
     @Published private(set) var currentStep: CloudKitStep? = nil
     let database: DatabaseType
@@ -35,6 +55,7 @@ class CloudKitManager: ObservableObject {
         let date = Date()
         os_log("CloudKitManager starting. Upon successful fetch, fetch time will be set to %@", log: Log_CloudKit, String(describing: date))
         do {
+            lastFetchDate = nil
             await setCurrentStep(to: .fetching(DylanRecordType.song.rawValue))
             try await fetchLatestSongs()
             await setCurrentStep(to: .fetching(DylanRecordType.album.rawValue))

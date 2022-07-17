@@ -97,6 +97,7 @@
 		86D9C2DB2884065700D5A0D3 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2DA2884065700D5A0D3 /* UploadView.swift */; };
 		86D9C2DE288406A000D5A0D3 /* PerformanceUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2DD288406A000D5A0D3 /* PerformanceUploadView.swift */; };
 		86D9C2E128840A7800D5A0D3 /* UploadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */; };
+		86D9C2E32884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +204,7 @@
 		86D9C2DA2884065700D5A0D3 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		86D9C2DD288406A000D5A0D3 /* PerformanceUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceUploadView.swift; sourceTree = "<group>"; };
 		86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFailureView.swift; sourceTree = "<group>"; };
+		86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKBisectingModifyRecordsOperation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -390,6 +392,7 @@
 				86C526A4287092A70035DD31 /* CloudKitManager+Song.swift */,
 				86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */,
 				86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */,
+				86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				866864042865ED8300510DDF /* sAlbum.swift in Sources */,
 				8668641E28670A9800510DDF /* SongDisplayModel.swift in Sources */,
 				86D9C2AB287DCF5200D5A0D3 /* TwoColumnTableViewType.swift in Sources */,
+				86D9C2E32884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift in Sources */,
 				8656A31128679C540013F595 /* RecordType.swift in Sources */,
 				865C451C287615BD0056E01A /* UserDefaultsBacked.swift in Sources */,
 				86D9C2B1287DD04400D5A0D3 /* SidebarListRowView.swift in Sources */,

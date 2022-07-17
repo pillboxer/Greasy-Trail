@@ -34,6 +34,7 @@ struct PerformanceAddingView: View {
             
             OnTapButton(text: "Upload") {
                 let individualSongs = songs.components(separatedBy: .newlines).compactMap { $0.trimmingCharacters(in:.whitespacesAndNewlines) }
+                let withCorrectApostrophe = individualSongs.compactMap { $0.replacingOccurrences(of: "’", with: "'")}
                 let detective = Detective()
                 var uuids: [String] = []
                 
@@ -46,7 +47,7 @@ struct PerformanceAddingView: View {
                     return error = .invalidDate(date)
                 }
                 
-                for song in individualSongs {
+                for song in withCorrectApostrophe {
                     guard let uuid = detective.uuid(for: song) else {
                         return error = .songNotRecognized(song)
                     }
