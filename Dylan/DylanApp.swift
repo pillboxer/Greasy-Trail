@@ -17,5 +17,17 @@ struct DylanApp: App {
             ContentView()
                 .environmentObject(appDelegate.cloudKitManager)
         }
+        .commands {
+            CommandMenu("Data") {
+                Button("Delete and Reset") {
+                    PersistenceController.shared.reset()
+                    Task {
+                        try await appDelegate.cloudKitManager.start(true)
+                    }
+                }
+
+            }
+        }
+        
     }
 }

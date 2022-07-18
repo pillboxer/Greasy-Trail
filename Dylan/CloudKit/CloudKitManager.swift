@@ -31,12 +31,14 @@ class CloudKitManager: ObservableObject {
         self.container = container
     }
     
-    func start() async throws {
+    func start(_ fetchAll: Bool = false) async throws {
         let date = Date()
         os_log("CloudKitManager starting. Upon successful fetch, fetch time will be set to %@", log: Log_CloudKit, String(describing: date))
         do {
             // Fix Me with deletion stuff
-            lastFetchDate = nil
+            if fetchAll {
+                lastFetchDate = nil
+            }
             subscribeToDatabase()
             await setCurrentStep(to: .fetching(DylanRecordType.song.rawValue))
             try await fetchLatestSongs()

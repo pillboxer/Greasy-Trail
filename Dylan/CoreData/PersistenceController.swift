@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import OSLog
 
 class PersistenceController {
     
@@ -46,4 +47,23 @@ class PersistenceController {
         container.newBackgroundContext()
     }
     
+    func reset() {
+        
+        // get all entities and loop over them
+        let context = newBackgroundContext()
+        let entityNames = self.container.managedObjectModel.entities.map({ $0.name!})
+        context.perform {
+            entityNames.forEach { entityName in
+                let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+                
+                do {
+                    try context.execute(deleteRequest)
+                    try context.save()
+                } catch let error  {
+                    os_log("Could not delete all items: %@", log: Log_CoreData, String(describing: error))
+                }
+            }
+        }
+    }
 }

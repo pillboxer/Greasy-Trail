@@ -84,16 +84,15 @@ struct ContentView: View {
                                     .environmentObject(viewModel)
                             }
                             .padding(4)
-                            
                         }
                         if let recordType = addingType?.recordType {
                             UploadView(recordType: recordType)
                         }
+                        
                         SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
                             .padding()
                     }
                 }
-                
             }
         }
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
