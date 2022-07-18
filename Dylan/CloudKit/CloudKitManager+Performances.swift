@@ -37,7 +37,7 @@ extension CloudKitManager {
             // Get the Song objects
             let songTitles = ordered.compactMap { $0.string(for: .title) }
             let context = container.newBackgroundContext()
-            let correspondingSongs = songTitles.compactMap { title in
+            let correspondingSongs: [Song] = songTitles.compactMap { title in
                 let predicate = NSPredicate(format: "title == %@", title)
                 return context.fetchAndWait(Song.self, with: predicate).first
             }
