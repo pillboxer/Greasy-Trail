@@ -11,13 +11,7 @@ import OSLog
 extension CloudKitManager {
     
     func fetchLatestSongs() async throws {
-        
-        os_log("Fetching latest songs", Log_CloudKit)
-        let predicate = NSPredicate(format: "modificationDate > %@", (lastFetchDate ?? .distantPast) as NSDate)
-        let query = CKQuery(recordType: .song, predicate: predicate)
-        
-        let array = await database.fetchPagedResults(with: query)
-        let records = array.compactMap { try? $0.1.get() }
+        let records = try await fetch(.song)
         let titles = records.map { $0.string(for: .title) }
         let authors = records.map { $0.string(for: .author) }
         
@@ -33,8 +27,9 @@ extension CloudKitManager {
         os_log("%@ songs fetched", log: Log_CloudKit, String(describing: records.count))
         let context = container.newBackgroundContext()
         for (index, record) in records.enumerated() {
+            await setProgress(to: Double(index) / Double(records.count))
+            await setCurrentStep(to: .fetching(.song))
             let title = titles[index] ?? "Unknown Title"
-            await setCurrentStep(to: .songs(title))
             let author = authors[index]
             await context.perform {
                 let predicate = NSPredicate(format: "title == %@", title)

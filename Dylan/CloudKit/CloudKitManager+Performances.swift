@@ -13,11 +13,7 @@ import CoreData
 extension CloudKitManager {
     
     func fetchLatestPerformances() async throws {
-        
-        let formatter = Formatter()
-        os_log("Fetching latest performances", Log_CloudKit)
-        let records = try await fetchRecords(of: .performance)
-        os_log("Found %@ performances", log: Log_CloudKit, String(describing: records.count))
+        let records = try await fetch(.performance)
         
         // Store titles and release dates
         let venues = records.compactMap { $0.string(for: .venue) }
@@ -25,13 +21,13 @@ extension CloudKitManager {
         let lbNumbers = records.map { $0.ints(for: .lbNumbers) }
         
         for (index, record) in records.enumerated() {
-            
+            await setProgress(to: Double(index) / Double(records.count))
+
+            await setCurrentStep(to: .fetching(.performance))
             // Get the title and release date of the album
             let venue = venues[index]
             let date = dates[index]
-            let lbs = lbNumbers[index]
-            await setCurrentStep(to: .performances(venue + " " + formatter.dateString(of: date)))
-            
+            let lbs = lbNumbers[index]            
             // Fetch the records
             let ordered = try await getOrderedSongRecords(from: record)
             // Get the Song objects
@@ -44,7 +40,7 @@ extension CloudKitManager {
             
             await context.perform {
                 // Check for existing performance
-                let predicate = NSPredicate(format: "date == %d", Int(date))
+                let predicate = NSPredicate(format: "venue == %@ && date == %d", venue, Int(date))
                 let existingPerformance = context.fetchAndWait(Performance.self, with: predicate).first
                 // Create or update performance
                 let performance = existingPerformance ?? Performance(context: context)

@@ -12,24 +12,20 @@ import OSLog
 extension CloudKitManager {
     
     func fetchLatestAlbums() async throws {
-        
-        os_log("Fetching latest albums", Log_CloudKit)
-        let records = try await fetchRecords(of: .album)
-        os_log("Found %@ albums", log: Log_CloudKit, String(describing: records.count))
-        
-        // Store titles and release dates
+        let records = try await fetch(.album)
         let titles = records.compactMap { $0.string(for: .title) }
         let releaseDates = records.map { $0.double(for: .releaseDate) }
         
         for (index, record) in records.enumerated() {
-            
+            await setProgress(to: Double(index) / Double(records.count))
+
+            await setCurrentStep(to: .fetching(.performance))
             // Get the title and release date of the album
             let title = titles[index]
             let releaseDate = releaseDates[index]
             if let metadata = record.data(for: .metadata) {
                 print(metadata)
             }
-            await setCurrentStep(to: .albums(title))
             
             let ordered = try await getOrderedSongRecords(from: record)
             let context = container.newBackgroundContext()

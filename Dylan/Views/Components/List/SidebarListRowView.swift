@@ -9,41 +9,92 @@ import SwiftUI
 
 struct SidebarListRowView: View {
 
-    @EnvironmentObject var viewModel: NavigationViewModel
-    
+    let recordType: DylanRecordType
+    let isFetching: Bool
+    var progress: Double?
+
     @State var selection: String
     @Binding var nextSearch: Search?
-    @Binding var addingType: NavigationViewModel.NavigationSection?
+    @Binding var selectedID: String?
+    
+    let onTap: () -> Void
 
     var body: some View {
-        NavigationLink(destination: destinationFor(selection), tag: selection, selection: $viewModel.selectedID) {
+        NavigationLink(destination: destinationFor(selection), tag: selection, selection: $selectedID) {
             HStack {
-                Text(selection.capitalized)
+                Text(selection.capitalized + "s")
                     .font(.headline)
                 Spacer()
-                OnTapButton(systemImage: "cross.fill") {
-                    addingType = addingType == viewModel.selectedSection ? nil : NavigationViewModel.NavigationSection(rawValue: selection)!
+                if isFetching {
+                    VStack {
+                        ProgressView("", value: progress, total: 1)
+                            .frame(maxWidth: 50)
+                        Spacer()
+                    }
                 }
-                .buttonStyle(.plain)
+                else {
+                    OnTapButton(systemImage: "cross.fill") {
+                        onTap()
+                    }
+                    .buttonStyle(.plain)
+                }
             }
- 
         }
+        .disabled(isFetching)
     }
+    
     
     @ViewBuilder
     func destinationFor(_ selection: String) -> some View {
-        if let section = NavigationViewModel.NavigationSection(rawValue: selection) {
+        if let section = DylanRecordType(rawValue: selection) {
             switch section {
-            case .songs:
+            case .song:
                 AllSongsView(nextSearch: $nextSearch)
-            case .albums:
+            case .album:
                 AllAlbumsView(nextSearch: $nextSearch)
-            case .performances:
+            case .performance:
                 AllPerformancesView(nextSearch: $nextSearch)
             }
         }
         else {
             fatalError()
         }
+    }
+    
+
+}
+
+struct GaugeProgressStyle: ProgressViewStyle {
+    var strokeColor = Color.blue
+    var strokeWidth = 25.0
+
+    func makeBody(configuration: Configuration) -> some View {
+        let fractionCompleted = configuration.fractionCompleted ?? 0
+
+        return ZStack {
+            Circle()
+                .trim(from: 0, to: fractionCompleted)
+                .stroke(strokeColor, style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
+                .rotationEffect(.degrees(-90))
+        }
+    }
+}
+
+struct ProgressValueView: View {
+
+    @State var progress: Double
+    
+    var body: some View {
+        ProgressView(value: progress, total: 1.0)
+            .progressViewStyle(GaugeProgressStyle())
+            .frame(width: 10, height: 10)
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if progress < 1.0 {
+                    withAnimation {
+                        progress += 0.2
+                    }
+                }
+            }
     }
 }

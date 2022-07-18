@@ -8,8 +8,8 @@
 import CloudKit
 
 enum DylanRecordType: CKRecord.RecordType, CaseIterable {
-    case album = "Album"
     case song = "Song"
+    case album = "Album"
     case performance = "Performance"
     
     var plural: String {

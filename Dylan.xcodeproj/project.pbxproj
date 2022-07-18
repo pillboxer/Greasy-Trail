@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03FBA0782885E28A00751ECD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBA0772885E28A00751ECD /* HomeView.swift */; };
 		8607123128685D8B00E54209 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123028685D8B00E54209 /* Globals.swift */; };
 		860712332868604300E54209 /* ReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860712322868604300E54209 /* ReferenceType.swift */; };
 		86563C50287829F700104879 /* DylanTests+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C4F287829F700104879 /* DylanTests+CoreData.swift */; };
@@ -44,7 +45,6 @@
 		868BAF802876D3640055576D /* Album+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BAF7E2876D3640055576D /* Album+CoreDataClass.swift */; };
 		868C12222876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868C12212876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift */; };
 		868C12242876D89C0054FF2D /* Album+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868C12232876D89C0054FF2D /* Album+CoreDataProperties.swift */; };
-		868C122728772F860054FF2D /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868C122628772F860054FF2D /* Progress.swift */; };
 		868C122A287737780054FF2D /* Performance+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868C1228287737780054FF2D /* Performance+CoreDataClass.swift */; };
 		86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */; };
 		86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B49419286DDEBC00B0C4EC /* Formatter.swift */; };
@@ -113,6 +113,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03FBA0772885E28A00751ECD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8607123028685D8B00E54209 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		860712322868604300E54209 /* ReferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceType.swift; sourceTree = "<group>"; };
 		86563C4F287829F700104879 /* DylanTests+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+CoreData.swift"; sourceTree = "<group>"; };
@@ -153,7 +154,6 @@
 		868BAF7E2876D3640055576D /* Album+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Album+CoreDataClass.swift"; sourceTree = "<group>"; };
 		868C12212876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
 		868C12232876D89C0054FF2D /* Album+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Album+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		868C122628772F860054FF2D /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
 		868C1228287737780054FF2D /* Performance+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Performance+CoreDataClass.swift"; sourceTree = "<group>"; };
 		86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTextFieldRepresentable.swift; sourceTree = "<group>"; };
 		86B49419286DDEBC00B0C4EC /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -230,6 +230,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03FBA0762885E28200751ECD /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				03FBA0772885E28A00751ECD /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		8607123428686C9300E54209 /* Mocking */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,10 +424,10 @@
 		8678FD332869FA6700DF1E69 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				03FBA0762885E28200751ECD /* Home */,
 				86D9C2D92884064B00D5A0D3 /* Upload */,
 				86D9C2B7287E0C7900D5A0D3 /* Performances */,
 				86D9C2B4287DFF9100D5A0D3 /* Albums */,
-				868C122528772F3F0054FF2D /* Progress */,
 				86C52695286F04CD0035DD31 /* Results */,
 				86C526AC2872F7A40035DD31 /* Search */,
 				86D9C2AC287DCFEC00D5A0D3 /* Songs */,
@@ -439,14 +447,6 @@
 				86D9C2BA287ECACD00D5A0D3 /* Songs */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		868C122528772F3F0054FF2D /* Progress */ = {
-			isa = PBXGroup;
-			children = (
-				868C122628772F860054FF2D /* Progress.swift */,
-			);
-			path = Progress;
 			sourceTree = "<group>";
 		};
 		86B49418286DDEB300B0C4EC /* Formatting */ = {
@@ -755,7 +755,6 @@
 				86D9C2C2287ED26700D5A0D3 /* ListRowView.swift in Sources */,
 				868C122A287737780054FF2D /* Performance+CoreDataClass.swift in Sources */,
 				86C526C52874C2E70035DD31 /* CloudKitManager+Performances.swift in Sources */,
-				868C122728772F860054FF2D /* Progress.swift in Sources */,
 				86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */,
 				86563C6228787B0500104879 /* ResultPerformanceOverviewView.swift in Sources */,
 				86C526A92870CF130035DD31 /* AlbumDisplayModel.swift in Sources */,
@@ -810,6 +809,7 @@
 				86D9C2AB287DCF5200D5A0D3 /* TwoColumnTableViewType.swift in Sources */,
 				86D9C2E32884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift in Sources */,
 				8656A31128679C540013F595 /* RecordType.swift in Sources */,
+				03FBA0782885E28A00751ECD /* HomeView.swift in Sources */,
 				865C451C287615BD0056E01A /* UserDefaultsBacked.swift in Sources */,
 				86D9C2B1287DD04400D5A0D3 /* SidebarListRowView.swift in Sources */,
 				86C526CC2875D63E0035DD31 /* PerformanceDisplayModel.swift in Sources */,
