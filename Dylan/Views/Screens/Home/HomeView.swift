@@ -24,6 +24,9 @@ struct HomeView: View {
     @Binding var nextSearch: Search?
     @State private var selectedID: String?
     
+    @EnvironmentObject private var cloudKitManager: CloudKitManager
+
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -37,7 +40,12 @@ struct HomeView: View {
                     .padding(4)
                 }
                 if let recordType = recordTypeToAdd {
-                    UploadView(recordType: recordType)
+                    UploadView(recordType: recordType) { model in
+                        Task {
+                            await cloudKitManager.upload(model)
+                            recordTypeToAdd = nil
+                        }
+                    }
                 }
 
                 SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)

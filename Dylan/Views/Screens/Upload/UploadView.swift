@@ -9,8 +9,9 @@ import SwiftUI
 
 struct UploadView: View {
     
-    @EnvironmentObject private var cloudKitManager: CloudKitManager
     let recordType: DylanRecordType
+    
+    let onTap: (PerformanceUploadModel) -> Void
     
     var body: some View {
         
@@ -21,9 +22,7 @@ struct UploadView: View {
             Text("NOT IMPLEMENTED")
         case .performance:
             PerformanceAddingView { model in
-                    Task {
-                        await cloudKitManager.upload(model)
-                    }
+                  onTap(model)
                 }
                 .padding(.horizontal)
         }
