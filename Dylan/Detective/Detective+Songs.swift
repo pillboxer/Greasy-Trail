@@ -27,7 +27,9 @@ extension Detective {
     
     private func fetch(song title: String) -> Song? {
         let context = container.newBackgroundContext()
-        let predicate = NSPredicate(format: "title =[c] %@", title)
+        let regexPredicate = NSPredicate(format: "title =[c] %@", title)
+        let matchPredicate = NSPredicate(format: "title =[c] %@", title.before(first: "(").trimmingCharacters(in: .whitespaces))
+        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [regexPredicate, matchPredicate])
         guard let song = context.fetchAndWait(Song.self, with: predicate).first else {
             return nil
         }
@@ -51,4 +53,15 @@ extension Detective {
         return toReturn
     }
     
+}
+
+
+private extension String {
+    func before(first delimiter: Character) -> String {
+          if let index = firstIndex(of: delimiter) {
+              let before = prefix(upTo: index)
+              return String(before)
+          }
+          return ""
+      }
 }

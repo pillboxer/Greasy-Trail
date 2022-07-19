@@ -33,7 +33,9 @@ struct PerformanceAddingView: View {
             TextEditor(text: $songs)
             
             OnTapButton(text: "Upload") {
-                let individualSongs = songs.components(separatedBy: .newlines).compactMap { $0.trimmingCharacters(in:.whitespacesAndNewlines) }
+                let trimmed = songs.trimmingCharacters(in: .newlines)
+                let individualSongs = trimmed.components(separatedBy: .newlines)
+                    .compactMap { $0.trimmingCharacters(in:.whitespacesAndNewlines) }
                 let withCorrectApostrophe = individualSongs.compactMap { $0.replacingOccurrences(of: "’", with: "'")}
                 let detective = Detective()
                 var uuids: [String] = []
@@ -48,14 +50,22 @@ struct PerformanceAddingView: View {
                 }
                 
                 for song in withCorrectApostrophe {
-                    guard let uuid = detective.uuid(for: song) else {
-                        return error = .songNotRecognized(song)
+                    var title = song
+                    if song == "—" || song == "" {
+                        print("It's break")
+                        title = "BREAK"
+                    }
+                    guard let uuid = detective.uuid(for: title) else {
+                        return error = .songNotRecognized(title)
                     }
                     uuids.append(uuid)
                 }
                 
                 let model = PerformanceUploadModel(venue: venue, date: date, uuids: uuids)
                 completion(model)
+                self.venue = ""
+                self.date = ""
+                self.songs = ""
             }
             
         }
@@ -63,3 +73,4 @@ struct PerformanceAddingView: View {
     }
     
 }
+

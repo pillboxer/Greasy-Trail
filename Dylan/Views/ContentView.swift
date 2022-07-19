@@ -7,40 +7,6 @@
 
 import SwiftUI
 
-//class NavigationViewModel: ObservableObject {
-//
-//    enum NavigationSection: String, CaseIterable {
-//        case songs
-//        case albums
-//        case performances
-//
-//        var recordType: DylanRecordType {
-//            switch self {
-//            case .songs:
-//                return .song
-//            case .albums:
-//                return .album
-//            case .performances:
-//                return .performance
-//            }
-//        }
-//    }
-//
-//    @Published var selectedID: String? = DylanRecordType.song.rawValue
-//
-//    var selectedSection: NavigationSection? {
-//        guard let id = selectedID else {
-//            return nil
-//        }
-//        return NavigationSection(rawValue: id)
-//    }
-//
-//    var sidebarSections: [String] {
-//        NavigationSection.allCases.map { $0.rawValue }
-//    }
-//
-//
-//}
 
 struct ContentView: View {
     
@@ -48,6 +14,8 @@ struct ContentView: View {
     @State private var albumModel: AlbumDisplayModel?
     @State private var performanceModel: PerformanceDisplayModel?
     @State private var nextSearch: Search?
+    @State private var recordTypeToAdd: DylanRecordType?
+    @State private var selectedID: String?
     @EnvironmentObject private var cloudKitManager: CloudKitManager
     
     private let formatter = Formatter()
@@ -68,7 +36,7 @@ struct ContentView: View {
                 ResultView(performanceModel: $performanceModel, nextSearch: $nextSearch, currentViewType: .performanceOverview)
             }
             else {
-                HomeView(fetchingType: cloudKitManager.fetchingType, progress: cloudKitManager.progress, songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
+                HomeView(fetchingType: cloudKitManager.fetchingType, progress: cloudKitManager.progress, songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, recordTypeToAdd: $recordTypeToAdd, nextSearch: $nextSearch, selectedID: $selectedID)
             }
         }
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)

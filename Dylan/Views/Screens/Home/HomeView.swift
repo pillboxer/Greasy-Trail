@@ -20,9 +20,9 @@ struct HomeView: View {
     @Binding var songModel: SongDisplayModel?
     @Binding var albumModel: AlbumDisplayModel?
     @Binding var performanceModel: PerformanceDisplayModel?
-    @State private var recordTypeToAdd: DylanRecordType?
+    @Binding var recordTypeToAdd: DylanRecordType?
     @Binding var nextSearch: Search?
-    @State private var selectedID: String?
+    @Binding var selectedID: String?
     
     @EnvironmentObject private var cloudKitManager: CloudKitManager
 
@@ -43,7 +43,6 @@ struct HomeView: View {
                     UploadView(recordType: recordType) { model in
                         Task {
                             await cloudKitManager.upload(model)
-                            recordTypeToAdd = nil
                         }
                     }
                 }
