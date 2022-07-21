@@ -27,7 +27,6 @@ class CloudKitManager: ObservableObject {
     @Published var progress: Double? = 0
 
     @MainActor func setProgress(to value: Double) {
-        os_log("Progress is now %@", log: Log_CloudKit, String(describing: value))
         progress = value
     }
 
@@ -74,8 +73,6 @@ class CloudKitManager: ObservableObject {
 
     @MainActor
     func setCurrentStep(to step: CloudKitStep?) {
-        let description = step == nil ? "nil" : String(describing: step!)
-        os_log("Setting next fetch step to %@", log: Log_CloudKit, description)
         currentStep = step
     }
 

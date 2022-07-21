@@ -39,6 +39,8 @@ class PersistenceController {
         container.loadPersistentStores { _, error in
             if let error = error {
                 fatalError("Error configuring Core Data: \(error.localizedDescription)")
+            } else {
+                self.container.viewContext.automaticallyMergesChangesFromParent = true
             }
         }
     }

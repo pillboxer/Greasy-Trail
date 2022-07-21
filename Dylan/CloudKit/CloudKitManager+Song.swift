@@ -31,7 +31,7 @@ extension CloudKitManager {
             await setCurrentStep(to: .fetching(.song))
             let title = titles[index] ?? "Unknown Title"
             let author = authors[index]
-            await context.perform {
+            context.performAndWait {
                 let predicate = NSPredicate(format: "title == %@", title)
                 let song: Song
                 if let existingSong = context.fetchAndWait(Song.self, with: predicate).first {
@@ -44,9 +44,9 @@ extension CloudKitManager {
                 song.title = title
                 song.author = author
                 song.uuid = record.recordID.recordName
-                context.saveWithTry()
             }
         }
+        context.saveWithTry()
     }
 
     func getOrderedSongRecords(from record: RecordType) async throws -> [RecordType] {

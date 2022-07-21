@@ -31,17 +31,18 @@ extension NSManagedObjectContext {
     }
 
     func saveWithTry() {
+        perform {
+            guard self.hasChanges else {
+                os_log("No changes to save, returning", log: Log_CoreData)
+                return
+            }
 
-        guard hasChanges else {
-            os_log("No changes to save, returning", log: Log_CoreData)
-            return
-        }
-
-        do {
-            try save()
-            os_log("Context successfully saved", log: Log_CoreData)
-        } catch let error {
-            os_log("Context unable to save. Error: %@", String(describing: error))
+            do {
+                try self.save()
+                os_log("Context successfully saved", log: Log_CoreData)
+            } catch let error {
+                os_log("Context unable to save. Error: %@", String(describing: error))
+            }
         }
     }
 

@@ -15,6 +15,7 @@ extension CloudKitManager {
         let records = try await fetch(.album)
         let titles = records.compactMap { $0.string(for: .title) }
         let releaseDates = records.map { $0.double(for: .releaseDate) }
+        let context = container.newBackgroundContext()
 
         for (index, record) in records.enumerated() {
             await setProgress(to: Double(index) / Double(records.count))
@@ -28,7 +29,6 @@ extension CloudKitManager {
             }
 
             let ordered = try await getOrderedSongRecords(from: record)
-            let context = container.newBackgroundContext()
             // Get the Song objects
             let songTitles = ordered.compactMap { $0.string(for: .title) }
             let correspondingSongs: [Song] = songTitles.compactMap { title in
@@ -36,7 +36,7 @@ extension CloudKitManager {
                 return context.fetchAndWait(Song.self, with: predicate).first
             }
 
-            await context.perform {
+            context.performAndWait {
                 // Check for existing album
                 let predicate = NSPredicate(format: "title == %@", title)
                 let existingAlbum = context.fetchAndWait(Album.self, with: predicate).first
@@ -48,8 +48,8 @@ extension CloudKitManager {
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 album.songs = orderedSet
-                context.saveWithTry()
             }
         }
+        context.saveWithTry()
     }
 }

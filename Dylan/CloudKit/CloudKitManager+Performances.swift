@@ -19,6 +19,7 @@ extension CloudKitManager {
         let venues = records.compactMap { $0.string(for: .venue) }
         let dates = records.compactMap { $0.double(for: .date) }
         let lbNumbers = records.map { $0.ints(for: .lbNumbers) }
+        let context = container.newBackgroundContext()
 
         for (index, record) in records.enumerated() {
             await setProgress(to: Double(index) / Double(records.count))
@@ -32,13 +33,12 @@ extension CloudKitManager {
             let ordered = try await getOrderedSongRecords(from: record)
             // Get the Song objects
             let songTitles = ordered.compactMap { $0.string(for: .title) }
-            let context = container.newBackgroundContext()
             let correspondingSongs: [Song] = songTitles.compactMap { title in
                 let predicate = NSPredicate(format: "title == %@", title)
                 return context.fetchAndWait(Song.self, with: predicate).first
             }
 
-            await context.perform {
+            context.performAndWait {
                 // Check for existing performance
                 let predicate = NSPredicate(format: "venue == %@ && date == %d", venue, Int(date))
                 let existingPerformance = context.fetchAndWait(Performance.self, with: predicate).first
@@ -51,9 +51,9 @@ extension CloudKitManager {
 
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 performance.songs = orderedSet
-                context.saveWithTry()
             }
         }
+        context.saveWithTry()
     }
 
     func upload(_ performanceUploadModel: PerformanceUploadModel) async {
