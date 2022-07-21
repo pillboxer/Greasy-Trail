@@ -10,51 +10,57 @@ import SwiftUI
 struct SidebarListRowView: View {
 
     let recordType: DylanRecordType
-    let isFetching: Bool
     var progress: Double?
-
     @State var selection: String
+    @State var isCollapsed = true
+    
+    var years: [String] = ["1960s", "1970s"]
+
     @Binding var nextSearch: Search?
     @Binding var selectedID: String?
 
     let onTap: () -> Void
 
     var body: some View {
-        NavigationLink(destination: destinationFor(selection), tag: selection, selection: $selectedID) {
-            HStack {
-                Text(selection.capitalized + "s")
-                    .font(.headline)
-                Spacer()
-                if isFetching {
-                    VStack {
-                        ProgressView("", value: progress, total: 1)
-                            .frame(maxWidth: 50)
-                        Spacer()
+        NavigationLink(destination: destination(), tag: selection, selection: $selectedID) {
+            VStack {
+                SideBarListMainRowView(recordType: recordType,
+                                       selection: selection,
+                                       isCollapsed: $isCollapsed,
+                                       onTap: onTap)
+                if recordType == .performance && !isCollapsed {
+                    ForEach(years, id: \.self) { year in
+                        SideBarListSubView(year: year)
                     }
-                } else {
-                    OnTapButton(systemImage: "cross.fill") {
-                        onTap()
-                    }
-                    .buttonStyle(.plain)
                 }
             }
         }
-        .disabled(isFetching)
+        .onChange(of: selectedID) { newValue in
+            if recordType == .performance,
+               newValue == recordType.rawValue {
+                collapse(false)
+            } else {
+                collapse(true)
+            }
+
+        }
+    }
+
+    private func collapse(_ bool: Bool) {
+        withAnimation {
+            isCollapsed = bool
+        }
     }
 
     @ViewBuilder
-    func destinationFor(_ selection: String) -> some View {
-        if let section = DylanRecordType(rawValue: selection) {
-            switch section {
-            case .song:
-                AllSongsView(nextSearch: $nextSearch)
-            case .album:
-                AllAlbumsView(nextSearch: $nextSearch)
-            case .performance:
-                AllPerformancesView(nextSearch: $nextSearch)
-            }
-        } else {
-            fatalError()
+    func destination() -> some View {
+        switch recordType {
+        case .song:
+            AllSongsView(nextSearch: $nextSearch)
+        case .album:
+            AllAlbumsView(nextSearch: $nextSearch)
+        case .performance:
+            EmptyView()
         }
     }
 

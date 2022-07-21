@@ -29,11 +29,10 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                List(DylanRecordType.allCases, id: \.self) { item in
+                ForEach(DylanRecordType.allCases, id: \.self) { item in
 
                     HStack {
                         SidebarListRowView(recordType: item,
-                                           isFetching: fetchingType == item,
                                            progress: progress,
                                            selection: item.rawValue,
                                            nextSearch: $nextSearch,
@@ -41,6 +40,7 @@ struct HomeView: View {
                             recordTypeToAdd = item
                         }
                     }
+                    Spacer()
                     .padding(4)
                 }
                 if let recordType = recordTypeToAdd {
