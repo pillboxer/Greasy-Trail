@@ -20,8 +20,10 @@ class CKPagingQueryOperation {
     let database: DatabaseType
     var records: [(CKRecord.ID, Result<RecordType, Error>)]
 
-
-    init(query: CKQuery, cursor: CKQueryOperation.Cursor? = nil, database: DatabaseType, records: [(CKRecord.ID, Result<RecordType, Error>)] = []) {
+    init(query: CKQuery,
+         cursor: CKQueryOperation.Cursor? = nil,
+         database: DatabaseType,
+         records: [(CKRecord.ID, Result<RecordType, Error>)] = []) {
         self.cursor = cursor
         self.database = database
         self.query = query
@@ -33,18 +35,27 @@ class CKPagingQueryOperation {
         operation.qualityOfService = .userInitiated
         let completionBlock: ((CKQueryOperation.Cursor?, Error?) -> Void)? = { [self] cursor, error in
             if let error = error as? CKError {
-                os_log("Error received in CKPagingQueryOperation: %@", log: Log_CloudKit, type: .error, String(describing: error))
+                os_log("Error received in CKPagingQueryOperation: %@",
+                       log: Log_CloudKit,
+                       type: .error,
+                       String(describing: error))
                 errorBlock?(error)
-            }
-            else if let cursor = cursor {
-                os_log("Cursor received in CKPagingQueryOperation, attempting query with cursor", log: Log_CloudKit, type: .debug)
-                let operation = CKPagingQueryOperation(query: query, cursor: cursor, database: database, records: records)
+            } else if let cursor = cursor {
+                os_log("Cursor received in CKPagingQueryOperation, attempting query with cursor",
+                       log: Log_CloudKit,
+                       type: .debug)
+                let operation = CKPagingQueryOperation(query: query,
+                                                       cursor: cursor,
+                                                       database: database,
+                                                       records: records)
                 operation.pagingCompletionBlock = pagingCompletionBlock
                 operation.errorBlock = errorBlock
                 operation.start()
-            }
-            else {
-                os_log("CKPagingQueryOperation complete, %@ record(s) obtained", log: Log_CloudKit, type: .debug, String(describing: records.count))
+            } else {
+                os_log("CKPagingQueryOperation complete, %@ record(s) obtained",
+                       log: Log_CloudKit,
+                       type: .debug,
+                       String(describing: records.count))
                 pagingCompletionBlock?(records)
             }
         }
@@ -52,7 +63,7 @@ class CKPagingQueryOperation {
             let mapped = record.map { $0 as RecordType }
             self.records.append((id, mapped))
         }
-        
+
         operation.queryCompletionBlock = completionBlock
         database.add(operation)
     }

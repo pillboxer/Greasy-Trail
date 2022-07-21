@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Song {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Song> {
@@ -23,8 +22,8 @@ extension Song {
 
 }
 
-extension Song : Identifiable {
-    
+extension Song: Identifiable {
+
     public var id: String {
         title ?? UUID().uuidString
     }

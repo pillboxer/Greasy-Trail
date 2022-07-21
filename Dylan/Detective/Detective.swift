@@ -10,23 +10,23 @@ import OSLog
 import CoreData
 
 public class Detective: ObservableObject {
-    
+
     let container: NSPersistentContainer
-    
+
     init(_ container: NSPersistentContainer = PersistenceController.shared.container) {
         self.container = container
     }
-    
+
     func search(song title: String) -> SongDisplayModel? {
         os_log("Searching song: %@", log: Log_Detective, title)
         return fetchModel(for: title)
     }
-    
+
     func search(album title: String) -> AlbumDisplayModel? {
         os_log("Searching album: %@", log: Log_Detective, title)
         return fetch(album: title)
     }
-    
+
     func search(performance date: Double) -> PerformanceDisplayModel? {
         os_log("Searching date: %@", log: Log_Detective, String(describing: date))
         return fetch(performance: date)
@@ -37,6 +37,5 @@ public class Detective: ObservableObject {
         let objects = context.fetchAndWait(T.self, with: predicate)
         return objects
     }
-    
-    
+
 }

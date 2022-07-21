@@ -8,26 +8,24 @@
 import SwiftUI
 
 struct OnTapButton: View {
-   
-    var text: String? = nil
-    var image: String? = nil
-    var systemImage: String? = nil
+
+    var text: String?
+    var image: String?
+    var systemImage: String?
     var onTap: () -> Void
-    
+
     var body: some View {
         Button {
             onTap()
         } label: {
             if let systemImage = systemImage {
                 Image(systemName: systemImage)
-            }
-            else if let image = image {
+            } else if let image = image {
                 Image(image)
-            }
-            else if let text = text {
+            } else if let text = text {
                 Text(text)
             }
         }
     }
-    
+
 }

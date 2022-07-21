@@ -8,21 +8,20 @@
 import SwiftUI
 
 struct AlbumsListView: View {
-    
+
     let albums: [sAlbum]
     var showingAppearances: Bool = false
     private var titles: [String] {
         albums.map { $0.title }
     }
-        
+
     private var uniqueAlbums: [sAlbum] {
         Array(Set(albums)).sorted { $0.releaseDate < $1.releaseDate }
     }
-    
-    
+
     let onTap: (String) -> Void
     private let formatter = Formatter()
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Albums").font(.title)

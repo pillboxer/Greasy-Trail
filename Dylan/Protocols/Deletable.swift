@@ -10,4 +10,3 @@ import CoreData
 protocol Deletable: NSManagedObject {
     var markedAsDeleted: Bool { get set }
 }
-

@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
-    
+
     @State private var songModel: SongDisplayModel?
     @State private var albumModel: AlbumDisplayModel?
     @State private var performanceModel: PerformanceDisplayModel?
@@ -17,26 +16,35 @@ struct ContentView: View {
     @State private var recordTypeToAdd: DylanRecordType?
     @State private var selectedID: String?
     @EnvironmentObject private var cloudKitManager: CloudKitManager
-    
+
     private let formatter = Formatter()
-    
+
     var body: some View {
         Group {
             if let step = cloudKitManager.currentStep,
                case let .failure(error) = step {
                    UploadFailureView(error: error)
-            }
-            else if let _ = songModel {
-                ResultView(songModel: $songModel, nextSearch: $nextSearch, currentViewType: .songOverview)
-            }
-            else if let _ = albumModel {
-                ResultView(albumModel: $albumModel, nextSearch: $nextSearch, currentViewType: .albumOverview)
-            }
-            else if let _ = performanceModel {
-                ResultView(performanceModel: $performanceModel, nextSearch: $nextSearch, currentViewType: .performanceOverview)
-            }
-            else {
-                HomeView(fetchingType: cloudKitManager.fetchingType, progress: cloudKitManager.progress, songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, recordTypeToAdd: $recordTypeToAdd, nextSearch: $nextSearch, selectedID: $selectedID)
+            } else if songModel != nil {
+                ResultView(songModel: $songModel,
+                           nextSearch: $nextSearch,
+                           currentViewType: .songOverview)
+            } else if albumModel != nil {
+                ResultView(albumModel: $albumModel,
+                           nextSearch: $nextSearch,
+                           currentViewType: .albumOverview)
+            } else if performanceModel != nil {
+                ResultView(performanceModel: $performanceModel,
+                           nextSearch: $nextSearch,
+                           currentViewType: .performanceOverview)
+            } else {
+                HomeView(fetchingType: cloudKitManager.fetchingType,
+                         progress: cloudKitManager.progress,
+                         songModel: $songModel,
+                         albumModel: $albumModel,
+                         performanceModel: $performanceModel,
+                         recordTypeToAdd: $recordTypeToAdd,
+                         nextSearch: $nextSearch,
+                         selectedID: $selectedID)
             }
         }
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)

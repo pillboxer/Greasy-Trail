@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct ResultAlbumOverviewView: View{
-    
+struct ResultAlbumOverviewView: View {
+
     @Binding var model: AlbumDisplayModel?
     @Binding var nextSearch: Search?
-    
+
     var body: some View {
         VStack(spacing: 16) {
             HStack {
@@ -34,5 +34,5 @@ struct ResultAlbumOverviewView: View{
         }
         .padding()
     }
-    
+
 }

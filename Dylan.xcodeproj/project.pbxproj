@@ -654,12 +654,15 @@
 				866863E52865EB6200510DDF /* Sources */,
 				866863E62865EB6200510DDF /* Frameworks */,
 				866863E72865EB6200510DDF /* Resources */,
+				86A60C5128888BA500813778 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Greasy Trail";
+			packageProductDependencies = (
+			);
 			productName = Dylan;
 			productReference = 866863E92865EB6200510DDF /* Greasy Trail.app */;
 			productType = "com.apple.product-type.application";
@@ -710,6 +713,8 @@
 				Base,
 			);
 			mainGroup = 866863E02865EB6200510DDF;
+			packageReferences = (
+			);
 			productRefGroup = 866863EA2865EB6200510DDF /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -739,6 +744,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		86A60C5128888BA500813778 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		866863E52865EB6200510DDF /* Sources */ = {

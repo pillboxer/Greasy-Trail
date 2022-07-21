@@ -8,7 +8,7 @@
 import CloudKit
 
 protocol ReferenceType {
-    
+
     var recordID: CKRecord.ID { get }
-    
+
 }

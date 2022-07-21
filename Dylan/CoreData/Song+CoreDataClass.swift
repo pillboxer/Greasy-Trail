@@ -11,7 +11,7 @@ import CoreData
 
 @objc(Song)
 public class Song: NSManagedObject {
-    
+
     var songAuthor: String {
         author ?? "Bob Dylan"
     }

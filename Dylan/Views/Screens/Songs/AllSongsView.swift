@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct AllSongsView: View {
-    
+
     @Binding var nextSearch: Search?
     @State var selection: Set<Song.ID> = []
     @FetchRequest(entity: Song.entity(),
-                  sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)], predicate: NSPredicate(format: "title != %@", "BREAK")) var fetched: FetchedResults<Song>
+                  sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)],
+                  predicate: NSPredicate(format: "title != %@", "BREAK"))
+    var fetched: FetchedResults<Song>
 
     @State var sortOrder: [KeyPathComparator<Song>] = [
             .init(\.title, order: SortOrder.forward),
             .init(\.author, order: SortOrder.forward)
         ]
-    
+
     var body: some View {
-        
+
         Table(tableData, selection: $selection, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_songs_0"), value: \.title!) { song in
                 let title = song.title!
@@ -35,13 +37,13 @@ struct AllSongsView: View {
                     .simultaneousGesture(singleTap(id: title))
             }
         }
-        
+
     }
-    
+
 }
 
 extension AllSongsView: TwoColumnTableViewType {
-    
+
     func doubleTap(on string: String, id: Song.ID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
             selection.removeAll()
@@ -49,7 +51,7 @@ extension AllSongsView: TwoColumnTableViewType {
             selection.insert(id)
         }
     }
-    
+
     func singleTap(id: Song.ID) -> _EndedGesture<TapGesture> {
         TapGesture()
             .onEnded {
@@ -59,4 +61,3 @@ extension AllSongsView: TwoColumnTableViewType {
     }
 
 }
-

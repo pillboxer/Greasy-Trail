@@ -11,15 +11,15 @@ import OSLog
 import CoreData
 
 extension CloudKitManager {
-    
+
     func fetchLatestPerformances() async throws {
         let records = try await fetch(.performance)
-        
+
         // Store titles and release dates
         let venues = records.compactMap { $0.string(for: .venue) }
         let dates = records.compactMap { $0.double(for: .date) }
         let lbNumbers = records.map { $0.ints(for: .lbNumbers) }
-        
+
         for (index, record) in records.enumerated() {
             await setProgress(to: Double(index) / Double(records.count))
 
@@ -27,7 +27,7 @@ extension CloudKitManager {
             // Get the title and release date of the album
             let venue = venues[index]
             let date = dates[index]
-            let lbs = lbNumbers[index]            
+            let lbs = lbNumbers[index]
             // Fetch the records
             let ordered = try await getOrderedSongRecords(from: record)
             // Get the Song objects
@@ -37,7 +37,7 @@ extension CloudKitManager {
                 let predicate = NSPredicate(format: "title == %@", title)
                 return context.fetchAndWait(Song.self, with: predicate).first
             }
-            
+
             await context.perform {
                 // Check for existing performance
                 let predicate = NSPredicate(format: "venue == %@ && date == %d", venue, Int(date))
@@ -51,22 +51,22 @@ extension CloudKitManager {
 
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 performance.songs = orderedSet
-                try? context.save()
+                context.saveWithTry()
             }
         }
     }
-    
+
     func upload(_ performanceUploadModel: PerformanceUploadModel) async {
         let result = await _upload(performanceUploadModel)
         switch result {
-        case .success(()):
+        case .success:
             await setCurrentStep(to: nil)
         case .failure(let error):
             await setCurrentStep(to: .failure(String(describing: error)))
         }
     }
-    
-    func _upload(_ performanceUploadModel: PerformanceUploadModel) async -> Result<Void, Error> {
+
+    private func _upload(_ performanceUploadModel: PerformanceUploadModel) async -> Result<Void, Error> {
         await setCurrentStep(to: .uploading(performanceUploadModel.venue))
         return await withCheckedContinuation { continuation in
             _upload(performanceUploadModel) { result in
@@ -74,9 +74,10 @@ extension CloudKitManager {
             }
         }
     }
-    
-    
-    func _upload(_ performanceUploadModel: PerformanceUploadModel, completion: @escaping (Result<Void, Error>) -> Void) {
+
+    // swiftlint:disable identifier_name
+    func _upload(_ performanceUploadModel: PerformanceUploadModel,
+                 completion: @escaping (Result<Void, Error>) -> Void) {
         let record = CKRecord(recordType: DylanRecordType.performance.rawValue)
         record["venue"] = performanceUploadModel.venue
         record["date"] = performanceUploadModel.date
@@ -91,13 +92,13 @@ extension CloudKitManager {
         database.add(operation)
         operation.modifyRecordsResultBlock = { result in
             switch result {
-            case .success(_):
+            case .success:
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
             }
-            
+
         }
     }
-    
+
 }

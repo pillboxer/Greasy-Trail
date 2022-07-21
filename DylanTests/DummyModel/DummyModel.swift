@@ -10,8 +10,7 @@ import Foundation
 @testable import Greasy_Trail
 
 class DummyModel {
-        
+
     static let expectedAlbumsForTombstoneBlues = [hw61AlbumRepresentation, realLiveAlbumRepresentation]
 
-        
 }

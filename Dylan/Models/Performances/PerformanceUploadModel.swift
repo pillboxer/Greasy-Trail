@@ -8,9 +8,9 @@
 import Foundation
 
 struct PerformanceUploadModel {
-    
+
     let venue: String
     let date: Double
     let uuids: [String]
-    
+
 }

@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ResultPerformanceOverviewView: View {
-    
+
     @Binding var model: PerformanceDisplayModel?
     @Binding var nextSearch: Search?
     @Binding var currentViewType: ResultView.ResultViewType
-    
+
     var body: some View {
         VStack(spacing: 16) {
             HStack {
@@ -51,5 +51,5 @@ struct ResultPerformanceOverviewView: View {
         }
         .padding()
     }
-    
+
 }

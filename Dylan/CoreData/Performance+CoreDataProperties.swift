@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Performance {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Performance> {
@@ -60,6 +59,6 @@ extension Performance {
 
 }
 
-extension Performance : Identifiable {
+extension Performance: Identifiable {
 
 }

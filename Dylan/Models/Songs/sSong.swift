@@ -7,26 +7,27 @@
 
 import Foundation
 
+// swiftlint:disable type_name
 public struct sSong: Codable {
-    
+
     let title: String
     var author: String = NSLocalizedString("default_author", comment: "")
     var performances: [sPerformance]?
-    var albums: [sAlbum]?    
+    var albums: [sAlbum]?
 }
 
 extension sSong: Equatable {
-    
+
     public static func == (lhs: sSong, rhs: sSong) -> Bool {
         lhs.title == rhs.title
     }
-    
+
 }
 
 extension sSong: Identifiable, Hashable {
-    
+
     public var id: String {
         title
     }
-    
+
 }

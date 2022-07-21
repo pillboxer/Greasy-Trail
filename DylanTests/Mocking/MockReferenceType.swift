@@ -9,14 +9,13 @@
 import CloudKit
 
 class MockReferenceType: ReferenceType {
-    
+
     let title: String
     let recordID: CKRecord.ID
-    
+
     init(title: String, recordID: CKRecord.ID) {
         self.title = title
         self.recordID = recordID
     }
-    
-    
+
 }

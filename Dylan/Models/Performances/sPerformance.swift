@@ -7,17 +7,18 @@
 
 import Foundation
 
+// swiftlint:disable type_name
 struct sPerformance: Codable {
-    
+
     let venue: String
     let songs: [sSong]
     let date: Double?
     var lbNumbers: [Int]?
-    
+
     var id: String {
-        venue + String(date ?? 0) 
+        venue + String(date ?? 0)
     }
-    
+
 }
 
 extension sPerformance: Hashable {}

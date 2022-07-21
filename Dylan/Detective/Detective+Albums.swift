@@ -10,7 +10,7 @@ import CoreData
 import OSLog
 
 extension Detective {
-    
+
     func fetch(album title: String) -> AlbumDisplayModel? {
         let context = container.newBackgroundContext()
         var toReturn: AlbumDisplayModel?
@@ -29,18 +29,19 @@ extension Detective {
         }
         return toReturn
     }
-    
+
     func albumsThatInclude(song objectID: NSManagedObjectID) -> [sAlbum] {
         let context = container.newBackgroundContext()
         var toReturn: [sAlbum] = []
         context.performAndWait {
-            let song = context.object(with: objectID) as! Song
-            let objects = objects(Album.self, including: song, context: context)
-            os_log("%@ found on %@ album(s)", song.title!, String(describing: objects.count))
-            let sAlbums = objects.compactMap { sAlbum(title: $0.title!, songs:[], releaseDate: $0.releaseDate) }
-            toReturn = sAlbums.sorted { $0.releaseDate < $1.releaseDate }
+            if let song = context.object(with: objectID) as? Song {
+                let objects = objects(Album.self, including: song, context: context)
+                os_log("%@ found on %@ album(s)", song.title!, String(describing: objects.count))
+                let sAlbums = objects.compactMap { sAlbum(title: $0.title!, songs: [], releaseDate: $0.releaseDate) }
+                toReturn = sAlbums.sorted { $0.releaseDate < $1.releaseDate }
+            }
         }
         return toReturn
     }
-    
+
 }

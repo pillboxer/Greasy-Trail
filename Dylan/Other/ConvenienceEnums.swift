@@ -11,7 +11,7 @@ enum DylanRecordType: CKRecord.RecordType, CaseIterable {
     case song = "Song"
     case album = "Album"
     case performance = "Performance"
-    
+
     var plural: String {
         rawValue + "s"
     }
@@ -35,7 +35,6 @@ enum DylanRecordField: String {
     case venue
     case date
     case lbNumbers = "LBNumbers"
-        
+
     case modificationDate
 }
-

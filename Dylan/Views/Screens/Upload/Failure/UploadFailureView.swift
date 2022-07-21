@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct UploadFailureView: View {
-    
+
     @EnvironmentObject private var cloudKitManager: CloudKitManager
     let error: String
-    
+
     var body: some View {
         Text("Failed: \(error)")
         OnTapButton(text: "OK") {

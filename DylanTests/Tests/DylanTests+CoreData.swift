@@ -11,23 +11,23 @@ import CoreData
 @testable import Greasy_Trail
 
 extension DylanTests {
-    
+
     func album(_ context: NSManagedObjectContext, title: String, releaseDate: Double) -> Album {
         let album = Album(context: context)
         album.title = title
         album.releaseDate = releaseDate
         return album
     }
-    
+
     func song(title: String, author: String? = NSLocalizedString("default_author", comment: "")) -> Song {
         let context = container.viewContext
         let song = Song(context: context)
         song.title = title
         song.author = author
-        try! context.save()
+        context.saveWithTry()
         return song
     }
-    
+
     func createAndSaveNewport1965() {
         let context = container.viewContext
 
@@ -39,9 +39,9 @@ extension DylanTests {
         performance.venue = DummyModel.tNewport1965
         performance.date = DummyModel.dNewport1965
         performance.lbNumbers = DummyModel.lbNewport1965
-        try! context.save()
+        context.saveWithTry()
     }
-    
+
     func createAndSaveHighway61Revisited() {
         let context = container.viewContext
 
@@ -59,7 +59,7 @@ extension DylanTests {
         album.songs = NSOrderedSet(array: songs)
         album.title = DummyModel.tHighway61Revisited
         album.releaseDate = DummyModel.dHighway61Revisited
-        try! context.save()
+        context.saveWithTry()
     }
-    
+
 }

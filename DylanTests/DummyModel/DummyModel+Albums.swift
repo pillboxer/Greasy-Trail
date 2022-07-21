@@ -7,9 +7,8 @@
 
 @testable import Greasy_Trail
 
-
 extension DummyModel {
-    
+
     static var aHighway61Revisited: sAlbum {
         let songs = [sLikeARollingStone,
                      sTombstoneBlues,
@@ -22,5 +21,5 @@ extension DummyModel {
                      sDesolationRow]
         return sAlbum(title: tHighway61Revisited, songs: songs, releaseDate: dHighway61Revisited)
     }
-    
+
 }

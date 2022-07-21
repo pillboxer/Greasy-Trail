@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct SearchFieldView: View {
-    
+
     @Binding var text: String
     @Binding var nextSearch: Search?
     @Binding var songModel: SongDisplayModel?
     @Binding var albumModel: AlbumDisplayModel?
     @Binding var performanceModel: PerformanceDisplayModel?
     @Binding var searchDisplayType: SearchView.SearchDisplayType
-    
+
     @EnvironmentObject var cloudKitManager: CloudKitManager
     @EnvironmentObject private var formatter: Formatter
-    
+
     @StateObject private var detective = Detective()
-    
+
     var body: some View {
         if let nextSearch = nextSearch {
             SearchingView()
@@ -30,8 +30,7 @@ struct SearchFieldView: View {
                 .onChange(of: nextSearch) { newValue in
                     searchNextSearch(newValue.title)
                 }
-        }
-        else {
+        } else {
             HStack {
                 OnTapButton(systemImage: "arrow.clockwise") {
                     self.refresh()
@@ -49,20 +48,20 @@ struct SearchFieldView: View {
             .padding(4)
         }
     }
-    
+
     private func refresh() {
         Task {
             try? await cloudKitManager.start()
         }
     }
-    
+
     private func searchBlind() {
         guard !text.isEmpty else {
             return
         }
         nextSearch = Search(title: text, type: .album)
     }
-    
+
     private func searchNextSearch(_ text: String) {
         guard let nextSearch = nextSearch else {
             return
@@ -73,16 +72,14 @@ struct SearchFieldView: View {
                 if let result = detective.search(album: text) {
                     albumModel = result
                     self.nextSearch = nil
-                }
-                else {
+                } else {
                     self.nextSearch = Search(title: text, type: .song)
                 }
             case .song:
                 if let result = detective.search(song: text) {
                     songModel = result
                     self.nextSearch = nil
-                }
-                else {
+                } else {
                     self.nextSearch = Search(title: text, type: .performance)
                 }
             case .performance:
@@ -90,12 +87,11 @@ struct SearchFieldView: View {
                    let result = detective.fetch(performance: toFetch) {
                     performanceModel = result
                     self.nextSearch = nil
-                }
-                else {
+                } else {
                     searchDisplayType = .noResultsFound(title: text)
                 }
             }
-            
+
         }
     }
 

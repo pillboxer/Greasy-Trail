@@ -14,7 +14,7 @@ enum SidebarSection: String, CaseIterable {
 }
 
 struct HomeView: View {
-    
+
     let fetchingType: DylanRecordType?
     var progress: Double? = 0
     @Binding var songModel: SongDisplayModel?
@@ -23,17 +23,21 @@ struct HomeView: View {
     @Binding var recordTypeToAdd: DylanRecordType?
     @Binding var nextSearch: Search?
     @Binding var selectedID: String?
-    
+
     @EnvironmentObject private var cloudKitManager: CloudKitManager
 
-    
     var body: some View {
         NavigationView {
             VStack {
                 List(DylanRecordType.allCases, id: \.self) { item in
-      
+
                     HStack {
-                        SidebarListRowView(recordType: item, isFetching: fetchingType == item, progress: progress, selection: item.rawValue, nextSearch: $nextSearch, selectedID: $selectedID) {
+                        SidebarListRowView(recordType: item,
+                                           isFetching: fetchingType == item,
+                                           progress: progress,
+                                           selection: item.rawValue,
+                                           nextSearch: $nextSearch,
+                                           selectedID: $selectedID) {
                             recordTypeToAdd = item
                         }
                     }
@@ -47,7 +51,10 @@ struct HomeView: View {
                     }
                 }
 
-                SearchView(songModel: $songModel, albumModel: $albumModel, performanceModel: $performanceModel, nextSearch: $nextSearch)
+                SearchView(songModel: $songModel,
+                           albumModel: $albumModel,
+                           performanceModel: $performanceModel,
+                           nextSearch: $nextSearch)
                     .padding()
             }
         }

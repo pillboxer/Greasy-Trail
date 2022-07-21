@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct TwoColumnTableView: View {
-    
+
     let models: [TableDisplayModel]
     @Binding var songDisplayModel: SongDisplayModel?
     @EnvironmentObject var formatter: Formatter
     @Binding var nextSearch: Search?
     @Binding var currentViewType: ResultView.ResultViewType
     @State private var selection: String?
-    
+
     var body: some View {
         VStack {
             HStack {
@@ -32,7 +32,8 @@ struct TwoColumnTableView: View {
                     Text(model.column1Value)
                         .gesture(TapGesture(count: 2).onEnded {
                             selection = model.id
-                            nextSearch = Search(title: nextSearchType == .album ? model.column1Value : String(model.column2Value), type: nextSearchType)
+                            nextSearch = Search(title: title(for: model),
+                                                type: nextSearchType)
                             self.songDisplayModel = nil
                         })
                         .simultaneousGesture(TapGesture()
@@ -49,8 +50,8 @@ struct TwoColumnTableView: View {
     }
 }
 
-extension TwoColumnTableView {
-    
+private extension TwoColumnTableView {
+
     var column1Header: String {
         switch currentViewType {
         case .performances:
@@ -61,7 +62,7 @@ extension TwoColumnTableView {
             return ""
         }
     }
-    
+
     var column2Header: String {
         switch currentViewType {
         case .performances:
@@ -72,7 +73,7 @@ extension TwoColumnTableView {
             return ""
         }
     }
-    
+
     var nextSearchType: DylanSearchType {
         switch currentViewType {
         case .albums:
@@ -80,5 +81,9 @@ extension TwoColumnTableView {
         default:
             return .performance
         }
+    }
+
+    func title(for model: TableDisplayModel) -> String {
+        nextSearchType == .album ? model.column1Value : String(model.column2Value)
     }
 }

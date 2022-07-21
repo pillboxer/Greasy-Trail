@@ -10,12 +10,12 @@ import CoreData
 import OSLog
 
 extension CloudKitManager {
-    
+
     func fetchLatestAlbums() async throws {
         let records = try await fetch(.album)
         let titles = records.compactMap { $0.string(for: .title) }
         let releaseDates = records.map { $0.double(for: .releaseDate) }
-        
+
         for (index, record) in records.enumerated() {
             await setProgress(to: Double(index) / Double(records.count))
 
@@ -26,7 +26,7 @@ extension CloudKitManager {
             if let metadata = record.data(for: .metadata) {
                 print(metadata)
             }
-            
+
             let ordered = try await getOrderedSongRecords(from: record)
             let context = container.newBackgroundContext()
             // Get the Song objects
@@ -48,7 +48,7 @@ extension CloudKitManager {
                 // Add the songs to the Album
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 album.songs = orderedSet
-                try? context.save()
+                context.saveWithTry()
             }
         }
     }

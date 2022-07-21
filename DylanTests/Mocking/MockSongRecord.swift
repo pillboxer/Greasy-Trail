@@ -10,10 +10,10 @@ import Foundation
 import CloudKit
 
 class MockSongRecord {
-    
+
     private let recordName = UUID().uuidString
     let title: String
-    
+
     var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
 
     init(title: String) {
@@ -22,34 +22,33 @@ class MockSongRecord {
 }
 
 extension MockSongRecord: CustomStringConvertible {
-    
+
     var description: String {
         """
             song title: \(title)
         """
     }
-    
+
 }
 
 extension MockSongRecord: RecordType {
-    
+
     func ints(for field: DylanRecordField) -> [Int]? {
         nil
     }
-    
+
     var modificationDate: Date? {
         .distantPast
     }
-    
+
     func data(for field: DylanRecordField) -> Data? {
         nil
     }
-    
-    
+
     func references(of referenceType: DylanReferenceType) -> [ReferenceType] {
         []
     }
-    
+
     func string(for field: DylanRecordField) -> String? {
         switch field {
         case .title:
@@ -58,17 +57,17 @@ extension MockSongRecord: RecordType {
             return nil
         }
     }
-    
+
     func double(for field: DylanRecordField) -> Double? {
         nil
     }
-    
+
 }
 
 extension MockSongRecord: MockRecordType {
-    
+
     func asReferenceType() -> MockReferenceType {
         MockReferenceType(title: title, recordID: recordID)
     }
-    
+
 }

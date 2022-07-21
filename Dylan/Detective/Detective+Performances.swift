@@ -43,13 +43,13 @@ extension Detective {
         let objects = objects(Performance.self, including: song, context: context)
         let objectID = song.objectID
         context.performAndWait {
-            let song = context.object(with: objectID) as! Song
-            os_log("%@ found on %@ performances(s)", song.title!, String(describing: objects.count))
-            let sPerformances = objects.compactMap { sPerformance(venue: $0.venue!, songs:[], date: $0.date) }
-            toReturn = sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
+            if let song = context.object(with: objectID) as? Song {
+                os_log("%@ found on %@ performances(s)", song.title!, String(describing: objects.count))
+                let sPerformances = objects.compactMap { sPerformance(venue: $0.venue!, songs: [], date: $0.date) }
+                toReturn = sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
+            }
         }
         return toReturn
     }
-    
-}
 
+}

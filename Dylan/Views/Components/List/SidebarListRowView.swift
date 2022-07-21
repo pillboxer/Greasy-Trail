@@ -16,7 +16,7 @@ struct SidebarListRowView: View {
     @State var selection: String
     @Binding var nextSearch: Search?
     @Binding var selectedID: String?
-    
+
     let onTap: () -> Void
 
     var body: some View {
@@ -31,8 +31,7 @@ struct SidebarListRowView: View {
                             .frame(maxWidth: 50)
                         Spacer()
                     }
-                }
-                else {
+                } else {
                     OnTapButton(systemImage: "cross.fill") {
                         onTap()
                     }
@@ -42,8 +41,7 @@ struct SidebarListRowView: View {
         }
         .disabled(isFetching)
     }
-    
-    
+
     @ViewBuilder
     func destinationFor(_ selection: String) -> some View {
         if let section = DylanRecordType(rawValue: selection) {
@@ -55,12 +53,10 @@ struct SidebarListRowView: View {
             case .performance:
                 AllPerformancesView(nextSearch: $nextSearch)
             }
-        }
-        else {
+        } else {
             fatalError()
         }
     }
-    
 
 }
 
@@ -83,7 +79,7 @@ struct GaugeProgressStyle: ProgressViewStyle {
 struct ProgressValueView: View {
 
     @State var progress: Double
-    
+
     var body: some View {
         ProgressView(value: progress, total: 1.0)
             .progressViewStyle(GaugeProgressStyle())

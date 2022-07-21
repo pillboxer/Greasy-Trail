@@ -9,25 +9,25 @@ import CoreData
 import OSLog
 
 class PersistenceController {
-    
+
     static let shared = PersistenceController()
-    
+
     static var managedObjectModel: NSManagedObjectModel = {
         let bundle = Bundle(for: PersistenceController.self)
-        
+
         guard let url = bundle.url(forResource: "Main", withExtension: "momd") else {
             fatalError("Failed to locate momd file for xcdatamodeld")
         }
-        
+
         guard let model = NSManagedObjectModel(contentsOf: url) else {
             fatalError("Failed to load momd file for xcdatamodeld")
         }
-        
+
         return model
     }()
-    
+
     let container: NSPersistentContainer
-        
+
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "Main", managedObjectModel: Self.managedObjectModel)
         if inMemory {
@@ -42,13 +42,13 @@ class PersistenceController {
             }
         }
     }
-    
+
     func newBackgroundContext() -> NSManagedObjectContext {
         container.newBackgroundContext()
     }
-    
+
     func reset() {
-        
+
         // get all entities and loop over them
         let context = newBackgroundContext()
         let entityNames = self.container.managedObjectModel.entities.map({ $0.name!})
@@ -56,11 +56,11 @@ class PersistenceController {
             entityNames.forEach { entityName in
                 let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
                 let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-                
+
                 do {
                     try context.execute(deleteRequest)
                     try context.save()
-                } catch let error  {
+                } catch let error {
                     os_log("Could not delete all items: %@", log: Log_CoreData, String(describing: error))
                 }
             }

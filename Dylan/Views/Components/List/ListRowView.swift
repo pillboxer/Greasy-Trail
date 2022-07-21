@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ListRowView: View {
-    
+
     let headline: String
     var subHeadline: String?
     let onTap: () -> Void
-    
+
     var body: some View {
         VStack(alignment: .leading) {
             HStack {

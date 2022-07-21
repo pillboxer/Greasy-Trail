@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct AllAlbumsView {
-    
+
     @Binding var nextSearch: Search?
     @State var selection: Set<Album.ID> = []
-    @FetchRequest(entity: Album.entity(), sortDescriptors: [NSSortDescriptor(key: "releaseDate", ascending: false)]) var fetched: FetchedResults<Album>
+    @FetchRequest(entity: Album.entity(),
+                  sortDescriptors: [NSSortDescriptor(key: "releaseDate", ascending: false)])
+    var fetched: FetchedResults<Album>
     private let formatter = Formatter()
     @State var sortOrder: [KeyPathComparator<Album>] = [
         .init(\.releaseDate, order: SortOrder.reverse),
         .init(\.title, order: SortOrder.forward)
     ]
-    
+
     var body: some View {
-        
+
         Table(tableData, selection: $selection, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_albums_0"), value: \.title!) { album in
                 let title = album.title!
@@ -34,13 +36,13 @@ struct AllAlbumsView {
                     .simultaneousGesture(singleTap(id: album.id))
             }
         }
-        
+
     }
-    
+
 }
 
 extension AllAlbumsView: TwoColumnTableViewType {
-    
+
     func doubleTap(on string: String, id: Album.ID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
             selection.removeAll()
@@ -48,7 +50,7 @@ extension AllAlbumsView: TwoColumnTableViewType {
             selection.insert(id)
         }
     }
-    
+
     func singleTap(id: Album.ID) -> _EndedGesture<TapGesture> {
         TapGesture()
             .onEnded {
@@ -57,5 +59,4 @@ extension AllAlbumsView: TwoColumnTableViewType {
             }
     }
 
-    
 }

@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension Album {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Album> {
@@ -21,7 +20,6 @@ extension Album {
     @NSManaged public var songs: NSOrderedSet?
     @NSManaged public var markedAsDeleted: Bool
     @NSManaged public var uuid: String?
-
 
 }
 
@@ -42,9 +40,8 @@ extension Album {
 
 }
 
-extension Album : Identifiable {
+extension Album: Identifiable {
 
-    
     public var id: String {
         title ?? "" + String(releaseDate)
     }

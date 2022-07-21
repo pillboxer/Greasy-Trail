@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct UploadView: View {
-    
+
     let recordType: DylanRecordType
-    
+
     let onTap: (PerformanceUploadModel) -> Void
-    
+
     var body: some View {
-        
+
         switch recordType {
         case .album:
             Text("NOT IMPLEMENTED")
