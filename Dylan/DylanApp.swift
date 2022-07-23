@@ -20,7 +20,7 @@ struct DylanApp: App {
         WindowGroup {
             SpellingResolverView(manager: SpellingResolverManager(cloudKitManager: appDelegate.cloudKitManager))
                 
-        }.handlesExternalEvents(matching: Set(arrayLiteral: "SpellingResolverView"))
+        }.handlesExternalEvents(matching: Set(Array(["SpellingResolverView"])))
         
         .commands {
             CommandMenu("Developer") {
@@ -46,7 +46,7 @@ enum OpenWindows: String, CaseIterable {
     case SpellingResolver = "SpellingResolverView"
 
     func open() {
-        if let url = URL(string: "dylan://\(self.rawValue)") { //replace myapp with your app's name
+        if let url = URL(string: "dylan://\(self.rawValue)") {
             NSWorkspace.shared.open(url)
         }
     }
