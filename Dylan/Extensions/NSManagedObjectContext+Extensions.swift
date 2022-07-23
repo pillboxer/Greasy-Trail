@@ -15,8 +15,7 @@ extension NSManagedObjectContext {
                                           sortDescriptors: [NSSortDescriptor]? = nil,
                                           fetchLimit: Int? = nil,
                                           propertiesToFetch: [String]? = nil) -> [T] {
-        var values: [T] = []
-        performAndWait {
+        return syncPerform {
             let request: NSFetchRequest = T.fetchRequest()
             request.predicate = predicate
             request.sortDescriptors = sortDescriptors
@@ -24,10 +23,8 @@ extension NSManagedObjectContext {
             if let limit = fetchLimit {
                 request.fetchLimit = limit
             }
-            values = (try? fetch(request) as? [T]) ?? []
+            return (try? fetch(request) as? [T]) ?? []
         }
-        return values
-
     }
 
     func saveWithTry() {
@@ -45,5 +42,15 @@ extension NSManagedObjectContext {
             }
         }
     }
-
+    
+    @discardableResult
+    func syncPerform<T>(_ block: () -> T) -> T {
+        var result: T?
+        // Call the framework version
+        performAndWait {
+            result = block()
+        }
+        return result!
+    }
 }
+

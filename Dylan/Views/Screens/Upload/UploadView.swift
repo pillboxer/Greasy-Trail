@@ -16,15 +16,13 @@ struct UploadView: View {
     var body: some View {
 
         switch recordType {
-        case .album:
-            Text("NOT IMPLEMENTED")
-        case .song:
-            Text("NOT IMPLEMENTED")
         case .performance:
             PerformanceAddingView { model in
                   onTap(model)
                 }
                 .padding(.horizontal)
+        default:
+            Text("NOT IMPLEMENTED")
         }
     }
 }

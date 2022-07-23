@@ -7,14 +7,16 @@
 
 import CloudKit
 
-enum DylanRecordType: CKRecord.RecordType, CaseIterable {
+enum DylanRecordType: CKRecord.RecordType {
     case song = "Song"
     case album = "Album"
     case performance = "Performance"
-
-    var plural: String {
-        rawValue + "s"
+    case appMetadata =  "AppMetadata"
+    
+    static var displayedTypes: [DylanRecordType] {
+        return [.song, .album, .performance]
     }
+
 }
 
 enum DylanReferenceType: CKRecord.RecordType {
@@ -35,6 +37,10 @@ enum DylanRecordField: String {
     case venue
     case date
     case lbNumbers = "LBNumbers"
+    
+    // App Metadata
+    case file
+    case name
 
     case modificationDate
 }

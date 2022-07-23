@@ -29,7 +29,7 @@ struct HomeView: View {
     var body: some View {
         NavigationView {
             VStack {
-                List(DylanRecordType.allCases, id: \.self) { item in
+                List(DylanRecordType.displayedTypes, id: \.self) { item in
 
                     HStack {
                         SidebarListRowView(recordType: item,

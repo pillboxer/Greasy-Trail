@@ -52,6 +52,8 @@ struct SidebarListRowView: View {
                 AllAlbumsView(nextSearch: $nextSearch)
             case .performance:
                 AllPerformancesView(nextSearch: $nextSearch)
+            default:
+                fatalError("Should not reach here")
             }
         } else {
             fatalError()

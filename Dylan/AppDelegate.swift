@@ -76,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let markedPerformances = context.fetchAndWait(Performance.self, with: predicate) as [Deletable]
         deleteables.append(contentsOf: markedSongs + markedAlbums + markedPerformances)
         os_log("%@ objects ready for delete", log: Log_CoreData, String(describing: deleteables.count))
-        deleteables.forEach { context.delete($0)}
+        deleteables.forEach { context.delete($0) }
 
     }
 }

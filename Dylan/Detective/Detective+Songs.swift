@@ -7,46 +7,71 @@
 
 import Foundation
 import OSLog
+import CoreData
+
+struct Misspellings: Codable {
+    var songs: [String: String]
+}
 
 extension Detective {
 
     func uuid(for song: String) -> String? {
-        guard let song = fetch(song: song) else {
+        let songObject: NSManagedObject?
+        songObject = fetch(song: song)
+        guard let song = songObject else {
             os_log("Could not find song %@", log: Log_Detective, song)
             return nil
         }
         var id: String?
         let context = container.newBackgroundContext()
-        context.performAndWait {
+        return context.syncPerform {
             let objectID = song.objectID
             let song = context.object(with: objectID) as? Song
             id = song?.uuid
+            return id
         }
-        return id
     }
 
     private func fetch(song title: String) -> Song? {
         let context = container.newBackgroundContext()
         let regexPredicate = NSPredicate(format: "title =[c] %@", title)
-
-        // FIXME: Remove
-        let matchPredicate = NSPredicate(format: "title =[c] %@",
-                                         title.before(first: "(").trimmingCharacters(in: .whitespaces))
+        let titleBeforeParentheses = title.before(first: "(").trimmingCharacters(in: .whitespaces)
+        let matchPredicate = NSPredicate(format: "title =[c] %@", titleBeforeParentheses)
         let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [regexPredicate, matchPredicate])
-        guard let song = context.fetchAndWait(Song.self, with: predicate).first else {
-            return nil
-        }
+        let song = context.fetchAndWait(Song.self, with: predicate).first
         return song
+    }
+    
+    private func resolveSpellingOf(song: String) -> String {
+        let context = container.newBackgroundContext()
+        os_log("Attempting to resolve %@", log: Log_Detective, song)
+
+        return context.syncPerform {
+            guard let metadata = context.fetchAndWait(AppMetadata.self, with: .misspellings).first,
+                  let data = metadata.file,
+                  let decoded = try? data.decoded() as Misspellings else {
+                os_log("Could not find misspellings data")
+                return song
+            }
+            let songsDict = decoded.songs
+            let correctlySpelt = songsDict[caseInsensitive: song]
+            if let correctlySpelt = correctlySpelt {
+                os_log("Success! Resolved to %@", log: Log_Detective, correctlySpelt)
+                return correctlySpelt
+            } else {
+                os_log("Unable to resolve %@", log: Log_Detective, song)
+                return song
+            }
+        }
     }
 
     func fetchModel(for title: String) -> SongDisplayModel? {
         let context = container.newBackgroundContext()
-        var toReturn: SongDisplayModel?
-        guard let song = fetch(song: title) else {
+        guard let song = fetch(song: title) ?? fetch(song: resolveSpellingOf(song: title)) else {
             return nil
         }
         let id = song.objectID
-        context.performAndWait {
+        return context.syncPerform {
             if let song = context.object(with: id) as? Song {
                 let albums = albumsThatInclude(song: id)
                 let performances = performancesThatInclude(song: song)
@@ -54,10 +79,10 @@ extension Detective {
                                   author: song.songAuthor,
                                   performances: performances,
                                   albums: albums)
-                toReturn = SongDisplayModel(song: sSong)
+                return SongDisplayModel(song: sSong)
             }
+            return nil
         }
-        return toReturn
     }
 
 }

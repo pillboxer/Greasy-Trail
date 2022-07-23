@@ -46,6 +46,14 @@
 		868C12222876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868C12212876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift */; };
 		868C12242876D89C0054FF2D /* Album+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868C12232876D89C0054FF2D /* Album+CoreDataProperties.swift */; };
 		868C122A287737780054FF2D /* Performance+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868C1228287737780054FF2D /* Performance+CoreDataClass.swift */; };
+		86A60C56288BF34B00813778 /* AppMetadata+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A60C54288BF34B00813778 /* AppMetadata+CoreDataClass.swift */; };
+		86A60C57288BF34B00813778 /* AppMetadata+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A60C55288BF34B00813778 /* AppMetadata+CoreDataProperties.swift */; };
+		86A60C59288BF38300813778 /* CloudKitManager+Metadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A60C58288BF38300813778 /* CloudKitManager+Metadata.swift */; };
+		86A60C5B288C074E00813778 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A60C5A288C074E00813778 /* Dictionary+Extensions.swift */; };
+		86A60C5D288C554800813778 /* SpellingResolverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A60C5C288C554800813778 /* SpellingResolverView.swift */; };
+		86A60C63288C58D400813778 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A60C62288C58D400813778 /* Data+Extensions.swift */; };
+		86A60C66288C59A200813778 /* SpellingResolverManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A60C65288C59A200813778 /* SpellingResolverManager.swift */; };
+		86A60C68288C5B8D00813778 /* NSPredicate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A60C67288C5B8D00813778 /* NSPredicate+Extensions.swift */; };
 		86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */; };
 		86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B49419286DDEBC00B0C4EC /* Formatter.swift */; };
 		86C52692286F02E50035DD31 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C52691286F02E50035DD31 /* SearchView.swift */; };
@@ -155,6 +163,15 @@
 		868C12212876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
 		868C12232876D89C0054FF2D /* Album+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Album+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		868C1228287737780054FF2D /* Performance+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Performance+CoreDataClass.swift"; sourceTree = "<group>"; };
+		86A60C54288BF34B00813778 /* AppMetadata+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppMetadata+CoreDataClass.swift"; sourceTree = "<group>"; };
+		86A60C55288BF34B00813778 /* AppMetadata+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppMetadata+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		86A60C58288BF38300813778 /* CloudKitManager+Metadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Metadata.swift"; sourceTree = "<group>"; };
+		86A60C5A288C074E00813778 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
+		86A60C5C288C554800813778 /* SpellingResolverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingResolverView.swift; sourceTree = "<group>"; };
+		86A60C5E288C56AC00813778 /* Greasy-Trail-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Greasy-Trail-Info.plist"; sourceTree = "<group>"; };
+		86A60C62288C58D400813778 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
+		86A60C65288C59A200813778 /* SpellingResolverManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpellingResolverManager.swift; sourceTree = "<group>"; };
+		86A60C67288C5B8D00813778 /* NSPredicate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Extensions.swift"; sourceTree = "<group>"; };
 		86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTextFieldRepresentable.swift; sourceTree = "<group>"; };
 		86B49419286DDEBC00B0C4EC /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		86C52691286F02E50035DD31 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -292,6 +309,9 @@
 				8656A31428679CE40013F595 /* CKQuery+Extensions.swift */,
 				868C12212876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift */,
 				86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */,
+				86A60C5A288C074E00813778 /* Dictionary+Extensions.swift */,
+				86A60C62288C58D400813778 /* Data+Extensions.swift */,
+				86A60C67288C5B8D00813778 /* NSPredicate+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -320,6 +340,7 @@
 		866863E02865EB6200510DDF = {
 			isa = PBXGroup;
 			children = (
+				86A60C5E288C56AC00813778 /* Greasy-Trail-Info.plist */,
 				866863EB2865EB6200510DDF /* Dylan */,
 				8668640E28662E2B00510DDF /* DylanTests */,
 				866863EA2865EB6200510DDF /* Products */,
@@ -404,6 +425,7 @@
 				8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */,
 				86C526A4287092A70035DD31 /* CloudKitManager+Song.swift */,
 				86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */,
+				86A60C58288BF38300813778 /* CloudKitManager+Metadata.swift */,
 				86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */,
 				86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */,
 				86D9C2E62884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift */,
@@ -424,13 +446,14 @@
 		8678FD332869FA6700DF1E69 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				03FBA0762885E28200751ECD /* Home */,
-				86D9C2D92884064B00D5A0D3 /* Upload */,
-				86D9C2B7287E0C7900D5A0D3 /* Performances */,
+				86A60C64288C598A00813778 /* Spelling Resolver */,
 				86D9C2B4287DFF9100D5A0D3 /* Albums */,
+				03FBA0762885E28200751ECD /* Home */,
+				86D9C2B7287E0C7900D5A0D3 /* Performances */,
 				86C52695286F04CD0035DD31 /* Results */,
 				86C526AC2872F7A40035DD31 /* Search */,
 				86D9C2AC287DCFEC00D5A0D3 /* Songs */,
+				86D9C2D92884064B00D5A0D3 /* Upload */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -447,6 +470,15 @@
 				86D9C2BA287ECACD00D5A0D3 /* Songs */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		86A60C64288C598A00813778 /* Spelling Resolver */ = {
+			isa = PBXGroup;
+			children = (
+				86A60C5C288C554800813778 /* SpellingResolverView.swift */,
+				86A60C65288C59A200813778 /* SpellingResolverManager.swift */,
+			);
+			path = "Spelling Resolver";
 			sourceTree = "<group>";
 		};
 		86B49418286DDEB300B0C4EC /* Formatting */ = {
@@ -532,6 +564,8 @@
 				86C526D82875F5B00035DD31 /* PersistenceController.swift */,
 				86C526DC28760AAA0035DD31 /* Song+CoreDataClass.swift */,
 				86C526DD28760AAA0035DD31 /* Song+CoreDataProperties.swift */,
+				86A60C54288BF34B00813778 /* AppMetadata+CoreDataClass.swift */,
+				86A60C55288BF34B00813778 /* AppMetadata+CoreDataProperties.swift */,
 				86C526D52875F55C0035DD31 /* Main.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -771,6 +805,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86C52697286F04EE0035DD31 /* ResultSongOverviewView.swift in Sources */,
+				86A60C68288C5B8D00813778 /* NSPredicate+Extensions.swift in Sources */,
 				8656A31728679D960013F595 /* ConvenienceEnums.swift in Sources */,
 				86C5269B286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift in Sources */,
 				86D9C2C0287ECB1D00D5A0D3 /* LBListView.swift in Sources */,
@@ -778,6 +813,8 @@
 				86C526D72875F55C0035DD31 /* Main.xcdatamodeld in Sources */,
 				86D9C2C5287F0C0A00D5A0D3 /* AlbumsListView.swift in Sources */,
 				86D9C2C2287ED26700D5A0D3 /* ListRowView.swift in Sources */,
+				86A60C63288C58D400813778 /* Data+Extensions.swift in Sources */,
+				86A60C56288BF34B00813778 /* AppMetadata+CoreDataClass.swift in Sources */,
 				868C122A287737780054FF2D /* Performance+CoreDataClass.swift in Sources */,
 				86C526C52874C2E70035DD31 /* CloudKitManager+Performances.swift in Sources */,
 				86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */,
@@ -801,10 +838,12 @@
 				86D9C2A9287D6D0000D5A0D3 /* Search.swift in Sources */,
 				86D9C2CC2881C1D100D5A0D3 /* PerformancesListView.swift in Sources */,
 				86C52699286F06780035DD31 /* OnTapButton.swift in Sources */,
+				86A60C66288C59A200813778 /* SpellingResolverManager.swift in Sources */,
 				868C12222876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift in Sources */,
 				8656A30C28679BC00013F595 /* CKDatabase+Extensions.swift in Sources */,
 				86563C70287CA8FA00104879 /* TestHelper.swift in Sources */,
 				86D9C2E928847E7200D5A0D3 /* Deletable.swift in Sources */,
+				86A60C5D288C554800813778 /* SpellingResolverView.swift in Sources */,
 				86D9C2C7288155CB00D5A0D3 /* CKPagingQueryOperation.swift in Sources */,
 				86C52692286F02E50035DD31 /* SearchView.swift in Sources */,
 				86C526AB2870D2C10035DD31 /* ResultAlbumOverviewView.swift in Sources */,
@@ -816,11 +855,14 @@
 				86C52694286F048A0035DD31 /* ResultView.swift in Sources */,
 				86563C5328782AE100104879 /* Detective+Songs.swift in Sources */,
 				8668641C286709FB00510DDF /* CloudKitManager.swift in Sources */,
+				86A60C5B288C074E00813778 /* Dictionary+Extensions.swift in Sources */,
 				86563C642878D59C00104879 /* Performance+CoreDataProperties.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,
 				86D9C2D8288402C600D5A0D3 /* UploadError.swift in Sources */,
 				86563C5728782BA600104879 /* Detective+Performances.swift in Sources */,
+				86A60C59288BF38300813778 /* CloudKitManager+Metadata.swift in Sources */,
 				8678FD2F2869AC8B00DF1E69 /* CloudKitManager+Albums.swift in Sources */,
+				86A60C57288BF34B00813778 /* AppMetadata+CoreDataProperties.swift in Sources */,
 				86C526DE28760AAA0035DD31 /* Song+CoreDataClass.swift in Sources */,
 				86C526D92875F5B00035DD31 /* PersistenceController.swift in Sources */,
 				86D9C2AE287DD00700D5A0D3 /* AllSongsView.swift in Sources */,
@@ -1013,6 +1055,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Greasy-Trail-Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1044,6 +1087,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Greasy-Trail-Info.plist";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -11,7 +11,7 @@ import OSLog
 extension CloudKitManager {
 
     func fetchLatestSongs() async throws {
-        let records = try await fetch(.song)
+        let records = try await fetch(.song, after: Self.lastFetchDateSongs)
         let titles = records.map { $0.string(for: .title) }
         let authors = records.map { $0.string(for: .author) }
 
@@ -31,7 +31,7 @@ extension CloudKitManager {
             await setCurrentStep(to: .fetching(.song))
             let title = titles[index] ?? "Unknown Title"
             let author = authors[index]
-            context.performAndWait {
+            context.syncPerform {
                 let predicate = NSPredicate(format: "title == %@", title)
                 let song: Song
                 if let existingSong = context.fetchAndWait(Song.self, with: predicate).first {
@@ -46,6 +46,7 @@ extension CloudKitManager {
                 song.uuid = record.recordID.recordName
             }
         }
+        Self.lastFetchDateSongs = Date()
         context.saveWithTry()
     }
 

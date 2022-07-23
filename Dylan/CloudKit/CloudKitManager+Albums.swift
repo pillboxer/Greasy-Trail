@@ -12,7 +12,7 @@ import OSLog
 extension CloudKitManager {
 
     func fetchLatestAlbums() async throws {
-        let records = try await fetch(.album)
+        let records = try await fetch(.album, after: Self.lastFetchDateAlbums)
         let titles = records.compactMap { $0.string(for: .title) }
         let releaseDates = records.map { $0.double(for: .releaseDate) }
         let context = container.newBackgroundContext()
@@ -36,7 +36,7 @@ extension CloudKitManager {
                 return context.fetchAndWait(Song.self, with: predicate).first
             }
 
-            context.performAndWait {
+            context.syncPerform {
                 // Check for existing album
                 let predicate = NSPredicate(format: "title == %@", title)
                 let existingAlbum = context.fetchAndWait(Album.self, with: predicate).first
@@ -50,6 +50,7 @@ extension CloudKitManager {
                 album.songs = orderedSet
             }
         }
+        Self.lastFetchDateAlbums = Date()
         context.saveWithTry()
     }
 }

@@ -122,8 +122,8 @@
             filePath = "Dylan/CloudKit/CloudKitManager+Performances.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "_upload(_:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,10 +138,58 @@
             filePath = "Dylan/Detective/Detective+Performances.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "fetch(performance:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AC110B5E-08A9-466A-A0F7-525C4A10F5A5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dylan/CloudKit/CloudKitManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "start()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "AC110B5E-08A9-466A-A0F7-525C4A10F5A5 - 5627e25336957aac"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Greasy_Trail.CloudKitManager.start() async throws -&gt; ()"
+                  moduleName = "Greasy Trail"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/CloudKit/CloudKitManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "132">
+               </Location>
+               <Location
+                  uuid = "AC110B5E-08A9-466A-A0F7-525C4A10F5A5 - dc5290d929a21943"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) await resume partial function for Greasy_Trail.CloudKitManager.start() async throws -&gt; ()"
+                  moduleName = "Greasy Trail"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/henrycooper/Repos/Dylan/Dylan/CloudKit/CloudKitManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "116">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

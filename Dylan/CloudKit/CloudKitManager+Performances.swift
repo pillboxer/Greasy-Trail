@@ -13,14 +13,14 @@ import CoreData
 extension CloudKitManager {
 
     func fetchLatestPerformances() async throws {
-        let records = try await fetch(.performance)
+        let records = try await fetch(.performance, after: Self.lastFetchDatePerformances)
 
         // Store titles and release dates
         let venues = records.compactMap { $0.string(for: .venue) }
         let dates = records.compactMap { $0.double(for: .date) }
         let lbNumbers = records.map { $0.ints(for: .lbNumbers) }
         let context = container.newBackgroundContext()
-
+        os_log("Processing Performances", log: Log_CloudKit)
         for (index, record) in records.enumerated() {
             await setProgress(to: Double(index) / Double(records.count))
 
@@ -38,7 +38,7 @@ extension CloudKitManager {
                 return context.fetchAndWait(Song.self, with: predicate).first
             }
 
-            context.performAndWait {
+            context.syncPerform {
                 // Check for existing performance
                 let predicate = NSPredicate(format: "venue == %@ && date == %d", venue, Int(date))
                 let existingPerformance = context.fetchAndWait(Performance.self, with: predicate).first
@@ -53,6 +53,7 @@ extension CloudKitManager {
                 performance.songs = orderedSet
             }
         }
+        Self.lastFetchDatePerformances = Date()
         context.saveWithTry()
     }
 

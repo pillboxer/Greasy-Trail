@@ -12,14 +12,12 @@ extension Detective {
 
     func fetch(performance date: Double) -> PerformanceDisplayModel? {
         let context = container.newBackgroundContext()
-        var toReturn: PerformanceDisplayModel?
-        context.performAndWait {
+        return context.syncPerform {
             // Fetch album with given title
             let predicate = NSPredicate(format: "date == %d", Int(date))
             guard let performance = context.fetchAndWait(Performance.self, with: predicate).first,
                   let songs = performance.songs?.array as? [Song] else {
-                toReturn = nil
-                return
+                return nil
             }
             // Get the songs
             var sSongs: [sSong] = []
@@ -32,24 +30,22 @@ extension Detective {
                                             songs: sSongs,
                                             date: performance.date,
                                             lbNumbers: performance.lbNumbers)
-            toReturn = PerformanceDisplayModel(sPerformance: sPerformance)
+            return PerformanceDisplayModel(sPerformance: sPerformance)
         }
-        return toReturn
     }
 
     func performancesThatInclude(song: Song) -> [sPerformance] {
         let context = container.newBackgroundContext()
-        var toReturn: [sPerformance] = []
         let objects = objects(Performance.self, including: song, context: context)
         let objectID = song.objectID
-        context.performAndWait {
+        return context.syncPerform {
             if let song = context.object(with: objectID) as? Song {
                 os_log("%@ found on %@ performances(s)", song.title!, String(describing: objects.count))
                 let sPerformances = objects.compactMap { sPerformance(venue: $0.venue!, songs: [], date: $0.date) }
-                toReturn = sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
+                return sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
             }
+            return []
         }
-        return toReturn
     }
 
 }

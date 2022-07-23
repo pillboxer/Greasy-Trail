@@ -56,7 +56,7 @@ class CKBisectingModifyRecordsOperation {
     }
 
     init(recordsToSave: [CKRecord]?,
-         recordIDsToDelete: [CKRecord.ID]?,
+         recordIDsToDelete: [CKRecord.ID]? = nil,
          manager: CKBisectingOperationManager = CKBisectingOperationManager(),
          database: DatabaseType) {
         self.manager = manager
