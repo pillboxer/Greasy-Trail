@@ -22,7 +22,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if !isRunningTests {
             _ = PersistenceController.shared
             Task {
-                try await cloudKitManager.start()
+                await cloudKitManager.start()
             }
         }
     }

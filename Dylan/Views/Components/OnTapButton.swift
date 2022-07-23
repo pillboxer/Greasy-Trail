@@ -13,7 +13,8 @@ struct OnTapButton: View {
     var image: String?
     var systemImage: String?
     var onTap: () -> Void
-
+    var args: [CVarArg]?
+    
     var body: some View {
         Button {
             onTap()
@@ -23,7 +24,7 @@ struct OnTapButton: View {
             } else if let image = image {
                 Image(image)
             } else if let text = text {
-                Text(text)
+                Text(String(format: NSLocalizedString(text, comment: ""), arguments: args ?? []))
             }
         }
     }

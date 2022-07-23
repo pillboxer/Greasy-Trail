@@ -21,7 +21,7 @@ struct SongsListView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Songs").font(.title)
+            Text("songs_list_title").font(.title)
                 .padding(.bottom)
             ScrollView {
                 ForEach(songs, id: \.self) { song in

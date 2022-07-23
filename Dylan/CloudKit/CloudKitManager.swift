@@ -11,6 +11,12 @@ import CoreData
 import OSLog
 
 class CloudKitManager: ObservableObject {
+    
+    enum CloudKitStep {
+        case fetching(DylanRecordType)
+        case uploading(String)
+        case failure(String)
+    }
 
     @UserDefaultsBacked(key: "last_fetch_date_songs") static var lastFetchDateSongs: Date?
     @UserDefaultsBacked(key: "last_fetch_date_albums") static var lastFetchDateAlbums: Date?
@@ -18,27 +24,10 @@ class CloudKitManager: ObservableObject {
     @UserDefaultsBacked(key: "last_fetch_date_appMetadata") static var lastFetchDateAppMetadata: Date?
 
     @Published private(set) var currentStep: CloudKitStep?
-    let database: DatabaseType
-    let container: NSPersistentContainer
-
-    var fetchingType: DylanRecordType? {
-        guard case let .fetching(type) = currentStep else {
-            return nil
-        }
-        return type
-    }
-
     @Published var progress: Double? = 0
 
-    @MainActor func setProgress(to value: Double) {
-        progress = value
-    }
-
-    enum CloudKitStep {
-        case fetching(DylanRecordType)
-        case uploading(String)
-        case failure(String)
-    }
+    let database: DatabaseType
+    let container: NSPersistentContainer
 
     init(_ database: DatabaseType,
          container: NSPersistentContainer = PersistenceController.shared.container) {
@@ -46,17 +35,20 @@ class CloudKitManager: ObservableObject {
         self.container = container
     }
 
-    func start() async throws {
+    func start() async {
+        subscribeToDatabase()
+   
         do {
-            subscribeToDatabase()
             try await fetchLatestMetadata()
             try await fetchLatestSongs()
             try await fetchLatestAlbums()
             try await fetchLatestPerformances()
-            await setCurrentStep(to: nil)
         } catch {
-            fatalError("Failed at start")
+            os_log("Failed at start() with error: %@", log: Log_CloudKit, type: .error, String(describing: error))
+            await setCurrentStep(to: .failure(String(describing: error)))
+            return
         }
+        await setCurrentStep(to: nil)
     }
 
     func fetch(_ type: DylanRecordType, after date: Date?) async throws -> [RecordType] {
@@ -64,24 +56,46 @@ class CloudKitManager: ObservableObject {
         await setProgress(to: 0)
         await setCurrentStep(to: .fetching(type))
         let records = try await fetchRecords(of: type, after: date)
+        os_log("%@ %@ objects fetched", log: Log_CloudKit,
+               String(describing: records.count),
+               String(describing: type.rawValue))
         return records
     }
 
-    @MainActor
-    func setCurrentStep(to step: CloudKitStep?) {
-        currentStep = step
-    }
-
-    // Fetching Many
     func fetchRecords(of type: DylanRecordType, after date: Date?) async throws -> [RecordType] {
         os_log("Fetching records of type %@", log: Log_CloudKit, String(describing: type))
         let predicate = NSPredicate(format: "modificationDate > %@", (date ?? .distantPast) as NSDate)
         let query = CKQuery(recordType: type, predicate: predicate)
-        let array = await database.fetchPagedResults(with: query)
-        let records = array.compactMap { try? $0.1.get() }
+        let array = try await database.fetchPagedResults(with: query)
+        let records = array.compactMap { try? $0.result.get() }
         return records
     }
 
+}
+
+extension CloudKitManager {
+    
+    @MainActor
+    func setCurrentStep(to step: CloudKitStep?) {
+        currentStep = step
+    }
+    
+    @MainActor func setProgress(to value: Double) {
+        os_log("Current progress is %@", log: Log_CloudKit, String(describing: value))
+        progress = value
+    }
+    
+}
+
+extension CloudKitManager {
+    
+    var fetchingType: DylanRecordType? {
+        guard case let .fetching(type) = currentStep else {
+            return nil
+        }
+        return type
+    }
+    
 }
 
 extension CloudKitManager {

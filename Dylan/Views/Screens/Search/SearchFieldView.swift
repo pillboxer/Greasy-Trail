@@ -51,7 +51,7 @@ struct SearchFieldView: View {
 
     private func refresh() {
         Task {
-            try? await cloudKitManager.start()
+            await cloudKitManager.start()
         }
     }
 

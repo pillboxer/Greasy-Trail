@@ -43,7 +43,7 @@ struct LBsListView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("LB Numbers").font(.title)
+            Text("lbs_list_title").font(.title)
                 .padding(.bottom)
             ScrollView {
                 ForEach(lbs, id: \.self) { lbNumber in

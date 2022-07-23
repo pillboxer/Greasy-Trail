@@ -32,6 +32,7 @@ extension CKRecord: RecordType {
     func data(for field: DylanRecordField) -> Data? {
         retrieve(type: Data.self, fromPath: field.rawValue)
     }
+    
     private func retrieve<T>(type: T.Type, fromPath path: String) -> T? {
         self[path] as? T
     }

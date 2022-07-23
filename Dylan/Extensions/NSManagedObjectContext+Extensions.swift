@@ -37,8 +37,11 @@ extension NSManagedObjectContext {
             do {
                 try self.save()
                 os_log("Context successfully saved", log: Log_CoreData)
-            } catch let error {
-                os_log("Context unable to save. Error: %@", String(describing: error))
+            } catch {
+                os_log("Context unable to save. Error: %@",
+                       log: Log_CoreData,
+                       type: .error,
+                       String(describing: error))
             }
         }
     }

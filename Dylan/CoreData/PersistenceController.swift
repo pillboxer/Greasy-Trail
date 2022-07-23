@@ -51,7 +51,6 @@ class PersistenceController {
 
     func reset() {
 
-        // get all entities and loop over them
         let context = newBackgroundContext()
         let entityNames = self.container.managedObjectModel.entities.map({ $0.name!})
         context.perform {
@@ -62,8 +61,8 @@ class PersistenceController {
                 do {
                     try context.execute(deleteRequest)
                     try context.save()
-                } catch let error {
-                    os_log("Could not delete all items: %@", log: Log_CoreData, String(describing: error))
+                } catch {
+                    os_log("Could not delete all items: %@", log: Log_CoreData, type: .error, String(describing: error))
                 }
             }
         }

@@ -12,20 +12,22 @@ extension Detective {
 
     func fetch(performance date: Double) -> PerformanceDisplayModel? {
         let context = container.newBackgroundContext()
+        
         return context.syncPerform {
-            // Fetch album with given title
             let predicate = NSPredicate(format: "date == %d", Int(date))
             guard let performance = context.fetchAndWait(Performance.self, with: predicate).first,
                   let songs = performance.songs?.array as? [Song] else {
                 return nil
             }
-            // Get the songs
             var sSongs: [sSong] = []
             for song in songs {
                 let id = song.objectID
                 let albums = albumsThatInclude(song: id)
-                sSongs.append(sSong(title: song.title!, author: song.songAuthor, albums: albums))
+                sSongs.append(sSong(title: song.title!,
+                                    author: song.songAuthor,
+                                    albums: albums))
             }
+            
             let sPerformance = sPerformance(venue: performance.venue!,
                                             songs: sSongs,
                                             date: performance.date,

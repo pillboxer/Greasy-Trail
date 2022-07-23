@@ -32,39 +32,6 @@ extension Detective {
         }
     }
 
-    private func fetch(song title: String) -> Song? {
-        let context = container.newBackgroundContext()
-        let regexPredicate = NSPredicate(format: "title =[c] %@", title)
-        let titleBeforeParentheses = title.before(first: "(").trimmingCharacters(in: .whitespaces)
-        let matchPredicate = NSPredicate(format: "title =[c] %@", titleBeforeParentheses)
-        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [regexPredicate, matchPredicate])
-        let song = context.fetchAndWait(Song.self, with: predicate).first
-        return song
-    }
-    
-    private func resolveSpellingOf(song: String) -> String {
-        let context = container.newBackgroundContext()
-        os_log("Attempting to resolve %@", log: Log_Detective, song)
-
-        return context.syncPerform {
-            guard let metadata = context.fetchAndWait(AppMetadata.self, with: .misspellings).first,
-                  let data = metadata.file,
-                  let decoded = try? data.decoded() as Misspellings else {
-                os_log("Could not find misspellings data")
-                return song
-            }
-            let songsDict = decoded.songs
-            let correctlySpelt = songsDict[caseInsensitive: song]
-            if let correctlySpelt = correctlySpelt {
-                os_log("Success! Resolved to %@", log: Log_Detective, correctlySpelt)
-                return correctlySpelt
-            } else {
-                os_log("Unable to resolve %@", log: Log_Detective, song)
-                return song
-            }
-        }
-    }
-
     func fetchModel(for title: String) -> SongDisplayModel? {
         let context = container.newBackgroundContext()
         guard let song = fetch(song: title) ?? fetch(song: resolveSpellingOf(song: title)) else {
@@ -84,7 +51,43 @@ extension Detective {
             return nil
         }
     }
+}
 
+private extension Detective {
+    
+    func fetch(song title: String) -> Song? {
+        let context = container.newBackgroundContext()
+        let regexPredicate = NSPredicate(format: "title =[c] %@", title)
+        let titleBeforeParentheses = title.before(first: "(").trimmingCharacters(in: .whitespaces)
+        let matchPredicate = NSPredicate(format: "title =[c] %@", titleBeforeParentheses)
+        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [regexPredicate, matchPredicate])
+        let song = context.fetchAndWait(Song.self, with: predicate).first
+        return song
+    }
+    
+    func resolveSpellingOf(song: String) -> String {
+        let context = container.newBackgroundContext()
+        os_log("Attempting to resolve %@", log: Log_Detective, song)
+
+        return context.syncPerform {
+            guard let metadata = context.fetchAndWait(AppMetadata.self, with: .misspellings).first,
+                  let data = metadata.file,
+                  let decoded = try? data.decoded() as Misspellings else {
+                os_log("Could not find misspellings data", log: Log_Detective, type: .error)
+                return song
+            }
+            let songsDict = decoded.songs
+            let correctlySpelt = songsDict[caseInsensitive: song]
+            if let correctlySpelt = correctlySpelt {
+                os_log("Success! Resolved to %@", log: Log_Detective, correctlySpelt)
+                return correctlySpelt
+            } else {
+                os_log("Unable to resolve %@", log: Log_Detective, song)
+                return song
+            }
+        }
+    }
+    
 }
 
 private extension String {

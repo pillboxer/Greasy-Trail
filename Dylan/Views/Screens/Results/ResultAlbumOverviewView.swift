@@ -15,10 +15,9 @@ struct ResultAlbumOverviewView: View {
     var body: some View {
         VStack(spacing: 16) {
             HStack {
-                Image(systemName: "house")
-                    .onTapGesture {
-                        model = nil
-                    }
+                OnTapButton(systemImage: "house") {
+                    model = nil
+                }
                 Spacer()
                 Text(model?.title ?? "")
                     .font(.headline)

@@ -21,9 +21,8 @@ struct SearchView: View {
     @Binding var albumModel: AlbumDisplayModel?
     @Binding var performanceModel: PerformanceDisplayModel?
     @Binding var nextSearch: Search?
-
     @State private var searchDisplayType: SearchDisplayType = .search
-
+    
     enum SearchDisplayType {
         case search
         case noResultsFound(title: String)
@@ -39,8 +38,8 @@ struct SearchView: View {
                             performanceModel: $performanceModel,
                             searchDisplayType: $searchDisplayType)
         case .noResultsFound(let title):
-            Text("No results found for \(title)")
-            Button("OK") {
+            Text(LocalizedStringKey(String(format: NSLocalizedString("search_failed", comment: ""), title)))
+            OnTapButton(text: "generic_ok") {
                 searchDisplayType = .search
                 nextSearch = nil
                 text = ""

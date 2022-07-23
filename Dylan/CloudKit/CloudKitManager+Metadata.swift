@@ -38,11 +38,14 @@ extension CloudKitManager {
     func upload(_ metdata: AppMetadata) async -> Bool {
       
         let query = CKQuery(recordType: .appMetadata, predicate: .misspellings)
-        let tuple = await database.fetchPagedResults(with: query).first
-        guard let record = (try? tuple?.1.get()) as? CKRecord else {
+        // FIXME:
+        let tuple = try? await database.fetchPagedResults(with: query).first
+        guard let result = tuple?.result,
+              let record = try? result.get() as? CKRecord else {
             return false
         }
         let context = container.newBackgroundContext()
+        
         // swiftlint: disable force_cast
         context.performAndWait {
             let safeMetadata = context.object(with: metdata.objectID) as! AppMetadata

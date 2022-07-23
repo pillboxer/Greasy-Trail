@@ -19,19 +19,19 @@ struct DylanApp: App {
         }
         WindowGroup {
             SpellingResolverView(manager: SpellingResolverManager(cloudKitManager: appDelegate.cloudKitManager))
-                
-        }.handlesExternalEvents(matching: Set(Array(["SpellingResolverView"])))
+        }
+        .handlesExternalEvents(matching: Set(Array(["SpellingResolverView"])))
         
         .commands {
-            CommandMenu("Developer") {
-                Button("Delete and Reset") {
+            CommandMenu("developer_menu_title") {
+                Button("developer_menu_button_0") {
                     PersistenceController.shared.reset()
                     CloudKitManager.resetAllFetchDates()
                     Task {
-                        try await appDelegate.cloudKitManager.start()
+                        await appDelegate.cloudKitManager.start()
                     }
                 }
-                Button("Add Alternate Spelling") {
+                Button("developer_menu_button_1") {
                     OpenWindows.SpellingResolver.open()
                 }
 

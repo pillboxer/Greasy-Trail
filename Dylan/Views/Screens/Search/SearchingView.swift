@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchingView: View {
 
     var body: some View {
-        ProgressView("Searching")
+        ProgressView("searching_progress")
     }
 
 }

@@ -23,7 +23,7 @@ struct ContentView: View {
         Group {
             if let step = cloudKitManager.currentStep,
                case let .failure(error) = step {
-                   UploadFailureView(error: error)
+                   CloudKitFailureView(error: error)
             } else if songModel != nil {
                 ResultView(songModel: $songModel,
                            nextSearch: $nextSearch,

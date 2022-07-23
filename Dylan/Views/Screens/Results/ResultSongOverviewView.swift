@@ -18,10 +18,9 @@ struct ResultSongOverviewView: View {
     var body: some View {
         VStack {
             HStack {
-                Image(systemName: "house")
-                    .onTapGesture {
-                        model = nil
-                    }
+                OnTapButton(systemImage: "house") {
+                    model = nil
+                }
                 Spacer()
                 Text(model?.title ?? "")
                     .font(.headline)

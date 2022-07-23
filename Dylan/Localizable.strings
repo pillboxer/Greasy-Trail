@@ -6,11 +6,19 @@
   
 */
 
+// Developer
+"developer_menu_title" = "Developer";
+"developer_menu_button_0" = "Delete all data";
+"developer_menu_button_1" = "Add alternate spelling";
+
 //Misc
 "search_placeholder" = "Enter your search term";
+"searching_progress" = "Searching";
 "default_author" = "Bob Dylan";
 "results_information_title_first_appearance" = "First appearance";
 "results_information_title_song_author" = "Written by";
+"search_failed" = "No results found for %@";
+"generic_ok" = "OK";
 
 // CloudKit
 "cloud_kit_fetch_songs_progress_description" = "Starting fetch of type %@";
@@ -20,6 +28,7 @@
 "cloud_kit_subscription_songs" = "SONGS-V1";
 "cloud_kit_subscription_albums" = "ALBUMS-V1";
 "cloud_kit_subscription_performances" = "PERFORMANCES-V1";
+"cloud_kit_failed" = "CloudKit failed with error %@";
 
 // Songs
 "table_column_title_songs_0" = "Title";
@@ -38,5 +47,7 @@
 "performances_list_empty" = "Not performed yet!";
 "performances_list_title" = "Performances";
 
+// LBs
+"lbs_list_title" = "LB Numbers";
 
 

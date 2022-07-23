@@ -22,14 +22,14 @@ extension CKDatabase: DatabaseType {
         return toReturn
     }
 
-    func fetchPagedResults(with query: CKQuery) async -> ([(CKRecord.ID, Result<RecordType, Error>)]) {
-        await withCheckedContinuation { contination in
+    func fetchPagedResults(with query: CKQuery) async throws -> ([PagedResult]) {
+        try await withCheckedThrowingContinuation { contination in
             let operation = CKPagingQueryOperation(query: query, database: self)
             operation.pagingCompletionBlock = { results in
                 contination.resume(returning: results)
             }
-            operation.errorBlock = { _ in
-                contination.resume(returning: [])
+            operation.errorBlock = { error in
+                contination.resume(throwing: error)
             }
             operation.start()
         }

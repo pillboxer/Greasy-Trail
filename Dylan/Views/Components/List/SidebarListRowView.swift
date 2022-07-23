@@ -39,7 +39,7 @@ struct SidebarListRowView: View {
                 }
             }
         }
-        .disabled(isFetching)
+//        .disabled(isFetching)
     }
 
     @ViewBuilder

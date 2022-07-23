@@ -21,16 +21,20 @@ extension CloudKitManager {
         let lbNumbers = records.map { $0.ints(for: .lbNumbers) }
         let context = container.newBackgroundContext()
         os_log("Processing Performances", log: Log_CloudKit)
+        
         for (index, record) in records.enumerated() {
+            
             await setProgress(to: Double(index) / Double(records.count))
-
             await setCurrentStep(to: .fetching(.performance))
+            
             // Get the title and release date of the album
             let venue = venues[index]
             let date = dates[index]
             let lbs = lbNumbers[index]
+            
             // Fetch the records
             let ordered = try await getOrderedSongRecords(from: record)
+            
             // Get the Song objects
             let songTitles = ordered.compactMap { $0.string(for: .title) }
             let correspondingSongs: [Song] = songTitles.compactMap { title in
@@ -51,10 +55,10 @@ extension CloudKitManager {
 
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 performance.songs = orderedSet
+                context.saveWithTry()
             }
         }
         Self.lastFetchDatePerformances = Date()
-        context.saveWithTry()
     }
 
     func upload(_ performanceUploadModel: PerformanceUploadModel) async {
@@ -67,7 +71,11 @@ extension CloudKitManager {
         }
     }
 
-    private func _upload(_ performanceUploadModel: PerformanceUploadModel) async -> Result<Void, Error> {
+}
+
+private extension CloudKitManager {
+    
+    func _upload(_ performanceUploadModel: PerformanceUploadModel) async -> Result<Void, Error> {
         await setCurrentStep(to: .uploading(performanceUploadModel.venue))
         return await withCheckedContinuation { continuation in
             _upload(performanceUploadModel) { result in
@@ -75,22 +83,26 @@ extension CloudKitManager {
             }
         }
     }
-
-    // swiftlint:disable identifier_name
+    
     func _upload(_ performanceUploadModel: PerformanceUploadModel,
                  completion: @escaping (Result<Void, Error>) -> Void) {
         let record = CKRecord(recordType: DylanRecordType.performance.rawValue)
-        record["venue"] = performanceUploadModel.venue
-        record["date"] = performanceUploadModel.date
         var refs: [CKRecord.Reference] = []
+        
         for uuid in performanceUploadModel.uuids {
-            let reference = CKRecord.Reference(recordID: CKRecord.ID(recordName: uuid), action: .none)
+            let reference = CKRecord.Reference(recordID: .init(recordName: uuid),
+                                               action: .none)
             refs.append(reference)
         }
+        
         record["songs"] = refs
+        record["venue"] = performanceUploadModel.venue
+        record["date"] = performanceUploadModel.date
+        
         let operation = CKModifyRecordsOperation(recordsToSave: [record])
         operation.qualityOfService = .userInitiated
         database.add(operation)
+        
         operation.modifyRecordsResultBlock = { result in
             switch result {
             case .success:
@@ -98,8 +110,6 @@ extension CloudKitManager {
             case .failure(let error):
                 completion(.failure(error))
             }
-
         }
     }
-
 }

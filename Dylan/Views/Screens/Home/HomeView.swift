@@ -50,7 +50,6 @@ struct HomeView: View {
                         }
                     }
                 }
-
                 SearchView(songModel: $songModel,
                            albumModel: $albumModel,
                            performanceModel: $performanceModel,

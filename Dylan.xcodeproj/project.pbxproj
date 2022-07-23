@@ -75,7 +75,6 @@
 		86C526BA287341B00035DD31 /* DummyModel+AlbumRepresentations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526B9287341B00035DD31 /* DummyModel+AlbumRepresentations.swift */; };
 		86C526BD287342770035DD31 /* DummyModel+MockRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */; };
 		86C526C52874C2E70035DD31 /* CloudKitManager+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */; };
-		86C526C72875C0EA0035DD31 /* TwoColumnTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C62875C0EA0035DD31 /* TwoColumnTableView.swift */; };
 		86C526C92875C3690035DD31 /* TableDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526C82875C3690035DD31 /* TableDisplayModel.swift */; };
 		86C526CC2875D63E0035DD31 /* PerformanceDisplayModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526CB2875D63E0035DD31 /* PerformanceDisplayModel.swift */; };
 		86C526D72875F55C0035DD31 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86C526D52875F55C0035DD31 /* Main.xcdatamodeld */; };
@@ -104,7 +103,7 @@
 		86D9C2D8288402C600D5A0D3 /* UploadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2D7288402C600D5A0D3 /* UploadError.swift */; };
 		86D9C2DB2884065700D5A0D3 /* UploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2DA2884065700D5A0D3 /* UploadView.swift */; };
 		86D9C2DE288406A000D5A0D3 /* PerformanceUploadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2DD288406A000D5A0D3 /* PerformanceUploadView.swift */; };
-		86D9C2E128840A7800D5A0D3 /* UploadFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */; };
+		86D9C2E128840A7800D5A0D3 /* CloudKitFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E028840A7800D5A0D3 /* CloudKitFailureView.swift */; };
 		86D9C2E32884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */; };
 		86D9C2E72884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E62884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift */; };
 		86D9C2E928847E7200D5A0D3 /* Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E828847E7200D5A0D3 /* Deletable.swift */; };
@@ -193,7 +192,6 @@
 		86C526B9287341B00035DD31 /* DummyModel+AlbumRepresentations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+AlbumRepresentations.swift"; sourceTree = "<group>"; };
 		86C526BC287342770035DD31 /* DummyModel+MockRecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DummyModel+MockRecords.swift"; sourceTree = "<group>"; };
 		86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Performances.swift"; sourceTree = "<group>"; };
-		86C526C62875C0EA0035DD31 /* TwoColumnTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoColumnTableView.swift; sourceTree = "<group>"; };
 		86C526C82875C3690035DD31 /* TableDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableDisplayModel.swift; sourceTree = "<group>"; };
 		86C526CB2875D63E0035DD31 /* PerformanceDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceDisplayModel.swift; sourceTree = "<group>"; };
 		86C526D62875F55C0035DD31 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
@@ -222,7 +220,7 @@
 		86D9C2D7288402C600D5A0D3 /* UploadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadError.swift; sourceTree = "<group>"; };
 		86D9C2DA2884065700D5A0D3 /* UploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadView.swift; sourceTree = "<group>"; };
 		86D9C2DD288406A000D5A0D3 /* PerformanceUploadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceUploadView.swift; sourceTree = "<group>"; };
-		86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadFailureView.swift; sourceTree = "<group>"; };
+		86D9C2E028840A7800D5A0D3 /* CloudKitFailureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitFailureView.swift; sourceTree = "<group>"; };
 		86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKBisectingModifyRecordsOperation.swift; sourceTree = "<group>"; };
 		86D9C2E62884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Subscriptions.swift"; sourceTree = "<group>"; };
 		86D9C2E828847E7200D5A0D3 /* Deletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deletable.swift; sourceTree = "<group>"; };
@@ -496,7 +494,6 @@
 				86C52696286F04EE0035DD31 /* ResultSongOverviewView.swift */,
 				86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */,
 				86C526AA2870D2C10035DD31 /* ResultAlbumOverviewView.swift */,
-				86C526C62875C0EA0035DD31 /* TwoColumnTableView.swift */,
 				86563C6128787B0400104879 /* ResultPerformanceOverviewView.swift */,
 			);
 			path = Results;
@@ -673,7 +670,7 @@
 		86D9C2DF28840A6A00D5A0D3 /* Failure */ = {
 			isa = PBXGroup;
 			children = (
-				86D9C2E028840A7800D5A0D3 /* UploadFailureView.swift */,
+				86D9C2E028840A7800D5A0D3 /* CloudKitFailureView.swift */,
 			);
 			path = Failure;
 			sourceTree = "<group>";
@@ -828,7 +825,7 @@
 				86D9C2DB2884065700D5A0D3 /* UploadView.swift in Sources */,
 				86B49417286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift in Sources */,
 				86D9C2C92881604F00D5A0D3 /* CKQueryOperation+Extensions.swift in Sources */,
-				86D9C2E128840A7800D5A0D3 /* UploadFailureView.swift in Sources */,
+				86D9C2E128840A7800D5A0D3 /* CloudKitFailureView.swift in Sources */,
 				8656A30F28679BFE0013F595 /* DatabaseType.swift in Sources */,
 				86D9C2BE287ECAE800D5A0D3 /* SongListView.swift in Sources */,
 				86C526DB2875F91A0035DD31 /* AppDelegate.swift in Sources */,
@@ -848,7 +845,6 @@
 				86C52692286F02E50035DD31 /* SearchView.swift in Sources */,
 				86C526AB2870D2C10035DD31 /* ResultAlbumOverviewView.swift in Sources */,
 				866863EF2865EB6200510DDF /* ContentView.swift in Sources */,
-				86C526C72875C0EA0035DD31 /* TwoColumnTableView.swift in Sources */,
 				86D9C2B6287DFFAE00D5A0D3 /* AllAlbumsView.swift in Sources */,
 				868C12242876D89C0054FF2D /* Album+CoreDataProperties.swift in Sources */,
 				8607123128685D8B00E54209 /* Globals.swift in Sources */,
