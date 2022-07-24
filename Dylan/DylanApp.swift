@@ -34,7 +34,10 @@ struct DylanApp: App {
                 Button("developer_menu_button_1") {
                     OpenWindows.SpellingResolver.open()
                 }
-
+                Button("developer_menu_button_2") {
+                    Logger.copyLogs()
+                }
+                
             }
         }
 
