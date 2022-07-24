@@ -32,14 +32,6 @@ struct MockAlbumRecord: CustomStringConvertible {
 
 extension MockAlbumRecord: MockRecordType {
 
-    func ints(for field: DylanRecordField) -> [Int]? {
-        nil
-    }
-
-    var modificationDate: Date? {
-        .distantPast
-    }
-
     var recordID: CKRecord.ID { CKRecord.ID(recordName: recordName) }
 
     func references(of referenceType: DylanReferenceType) -> [ReferenceType] {
@@ -48,10 +40,6 @@ extension MockAlbumRecord: MockRecordType {
 
     func asReferenceType() -> MockReferenceType {
         MockReferenceType(title: title, recordID: recordID)
-    }
-
-    func data(for field: DylanRecordField) -> Data? {
-        nil
     }
 
     func string(for field: DylanRecordField) -> String? {

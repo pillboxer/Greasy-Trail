@@ -38,10 +38,10 @@ extension CloudKitManager {
                 song.title = title
                 song.author = author
                 song.uuid = record.recordID.recordName
+                context.saveWithTry()
             }
         }
         Self.lastFetchDateSongs = Date()
-        context.saveWithTry()
     }
 
     func getOrderedSongRecords(from record: RecordType) async throws -> [RecordType] {

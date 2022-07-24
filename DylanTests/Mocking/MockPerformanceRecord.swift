@@ -32,23 +32,30 @@ class MockPerformanceRecord {
 extension MockPerformanceRecord: RecordType {
 
     func ints(for field: DylanRecordField) -> [Int]? {
-        lbNumbers
+        switch field {
+        case .lbNumbers:
+            return lbNumbers
+        default:
+            return nil
+        }
     }
 
     func string(for field: DylanRecordField) -> String? {
-        venue
+        switch field {
+        case .venue:
+            return venue
+        default:
+            return nil
+        }
     }
 
     func double(for field: DylanRecordField) -> Double? {
-        date
-    }
-
-    func data(for field: DylanRecordField) -> Data? {
-        nil
-    }
-
-    var modificationDate: Date? {
-        .distantPast
+        switch field {
+        case .date:
+            return date
+        default:
+            return nil
+        }
     }
 
     func references(of referenceType: DylanReferenceType) -> [ReferenceType] {

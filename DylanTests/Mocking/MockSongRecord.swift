@@ -33,20 +33,8 @@ extension MockSongRecord: CustomStringConvertible {
 
 extension MockSongRecord: RecordType {
 
-    func ints(for field: DylanRecordField) -> [Int]? {
-        nil
-    }
-
     var modificationDate: Date? {
         .distantPast
-    }
-
-    func data(for field: DylanRecordField) -> Data? {
-        nil
-    }
-
-    func references(of referenceType: DylanReferenceType) -> [ReferenceType] {
-        []
     }
 
     func string(for field: DylanRecordField) -> String? {
@@ -57,11 +45,6 @@ extension MockSongRecord: RecordType {
             return nil
         }
     }
-
-    func double(for field: DylanRecordField) -> Double? {
-        nil
-    }
-
 }
 
 extension MockSongRecord: MockRecordType {

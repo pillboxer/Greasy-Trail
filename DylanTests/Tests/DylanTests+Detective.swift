@@ -8,10 +8,12 @@
 import XCTest
 import CoreData
 @testable import Greasy_Trail
+import SwiftUI
 
 class DylanTests: XCTestCase {
 
     var container: NSPersistentContainer!
+    let formatter = Greasy_Trail.Formatter() 
 
     override func setUpWithError() throws {
         container = PersistenceController(inMemory: true).container
@@ -59,4 +61,14 @@ class DylanTests: XCTestCase {
         let resultDisplayModel = detective.search(performance: DummyModel.dNewport1965)
         XCTAssert(resultDisplayModel == expectedDisplayModel)
     }
+    
+    func testSearchWithMisspellingRegisteredResultsInCorrectDisplayModel() {
+        createAndSaveHighway61Revisited()
+        createAndSaveMisspellingsMetadata()
+        let expectedDisplayModel = DummyModel.sdmLikeARollingStone
+        let detective = Detective(container)
+        let resultDisplayModel = detective.search(song: "lars")
+        XCTAssert(resultDisplayModel == expectedDisplayModel)
+    }
+    
 }

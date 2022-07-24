@@ -37,7 +37,6 @@ class CloudKitManager: ObservableObject {
 
     func start() async {
         subscribeToDatabase()
-   
         do {
             try await fetchLatestMetadata()
             try await fetchLatestSongs()

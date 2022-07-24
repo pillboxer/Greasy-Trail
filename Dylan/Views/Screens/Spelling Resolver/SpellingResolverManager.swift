@@ -7,17 +7,21 @@
 
 import Combine
 import Foundation
+import CoreData
 
+// FIXME: TESTS
 class SpellingResolverManager: ObservableObject {
     
-    private let container = PersistenceController.shared
+    private let container: NSPersistentContainer
     private let cloudKitManager: CloudKitManager
     
     @Published var key: String = ""
     @Published var value: String = ""
     
-    init(cloudKitManager: CloudKitManager) {
+    init(cloudKitManager: CloudKitManager,
+         container: NSPersistentContainer = PersistenceController.shared.container) {
         self.cloudKitManager = cloudKitManager
+        self.container = container
     }
     
     func save(key: String, value: String, type: DylanRecordType) async -> Bool {

@@ -39,7 +39,7 @@ extension DylanTests {
         performance.venue = DummyModel.tNewport1965
         performance.date = DummyModel.dNewport1965
         performance.lbNumbers = DummyModel.lbNewport1965
-        context.saveWithTry()
+        try? context.save()
     }
 
     func createAndSaveHighway61Revisited() {
@@ -59,7 +59,15 @@ extension DylanTests {
         album.songs = NSOrderedSet(array: songs)
         album.title = DummyModel.tHighway61Revisited
         album.releaseDate = DummyModel.dHighway61Revisited
-        context.saveWithTry()
+        try? context.save()
+    }
+    
+    func createAndSaveMisspellingsMetadata() {
+        let context = container.viewContext
+        let record = AppMetadata(context: context)
+        record.name = "misspellings"
+        record.file = DummyModel.testJSON
+        try? context.save()
     }
 
 }
