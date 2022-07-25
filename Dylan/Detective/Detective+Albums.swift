@@ -32,7 +32,7 @@ extension Detective {
         return context.syncPerform { 
             if let song = context.object(with: objectID) as? Song {
                 let objects = objects(Album.self, including: song, context: context)
-                os_log("%@ found on %@ album(s)", song.title!, String(describing: objects.count))
+                os_log("%{public}@ found on %{public}@ album(s)", song.title!, String(describing: objects.count))
                 let sAlbums = objects.compactMap { sAlbum(title: $0.title!, songs: [], releaseDate: $0.releaseDate) }
                 return sAlbums.sorted { $0.releaseDate < $1.releaseDate }
             }

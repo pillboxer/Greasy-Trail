@@ -61,7 +61,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             object.markedAsDeleted = true
 
-            os_log("Deleting object with id %@", log: Log_CoreData, toDelete)
+            os_log("Deleting object with id %{public}@", log: Log_CoreData, toDelete)
             context.delete(object)
             context.saveWithTry()
         }
@@ -75,7 +75,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let markedAlbums = context.fetchAndWait(Album.self, with: predicate) as [Deletable]
         let markedPerformances = context.fetchAndWait(Performance.self, with: predicate) as [Deletable]
         deleteables.append(contentsOf: markedSongs + markedAlbums + markedPerformances)
-        os_log("%@ objects ready for delete", log: Log_CoreData, String(describing: deleteables.count))
+        os_log("%{public}@ objects ready for delete", log: Log_CoreData, String(describing: deleteables.count))
         deleteables.forEach { context.delete($0) }
 
     }

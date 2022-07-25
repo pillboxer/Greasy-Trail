@@ -19,7 +19,7 @@ extension Detective {
         let songObject: NSManagedObject?
         songObject = fetch(song: song)
         guard let song = songObject else {
-            os_log("Could not find song %@", log: Log_Detective, song)
+            os_log("Could not find song %{public}@", log: Log_Detective, song)
             return nil
         }
         var id: String?
@@ -67,7 +67,7 @@ private extension Detective {
     
     func resolveSpellingOf(song: String) -> String {
         let context = container.newBackgroundContext()
-        os_log("Attempting to resolve %@", log: Log_Detective, song)
+        os_log("Attempting to resolve %{public}@", log: Log_Detective, song)
 
         return context.syncPerform {
             guard let metadata = context.fetchAndWait(AppMetadata.self, with: .misspellings).first,
@@ -79,10 +79,10 @@ private extension Detective {
             let songsDict = decoded.songs
             let correctlySpelt = songsDict[caseInsensitive: song]
             if let correctlySpelt = correctlySpelt {
-                os_log("Success! Resolved to %@", log: Log_Detective, correctlySpelt)
+                os_log("Resolved to %{public}@", log: Log_Detective, correctlySpelt)
                 return correctlySpelt
             } else {
-                os_log("Unable to resolve %@", log: Log_Detective, song)
+                os_log("Unable to resolve %{public}@", log: Log_Detective, song)
                 return song
             }
         }

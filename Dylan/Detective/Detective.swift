@@ -18,17 +18,17 @@ public class Detective: ObservableObject {
     }
 
     func search(song title: String) -> SongDisplayModel? {
-        os_log("Searching song: %@", log: Log_Detective, title)
+        os_log("Searching song: %{public}@", log: Log_Detective, title)
         return fetchModel(for: title)
     }
 
     func search(album title: String) -> AlbumDisplayModel? {
-        os_log("Searching album: %@", log: Log_Detective, title)
+        os_log("Searching album: %{public}@", log: Log_Detective, title)
         return fetch(album: title)
     }
 
     func search(performance date: Double) -> PerformanceDisplayModel? {
-        os_log("Searching date: %@", log: Log_Detective, String(describing: date))
+        os_log("Searching date: %{public}@", log: Log_Detective, String(describing: date))
         return fetch(performance: date)
     }
 

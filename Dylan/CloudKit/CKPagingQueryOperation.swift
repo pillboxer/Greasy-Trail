@@ -49,13 +49,13 @@ class CKPagingQueryOperation {
                    operation.errorBlock = errorBlock
                    operation.start()
                } else {
-                   os_log("CKPagingQueryOperation complete, %@ record(s) obtained",
+                   os_log("CKPagingQueryOperation complete, %{public}@ record(s) obtained",
                           log: Log_CloudKit,
                           String(describing: records.count))
                    pagingCompletionBlock?(records)
                }
             case .failure(let error):
-                os_log("Error received in CKPagingQueryOperation: %@",
+                os_log("Error received in CKPagingQueryOperation: %{public}@",
                        log: Log_CloudKit,
                        type: .error,
                        String(describing: error))

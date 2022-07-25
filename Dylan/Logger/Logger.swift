@@ -30,7 +30,7 @@ class Logger {
                 }
             }
         } catch {
-            os_log("Error fetching logs %@", log: Log_OSLog, type: .error, String(describing: error))
+            os_log("Error fetching logs %{public}@", log: Log_OSLog, type: .error, String(describing: error))
             return
         }
         os_log("Successfully copied logs", log: Log_OSLog)

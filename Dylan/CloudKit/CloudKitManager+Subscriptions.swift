@@ -43,7 +43,10 @@ extension CloudKitManager {
         operation.modifySubscriptionsResultBlock = { result in
             switch result {
             case .failure(let error):
-                os_log("Failed to add subscriptions: %@", log: Log_CloudKit, type: .error, String(describing: error))
+                os_log("Failed to add subscriptions: %{public}@",
+                       log: Log_CloudKit,
+                       type: .error,
+                       String(describing: error))
             case .success:
                 os_log("Added subscriptions successfully", log: Log_CloudKit)
             }

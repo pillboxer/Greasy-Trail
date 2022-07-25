@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import CoreData
+import os
 
 // FIXME: TESTS
 class SpellingResolverManager: ObservableObject {
@@ -25,19 +26,19 @@ class SpellingResolverManager: ObservableObject {
     }
     
     func save(key: String, value: String, type: DylanRecordType) async -> Bool {
+        os_log("Attempting to save key %{public}@ and value %{public}@", log: Log_SpellingResolver, key, value)
         self.key = ""
         self.value = ""
         let context = container.newBackgroundContext()
-        var appMetadata: AppMetadata?
-        let didSave = context.syncPerform { () -> Bool in
+        var appMetadata: AppMetadata!
+        context.syncPerform { () -> Void in
             guard let metadata = context.fetchAndWait(AppMetadata.self, with: .misspellings).first,
                   let data = metadata.file,
                   var misspellings = try? data.decoded() as Misspellings else {
-                return false
+                os_log("Could not find metadata", log: Log_SpellingResolver)
+                return
             }
-            
-            appMetadata = metadata
-            
+                        
             switch type {
             case .song:
                 misspellings.songs[key] = value
@@ -46,19 +47,17 @@ class SpellingResolverManager: ObservableObject {
             }
             
             guard let encoded = try? misspellings.encoded() else {
-                return false
+                return
             }
             
             metadata.file = encoded
-            context.saveWithTry()
-            return true
+            appMetadata = metadata
         }
         
-        guard let appMetadata = appMetadata else {
-            return false
-        }
-
         let didUpload = await cloudKitManager.upload(appMetadata)
-        return didSave && didUpload
+        if didUpload {
+            context.saveWithTry()
+        }
+        return didUpload
     }
 }

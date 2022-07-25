@@ -29,10 +29,10 @@ extension CloudKitManager {
                 let predicate = NSPredicate(format: "title == %@", title)
                 let song: Song
                 if let existingSong = context.fetchAndWait(Song.self, with: predicate).first {
-                    os_log("Existing song found, updating %@", log: Log_CloudKit, title)
+                    os_log("Existing song found, updating %{public}@", log: Log_CloudKit, title)
                     song = existingSong
                 } else {
-                    os_log("Creating new song %@", log: Log_CloudKit, title)
+                    os_log("Creating new song %{public}@", log: Log_CloudKit, title)
                     song = Song(context: context)
                 }
                 song.title = title
@@ -61,7 +61,10 @@ extension CloudKitManager {
             guard let recordType = try? result.get() else {
                 let title = record.string(for: .title) ?? record.string(for: .venue) ?? ""
                 let badName = id.recordName
-                os_log("Unknown ID %@ found in song records of %@", log: Log_CloudKit, type: .error, badName, title)
+                os_log("Unknown ID %{public}@ found in song records of %{public}@",
+                       log: Log_CloudKit,
+                       type: .error,
+                       badName, title)
                 continue
             }
             ordered.append(recordType)

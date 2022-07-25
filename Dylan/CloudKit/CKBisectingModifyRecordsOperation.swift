@@ -16,7 +16,7 @@ class CKBisectingOperationManager {
 
     func addOperation() {
         runningOperationCount += 1
-        os_log("Adding Bisecting Operation: %@ operations in progress",
+        os_log("Adding Bisecting Operation: %{public}@ operations in progress",
                log: Log_CloudKit,
                type: .info,
                String(describing: runningOperationCount))
@@ -31,7 +31,7 @@ class CKBisectingOperationManager {
             recordIDsDeleted.append(contentsOf: deletedRecordIDs)
         }
         runningOperationCount -= 1
-        os_log("Finished Bisecting Operation: %@ operations remaining",
+        os_log("Finished Bisecting Operation: %{public}@ operations remaining",
                log: Log_CloudKit,
                type: .info,
                String(describing: runningOperationCount))
@@ -41,8 +41,6 @@ class CKBisectingOperationManager {
 
 /// Keeps chopping its batches in half until it satisfies CloudKit's record limit
 class CKBisectingModifyRecordsOperation {
-
-    var errorBlock: ((Error) -> Void)?
 
     let recordsToSave: [CKRecord]?
     let recordIDsToDelete: [CKRecord.ID]?
@@ -73,12 +71,12 @@ class CKBisectingModifyRecordsOperation {
         manager.addOperation()
 
         if bisecting {
-            os_log("Beginning Bisecting Operation with %@ records",
+            os_log("Beginning Bisecting Operation with %{public}@ records",
                    log: Log_CloudKit,
                    type: .info,
                    String(describing: recordBatchCount))
         } else {
-            os_log("Beginning Modification Operation with %@ records",
+            os_log("Beginning Modification Operation with %{public}@ records",
                    log: Log_CloudKit,
                    type: .info,
                    String(describing: recordBatchCount))
@@ -101,6 +99,10 @@ class CKBisectingModifyRecordsOperation {
                error.code == CKError.limitExceeded {
                 bisect(records: recordsToSave, recordIDs: recordIDsToDelete)
             } else if let error = error {
+                os_log("Unable to save records. Error %{public}@",
+                       log: Log_CloudKit,
+                       type: .error,
+                       String(describing: error))
                 bisectingModifyRecordsCompletionBlock?(nil, nil, error)
             } else {
                 if manager.runningOperationCount == 0 {

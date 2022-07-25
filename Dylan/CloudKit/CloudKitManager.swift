@@ -43,7 +43,10 @@ class CloudKitManager: ObservableObject {
             try await fetchLatestAlbums()
             try await fetchLatestPerformances()
         } catch {
-            os_log("Failed at start() with error: %@", log: Log_CloudKit, type: .error, String(describing: error))
+            os_log("Failed at start() with error: %{public}@",
+                   log: Log_CloudKit,
+                   type: .error,
+                   String(describing: error))
             await setCurrentStep(to: .failure(String(describing: error)))
             return
         }
@@ -51,18 +54,18 @@ class CloudKitManager: ObservableObject {
     }
 
     func fetch(_ type: DylanRecordType, after date: Date?) async throws -> [RecordType] {
-        os_log("Fetching latest %@", log: Log_CloudKit, type.rawValue)
+        os_log("Fetching latest %{public}@", log: Log_CloudKit, type.rawValue)
         await setProgress(to: 0)
         await setCurrentStep(to: .fetching(type))
         let records = try await fetchRecords(of: type, after: date)
-        os_log("%@ %@ objects fetched", log: Log_CloudKit,
+        os_log("%{public}@ %{public}@ objects fetched", log: Log_CloudKit,
                String(describing: records.count),
                String(describing: type.rawValue))
         return records
     }
 
     func fetchRecords(of type: DylanRecordType, after date: Date?) async throws -> [RecordType] {
-        os_log("Fetching records of type %@", log: Log_CloudKit, String(describing: type))
+        os_log("Fetching records of type %{public}@", log: Log_CloudKit, String(describing: type))
         let predicate = NSPredicate(format: "modificationDate > %@", (date ?? .distantPast) as NSDate)
         let query = CKQuery(recordType: type, predicate: predicate)
         let array = try await database.fetchPagedResults(with: query)
@@ -80,7 +83,6 @@ extension CloudKitManager {
     }
     
     @MainActor func setProgress(to value: Double) {
-        os_log("Current progress is %@", log: Log_CloudKit, String(describing: value))
         progress = value
     }
     

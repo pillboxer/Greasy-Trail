@@ -62,7 +62,10 @@ class PersistenceController {
                     try context.execute(deleteRequest)
                     try context.save()
                 } catch {
-                    os_log("Could not delete all items: %@", log: Log_CoreData, type: .error, String(describing: error))
+                    os_log("Could not delete all items: %{public}@",
+                           log: Log_CoreData,
+                           type: .error,
+                           String(describing: error))
                 }
             }
         }
