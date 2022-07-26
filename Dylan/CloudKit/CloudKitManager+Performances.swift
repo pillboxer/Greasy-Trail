@@ -55,7 +55,7 @@ extension CloudKitManager {
 
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 performance.songs = orderedSet
-                context.saveWithTry()
+                context.performSave()
             }
         }
         Self.lastFetchDatePerformances = Date()

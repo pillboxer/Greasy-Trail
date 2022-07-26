@@ -32,12 +32,12 @@ extension CloudKitManager {
                 record.name = fileName
             }
             Self.lastFetchDateAppMetadata = Date()
-            context.saveWithTry()
+            context.performSave()
         }
     }
     
     func upload(_ metdata: AppMetadata) async -> Bool {
-      
+        // swiftlint: disable force_try
         let query = CKQuery(recordType: .appMetadata, predicate: .misspellings)
         // FIXME:
         let tuple = try? await database.fetchPagedResults(with: query).first
@@ -51,6 +51,7 @@ extension CloudKitManager {
         context.performAndWait {
             let safeMetadata = context.object(with: metdata.objectID) as! AppMetadata
             record["file"] = safeMetadata.file
+            print(try! (safeMetadata.file)!.decoded() as Misspellings)
         }
         return await withCheckedContinuation { continuation in
             _upload(record: record) { bool in

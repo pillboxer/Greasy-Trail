@@ -53,11 +53,8 @@ class SpellingResolverManager: ObservableObject {
             metadata.file = encoded
             appMetadata = metadata
         }
-        
+        context.syncSave()
         let didUpload = await cloudKitManager.upload(appMetadata)
-        if didUpload {
-            context.saveWithTry()
-        }
         return didUpload
     }
 }

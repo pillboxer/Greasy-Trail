@@ -38,7 +38,7 @@ extension CloudKitManager {
                 song.title = title
                 song.author = author
                 song.uuid = record.recordID.recordName
-                context.saveWithTry()
+                context.performSave()
             }
         }
         Self.lastFetchDateSongs = Date()

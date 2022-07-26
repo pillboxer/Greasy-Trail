@@ -24,7 +24,7 @@ extension DylanTests {
         let song = Song(context: context)
         song.title = title
         song.author = author
-        context.saveWithTry()
+        context.syncSave()
         return song
     }
 

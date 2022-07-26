@@ -51,6 +51,6 @@ extension CloudKitManager {
             }
         }
         Self.lastFetchDateAlbums = Date()
-        context.saveWithTry()
+        context.performSave()
     }
 }

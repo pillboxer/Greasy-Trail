@@ -27,22 +27,30 @@ extension NSManagedObjectContext {
         }
     }
 
-    func saveWithTry() {
+    func performSave() {
         perform {
-            guard self.hasChanges else {
-                os_log("No changes to save, returning", log: Log_CoreData)
-                return
-            }
+            self.saveWithTry()
+        }
+    }
+    
+    func syncSave() {
+        syncPerform {
+            self.saveWithTry()
+        }
+    }
 
-            do {
-                try self.save()
-                os_log("Context successfully saved", log: Log_CoreData)
-            } catch {
-                os_log("Context unable to save. Error: %{public}@",
-                       log: Log_CoreData,
-                       type: .error,
-                       String(describing: error))
-            }
+    private func saveWithTry() {
+        guard self.hasChanges else {
+            os_log("No changes to save, returning", log: Log_CoreData)
+            return
+        }
+        do {
+            try self.save()
+        } catch {
+            os_log("Context unable to save. Error: %{public}@",
+                   log: Log_CoreData,
+                   type: .error,
+                   String(describing: error))
         }
     }
     

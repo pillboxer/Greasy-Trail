@@ -63,7 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
             os_log("Deleting object with id %{public}@", log: Log_CoreData, toDelete)
             context.delete(object)
-            context.saveWithTry()
+            context.performSave()
         }
     }
 
