@@ -17,7 +17,7 @@ extension Detective {
 
     func uuid(for song: String) -> String? {
         let songObject: NSManagedObject?
-        songObject = fetch(song: song)
+        songObject = fetch(song: song) ?? fetch(song: resolveSpellingOf(song: song))
         guard let song = songObject else {
             os_log("Could not find song %{public}@", log: Log_Detective, song)
             return nil
