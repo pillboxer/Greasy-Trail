@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchFieldView: View {
-
+    
     @Binding var text: String
     @Binding var nextSearch: Search?
     @Binding var songModel: SongDisplayModel?
