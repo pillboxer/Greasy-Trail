@@ -8,65 +8,43 @@
 import SwiftUI
 
 struct ResultSongOverviewView: View {
-
-    @Binding var model: SongDisplayModel?
-    @Binding var currentViewType: ResultView.ResultViewType
-    @Binding var nextSearch: Search?
-
-    @EnvironmentObject var formatter: Formatter
-
+    
+    @EnvironmentObject private var formatter: Formatter
+    @EnvironmentObject private var searchViewModel: SearchViewModel
+    
     var body: some View {
         VStack {
             HStack {
                 OnTapButton(systemImage: "house") {
-                    model = nil
+                    searchViewModel.reset()
                 }
+                .buttonStyle(.plain)
                 Spacer()
-                Text(model?.title ?? "")
+                Text(searchViewModel.songModel?.title ?? "")
                     .font(.headline)
                 Spacer()
             }
             .padding(.bottom)
             Spacer()
             HStack {
-                if let albums = model?.albums, !albums.isEmpty {
+                if let albums = searchViewModel.songModel?.albums, !albums.isEmpty {
                     AlbumsListView(albums: albums) { title in
-                        nextSearch = Search(title: title, type: .album)
-                        model = nil
+                        searchViewModel.search(.init(title: title, type: .album))
                     }
                 }
-                if let performances = model?.performances, !performances.isEmpty {
+                if let performances = searchViewModel.songModel?.performances, !performances.isEmpty {
                     PerformancesListView(performances: performances) { date in
-                        nextSearch = Search(title: date, type: .performance)
-                        model = nil
+                        searchViewModel.search(.init(title: date, type: .performance))
                     }
                 }
             }
             Text("results_information_title_song_author")
                 .font(.footnote)
                 .bold()
-            Text(model?.author ?? "default_author")
+            Text(searchViewModel.songModel?.author ?? "default_author")
                 .font(.caption)
         }
         .padding()
-    }
-
-    @ViewBuilder
-    private var albumInformationView: some View {
-        if let firstAlbum = model?.firstAlbumAppearance {
-            ResultsInformationTitleAndDetailView(title: "results_information_title_first_appearance",
-                                                 detail: firstAlbum.title)
-        } else {
-            ResultsInformationTitleAndDetailView(title: "results_information_title_first_appearance",
-                                                 detail: "Never")
-        }
-        if let firstPerformance = model?.firstPerformance {
-            ResultsInformationTitleAndDetailView(title: "results_information_title_first_live_performance",
-                                                 detail: formatter.formatted(performance: firstPerformance))
-        } else {
-            ResultsInformationTitleAndDetailView(title: "results_information_title_first_live_performance",
-                                                 detail: "Never")
-        }
     }
 
 }

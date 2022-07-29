@@ -9,8 +9,10 @@ import SwiftUI
 
 struct AllSongsView: View {
 
-    @Binding var nextSearch: Search?
+    @EnvironmentObject private var searchViewModel: SearchViewModel
+
     @State var selection: Set<Song.ID> = []
+    
     @FetchRequest(entity: Song.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)],
                   predicate: NSPredicate(format: "title != %@", "BREAK"))
@@ -47,7 +49,7 @@ extension AllSongsView: TwoColumnTableViewType {
     func doubleTap(on string: String, id: Song.ID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
             selection.removeAll()
-            nextSearch = Search(title: string, type: .song)
+            searchViewModel.search(.init(title: string, type: .song))
             selection.insert(id)
         }
     }

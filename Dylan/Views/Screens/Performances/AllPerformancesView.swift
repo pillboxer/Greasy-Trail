@@ -9,8 +9,10 @@ import SwiftUI
 
 struct AllPerformancesView {
 
-    @Binding var nextSearch: Search?
+    @EnvironmentObject private var searchViewModel: SearchViewModel
+
     @State var selection: Set<Performance.ID> = []
+    
     @FetchRequest(entity: Performance.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
     var fetched: FetchedResults<Performance>
@@ -49,7 +51,7 @@ extension AllPerformancesView: TwoColumnTableViewType {
     func doubleTap(on string: String, id: Performance.ID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
             selection.removeAll()
-            nextSearch = Search(title: string, type: .performance)
+            searchViewModel.search(.init(title: string, type: .performance))
             selection.insert(id)
         }
     }

@@ -9,46 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @State private var songModel: SongDisplayModel?
-    @State private var albumModel: AlbumDisplayModel?
-    @State private var performanceModel: PerformanceDisplayModel?
-    @State private var nextSearch: Search?
-    @State private var recordTypeToAdd: DylanRecordType?
     @State private var selectedID: String?
     @EnvironmentObject private var cloudKitManager: CloudKitManager
-
-    private let formatter = Formatter()
+    @EnvironmentObject private var searchViewModel: SearchViewModel
 
     var body: some View {
         Group {
             if let step = cloudKitManager.currentStep,
                case let .failure(error) = step {
                    CloudKitFailureView(error: error)
-            } else if songModel != nil {
-                ResultView(songModel: $songModel,
-                           nextSearch: $nextSearch,
-                           currentViewType: .songOverview)
-            } else if albumModel != nil {
-                ResultView(albumModel: $albumModel,
-                           nextSearch: $nextSearch,
-                           currentViewType: .albumOverview)
-            } else if performanceModel != nil {
-                ResultView(performanceModel: $performanceModel,
-                           nextSearch: $nextSearch,
-                           currentViewType: .performanceOverview)
+            } else if searchViewModel.hasResult {
+                ResultView()
             } else {
                 HomeView(fetchingType: cloudKitManager.fetchingType,
                          progress: cloudKitManager.progress,
-                         songModel: $songModel,
-                         albumModel: $albumModel,
-                         performanceModel: $performanceModel,
-                         recordTypeToAdd: $recordTypeToAdd,
-                         nextSearch: $nextSearch,
                          selectedID: $selectedID)
             }
         }
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-        .environmentObject(formatter)
+        .environmentObject(searchViewModel)
         .frame(width: 900, height: 600)
     }
 }

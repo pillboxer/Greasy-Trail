@@ -9,29 +9,26 @@ import SwiftUI
 
 struct ResultAlbumOverviewView: View {
 
-    @Binding var model: AlbumDisplayModel?
-    @Binding var nextSearch: Search?
-
+    @EnvironmentObject private var searchViewModel: SearchViewModel
+    
     var body: some View {
         VStack(spacing: 16) {
             HStack {
                 OnTapButton(systemImage: "house") {
-                    model = nil
+                    searchViewModel.reset()
                 }
                 Spacer()
-                Text(model?.title ?? "")
+                Text(searchViewModel.albumModel?.title ?? "")
                     .font(.headline)
                 Spacer()
             }
             Spacer()
             HStack {
-                SongsListView(songs: model?.songs ?? []) { title in
-                    nextSearch = Search(title: title, type: .song)
-                    model = nil
+                SongsListView(songs: searchViewModel.albumModel?.songs ?? []) { title in
+                    searchViewModel.search(.init(title: title, type: .song))
                 }
             }
         }
         .padding()
     }
-
 }

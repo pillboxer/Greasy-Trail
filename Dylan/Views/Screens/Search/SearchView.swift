@@ -16,34 +16,17 @@ enum DylanSearchType {
 
 struct SearchView: View {
 
-    @State private var text: String = ""
-    @Binding var songModel: SongDisplayModel?
-    @Binding var albumModel: AlbumDisplayModel?
-    @Binding var performanceModel: PerformanceDisplayModel?
-    @Binding var nextSearch: Search?
-    @State private var searchDisplayType: SearchDisplayType = .search
-    
-    enum SearchDisplayType {
-        case search
-        case noResultsFound(title: String)
-    }
+    @EnvironmentObject var searchViewModel: SearchViewModel
 
     var body: some View {
-        switch searchDisplayType {
-        case .search:
-            SearchFieldView(text: $text,
-                            nextSearch: $nextSearch,
-                            songModel: $songModel,
-                            albumModel: $albumModel,
-                            performanceModel: $performanceModel,
-                            searchDisplayType: $searchDisplayType)
-        case .noResultsFound(let title):
-            Text(LocalizedStringKey(String(format: NSLocalizedString("search_failed", comment: ""), title)))
+        if searchViewModel.shouldDisplayNoResultsFound {
+            Text(LocalizedStringKey(String(format: NSLocalizedString("search_failed", comment: ""),
+                                           searchViewModel.text)))
             OnTapButton(text: "generic_ok") {
-                searchDisplayType = .search
-                nextSearch = nil
-                text = ""
+                searchViewModel.reset()
             }
+        } else {
+            SearchFieldView()
         }
     }
 
