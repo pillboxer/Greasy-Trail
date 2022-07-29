@@ -9,19 +9,21 @@ import SwiftUI
 
 struct AllAlbumsView {
 
-    @Binding var nextSearch: Search?
+    @EnvironmentObject private var searchViewModel: SearchViewModel
+    
     @State var selection: Set<Album.ID> = []
+    
     @FetchRequest(entity: Album.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "releaseDate", ascending: false)])
     var fetched: FetchedResults<Album>
     private let formatter = Formatter()
+    
     @State var sortOrder: [KeyPathComparator<Album>] = [
         .init(\.releaseDate, order: SortOrder.reverse),
         .init(\.title, order: SortOrder.forward)
     ]
 
     var body: some View {
-
         Table(tableData, selection: $selection, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_albums_0"), value: \.title!) { album in
                 let title = album.title!
@@ -46,7 +48,7 @@ extension AllAlbumsView: TwoColumnTableViewType {
     func doubleTap(on string: String, id: Album.ID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
             selection.removeAll()
-            nextSearch = Search(title: string, type: .album)
+            searchViewModel.search(.init(title: string, type: .album))
             selection.insert(id)
         }
     }

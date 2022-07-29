@@ -8,22 +8,20 @@
 import SwiftUI
 
 struct ResultPerformanceOverviewView: View {
-
-    @Binding var model: PerformanceDisplayModel?
-    @Binding var nextSearch: Search?
-    @Binding var currentViewType: ResultView.ResultViewType
+    
+    @EnvironmentObject private var searchViewModel: SearchViewModel
 
     var body: some View {
         VStack(spacing: 16) {
             HStack {
                 Image(systemName: "house")
                     .onTapGesture {
-                        model = nil
+                        searchViewModel.reset()
                     }
                 Spacer()
-                Text(model?.venue ?? "")
+                Text(searchViewModel.performanceModel?.venue ?? "")
                     .font(.headline)
-                if let url = model?.officialURL() {
+                if let url = searchViewModel.performanceModel?.officialURL() {
                     OnTapButton(systemImage: "globe") {
                         NSWorkspace.shared.open(url)
                     }
@@ -33,15 +31,14 @@ struct ResultPerformanceOverviewView: View {
             }
             Spacer()
             HStack {
-                SongsListView(songs: model?.songs ?? []) { title in
-                    nextSearch = Search(title: title, type: .song)
-                    model = nil
+                SongsListView(songs: searchViewModel.performanceModel?.songs ?? []) { title in
+                    searchViewModel.search(.init(title: title, type: .song))
                 }
-                AlbumsListView(albums: model?.albums ?? [], showingAppearances: true) { title in
-                    nextSearch = Search(title: title, type: .album)
-                    model = nil
+                AlbumsListView(albums: searchViewModel.performanceModel?.albums ?? [],
+                               showingAppearances: true) { title in
+                    searchViewModel.search(.init(title: title, type: .album))
                 }
-                if let lbNumbers = model?.lbNumbers {
+                if let lbNumbers = searchViewModel.performanceModel?.lbNumbers {
                     LBsListView(lbs: lbNumbers) { url in
                         NSWorkspace.shared.open(url)
                     }

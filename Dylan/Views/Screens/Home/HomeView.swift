@@ -17,11 +17,7 @@ struct HomeView: View {
 
     let fetchingType: DylanRecordType?
     var progress: Double? = 0
-    @Binding var songModel: SongDisplayModel?
-    @Binding var albumModel: AlbumDisplayModel?
-    @Binding var performanceModel: PerformanceDisplayModel?
-    @Binding var recordTypeToAdd: DylanRecordType?
-    @Binding var nextSearch: Search?
+    @State var recordTypeToAdd: DylanRecordType?
     @Binding var selectedID: String?
 
     @EnvironmentObject private var cloudKitManager: CloudKitManager
@@ -36,7 +32,6 @@ struct HomeView: View {
                                            isFetching: fetchingType == item,
                                            progress: progress,
                                            selection: item.rawValue,
-                                           nextSearch: $nextSearch,
                                            selectedID: $selectedID) {
                             recordTypeToAdd = item
                         }
@@ -50,10 +45,7 @@ struct HomeView: View {
                         }
                     }
                 }
-                SearchView(songModel: $songModel,
-                           albumModel: $albumModel,
-                           performanceModel: $performanceModel,
-                           nextSearch: $nextSearch)
+                SearchView()
                     .padding()
             }
         }

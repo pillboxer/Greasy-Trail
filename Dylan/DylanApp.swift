@@ -16,6 +16,7 @@ struct DylanApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(appDelegate.cloudKitManager)
+                .environmentObject(SearchViewModel(cloudKitManager: appDelegate.cloudKitManager))
         }
         WindowGroup {
             SpellingResolverView(manager: SpellingResolverManager(cloudKitManager: appDelegate.cloudKitManager))
@@ -37,7 +38,6 @@ struct DylanApp: App {
                 Button("developer_menu_button_2") {
                     Logger.copyLogs()
                 }
-                
             }
         }
 

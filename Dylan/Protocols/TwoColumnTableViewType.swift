@@ -12,7 +12,6 @@ import SwiftUI
 protocol TwoColumnTableViewType: View {
     // swiftlint:disable type_name
     associatedtype T: NSManagedObject, Identifiable
-    var nextSearch: Search? { get }
     var selection: Set<T.ID> { get set }
     func doubleTap(on string: String, id: T.ID) -> _EndedGesture<TapGesture>
     func singleTap(id: T.ID) -> _EndedGesture<TapGesture>

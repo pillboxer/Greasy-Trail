@@ -14,7 +14,6 @@ struct SidebarListRowView: View {
     var progress: Double?
 
     @State var selection: String
-    @Binding var nextSearch: Search?
     @Binding var selectedID: String?
 
     let onTap: () -> Void
@@ -47,11 +46,11 @@ struct SidebarListRowView: View {
         if let section = DylanRecordType(rawValue: selection) {
             switch section {
             case .song:
-                AllSongsView(nextSearch: $nextSearch)
+                AllSongsView()
             case .album:
-                AllAlbumsView(nextSearch: $nextSearch)
+                AllAlbumsView()
             case .performance:
-                AllPerformancesView(nextSearch: $nextSearch)
+                AllPerformancesView()
             default:
                 fatalError("Should not reach here")
             }
