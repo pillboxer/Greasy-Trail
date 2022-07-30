@@ -10,7 +10,6 @@ import SwiftUI
 struct SearchFieldView: View {
 
     @EnvironmentObject private var searchViewModel: SearchViewModel
-    @EnvironmentObject var cloudKitManager: CloudKitManager
 
     var body: some View {
         if searchViewModel.shouldDisplaySearch {

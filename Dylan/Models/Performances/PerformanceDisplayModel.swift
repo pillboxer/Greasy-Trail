@@ -9,10 +9,13 @@ import Foundation
 
 struct PerformanceDisplayModel: Model {
 
+    let formatter = Formatter()
     let sPerformance: sPerformance
+    let uuid: String
 
     init(sPerformance: sPerformance) {
         self.sPerformance = sPerformance
+        self.uuid = sPerformance.uuid
     }
 
 }
@@ -29,6 +32,10 @@ extension PerformanceDisplayModel {
 
     var venue: String {
         sPerformance.venue
+    }
+    
+    var date: String {
+        formatter.dateString(of: sPerformance.date)
     }
 
     var lbNumbers: [Int]? {
@@ -53,4 +60,10 @@ extension PerformanceDisplayModel {
 
 }
 
-extension PerformanceDisplayModel: Equatable {}
+extension PerformanceDisplayModel: Equatable {
+    
+    static func == (lhs: PerformanceDisplayModel, rhs: PerformanceDisplayModel) -> Bool {
+        lhs.sPerformance == rhs.sPerformance
+    }
+  
+}

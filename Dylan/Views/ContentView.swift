@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-
-    @State private var selectedID: String?
+    
     @EnvironmentObject private var cloudKitManager: CloudKitManager
     @EnvironmentObject private var searchViewModel: SearchViewModel
 
@@ -22,8 +21,7 @@ struct ContentView: View {
                 ResultView()
             } else {
                 HomeView(fetchingType: cloudKitManager.fetchingType,
-                         progress: cloudKitManager.progress,
-                         selectedID: $selectedID)
+                         progress: cloudKitManager.progress)
             }
         }
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)

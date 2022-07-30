@@ -51,4 +51,8 @@
 // LBs
 "lbs_list_title" = "LB Numbers";
 
+// Editing
+"edit_alert_success" = "Successfully edited record";
+"edit_alert_failure" = "Unable to edit record. Received error: %@";
+
 

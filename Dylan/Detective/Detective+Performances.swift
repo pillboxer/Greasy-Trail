@@ -25,12 +25,14 @@ extension Detective {
                 for song in songs {
                     let id = song.objectID
                     let albums = albumsThatInclude(song: id)
-                    sSongs.append(sSong(title: song.title!,
+                    sSongs.append(sSong(uuid: song.uuid!,
+                                        title: song.title!,
                                         author: song.songAuthor,
                                         albums: albums))
                 }
                 
-                let sPerformance = sPerformance(venue: performance.venue!,
+                let sPerformance = sPerformance(uuid: performance.uuid!,
+                                                venue: performance.venue!,
                                                 songs: sSongs,
                                                 date: performance.date,
                                                 lbNumbers: performance.lbNumbers)
@@ -38,7 +40,7 @@ extension Detective {
             }
         }.eraseToAnyPublisher()
     }
-
+    
     func performancesThatInclude(song: Song) -> [sPerformance] {
         let context = container.newBackgroundContext()
         let objects = objects(Performance.self, including: song, context: context)
@@ -46,7 +48,10 @@ extension Detective {
         return context.syncPerform {
             if let song = context.object(with: objectID) as? Song {
                 os_log("%{public}@ found on %{public}@ performances(s)", song.title!, String(describing: objects.count))
-                let sPerformances = objects.compactMap { sPerformance(venue: $0.venue!, songs: [], date: $0.date) }
+                let sPerformances = objects.compactMap { sPerformance(uuid: $0.uuid!,
+                                                                      venue: $0.venue!,
+                                                                      songs: [],
+                                                                      date: $0.date) }
                 return sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
             }
             return []

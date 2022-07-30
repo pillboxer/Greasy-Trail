@@ -41,7 +41,9 @@ extension CloudKitManager {
                 context.performSave()
             }
         }
-        Self.lastFetchDateSongs = Date()
+        if !records.isEmpty {
+            Self.lastFetchDateSongs = Date()
+        }
     }
 
     func getOrderedSongRecords(from record: RecordType) async throws -> [RecordType] {

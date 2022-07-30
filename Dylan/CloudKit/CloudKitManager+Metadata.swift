@@ -31,19 +31,23 @@ extension CloudKitManager {
                 record.file = file
                 record.name = fileName
             }
-            Self.lastFetchDateAppMetadata = Date()
             context.performSave()
+        }
+        if !records.isEmpty {
+            Self.lastFetchDateAppMetadata = Date()
         }
     }
     
-    func upload(_ metdata: AppMetadata) async -> Bool {
+    func upload(_ metdata: AppMetadata) async -> Result<CKRecord, Error> {
         // swiftlint: disable force_try
         let query = CKQuery(recordType: .appMetadata, predicate: .misspellings)
         // FIXME:
         let tuple = try? await database.fetchPagedResults(with: query).first
         guard let result = tuple?.result,
               let record = try? result.get() as? CKRecord else {
-            return false
+            // FIXME:
+
+            return .failure(NSError(domain: "CloudKit", code: 999))
         }
         let context = container.newBackgroundContext()
         
@@ -54,22 +58,27 @@ extension CloudKitManager {
             print(try! (safeMetadata.file)!.decoded() as Misspellings)
         }
         return await withCheckedContinuation { continuation in
-            _upload(record: record) { bool in
-                continuation.resume(returning: bool)
+            _upload(record: record) { result in
+                continuation.resume(returning: result)
             }
 
         }
     }
     
-    private func _upload(record: CKRecord, completion: @escaping (Bool) -> Void) {
+    // swiftlint: disable identifier_name
+    func _upload(record: CKRecord, completion: @escaping (Result<CKRecord, Error>) -> Void) {
    
         let operation = CKBisectingModifyRecordsOperation(recordsToSave: [record], database: database)
         operation.start()
-        operation.bisectingModifyRecordsCompletionBlock = { _, _, error in
-            if error != nil {
-                completion(false)
+        operation.bisectingModifyRecordsCompletionBlock = { records, _, error in
+            if let error = error {
+                completion(.failure(error))
+            } else if let record = records?.first {
+                completion(.success(record))
             } else {
-                completion(true)
+                // FIXME:
+
+                completion(.failure(NSError(domain: "CloudKit", code: 999)))
             }
         }
     }

@@ -8,13 +8,15 @@
 import Combine
 import Foundation
 
-protocol Model {}
+protocol Model {
+    var uuid: String { get }
+}
 
 class SearchViewModel: ObservableObject {
     
     private let detective = Detective()
     private let formatter = Formatter()
-    private let cloudKitManager: CloudKitManager
+    private let cloudKitManager = CloudKitManager()
     private var cancellables: Set<AnyCancellable> = []
     
     @Published var text: String = ""
@@ -34,14 +36,13 @@ class SearchViewModel: ObservableObject {
         didSet {
             shouldDisplaySearch = nextSearch != nil
             if let nextSearch = nextSearch {
-                searchNextSearch(nextSearch.title)
+                delay(0.3) { [self] in
+                    searchNextSearch(nextSearch.title)
+                }
             }
         }
     }
-    
-    init(cloudKitManager: CloudKitManager) {
-        self.cloudKitManager = cloudKitManager
-    }
+
 }
 
 extension SearchViewModel {

@@ -16,7 +16,7 @@ struct DylanApp: App {
         WindowGroup {
             ContentView()
                 .environmentObject(appDelegate.cloudKitManager)
-                .environmentObject(SearchViewModel(cloudKitManager: appDelegate.cloudKitManager))
+                .environmentObject(SearchViewModel())
         }
         WindowGroup {
             SpellingResolverView(manager: SpellingResolverManager(cloudKitManager: appDelegate.cloudKitManager))

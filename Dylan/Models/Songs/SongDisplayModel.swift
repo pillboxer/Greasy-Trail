@@ -11,9 +11,10 @@ import Foundation
 struct SongDisplayModel: Model {
 
     private let song: sSong
-
+    let uuid: String
     init(song: sSong) {
         self.song = song
+        self.uuid = song.uuid
     }
 
 }

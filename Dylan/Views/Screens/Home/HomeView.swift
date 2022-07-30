@@ -18,7 +18,6 @@ struct HomeView: View {
     let fetchingType: DylanRecordType?
     var progress: Double? = 0
     @State var recordTypeToAdd: DylanRecordType?
-    @Binding var selectedID: String?
 
     @EnvironmentObject private var cloudKitManager: CloudKitManager
 
@@ -30,15 +29,14 @@ struct HomeView: View {
                     HStack {
                         SidebarListRowView(recordType: item,
                                            isFetching: fetchingType == item,
-                                           progress: progress,
-                                           selection: item.rawValue,
-                                           selectedID: $selectedID) {
+                                           progress: progress) {
                             recordTypeToAdd = item
                         }
                     }
                     .padding(4)
                 }
                 if let recordType = recordTypeToAdd {
+                    // FIXME: UPloade view model
                     UploadView(recordType: recordType) { model in
                         Task {
                             await cloudKitManager.upload(model)

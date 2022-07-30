@@ -22,8 +22,8 @@ struct PerformancesListView: View {
         VStack(alignment: .leading) {
             Text("performances_list_title").font(.title)
                 .padding(.bottom)
-            ScrollView {
-                ForEach(performances, id: \.self) { performance in
+             
+                List(performances, id: \.self) { performance in
                     let title = performance.venue
                     HStack(alignment: .top) {
                         ListRowView(headline: title, subHeadline: formatter.dateString(of: performance.date)) {
@@ -35,7 +35,6 @@ struct PerformancesListView: View {
                     }
                     .padding(2)
                 }
-            }
         }
     }
 }

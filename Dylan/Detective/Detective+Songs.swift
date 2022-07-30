@@ -46,7 +46,8 @@ extension Detective {
                 if let song = context.object(with: id) as? Song {
                     let albums = albumsThatInclude(song: id)
                     let performances = performancesThatInclude(song: song)
-                    let sSong = sSong(title: song.title!,
+                    let sSong = sSong(uuid: song.uuid!,
+                        title: song.title!,
                                       author: song.songAuthor,
                                       performances: performances,
                                       albums: albums)

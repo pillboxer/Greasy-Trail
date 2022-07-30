@@ -10,6 +10,7 @@ import Foundation
 // swiftlint:disable type_name
 struct sPerformance: Codable {
 
+    let uuid: String
     let venue: String
     let songs: [sSong]
     let date: Double?

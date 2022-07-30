@@ -10,6 +10,7 @@ import Foundation
 // swiftlint:disable type_name
 public struct sAlbum: Codable, Equatable, Identifiable {
 
+    let uuid: String
     let title: String
     let songs: [sSong]
     let releaseDate: Double

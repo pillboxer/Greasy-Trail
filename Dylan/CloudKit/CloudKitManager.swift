@@ -29,7 +29,7 @@ class CloudKitManager: ObservableObject {
     let database: DatabaseType
     let container: NSPersistentContainer
 
-    init(_ database: DatabaseType,
+    init(_ database: DatabaseType = DylanDatabase,
          container: NSPersistentContainer = PersistenceController.shared.container) {
         self.database = database
         self.container = container

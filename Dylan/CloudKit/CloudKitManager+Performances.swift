@@ -41,10 +41,10 @@ extension CloudKitManager {
                 let predicate = NSPredicate(format: "title == %@", title)
                 return context.fetchAndWait(Song.self, with: predicate).first
             }
-
+            
             context.syncPerform {
                 // Check for existing performance
-                let predicate = NSPredicate(format: "venue == %@ && date == %d", venue, Int(date))
+                let predicate = NSPredicate(format: "uuid == %@", record.recordID.recordName)
                 let existingPerformance = context.fetchAndWait(Performance.self, with: predicate).first
                 // Create or update performance
                 let performance = existingPerformance ?? Performance(context: context)
@@ -58,7 +58,9 @@ extension CloudKitManager {
                 context.performSave()
             }
         }
-        Self.lastFetchDatePerformances = Date()
+        if !records.isEmpty {
+            Self.lastFetchDatePerformances = Date()
+        }
     }
 
     func upload(_ performanceUploadModel: PerformanceUploadModel) async {

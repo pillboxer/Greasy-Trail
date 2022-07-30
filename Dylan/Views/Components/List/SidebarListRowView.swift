@@ -13,13 +13,21 @@ struct SidebarListRowView: View {
     let isFetching: Bool
     var progress: Double?
 
-    @State var selection: String
-    @Binding var selectedID: String?
+    @State private var selection: String
+    @State private var selectedID: String?
+    
+    init(recordType: DylanRecordType, isFetching: Bool, progress: Double?, onTap: @escaping () -> Void) {
+        self.recordType = recordType
+        self.isFetching = isFetching
+        self.progress = progress
+        self.selection = recordType.rawValue
+        self.onTap = onTap
+    }
 
     let onTap: () -> Void
 
     var body: some View {
-        NavigationLink(destination: destinationFor(selection), tag: selection, selection: $selectedID) {
+        NavigationLink(destination: destinationFor(selection), tag: recordType.rawValue, selection: $selectedID) {
             HStack {
                 Text(selection.capitalized + "s")
                     .font(.headline)
@@ -38,7 +46,6 @@ struct SidebarListRowView: View {
                 }
             }
         }
-//        .disabled(isFetching)
     }
 
     @ViewBuilder

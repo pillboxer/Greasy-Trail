@@ -10,7 +10,9 @@ import SwiftUI
 struct ResultPerformanceOverviewView: View {
     
     @EnvironmentObject private var searchViewModel: SearchViewModel
-
+    @ObservedObject var editorViewModel: EditorViewModel
+    @State private var presentAlert = false
+    
     var body: some View {
         VStack(spacing: 16) {
             HStack {
@@ -19,8 +21,17 @@ struct ResultPerformanceOverviewView: View {
                         searchViewModel.reset()
                     }
                 Spacer()
-                Text(searchViewModel.performanceModel?.venue ?? "")
-                    .font(.headline)
+                if editorViewModel.isEditing {
+                    EditingView(text: searchViewModel.performanceModel?.venue ?? "") {
+                        editorViewModel.stopEditing()
+                    } onConfirm: { text in
+                        editorViewModel.edit(.venue, on: .performance, to: text)
+                    }
+                } else {
+                    Text(searchViewModel.performanceModel?.venue ?? "")
+                        .font(.headline)
+                        .onTapGesture(count: 3) { editorViewModel.startEditing() }
+                }
                 if let url = searchViewModel.performanceModel?.officialURL() {
                     OnTapButton(systemImage: "globe") {
                         NSWorkspace.shared.open(url)
@@ -29,6 +40,7 @@ struct ResultPerformanceOverviewView: View {
                 }
                 Spacer()
             }
+            Text(searchViewModel.performanceModel?.date ?? "")
             Spacer()
             HStack {
                 SongsListView(songs: searchViewModel.performanceModel?.songs ?? []) { title in
@@ -47,6 +59,45 @@ struct ResultPerformanceOverviewView: View {
             }
         }
         .padding()
+        .onChange(of: editorViewModel.alertText) { newValue in
+            presentAlert = newValue != nil
+        }
+        .alert(editorViewModel.alertText ?? "", isPresented: $presentAlert) {
+            OnTapButton(text: "Ok") {
+                editorViewModel.stopEditing()
+                searchViewModel.search(.init(title: searchViewModel.performanceModel?.date ?? "", type: .performance))
+            }
+        }
     }
 
+}
+
+struct EditingView: View {
+    
+    @State private var text: String
+    @State private var disabled = false
+    let onCancel: () -> Void
+    let onConfirm: (String) -> Void
+    
+    init(text: String, onCancel: @escaping () -> Void, onConfirm: @escaping (String) -> Void) {
+        self.text = text
+        self.onCancel = onCancel
+        self.onConfirm = onConfirm
+    }
+    
+    var body: some View {
+        HStack {
+            OnTapButton(text: "❌") {
+                onCancel()
+            }
+            TextField("", text: $text)
+            OnTapButton(systemImage: "icloud.and.arrow.up") {
+                disabled = true
+                onConfirm(text)
+            }
+
+        }
+        .disabled(disabled)
+    }
+    
 }

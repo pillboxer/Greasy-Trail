@@ -10,9 +10,10 @@ import Foundation
 struct AlbumDisplayModel: Model {
 
     let album: sAlbum
-
+    let uuid: String
     init(album: sAlbum) {
         self.album = album
+        self.uuid = album.uuid
     }
 
 }

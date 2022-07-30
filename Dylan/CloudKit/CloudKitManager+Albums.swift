@@ -50,7 +50,9 @@ extension CloudKitManager {
                 album.songs = orderedSet
             }
         }
-        Self.lastFetchDateAlbums = Date()
+        if !records.isEmpty {
+            Self.lastFetchDateAlbums = Date()
+        }
         context.performSave()
     }
 }

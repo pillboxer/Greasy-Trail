@@ -10,6 +10,9 @@
 		03FBA0782885E28A00751ECD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBA0772885E28A00751ECD /* HomeView.swift */; };
 		8607123128685D8B00E54209 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8607123028685D8B00E54209 /* Globals.swift */; };
 		860712332868604300E54209 /* ReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860712322868604300E54209 /* ReferenceType.swift */; };
+		860E2E062895714B006F968F /* Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860E2E052895714B006F968F /* Convenience.swift */; };
+		860E2E0C289574E5006F968F /* EditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860E2E0B289574E5006F968F /* EditorViewModel.swift */; };
+		860E2E0E289580AD006F968F /* CloudKitManager+Edit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860E2E0D289580AD006F968F /* CloudKitManager+Edit.swift */; };
 		86563C50287829F700104879 /* DylanTests+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C4F287829F700104879 /* DylanTests+CoreData.swift */; };
 		86563C5328782AE100104879 /* Detective+Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5228782AE100104879 /* Detective+Songs.swift */; };
 		86563C5528782B2500104879 /* Detective+Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C5428782B2500104879 /* Detective+Albums.swift */; };
@@ -130,6 +133,9 @@
 		03FBA0772885E28A00751ECD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8607123028685D8B00E54209 /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		860712322868604300E54209 /* ReferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceType.swift; sourceTree = "<group>"; };
+		860E2E052895714B006F968F /* Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convenience.swift; sourceTree = "<group>"; };
+		860E2E0B289574E5006F968F /* EditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewModel.swift; sourceTree = "<group>"; };
+		860E2E0D289580AD006F968F /* CloudKitManager+Edit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Edit.swift"; sourceTree = "<group>"; };
 		86563C4F287829F700104879 /* DylanTests+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DylanTests+CoreData.swift"; sourceTree = "<group>"; };
 		86563C5228782AE100104879 /* Detective+Songs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detective+Songs.swift"; sourceTree = "<group>"; };
 		86563C5428782B2500104879 /* Detective+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detective+Albums.swift"; sourceTree = "<group>"; };
@@ -281,6 +287,15 @@
 			path = Mocking;
 			sourceTree = "<group>";
 		};
+		860E2E0728957266006F968F /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				86C6A61628932DA000EBFAB3 /* SearchViewModel.swift */,
+				860E2E0B289574E5006F968F /* EditorViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		86563C4E2878278100104879 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +342,7 @@
 				86A60C5A288C074E00813778 /* Dictionary+Extensions.swift */,
 				86A60C62288C58D400813778 /* Data+Extensions.swift */,
 				86A60C67288C5B8D00813778 /* NSPredicate+Extensions.swift */,
+				860E2E052895714B006F968F /* Convenience.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -375,7 +391,6 @@
 		866863EB2865EB6200510DDF /* Dylan */ = {
 			isa = PBXGroup;
 			children = (
-				86B61AC3288DBD8000C78E38 /* Logger */,
 				866863F52865EB6400510DDF /* Dylan.entitlements */,
 				8678FD302869F76700DF1E69 /* Localizable.strings */,
 				86C526DA2875F91A0035DD31 /* AppDelegate.swift */,
@@ -386,11 +401,13 @@
 				86563C5128782AD100104879 /* Detective */,
 				8656A30A28679BA50013F595 /* Extensions */,
 				86B49418286DDEB300B0C4EC /* Formatting */,
+				86B61AC3288DBD8000C78E38 /* Logger */,
 				866863FE2865ED1100510DDF /* Models */,
 				86563C6E287CA8DF00104879 /* Other */,
 				866863F22865EB6400510DDF /* Preview Content */,
 				865C451A287615B20056E01A /* PropertyWrappers */,
 				8656A30D28679BE60013F595 /* Protocols */,
+				860E2E0728957266006F968F /* ViewModels */,
 				8678FD322869FA6200DF1E69 /* Views */,
 			);
 			path = Dylan;
@@ -445,6 +462,7 @@
 				86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */,
 				86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */,
 				86D9C2E62884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift */,
+				860E2E0D289580AD006F968F /* CloudKitManager+Edit.swift */,
 			);
 			path = CloudKit;
 			sourceTree = "<group>";
@@ -546,7 +564,6 @@
 		86C526AC2872F7A40035DD31 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				86C6A61528932DA000EBFAB3 /* ViewModel */,
 				86C52691286F02E50035DD31 /* SearchView.swift */,
 				86C526AD2872F7B30035DD31 /* SearchingView.swift */,
 				86C526AF2872F7D70035DD31 /* SearchFieldView.swift */,
@@ -595,14 +612,6 @@
 				86C526D52875F55C0035DD31 /* Main.xcdatamodeld */,
 			);
 			path = CoreData;
-			sourceTree = "<group>";
-		};
-		86C6A61528932DA000EBFAB3 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				86C6A61628932DA000EBFAB3 /* SearchViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		86D9C2A7287D6CF500D5A0D3 /* Search */ = {
@@ -854,6 +863,7 @@
 				86C526C52874C2E70035DD31 /* CloudKitManager+Performances.swift in Sources */,
 				86B4941A286DDEBC00B0C4EC /* Formatter.swift in Sources */,
 				86563C6228787B0500104879 /* ResultPerformanceOverviewView.swift in Sources */,
+				860E2E0C289574E5006F968F /* EditorViewModel.swift in Sources */,
 				86C526A92870CF130035DD31 /* AlbumDisplayModel.swift in Sources */,
 				86D9C2B9287E0D3200D5A0D3 /* AllPerformancesView.swift in Sources */,
 				866864062865EDD700510DDF /* sPerformance.swift in Sources */,
@@ -900,6 +910,8 @@
 				86A60C57288BF34B00813778 /* AppMetadata+CoreDataProperties.swift in Sources */,
 				86C526DE28760AAA0035DD31 /* Song+CoreDataClass.swift in Sources */,
 				86C526D92875F5B00035DD31 /* PersistenceController.swift in Sources */,
+				860E2E0E289580AD006F968F /* CloudKitManager+Edit.swift in Sources */,
+				860E2E062895714B006F968F /* Convenience.swift in Sources */,
 				86D9C2AE287DD00700D5A0D3 /* AllSongsView.swift in Sources */,
 				86C526A5287092A70035DD31 /* CloudKitManager+Song.swift in Sources */,
 				86D9C2DE288406A000D5A0D3 /* PerformanceAddingView.swift in Sources */,

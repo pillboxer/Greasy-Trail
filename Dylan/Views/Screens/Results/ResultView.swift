@@ -17,8 +17,8 @@ struct ResultView: View {
             ResultSongOverviewView()
         } else if searchViewModel.albumModel != nil {
             ResultAlbumOverviewView()
-        } else if searchViewModel.performanceModel != nil {
-            ResultPerformanceOverviewView()
+        } else if let model = searchViewModel.performanceModel {
+            ResultPerformanceOverviewView(editorViewModel: EditorViewModel(model: model))
         }
     }
 }

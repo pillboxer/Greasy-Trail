@@ -9,7 +9,8 @@ import Foundation
 
 // swiftlint:disable type_name
 public struct sSong: Codable {
-
+    
+    let uuid: String
     let title: String
     var author: String = NSLocalizedString("default_author", comment: "")
     var performances: [sPerformance]?
