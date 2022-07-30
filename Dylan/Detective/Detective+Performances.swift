@@ -7,33 +7,36 @@
 
 import OSLog
 import CoreData
+import Combine
 
 extension Detective {
-
-    func fetch(performance date: Double) -> PerformanceDisplayModel? {
+    
+    func fetch(performance date: Double) -> AnyPublisher<Model?, Never> {
         let context = container.newBackgroundContext()
         
-        return context.syncPerform {
-            let predicate = NSPredicate(format: "date == %d", Int(date))
-            guard let performance = context.fetchAndWait(Performance.self, with: predicate).first,
-                  let songs = performance.songs?.array as? [Song] else {
-                return nil
+        return Future { promise in
+            context.perform { [self] in 
+                let predicate = NSPredicate(format: "date == %d", Int(date))
+                guard let performance = context.fetchAndWait(Performance.self, with: predicate).first,
+                      let songs = performance.songs?.array as? [Song] else {
+                    return promise(.success(nil))
+                }
+                var sSongs: [sSong] = []
+                for song in songs {
+                    let id = song.objectID
+                    let albums = albumsThatInclude(song: id)
+                    sSongs.append(sSong(title: song.title!,
+                                        author: song.songAuthor,
+                                        albums: albums))
+                }
+                
+                let sPerformance = sPerformance(venue: performance.venue!,
+                                                songs: sSongs,
+                                                date: performance.date,
+                                                lbNumbers: performance.lbNumbers)
+                promise(.success(PerformanceDisplayModel(sPerformance: sPerformance)))
             }
-            var sSongs: [sSong] = []
-            for song in songs {
-                let id = song.objectID
-                let albums = albumsThatInclude(song: id)
-                sSongs.append(sSong(title: song.title!,
-                                    author: song.songAuthor,
-                                    albums: albums))
-            }
-            
-            let sPerformance = sPerformance(venue: performance.venue!,
-                                            songs: sSongs,
-                                            date: performance.date,
-                                            lbNumbers: performance.lbNumbers)
-            return PerformanceDisplayModel(sPerformance: sPerformance)
-        }
+        }.eraseToAnyPublisher()
     }
 
     func performancesThatInclude(song: Song) -> [sPerformance] {

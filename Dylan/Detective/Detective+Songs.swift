@@ -8,6 +8,7 @@
 import Foundation
 import OSLog
 import CoreData
+import Combine
 
 struct Misspellings: Codable {
     var songs: [String: String]
@@ -32,24 +33,28 @@ extension Detective {
         }
     }
 
-    func fetchModel(for title: String) -> SongDisplayModel? {
+    func fetchModel(for title: String) -> AnyPublisher<Model?, Never> {
         let context = container.newBackgroundContext()
         guard let song = fetch(song: title) ?? fetch(song: resolveSpellingOf(song: title)) else {
-            return nil
+            return Just(nil)
+                .eraseToAnyPublisher()
         }
         let id = song.objectID
-        return context.syncPerform {
-            if let song = context.object(with: id) as? Song {
-                let albums = albumsThatInclude(song: id)
-                let performances = performancesThatInclude(song: song)
-                let sSong = sSong(title: song.title!,
-                                  author: song.songAuthor,
-                                  performances: performances,
-                                  albums: albums)
-                return SongDisplayModel(song: sSong)
+
+        return Future { promise in
+            context.perform { [self] in
+                if let song = context.object(with: id) as? Song {
+                    let albums = albumsThatInclude(song: id)
+                    let performances = performancesThatInclude(song: song)
+                    let sSong = sSong(title: song.title!,
+                                      author: song.songAuthor,
+                                      performances: performances,
+                                      albums: albums)
+                    promise(.success(SongDisplayModel(song: sSong)))
+                }
+                promise(.success(nil))
             }
-            return nil
-        }
+        }.eraseToAnyPublisher()
     }
 }
 

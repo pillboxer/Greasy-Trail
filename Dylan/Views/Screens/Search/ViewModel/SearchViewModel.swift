@@ -8,11 +8,14 @@
 import Combine
 import Foundation
 
+protocol Model {}
+
 class SearchViewModel: ObservableObject {
     
     private let detective = Detective()
     private let formatter = Formatter()
     private let cloudKitManager: CloudKitManager
+    private var cancellables: Set<AnyCancellable> = []
     
     @Published var text: String = ""
     
@@ -72,40 +75,58 @@ extension SearchViewModel {
 
 private extension SearchViewModel {
     
-    private func resetModels() {
+    func resetModels() {
         songModel = nil
         albumModel = nil
         performanceModel = nil
+    }
+    
+    func handleModel(_ model: Model?) {
+        guard let nextSearch = nextSearch else {
+            return
+        }
+        self.nextSearch = nil
+        if let model = model as? SongDisplayModel {
+            songModel = model
+        } else if let model = model as? AlbumDisplayModel {
+            albumModel = model
+        } else if let model = model as? PerformanceDisplayModel {
+            performanceModel = model
+        } else {
+            switch nextSearch.type {
+            case .album:
+                search(.init(title: nextSearch.title, type: .song))
+            case .song:
+                search(.init(title: nextSearch.title, type: .performance))
+            case .performance:
+                shouldDisplayNoResultsFound = true
+            }
+        }
     }
     
     func searchNextSearch(_ text: String) {
         guard let nextSearch = nextSearch else {
             return
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
-            switch nextSearch.type {
-            case .album:
-                if let result = detective.search(album: text) {
-                    albumModel = result
-                    self.nextSearch = nil
-                } else {
-                    self.nextSearch = Search(title: text, type: .song)
-                }
-            case .song:
-                if let result = detective.search(song: text) {
-                    songModel = result
-                    self.nextSearch = nil
-                } else {
-                    self.nextSearch = Search(title: text, type: .performance)
-                }
-            case .performance:
-                if let toFetch = Double(text) ?? formatter.date(from: text),
-                   let result = detective.fetch(performance: toFetch) {
-                    performanceModel = result
-                    self.nextSearch = nil
-                } else {
-                    shouldDisplayNoResultsFound = true
-                }
+        switch nextSearch.type {
+        case .album:
+            detective.search(song: text)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: handleModel(_:))
+                .store(in: &cancellables)
+        case .song:
+            detective.search(song: text)
+                .receive(on: DispatchQueue.main)
+                .sink(receiveValue: handleModel(_:))
+                .store(in: &cancellables)
+        case .performance:
+            if let toFetch = Double(text) ?? formatter.date(from: text) {
+                detective.fetch(performance: toFetch)
+                 .receive(on: DispatchQueue.main)
+                 .sink(receiveValue: handleModel(_:))
+                 .store(in: &cancellables)
+            } else {
+                shouldDisplayNoResultsFound = true
             }
         }
     }

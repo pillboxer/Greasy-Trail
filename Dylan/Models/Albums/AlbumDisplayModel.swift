@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AlbumDisplayModel {
+struct AlbumDisplayModel: Model {
 
     let album: sAlbum
 

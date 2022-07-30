@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PerformanceDisplayModel {
+struct PerformanceDisplayModel: Model {
 
     let sPerformance: sPerformance
 

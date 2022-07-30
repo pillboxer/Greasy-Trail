@@ -8,6 +8,7 @@
 import Foundation
 import OSLog
 import CoreData
+import Combine
 
 public class Detective: ObservableObject {
 
@@ -17,17 +18,17 @@ public class Detective: ObservableObject {
         self.container = container
     }
 
-    func search(song title: String) -> SongDisplayModel? {
+    func search(song title: String) -> AnyPublisher<Model?, Never> {
         os_log("Searching song: %{public}@", log: Log_Detective, title)
         return fetchModel(for: title)
     }
 
-    func search(album title: String) -> AlbumDisplayModel? {
+    func search(album title: String) -> AnyPublisher<Model?, Never> {
         os_log("Searching album: %{public}@", log: Log_Detective, title)
         return fetch(album: title)
     }
 
-    func search(performance date: Double) -> PerformanceDisplayModel? {
+    func search(performance date: Double) -> AnyPublisher<Model?, Never> {
         os_log("Searching date: %{public}@", log: Log_Detective, String(describing: date))
         return fetch(performance: date)
     }

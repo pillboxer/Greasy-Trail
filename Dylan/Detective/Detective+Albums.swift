@@ -8,23 +8,26 @@
 import Foundation
 import CoreData
 import OSLog
+import Combine
 
 extension Detective {
-
-    func fetch(album title: String) -> AlbumDisplayModel? {
+    
+    func fetch(album title: String) -> AnyPublisher<Model?, Never> {
         let context = container.newBackgroundContext()
-        return context.syncPerform {
-            // Fetch album with given title
-            let predicate = NSPredicate(format: "title =[c] %@", title)
-            guard let album = context.fetchAndWait(Album.self, with: predicate).first,
-                  let songs = album.songs?.array as? [Song] else {
-                return nil
+        return Future { promise in
+            context.perform {
+                // Fetch album with given title
+                let predicate = NSPredicate(format: "title =[c] %@", title)
+                guard let album = context.fetchAndWait(Album.self, with: predicate).first,
+                      let songs = album.songs?.array as? [Song] else {
+                    return promise(.success(nil))
+                }
+                // Get the songs
+                let sSongs = songs.compactMap { sSong(title: $0.title!, author: $0.songAuthor) }
+                let sAlbum = sAlbum(title: album.title!, songs: sSongs, releaseDate: album.releaseDate)
+                promise(.success(AlbumDisplayModel(album: sAlbum)))
             }
-            // Get the songs
-            let sSongs = songs.compactMap { sSong(title: $0.title!, author: $0.songAuthor) }
-            let sAlbum = sAlbum(title: album.title!, songs: sSongs, releaseDate: album.releaseDate)
-            return AlbumDisplayModel(album: sAlbum)
-        }
+        }.eraseToAnyPublisher()
     }
 
     func albumsThatInclude(song objectID: NSManagedObjectID) -> [sAlbum] {

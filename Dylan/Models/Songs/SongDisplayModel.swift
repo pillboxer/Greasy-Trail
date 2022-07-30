@@ -8,7 +8,7 @@
 import Foundation
 
 /// The Information Returned Upon Requesting Information About A Song
-struct SongDisplayModel {
+struct SongDisplayModel: Model {
 
     private let song: sSong
 
