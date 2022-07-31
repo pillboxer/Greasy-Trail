@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 import os
 
-// FIXME: TESTS
 class SpellingResolverManager: ObservableObject {
     
     private let container: NSPersistentContainer
@@ -18,6 +17,7 @@ class SpellingResolverManager: ObservableObject {
     
     @Published var key: String = ""
     @Published var value: String = ""
+    @Published var error: Error?
     
     init(cloudKitManager: CloudKitManager,
          container: NSPersistentContainer = PersistenceController.shared.container) {
@@ -57,7 +57,8 @@ class SpellingResolverManager: ObservableObject {
         let result = await cloudKitManager.upload(appMetadata)
         
         switch result {
-        case .failure:
+        case .failure(let error):
+            self.error = error
             return false
         case .success:
             return true

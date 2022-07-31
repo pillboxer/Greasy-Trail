@@ -45,6 +45,7 @@ struct SpellingResolverView: View {
                 .buttonStyle(.plain)
             }
         }
+        .errorAlert(error: $manager.error)
         .padding()
     }
     

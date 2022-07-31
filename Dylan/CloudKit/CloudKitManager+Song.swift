@@ -11,7 +11,6 @@ import OSLog
 extension CloudKitManager {
 
     func fetchLatestSongs() async throws {
-        
         let records = try await fetch(.song, after: Self.lastFetchDateSongs)
         let titles = records.map { $0.string(for: .title) }
         let authors = records.map { $0.string(for: .author) }

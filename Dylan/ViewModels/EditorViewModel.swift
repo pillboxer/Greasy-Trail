@@ -13,6 +13,7 @@ class EditorViewModel: ObservableObject {
     
     @Published private(set) var isEditing = false
     @Published private(set) var alertText: String?
+    @Published var error: Error?
     private let cloudKitManager = CloudKitManager()
     private let model: Model
 
@@ -29,6 +30,7 @@ extension EditorViewModel {
     }
     
     func stopEditing() {
+        error = nil
         alertText = nil
         isEditing = false
     }
@@ -43,19 +45,22 @@ extension EditorViewModel {
                 await cloudKitManager.start()
                 await setAlert(to: NSLocalizedString("edit_alert_success", comment: ""))
             case .failure(let error):
-                await setAlert(to: String(format: NSLocalizedString("edit_alert_failure", comment: ""),
-                                   arguments: [String(describing: error)]))
+                await setError(to: error)
             }
         }
     }
     
 }
 
+@MainActor
 private extension EditorViewModel {
     
-    @MainActor
     func setAlert(to string: String) {
         alertText = string
+    }
+    
+    func setError(to error: Error) {
+        self.error = error
     }
     
 }

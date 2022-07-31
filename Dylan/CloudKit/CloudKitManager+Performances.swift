@@ -15,27 +15,23 @@ extension CloudKitManager {
     func fetchLatestPerformances() async throws {
         let records = try await fetch(.performance, after: Self.lastFetchDatePerformances)
 
-        // Store titles and release dates
         let venues = records.compactMap { $0.string(for: .venue) }
         let dates = records.compactMap { $0.double(for: .date) }
         let lbNumbers = records.map { $0.ints(for: .lbNumbers) }
+        
         let context = container.newBackgroundContext()
-        os_log("Processing Performances", log: Log_CloudKit)
+        os_log("Processing Performances...", log: Log_CloudKit)
         
         for (index, record) in records.enumerated() {
             
             await setProgress(to: Double(index) / Double(records.count))
             await setCurrentStep(to: .fetching(.performance))
             
-            // Get the title and release date of the album
             let venue = venues[index]
             let date = dates[index]
             let lbs = lbNumbers[index]
             
-            // Fetch the records
             let ordered = try await getOrderedSongRecords(from: record)
-            
-            // Get the Song objects
             let songTitles = ordered.compactMap { $0.string(for: .title) }
             let correspondingSongs: [Song] = songTitles.compactMap { title in
                 let predicate = NSPredicate(format: "title == %@", title)
@@ -43,20 +39,17 @@ extension CloudKitManager {
             }
             
             context.syncPerform {
-                // Check for existing performance
                 let predicate = NSPredicate(format: "uuid == %@", record.recordID.recordName)
                 let existingPerformance = context.fetchAndWait(Performance.self, with: predicate).first
-                // Create or update performance
                 let performance = existingPerformance ?? Performance(context: context)
                 performance.venue = venue
                 performance.date = date
                 performance.lbNumbers = lbs
                 performance.uuid = record.recordID.recordName
-
                 let orderedSet = NSOrderedSet(array: correspondingSongs)
                 performance.songs = orderedSet
-                context.performSave()
             }
+            context.performSave()
         }
         if !records.isEmpty {
             Self.lastFetchDatePerformances = Date()

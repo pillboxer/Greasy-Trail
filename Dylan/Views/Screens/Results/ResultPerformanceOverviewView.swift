@@ -68,6 +68,9 @@ struct ResultPerformanceOverviewView: View {
                 searchViewModel.search(.init(title: searchViewModel.performanceModel?.date ?? "", type: .performance))
             }
         }
+        .errorAlert(error: $editorViewModel.error) {
+            editorViewModel.stopEditing()
+        }
     }
 
 }
