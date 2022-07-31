@@ -50,7 +50,6 @@ struct PerformanceAddingView: View {
                 for song in withCorrectApostrophe {
                     var title = song
                     if song == "—" || song == "" {
-                        print("It's break")
                         title = "BREAK"
                     }
                     guard let uuid = detective.uuid(for: title) else {
