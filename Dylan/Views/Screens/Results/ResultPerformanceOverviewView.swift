@@ -46,11 +46,11 @@ struct ResultPerformanceOverviewView: View {
                 SongsListView(songs: searchViewModel.performanceModel?.songs ?? []) { title in
                     searchViewModel.search(.init(title: title, type: .song))
                 }
-                AlbumsListView(albums: searchViewModel.performanceModel?.albums ?? [],
-                               showingAppearances: true) { title in
-                    searchViewModel.search(.init(title: title, type: .album))
-                }
-                if let lbNumbers = searchViewModel.performanceModel?.lbNumbers {
+//                AlbumsListView(albums: searchViewModel.performanceModel?.albums ?? [],
+//                               showingAppearances: true) { title in
+//                    searchViewModel.search(.init(title: title, type: .album))
+//                }
+                if let lbNumbers = searchViewModel.performanceModel?.lbNumbers, !lbNumbers.isEmpty {
                     LBsListView(lbs: lbNumbers) { url in
                         NSWorkspace.shared.open(url)
                     }

@@ -14,14 +14,18 @@ struct SidebarListRowView: View {
     var progress: Double?
 
     @State private var selection: String
-    @State private var selectedID: String?
+    @Binding var selectedID: String?
     
-    init(recordType: DylanRecordType, isFetching: Bool, progress: Double?, onTap: @escaping () -> Void) {
+    init(recordType: DylanRecordType,
+         isFetching: Bool, progress: Double?,
+         selectedID: Binding<String?>,
+         onTap: @escaping () -> Void) {
         self.recordType = recordType
         self.isFetching = isFetching
         self.progress = progress
         self.selection = recordType.rawValue
         self.onTap = onTap
+        _selectedID = selectedID
     }
 
     let onTap: () -> Void

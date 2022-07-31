@@ -8,7 +8,7 @@
 import Foundation
 
 // swiftlint:disable type_name
-struct sPerformance: Codable {
+struct sPerformance: Codable, Editable {
 
     let uuid: String
     let venue: String

@@ -8,10 +8,6 @@
 import Combine
 import Foundation
 
-protocol Model {
-    var uuid: String { get }
-}
-
 class SearchViewModel: ObservableObject {
     
     private let detective = Detective()

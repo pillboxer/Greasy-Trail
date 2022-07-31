@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @EnvironmentObject private var cloudKitManager: CloudKitManager
     @EnvironmentObject private var searchViewModel: SearchViewModel
+    @State private var selectedID: String?
 
     var body: some View {
         Group {
@@ -21,7 +22,8 @@ struct ContentView: View {
                 ResultView()
             } else {
                 HomeView(fetchingType: cloudKitManager.fetchingType,
-                         progress: cloudKitManager.progress)
+                         progress: cloudKitManager.progress,
+                         selectedID: $selectedID)
             }
         }
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)

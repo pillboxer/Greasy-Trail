@@ -12,33 +12,25 @@ import Foundation
 class EditorViewModel: ObservableObject {
     
     @Published private(set) var isEditing = false
-    @Published private(set) var alertText: String?
+    @Published private(set) var isProcessing = false
+
+    @Published var alertText: String?
     @Published var error: Error?
     private let cloudKitManager = CloudKitManager()
-    private let model: Model
+    private let editable: Editable
 
-    init(model: Model) {
-        self.model = model
+    init(editable: Editable) {
+        self.editable = editable
     }
     
-}
-
-extension EditorViewModel {
-    
-    func startEditing() {
-        isEditing = true
-    }
-    
-    func stopEditing() {
-        error = nil
-        alertText = nil
-        isEditing = false
-    }
-        
     // swiftlint: disable force_cast
     func edit(_ field: DylanRecordField, on record: DylanRecordType, to newValue: Any) {
         Task {
-            let result = await cloudKitManager.edit(field, on: record, with: model.uuid, to: newValue as! CKRecordValue)
+            await setProcessing(to: true)
+            let result = await cloudKitManager.edit(field,
+                                                    on: record,
+                                                    with: editable.uuid,
+                                                    to: newValue as! CKRecordValue)
             switch result {
             case .success:
                 await delay(0.5)
@@ -52,8 +44,30 @@ extension EditorViewModel {
     
 }
 
+extension EditorViewModel {
+    
+    func startEditing() {
+        isEditing = true
+    }
+    
+    func stopEditing() {
+        Task {
+            await setProcessing(to: false)
+        }
+        isProcessing = false
+        error = nil
+        alertText = nil
+        isEditing = false
+    }
+    
+}
+
 @MainActor
-private extension EditorViewModel {
+extension EditorViewModel {
+    
+    func setProcessing(to bool: Bool) {
+        isProcessing = bool
+    }
     
     func setAlert(to string: String) {
         alertText = string

@@ -8,31 +8,54 @@
 import SwiftUI
 
 extension View {
-    func errorAlert(error: Binding<Error?>, buttonTitle: String = "OK", buttonAction: (() -> Void)? = nil) -> some View {
-        let localizedAlertError = LocalizedAlertError(error: error.wrappedValue)
-        return alert(isPresented: .constant(localizedAlertError != nil), error: localizedAlertError) { _ in
-            OnTapButton(text: buttonTitle) {
-                if let buttonAction = buttonAction {
-                    buttonAction()
+    @MainActor
+    func errorAlert(error: Binding<Error?>, title: String = "Error", action: (() -> Void)? = nil) -> some View {
+        let alertError = AlertError(error: error.wrappedValue)
+        print(String(describing: error.wrappedValue), "LL")
+        return alert(String(describing: error), isPresented: .constant(alertError != nil)) {
+            OnTapButton(text: "OK") {
+                if let action = action {
+                    action()
                 } else {
                     error.wrappedValue = nil
                 }
             }
-        } message: { error in
-            Text(error.recoverySuggestion ?? "")
+        } message: {
+            Text(alertError?.recoverySuggestion ?? "")
         }
+    }
+    
+    func alert(string: Binding<String?>, title: String = "", action: (() -> Void)? = nil) -> some View {
+        return alert(title, isPresented: .constant(string.wrappedValue != nil)) {
+            OnTapButton(text: "OK") {
+                if let action = action {
+                    action()
+                } else {
+                    string.wrappedValue = nil
+                }
+            }
+        } message: {
+            Text(string.wrappedValue ?? "")
+        }
+
     }
 }
 
-struct LocalizedAlertError: LocalizedError {
-    let underlyingError: LocalizedError
+struct AlertError {
+    let underlyingError: Error
     
     var errorDescription: String? {
-        String(formatted: underlyingError.errorDescription ?? "")
+        (underlyingError as? LocalizedError)?.localizedDescription ?? String(describing: underlyingError)
     }
-
+    
+    var recoverySuggestion: String? {
+        (underlyingError as? LocalizedError)?.recoverySuggestion ?? ""
+    }
+    
     init?(error: Error?) {
-        guard let localizedError = error as? LocalizedError else { return nil }
-        underlyingError = localizedError
+        guard let error = error else {
+            return nil
+        }
+        underlyingError = error
     }
 }

@@ -18,18 +18,18 @@ struct HomeView: View {
     let fetchingType: DylanRecordType?
     var progress: Double? = 0
     @State var recordTypeToAdd: DylanRecordType?
-
+    @Binding var selectedID: String?
     @EnvironmentObject private var cloudKitManager: CloudKitManager
 
     var body: some View {
         NavigationView {
             VStack {
                 List(DylanRecordType.displayedTypes, id: \.self) { item in
-
                     HStack {
                         SidebarListRowView(recordType: item,
                                            isFetching: fetchingType == item,
-                                           progress: progress) {
+                                           progress: progress,
+                                           selectedID: $selectedID) {
                             recordTypeToAdd = item
                         }
                     }
