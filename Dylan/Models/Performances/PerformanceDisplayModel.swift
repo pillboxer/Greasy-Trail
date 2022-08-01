@@ -50,10 +50,7 @@ extension PerformanceDisplayModel {
     func officialURL() -> URL? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        guard let performanceDate = sPerformance.date else {
-            return nil
-        }
-        let date = Date(timeIntervalSince1970: performanceDate)
+        let date = Date(timeIntervalSince1970: sPerformance.date)
         let string = formatter.string(from: date)
         return URL(string: "https://www.bobdylan.com/date/\(string)")!
     }

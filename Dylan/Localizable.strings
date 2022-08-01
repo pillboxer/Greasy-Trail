@@ -11,6 +11,7 @@
 "developer_menu_button_0" = "Delete all data";
 "developer_menu_button_1" = "Add alternate spelling";
 "developer_menu_button_2" = "Copy logs";
+"developer_menu_button_3" = "Edit..";
 
 //Misc
 "search_placeholder" = "Enter your search term";

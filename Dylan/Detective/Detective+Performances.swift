@@ -52,7 +52,7 @@ extension Detective {
                                                                       venue: $0.venue!,
                                                                       songs: [],
                                                                       date: $0.date) }
-                return sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
+                return sPerformances.sorted { $0.date < $1.date }
             }
             return []
         }

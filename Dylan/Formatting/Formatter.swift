@@ -31,10 +31,7 @@ class Formatter: ObservableObject {
 
     func formatted(performance: sPerformance) -> String {
         let prefix = performance.venue
-        var suffix = "Unknown date"
-        if let date = performance.date {
-            suffix = dateString(of: date)
-        }
+        let suffix = dateString(of: performance.date)
         return "\(prefix) (\(suffix))"
     }
 

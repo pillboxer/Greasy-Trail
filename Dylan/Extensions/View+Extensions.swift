@@ -11,7 +11,7 @@ extension View {
     @MainActor
     func errorAlert(error: Binding<Error?>, title: String = "Error", action: (() -> Void)? = nil) -> some View {
         let alertError = AlertError(error: error.wrappedValue)
-        return alert(String(describing: error), isPresented: .constant(alertError != nil)) {
+        return alert(alertError?.errorDescription ?? "", isPresented: .constant(alertError != nil)) {
             OnTapButton(text: "OK") {
                 if let action = action {
                     action()
@@ -43,7 +43,7 @@ extension View {
 struct AlertError {
     let underlyingError: Error
     
-    var errorDescription: String? {
+    var errorDescription: String {
         (underlyingError as? LocalizedError)?.localizedDescription ?? String(describing: underlyingError)
     }
     

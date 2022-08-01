@@ -7,7 +7,7 @@
 
 import Foundation
 
-class LBsEditorViewModel: EditorViewModel {
+final class PerformanceEditorViewModel: RecordEditorViewModel {
     
     enum LBEditingViewModelError: LocalizedError {
         case missingPrefix(String)
@@ -34,23 +34,23 @@ class LBsEditorViewModel: EditorViewModel {
         sPerformance.lbNumbers?.compactMap { "LB-\(String($0))"}.joined(separator: "\n") ?? ""
     }
     
-    func saveLBs(_ lbs: String) {
+    func validateLBs(_ lbs: String) async -> [Int]? {
         if lbs.isEmpty {
-            edit(.lbNumbers, on: .performance, to: [])
+            return []
         } else {
             let separated = lbs.components(separatedBy: .newlines)
             let withoutPrefix = separated.filter { $0.prefix(3) != "LB-" }
-            Task { () -> Void in
-                if let withoutPrefix = withoutPrefix.first {
-                    return await setError(to: LBEditingViewModelError.missingPrefix(withoutPrefix))
-                }
-                let noPrefix = separated.compactMap { $0.replacingOccurrences(of: "LB-", with: "") }
-                let ints = noPrefix.compactMap { Int($0) }
-                guard ints.count == separated.count else {
-                    return await setError(to: LBEditingViewModelError.notANumber)
-                }
-                edit(.lbNumbers, on: .performance, to: ints)
+            if let withoutPrefix = withoutPrefix.first {
+                await setError(to: LBEditingViewModelError.missingPrefix(withoutPrefix))
+                return nil
             }
+            let noPrefix = separated.compactMap { $0.replacingOccurrences(of: "LB-", with: "") }
+            let ints = noPrefix.compactMap { Int($0) }
+            guard ints.count == separated.count else {
+                await setError(to: LBEditingViewModelError.notANumber)
+                return nil
+            }
+            return ints
         }
     }
     

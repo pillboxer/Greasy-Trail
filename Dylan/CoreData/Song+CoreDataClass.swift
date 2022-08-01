@@ -13,7 +13,7 @@ import CoreData
 public class Song: NSManagedObject {
 
     var songAuthor: String {
-        author ?? "Bob Dylan"
+        author ?? String(formatted: "default_author")
     }
 
 }

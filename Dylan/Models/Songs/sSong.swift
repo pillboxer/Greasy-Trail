@@ -12,7 +12,7 @@ public struct sSong: Codable {
     
     let uuid: String
     let title: String
-    var author: String = NSLocalizedString("default_author", comment: "")
+    var author: String
     var performances: [sPerformance]?
     var albums: [sAlbum]?
 }

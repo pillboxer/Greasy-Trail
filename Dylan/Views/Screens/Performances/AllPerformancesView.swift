@@ -10,6 +10,7 @@ import SwiftUI
 struct AllPerformancesView {
     
     @EnvironmentObject private var searchViewModel: SearchViewModel
+    @EnvironmentObject private var editingObect: EditingViewModel
     
     @State var selection: Set<Performance.ID> = []
     @FetchRequest(entity: Performance.entity(),
@@ -22,34 +23,23 @@ struct AllPerformancesView {
     ]
     
     var body: some View {
-        
         Table(tableData, selection: $selection, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_performances_0"), value: \.venue!) { performance in
                 let venue = performance.venue!
                 let date = String(performance.date)
-                
-                PopoverRowView(headline: venue, onTap: {
-                    searchViewModel.search(.init(title: date, type: .performance))
-                }, popoverContent: {
-                    LBAddingView(editorViewModel:
-                                    LBsEditorViewModel(sPerformance: sPerformance(uuid: performance.uuid!,
-                                                      venue: performance.venue!,
-                                                      songs: [],
-                                                      date: performance.date,
-                                                      lbNumbers: performance.lbNumbers)))
-                    .frame(width: 300, height: 300)
-                })
-                .gesture(doubleTap(on: date, id: performance.id))
-                .simultaneousGesture(singleTap(id: performance.id))
-                
+                Text(venue)
+                    .gesture(doubleTap(on: date, id: performance.id))
+                    .simultaneousGesture(singleTap(id: performance.id))
             }
             TableColumn(LocalizedStringKey("table_column_title_performances_1"), value: \.date) { performance in
                 let date = String(performance.date)
-                
                 Text(formatter.dateString(of: performance.date))
                     .gesture(doubleTap(on: date, id: performance.id))
                     .simultaneousGesture(singleTap(id: performance.id))
             }
+        }
+        .onDisappear {
+            editingObect.editable = nil
         }
     }
 }
@@ -69,6 +59,9 @@ extension AllPerformancesView: TwoColumnTableViewType {
             .onEnded {
                 selection.removeAll()
                 selection.insert(id)
+                if let performance = fetched.first(where: { $0.id == id }) {
+                    editingObect.editable = sPerformance(performance: performance)
+                }
             }
     }
 }

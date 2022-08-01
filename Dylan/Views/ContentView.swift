@@ -26,7 +26,6 @@ struct ContentView: View {
                          selectedID: $selectedID)
             }
         }
-        .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         .environmentObject(searchViewModel)
         .frame(width: 900, height: 600)
     }

@@ -12,7 +12,7 @@ struct PerformancesListView: View {
     let performances: [sPerformance]
 
     var sorted: [sPerformance] {
-        performances.sorted { $0.date ?? 0 < $1.date ?? 0 }
+        performances.sorted { $0.date < $1.date }
     }
 
     let onTap: (String) -> Void
@@ -27,10 +27,7 @@ struct PerformancesListView: View {
                     let title = performance.venue
                     HStack(alignment: .top) {
                         ListRowView(headline: title, subHeadline: formatter.dateString(of: performance.date)) {
-                            guard let date = performance.date else {
-                                return
-                            }
-                            onTap(String(date))
+                            onTap(String(performance.date))
                         }
                     }
                     .padding(2)
