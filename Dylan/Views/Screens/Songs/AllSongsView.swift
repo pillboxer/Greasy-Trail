@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GTCoreData
+import TwoColumnTable
 
 struct AllSongsView: View {
 
@@ -24,7 +26,6 @@ struct AllSongsView: View {
         ]
 
     var body: some View {
-
         Table(tableData, selection: $selection, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_songs_0"), value: \.title!) { song in
                 let title = song.title!

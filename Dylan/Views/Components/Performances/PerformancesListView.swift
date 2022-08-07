@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GTFormatter
+import Model
 
 struct PerformancesListView: View {
 
@@ -16,7 +18,7 @@ struct PerformancesListView: View {
     }
 
     let onTap: (String) -> Void
-    private let formatter = Formatter()
+    private let formatter = GTFormatter.Formatter()
 
     var body: some View {
         VStack(alignment: .leading) {

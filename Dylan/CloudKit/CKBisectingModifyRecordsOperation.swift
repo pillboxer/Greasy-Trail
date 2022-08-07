@@ -7,6 +7,7 @@
 
 import CloudKit
 import OSLog
+import GTLogging
 
 class CKBisectingOperationManager {
 

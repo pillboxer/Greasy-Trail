@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 /// Coordinates between different result views
 struct ResultView: View {
     
     @EnvironmentObject private var searchViewModel: SearchViewModel
+    @EnvironmentObject private var store: Store<AppState, AppAction>
     
     var body: some View {
-        if searchViewModel.songModel != nil {
+        if store.value.songDisplayModel != nil {
             ResultSongOverviewView()
-        } else if searchViewModel.albumModel != nil {
+        } else if store.value.albumDisplayModel != nil {
             ResultAlbumOverviewView()
-        } else if let model = searchViewModel.performanceModel {
-            ResultPerformanceOverviewView(editorViewModel: EditorViewModel(editable: model.sPerformance))
+        } else if let model = store.value.performanceDisplayModel {
+            ResultPerformanceOverviewView(model: model,
+                                          editorViewModel: EditorViewModel(editable: model.sPerformance))
         }
     }
 }

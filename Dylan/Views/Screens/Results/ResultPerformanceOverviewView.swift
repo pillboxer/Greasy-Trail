@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Model
 
 struct ResultPerformanceOverviewView: View {
-    
-    @EnvironmentObject private var searchViewModel: SearchViewModel
+        
+    let model: PerformanceDisplayModel
     @ObservedObject var editorViewModel: EditorViewModel
     @State private var presentAlert = false
     
@@ -17,22 +18,20 @@ struct ResultPerformanceOverviewView: View {
         VStack(spacing: 16) {
             HStack {
                 Image(systemName: "house")
-                    .onTapGesture {
-                        searchViewModel.reset()
-                    }
+
                 Spacer()
                 if editorViewModel.isEditing {
-                    EditingView(text: searchViewModel.performanceModel?.venue ?? "") {
+                    EditingView(text: model.venue) {
                         editorViewModel.stopEditing()
                     } onConfirm: { text in
                         editorViewModel.edit(.venue, on: .performance, to: text)
                     }
                 } else {
-                    Text(searchViewModel.performanceModel?.venue ?? "")
+                    Text(model.venue)
                         .font(.headline)
                         .onTapGesture(count: 3) { editorViewModel.startEditing() }
                 }
-                if let url = searchViewModel.performanceModel?.officialURL() {
+                if let url = model.officialURL() {
                     OnTapButton(systemImage: "globe") {
                         NSWorkspace.shared.open(url)
                     }
@@ -40,17 +39,17 @@ struct ResultPerformanceOverviewView: View {
                 }
                 Spacer()
             }
-            Text(searchViewModel.performanceModel?.date ?? "")
+            Text(model.date)
             Spacer()
             HStack {
-                SongsListView(songs: searchViewModel.performanceModel?.songs ?? []) { title in
-                    searchViewModel.search(.init(title: title, type: .song))
+                SongsListView(songs: model.songs) { title in
+//                    model.search(.init(title: title, type: .song))
                 }
 //                AlbumsListView(albums: searchViewModel.performanceModel?.albums ?? [],
 //                               showingAppearances: true) { title in
 //                    searchViewModel.search(.init(title: title, type: .album))
 //                }
-                if let lbNumbers = searchViewModel.performanceModel?.lbNumbers, !lbNumbers.isEmpty {
+                if let lbNumbers = model.lbNumbers, !lbNumbers.isEmpty {
                     LBsListView(lbs: lbNumbers) { url in
                         NSWorkspace.shared.open(url)
                     }
@@ -65,7 +64,7 @@ struct ResultPerformanceOverviewView: View {
         .alert(editorViewModel.alertText ?? "", isPresented: $presentAlert) {
             OnTapButton(text: "Ok") {
                 editorViewModel.stopEditing()
-                searchViewModel.search(.init(title: searchViewModel.performanceModel?.date ?? "", type: .performance))
+//                searchViewModel.search(.init(title: model.date, type: .performance))
             }
         }
         .errorAlert(error: $editorViewModel.error) {

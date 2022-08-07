@@ -8,6 +8,8 @@
 import Cocoa
 import CoreData
 import OSLog
+import GTCoreData
+import GTLogging
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 

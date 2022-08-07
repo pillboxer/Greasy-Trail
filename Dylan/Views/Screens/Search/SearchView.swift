@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-// Rename
-enum DylanSearchType {
-    case song
-    case album
-    case performance
-}
-
 struct SearchView: View {
 
     @EnvironmentObject var searchViewModel: SearchViewModel

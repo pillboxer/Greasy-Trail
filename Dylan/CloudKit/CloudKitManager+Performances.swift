@@ -9,6 +9,8 @@ import Foundation
 import CloudKit
 import OSLog
 import CoreData
+import GTCoreData
+import GTLogging
 
 extension CloudKitManager {
 

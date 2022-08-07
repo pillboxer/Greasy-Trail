@@ -9,6 +9,8 @@ import Foundation
 import CloudKit
 import CoreData
 import OSLog
+import GTCoreData
+import GTLogging
 
 class CloudKitManager: ObservableObject {
     

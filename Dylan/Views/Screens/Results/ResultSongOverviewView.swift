@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import GTFormatter
 
 struct ResultSongOverviewView: View {
     
-    @EnvironmentObject private var formatter: Formatter
+    let formatter = GTFormatter.Formatter()
     @EnvironmentObject private var searchViewModel: SearchViewModel
     
     var body: some View {

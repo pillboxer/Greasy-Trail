@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import GTLogging
+import ComposableArchitecture
+import GTCoreData
 
 @main
 struct DylanApp: App {
@@ -14,7 +17,7 @@ struct DylanApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(store: Store(initialValue: AppState(), reducing: appReducer))
                 .environmentObject(appDelegate.cloudKitManager)
                 .environmentObject(SearchViewModel())
         }

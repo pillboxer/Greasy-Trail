@@ -8,6 +8,7 @@
 import Combine
 import CloudKit
 import Foundation
+import Model
 
 class EditorViewModel: ObservableObject {
     

@@ -39,6 +39,36 @@
                ReferencedContainer = "container:Dylan.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "865962D2289C5A0B003F43A4"
+               BuildableName = "AllPerformancesTests.xctest"
+               BlueprintName = "AllPerformancesTests"
+               ReferencedContainer = "container:Dylan.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "865962F5289C5A50003F43A4"
+               BuildableName = "ComposableArchitectureTests.xctest"
+               BlueprintName = "ComposableArchitectureTests"
+               ReferencedContainer = "container:Dylan.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8659631B289D6510003F43A4"
+               BuildableName = "TableSelectionTests.xctest"
+               BlueprintName = "TableSelectionTests"
+               ReferencedContainer = "container:Dylan.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

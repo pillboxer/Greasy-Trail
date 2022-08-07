@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import GTCoreData
+import TwoColumnTable
+import GTFormatter
 
 struct AllAlbumsView {
 
@@ -16,7 +19,7 @@ struct AllAlbumsView {
     @FetchRequest(entity: Album.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "releaseDate", ascending: false)])
     var fetched: FetchedResults<Album>
-    private let formatter = Formatter()
+    private let formatter = GTFormatter.Formatter()
     
     @State var sortOrder: [KeyPathComparator<Album>] = [
         .init(\.releaseDate, order: SortOrder.reverse),

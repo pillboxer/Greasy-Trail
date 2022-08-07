@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
+import TableSelection
+import AllPerformances
 
 struct SidebarListRowView: View {
-
+    
+    @EnvironmentObject var store: Store<AppState, AppAction>
+    
     let recordType: DylanRecordType
     let isFetching: Bool
     var progress: Double?
-
+    
     @State private var selection: String
     @Binding var selectedID: String?
     
@@ -27,11 +32,13 @@ struct SidebarListRowView: View {
         self.onTap = onTap
         _selectedID = selectedID
     }
-
+    
     let onTap: () -> Void
-
+    
     var body: some View {
-        NavigationLink(destination: destinationFor(selection), tag: recordType.rawValue, selection: $selectedID) {
+        NavigationLink(destination: destinationFor(selection).environmentObject(store),
+                       tag: recordType.rawValue,
+                       selection: $selectedID) {
             HStack {
                 Text(selection.capitalized + "s")
                     .font(.headline)
@@ -61,48 +68,19 @@ struct SidebarListRowView: View {
             case .album:
                 AllAlbumsView()
             case .performance:
-                AllPerformancesView()
+                AllPerformancesView(store: store.view(value: { $0.selection }, action: { action in
+                    switch action {
+                    case .tableSelect(let action):
+                        return .tableSelect(action)
+                    case .search(let action):
+                        return .search(action)
+                    }
+                }))
             default:
                 fatalError("Should not reach here")
             }
         } else {
             fatalError()
         }
-    }
-
-}
-
-struct GaugeProgressStyle: ProgressViewStyle {
-    var strokeColor = Color.blue
-    var strokeWidth = 25.0
-
-    func makeBody(configuration: Configuration) -> some View {
-        let fractionCompleted = configuration.fractionCompleted ?? 0
-
-        return ZStack {
-            Circle()
-                .trim(from: 0, to: fractionCompleted)
-                .stroke(strokeColor, style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
-                .rotationEffect(.degrees(-90))
-        }
-    }
-}
-
-struct ProgressValueView: View {
-
-    @State var progress: Double
-
-    var body: some View {
-        ProgressView(value: progress, total: 1.0)
-            .progressViewStyle(GaugeProgressStyle())
-            .frame(width: 10, height: 10)
-            .contentShape(Rectangle())
-            .onTapGesture {
-                if progress < 1.0 {
-                    withAnimation {
-                        progress += 0.2
-                    }
-                }
-            }
     }
 }

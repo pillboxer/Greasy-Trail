@@ -8,6 +8,7 @@
 import CloudKit
 import SwiftUI
 import os
+import GTCoreData
 
 extension CloudKitManager {
     

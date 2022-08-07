@@ -8,6 +8,7 @@
 import CloudKit
 import CoreData
 import OSLog
+import GTCoreData
 
 extension CloudKitManager {
 
