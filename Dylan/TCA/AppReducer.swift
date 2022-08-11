@@ -7,10 +7,11 @@
 
 import Foundation
 
-import TableSelection
 import ComposableArchitecture
 import Search
+import TableList
 
 let appReducer: (inout AppState, AppAction) -> Void =
-combine(pullback(tableSelectionReducer, value: \.selection, action: \.tableSelect),
-        pullback(searchReducer, value: \.model, action: \.search))
+logging(combine(
+    pullback(tableListReducer, value: \.tableListState, action: \.tableListAction),
+    pullback(searchReducer, value: \.searchState, action: \.searchAction)))

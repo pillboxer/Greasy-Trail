@@ -7,11 +7,11 @@
 
 import Foundation
 
-func delay(_ timeInterval: TimeInterval, action: @escaping () -> Void) {
+public func delay(_ timeInterval: TimeInterval, action: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + timeInterval, execute: action)
 }
 
-func delay(_ timeInterval: TimeInterval) async {
+public func delay(_ timeInterval: TimeInterval) async {
     await withCheckedContinuation { continuation in
         delay(timeInterval) {
             continuation.resume()

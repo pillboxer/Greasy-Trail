@@ -6,20 +6,24 @@
 //
 
 import SwiftUI
+import UI
+import SearchField
+import Search
+import ComposableArchitecture
 
 struct SearchView: View {
-
-    @EnvironmentObject var searchViewModel: SearchViewModel
+    
+    @ObservedObject var store: Store<SearchState, SearchAction>
 
     var body: some View {
-        if searchViewModel.shouldDisplayNoResultsFound {
+        if let search = store.value.failedSearch {
             Text(LocalizedStringKey(String(format: NSLocalizedString("search_failed", comment: ""),
-                                           searchViewModel.text)))
+                                           search.title)))
             OnTapButton(text: "generic_ok") {
-                searchViewModel.reset()
+                store.send(.reset)
             }
         } else {
-            SearchFieldView()
+            SearchFieldView(store: store)
         }
     }
 

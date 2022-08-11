@@ -7,20 +7,19 @@
 
 import SwiftUI
 import Model
+import UI
 
-struct SongsListView: View {
+public struct SongsListView: View {
     
     let songs: [sSong]
-    private var titles: [String] {
-        songs.map { $0.title }
-    }
-    
-    var titlesWithoutBreaks: [sSong] {
-        songs.filter { $0.title != "BREAK" }
-    }
     let onTap: (String) -> Void
     
-    var body: some View {
+    public init(songs: [sSong], onTap: @escaping (String) -> Void) {
+        self.songs = songs
+        self.onTap = onTap
+    }
+    
+    public var body: some View {
         VStack(alignment: .leading) {
             Text("songs_list_title").font(.title)
                 .padding(.bottom)
@@ -41,4 +40,16 @@ struct SongsListView: View {
             }
         }
     }
+}
+
+private extension SongsListView {
+    
+    var titles: [String] {
+        songs.map { $0.title }
+    }
+    
+    var titlesWithoutBreaks: [sSong] {
+        songs.filter { $0.title != "BREAK" }
+    }
+    
 }

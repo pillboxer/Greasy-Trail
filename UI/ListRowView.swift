@@ -49,13 +49,19 @@ private struct _ListRowView<V: View>: View {
     }
 }
 
-struct ListRowView: View {
+public struct ListRowView: View {
     
     let headline: String
     var subHeadline: String?
     let onTap: () -> Void
     
-    var body: some View {
+    public init(headline: String, subHeadline: String? = nil, onTap: @escaping () -> Void) {
+        self.headline = headline
+        self.subHeadline = subHeadline
+        self.onTap = onTap
+    }
+    
+    public var body: some View {
         _ListRowView<EmptyView>(headline: headline, subHeadline: subHeadline, onTap: onTap)
     }
     

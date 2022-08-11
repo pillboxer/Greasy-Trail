@@ -8,19 +8,15 @@
 import SwiftUI
 import GTCoreData
 import GTFormatter
-import TableSelection
+import Model
 import Search
 import TwoColumnTable
 import ComposableArchitecture
-
-public enum AllPerformancesViewAction {
-    case tableSelect(TableSelectionAction)
-    case search(SearchAction)
-}
+import TableList
 
 public struct AllPerformancesView {
     
-    @ObservedObject var store: Store<Set<ObjectIdentifier>, AllPerformancesViewAction>
+    @ObservedObject var store: Store<TableListState, TableListAction>
     let formatter = GTFormatter.Formatter()
     
     @FetchRequest(entity: Performance.entity(),
@@ -31,17 +27,19 @@ public struct AllPerformancesView {
         .init(\.venue, order: SortOrder.forward)
     ]
     
-    public init(store: Store<Set<ObjectIdentifier>, AllPerformancesViewAction>) {
+    public init(store: Store<TableListState, TableListAction>) {
         self.store = store
     }
     
+    @State private var ids: Set<ObjectIdentifier> = []
+    
     public var body: some View {
         
-        Table(tableData, selection: $store.value, sortOrder: $sortOrder) {
+        Table(tableData, selection: $ids, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_performances_0"), value: \.venue!) { performance in
                 let venue = performance.venue!
                 let date = String(performance.date)
-
+                
                 Text(venue)
                     .gesture(doubleTap(on: date, id: performance.id))
                     .simultaneousGesture(singleTap(id: performance.id))
@@ -53,6 +51,10 @@ public struct AllPerformancesView {
                     .gesture(doubleTap(on: date, id: performance.id))
                     .simultaneousGesture(singleTap(id: performance.id))
             }
+        }
+        .onAppear { ids = store.value.ids }
+        .onChange(of: store.value.ids) { newValue in
+            ids = newValue
         }
     }
 }

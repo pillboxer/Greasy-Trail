@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import SongsList
+import UI
 
 struct ResultAlbumOverviewView: View {
 

@@ -8,37 +8,45 @@
 import SwiftUI
 import GTCoreData
 import TwoColumnTable
+import ComposableArchitecture
+import TableList
 
-struct AllSongsView: View {
+public struct AllSongsView: View {
 
-    @EnvironmentObject private var searchViewModel: SearchViewModel
-
-    @State var selection: Set<Song.ID> = []
+    @ObservedObject var store: Store<TableListState, TableListAction>
     
     @FetchRequest(entity: Song.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)],
                   predicate: NSPredicate(format: "title != %@", "BREAK"))
-    var fetched: FetchedResults<Song>
-
-    @State var sortOrder: [KeyPathComparator<Song>] = [
+    public var fetched: FetchedResults<Song>
+    
+    @State public var sortOrder: [KeyPathComparator<Song>] = [
             .init(\.title, order: SortOrder.forward),
             .init(\.author, order: SortOrder.forward)
         ]
+    
+    @State private var ids: Set<ObjectIdentifier> = []
+    
+    public init(store: Store<TableListState, TableListAction>) {
+        self.store = store
+    }
 
-    var body: some View {
-        Table(tableData, selection: $selection, sortOrder: $sortOrder) {
+    public var body: some View {
+        Table(tableData, selection: $ids, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_songs_0"), value: \.title!) { song in
                 let title = song.title!
                 Text(title)
                     .gesture(doubleTap(on: title, id: song.id))
-                    .simultaneousGesture(singleTap(id: title))
             }
             TableColumn(LocalizedStringKey("table_column_title_songs_1"), value: \.songAuthor) { song in
                 let title = song.title!
                 Text(song.songAuthor)
                     .gesture(doubleTap(on: title, id: song.id))
-                    .simultaneousGesture(singleTap(id: title))
             }
+        }
+        .onAppear { ids = store.value.ids }
+        .onChange(of: store.value.ids) { newValue in
+            ids = newValue
         }
 
     }
@@ -47,19 +55,16 @@ struct AllSongsView: View {
 
 extension AllSongsView: TwoColumnTableViewType {
 
-    func doubleTap(on string: String, id: Song.ID) -> _EndedGesture<TapGesture> {
+    public func doubleTap(on string: String, id: Song.ID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
-            selection.removeAll()
-            searchViewModel.search(.init(title: string, type: .song))
-            selection.insert(id)
+            store.send(.search(.makeSearch(.init(title: string, type: .song))))
         }
     }
-
-    func singleTap(id: Song.ID) -> _EndedGesture<TapGesture> {
+    
+    public func singleTap(id: Song.ID) -> _EndedGesture<TapGesture> {
         TapGesture()
             .onEnded {
-                selection.removeAll()
-                selection.insert(id)
+                store.send(.tableSelect(.select(identifier: id)))
             }
     }
 

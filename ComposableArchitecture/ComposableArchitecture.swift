@@ -6,11 +6,12 @@
 //
 
 import Combine
+import CloudKit
 // swiftlint: disable identifier_name
 public final class Store<State, Action>: ObservableObject {
     
     let reducer: (inout State, Action) -> Void
-    @Published public var value: State
+    @Published public private(set) var value: State
     private var cancellable: AnyCancellable?
     
     public init(initialValue: State, reducing: @escaping (inout State, Action) -> Void) {
@@ -19,7 +20,6 @@ public final class Store<State, Action>: ObservableObject {
     }
     
     public func send(_ action: Action) {
-        print("*** Sending Action ***")
         reducer(&value, action)
     }
 
@@ -28,11 +28,9 @@ public final class Store<State, Action>: ObservableObject {
     -> Store<LocalState, LocalAction> {
         let localValue = toLocalValue(self.value)
         let localStore = Store<LocalState, LocalAction>(initialValue: localValue) { localValue, localAction in
-            print("*** In LocalStore closure ***")
             // Local store has a new reducer
             // Send parent store the action
             self.send(toGlobalAction(localAction))
-            print("*** Get current local value (after change) ***")
             localValue = toLocalValue(self.value)
 
         }
@@ -54,21 +52,33 @@ public final class Store<State, Action>: ObservableObject {
 
 public func combine<Value, Action>(_ reducers: (inout Value, Action) -> Void...) -> (inout Value, Action) -> Void {
     return { value, action in
-        for (index, reducer) in reducers.enumerated() {
-            print("*** Calling reducer \(index + 1) ***")
+        for reducer in reducers {
+            // Pullback
             reducer(&value, action)
         }
     }
 }
 
+public func logging<Value, Action>(_ reducer:
+                                   @escaping (inout Value, Action) -> Void) -> (inout Value, Action) -> Void {
+    return { value, action in
+        // Combine reducer
+        reducer(&value, action)
+        print("Action: \(action)")
+        print("Value: ")
+        dump(value)
+        print("-----")
+    }
+}
+
+// tableSelectionReducer, value: \AllPerformancesState.ids, action: \AllPerformancesViewAction.tableSelect
+
 public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
     _ reducer: @escaping (inout LocalValue, LocalAction) -> Void,
     value: WritableKeyPath<GlobalValue, LocalValue>,
-    action: WritableKeyPath<GlobalAction, LocalAction?>) -> (inout GlobalValue, GlobalAction) -> Void {
+    action: WritableKeyPath<GlobalAction, LocalAction?>)-> (inout GlobalValue, GlobalAction) -> Void {
         return { globalValue, globalAction in
-            print("*** Calling Pullback ***")
             guard let localAction = globalAction[keyPath: action] else {
-                print("*** Action doesn't belong to this reducer ***")
                 return
             }
             reducer(&globalValue[keyPath: value], localAction)

@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
+import Search
 
 enum SidebarSection: String, CaseIterable {
     case songs = "Song"
@@ -14,13 +16,15 @@ enum SidebarSection: String, CaseIterable {
 }
 
 struct HomeView: View {
-
+    
+    @EnvironmentObject var store: Store<AppState, AppAction>
+    
     let fetchingType: DylanRecordType?
     var progress: Double? = 0
     @State var recordTypeToAdd: DylanRecordType?
     @Binding var selectedID: String?
     @EnvironmentObject private var cloudKitManager: CloudKitManager
-
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -43,8 +47,12 @@ struct HomeView: View {
                         }
                     }
                 }
-                SearchView()
-                    .padding()
+                SearchView(store: store.view(value: {
+                    SearchState(model: $0.model, failedSearch: $0.failedSearch, currentSearch: $0.currentSearch)
+                }, action: {
+                    .search($0)
+                }))
+                .padding()
             }
         }
     }

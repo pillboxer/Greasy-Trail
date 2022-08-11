@@ -7,20 +7,29 @@
 
 import SwiftUI
 import GTFormatter
+import Search
 import Model
+import ComposableArchitecture
+import UI
 
-struct PerformancesListView: View {
+public struct PerformancesListView: View {
+    
+    @ObservedObject var store: Store<Model?, SearchAction>
 
-    let performances: [sPerformance]
+    private let performances: [sPerformance]
 
-    var sorted: [sPerformance] {
+    private var sorted: [sPerformance] {
         performances.sorted { $0.date ?? 0 < $1.date ?? 0 }
     }
+ 
+    public init(performances: [sPerformance], store: Store<Model?, SearchAction>) {
+        self.performances = performances
+        self.store = store
+    }
 
-    let onTap: (String) -> Void
     private let formatter = GTFormatter.Formatter()
 
-    var body: some View {
+    public var body: some View {
         VStack(alignment: .leading) {
             Text("performances_list_title").font(.title)
                 .padding(.bottom)
@@ -32,7 +41,7 @@ struct PerformancesListView: View {
                             guard let date = performance.date else {
                                 return
                             }
-                            onTap(String(date))
+                            store.send(.makeSearch(.init(title: String(date), type: .performance)))
                         }
                     }
                     .padding(2)

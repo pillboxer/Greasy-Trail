@@ -8,28 +8,34 @@
 import Foundation
 import SwiftUI
 
-struct NSTextFieldRepresentable: NSViewRepresentable {
+public struct NSTextFieldRepresentable: NSViewRepresentable {
 
     let placeholder: String
     var text: Binding<String>
     var onCommit: () -> Void
+    
+    public init(placeholder: String, text: Binding<String>, onCommit: @escaping () -> Void) {
+        self.placeholder = placeholder
+        self.text = text
+        self.onCommit = onCommit
+    }
 
-    func makeNSView(context: Context) -> NSTextField {
+    public func makeNSView(context: Context) -> NSTextField {
         let view = NSTextField()
         view.delegate = context.coordinator
         return view
     }
 
-    func makeCoordinator() -> NSTextFieldCoordinator {
+    public func makeCoordinator() -> NSTextFieldCoordinator {
         NSTextFieldCoordinator(textField: self)
     }
 
-    func updateNSView(_ nsView: NSTextField, context: Context) {
+    public func updateNSView(_ nsView: NSTextField, context: Context) {
         customize(nsView)
         nsView.stringValue = text.wrappedValue
     }
 
-    func customize(_ textField: NSTextField) {
+    private func customize(_ textField: NSTextField) {
         textField.placeholderString = NSLocalizedString(placeholder, comment: "")
         textField.focusRingType = .none
         textField.wantsLayer = true
@@ -45,7 +51,7 @@ struct NSTextFieldRepresentable: NSViewRepresentable {
     }
 
 }
-class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
+public class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
 
     var textField: NSTextFieldRepresentable
 
@@ -53,7 +59,7 @@ class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
         self.textField = textField
     }
 
-    func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+    public func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
         if commandSelector == #selector(NSResponder.insertNewline(_:)) {
             // Do something against ENTER key
             textField.onCommit()
@@ -62,7 +68,7 @@ class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
         return false
     }
 
-    func controlTextDidChange(_ obj: Notification) {
+    public func controlTextDidChange(_ obj: Notification) {
         textField.text.wrappedValue = (obj.object as? NSTextField)?.stringValue ?? ""
     }
 

@@ -12,7 +12,6 @@ import GTCoreData
 struct ContentView: View {
     @ObservedObject var store: Store<AppState, AppAction>
     @EnvironmentObject private var cloudKitManager: CloudKitManager
-    @EnvironmentObject private var searchViewModel: SearchViewModel
     @State private var selectedID: String?
 
     var body: some View {
@@ -31,7 +30,6 @@ struct ContentView: View {
             }
         }
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-        .environmentObject(searchViewModel)
         .frame(width: 900, height: 600)
     }
 }

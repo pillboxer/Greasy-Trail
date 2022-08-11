@@ -10,6 +10,7 @@ import Foundation
 import GTFormatter
 import Search
 import Model
+import Core
 
 class SearchViewModel: ObservableObject {
     

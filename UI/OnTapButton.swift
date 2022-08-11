@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnTapButton: View {
+public struct OnTapButton: View {
 
     var text: String?
     var image: String?
@@ -15,7 +15,19 @@ struct OnTapButton: View {
     var onTap: () -> Void
     var args: [CVarArg]?
     
-    var body: some View {
+    public init(text: String? = nil,
+                image: String? = nil,
+                systemImage: String? = nil,
+                onTap: @escaping () -> Void,
+                args: [CVarArg]? = nil) {
+        self.text = text
+        self.image = image
+        self.systemImage = systemImage
+        self.onTap = onTap
+        self.args = args
+    }
+    
+    public var body: some View {
         Button {
             onTap()
         } label: {

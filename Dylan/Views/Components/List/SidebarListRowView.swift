@@ -9,6 +9,9 @@ import SwiftUI
 import ComposableArchitecture
 import TableSelection
 import AllPerformances
+import UI
+import TableList
+import AllSongs
 
 struct SidebarListRowView: View {
     
@@ -64,17 +67,18 @@ struct SidebarListRowView: View {
         if let section = DylanRecordType(rawValue: selection) {
             switch section {
             case .song:
-                AllSongsView()
+                AllSongsView(store: store.view(value: {
+                    TableListState(ids: $0.selection, model: $0.model, failedSearch: $0.failedSearch)
+                }, action: { action in
+                    return .tableList(action)
+                }))
             case .album:
                 AllAlbumsView()
             case .performance:
-                AllPerformancesView(store: store.view(value: { $0.selection }, action: { action in
-                    switch action {
-                    case .tableSelect(let action):
-                        return .tableSelect(action)
-                    case .search(let action):
-                        return .search(action)
-                    }
+                AllPerformancesView(store: store.view(value: {
+                    TableListState(ids: $0.selection, model: $0.model, failedSearch: $0.failedSearch)
+                }, action: { action in
+                    return .tableList(action)
                 }))
             default:
                 fatalError("Should not reach here")

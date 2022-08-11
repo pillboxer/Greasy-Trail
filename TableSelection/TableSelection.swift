@@ -12,7 +12,6 @@ public enum TableSelectionAction {
 }
 
 public func tableSelectionReducer(state: inout Set<ObjectIdentifier>, action: TableSelectionAction) {
-    print("*** In table selection reducer ***")
     switch action {
     case .select(let identifier):
         state.removeAll()
