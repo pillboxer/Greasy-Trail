@@ -6,9 +6,8 @@
 //
 
 import SwiftUI
-import UI
 
-extension View {
+public extension View {
     @MainActor
     func errorAlert(error: Binding<Error?>, title: String = "Error", action: (() -> Void)? = nil) -> some View {
         let alertError = AlertError(error: error.wrappedValue)

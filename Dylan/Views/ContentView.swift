@@ -8,20 +8,26 @@
 import SwiftUI
 import ComposableArchitecture
 import GTCoreData
+import Result
+import Search
+import GTCloudKit
 
 struct ContentView: View {
     @ObservedObject var store: Store<AppState, AppAction>
     @EnvironmentObject private var cloudKitManager: CloudKitManager
     @State private var selectedID: String?
-
+    
     var body: some View {
         Group {
             if let step = cloudKitManager.currentStep,
                case let .failure(error) = step {
-                   CloudKitFailureView(error: error)
+                CloudKitFailureView(error: error)
             } else if store.value.model != nil {
-                ResultView()
-                    .environmentObject(store)
+                ResultView(store: store.view(value: {
+                    return SearchState(model: $0.model, failedSearch: $0.failedSearch, currentSearch: $0.currentSearch)
+                }, action: {
+                    .search($0)
+                }))
             } else {
                 HomeView(fetchingType: cloudKitManager.fetchingType,
                          progress: cloudKitManager.progress,

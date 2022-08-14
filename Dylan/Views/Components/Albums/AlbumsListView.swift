@@ -34,7 +34,7 @@ struct AlbumsListView: View {
                 let suffix = showingAppearances ? "(\(String(appearances)))" : ""
                 let title = "\(prefix) \(suffix)"
                 HStack(alignment: .top) {
-                    ListRowView(headline: title, subHeadline: formatter.dateString(of: album.releaseDate)) {
+                    ListRowView(headline: title, subheadline: formatter.dateString(of: album.releaseDate)) {
                         onTap(album.title)
                     }
                 }

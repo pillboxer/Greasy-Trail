@@ -10,6 +10,7 @@ import CloudKit
 import Foundation
 import Model
 import Core
+import GTCloudKit
 
 class EditorViewModel: ObservableObject {
     

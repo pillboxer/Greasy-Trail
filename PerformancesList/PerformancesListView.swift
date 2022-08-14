@@ -37,7 +37,7 @@ public struct PerformancesListView: View {
                 List(performances, id: \.self) { performance in
                     let title = performance.venue
                     HStack(alignment: .top) {
-                        ListRowView(headline: title, subHeadline: formatter.dateString(of: performance.date)) {
+                        ListRowView(headline: title, subheadline: formatter.dateString(of: performance.date)) {
                             guard let date = performance.date else {
                                 return
                             }

@@ -7,10 +7,16 @@
 
 import Foundation
 
-struct PerformanceUploadModel {
+public struct PerformanceUploadModel {
 
-    let venue: String
-    let date: Double
-    let uuids: [String]
+    public let venue: String
+    public let date: Double
+    public let uuids: [String]
+    
+    public init(venue: String, date: Double, uuids: [String]) {
+        self.venue = venue
+        self.date = date
+        self.uuids = uuids
+    }
 
 }

@@ -10,6 +10,7 @@ import CoreData
 import OSLog
 import GTCoreData
 import GTLogging
+import GTCloudKit
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 

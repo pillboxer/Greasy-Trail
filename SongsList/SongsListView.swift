@@ -24,17 +24,15 @@ public struct SongsListView: View {
             Text("songs_list_title").font(.title)
                 .padding(.bottom)
             List(songs, id: \.self) { song in
-                let title = song.title
-                if title == "BREAK" {
+                if song.title == "BREAK" {
                     Divider()
                 } else {
                     let index = (titlesWithoutBreaks.firstIndex(of: song) ?? 0)
-                    HStack(alignment: .top) {
-                        Text("\(index + 1).")
-                        ListRowView(headline: title, subHeadline: song.author) {
-                            onTap(title)
-                        }
-                    }
+                    ListSongView(index: index, title: song.title, author: song.author, onTap: {
+                        onTap(song.title)
+                    }, onButtonTap: { button in
+                        print(button.rawValue)
+                    })
                     .padding(2)
                 }
             }

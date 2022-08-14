@@ -11,6 +11,7 @@ import GTCoreData
 import CoreData
 import os
 import GTLogging
+import GTCloudKit
 
 class SpellingResolverManager: ObservableObject {
     

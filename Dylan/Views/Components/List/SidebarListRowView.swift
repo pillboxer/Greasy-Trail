@@ -11,6 +11,7 @@ import TableSelection
 import AllPerformances
 import UI
 import TableList
+import GTCloudKit
 import AllSongs
 
 struct SidebarListRowView: View {

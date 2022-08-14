@@ -11,6 +11,7 @@ import GTFormatter
 import Search
 import Model
 import Core
+import GTCloudKit
 
 class SearchViewModel: ObservableObject {
     

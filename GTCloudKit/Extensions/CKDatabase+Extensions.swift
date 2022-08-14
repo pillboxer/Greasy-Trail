@@ -9,9 +9,10 @@ import CloudKit
 import OSLog
 
 extension CKDatabase: DatabaseType {
-
-    func recordTypes(for ids: [CKRecord.ID],
-                     desiredKeys: [CKRecord.FieldKey]?) async throws -> [CKRecord.ID: Result<RecordType, Error>] {
+    
+    public func recordTypes(for ids: [CKRecord.ID],
+                            desiredKeys: [CKRecord.FieldKey]?) async throws ->
+    [CKRecord.ID: Result<RecordType, Error>] {
         let oldReturn = try await records(for: ids, desiredKeys: desiredKeys)
         var toReturn: [CKRecord.ID: Result<RecordType, Error>] = [:]
         for pair in oldReturn {
@@ -21,8 +22,8 @@ extension CKDatabase: DatabaseType {
         }
         return toReturn
     }
-
-    func fetchPagedResults(with query: CKQuery) async throws -> ([PagedResult]) {
+    
+    public func fetchPagedResults(with query: CKQuery) async throws -> ([PagedResult]) {
         try await withCheckedThrowingContinuation { contination in
             let operation = CKPagingQueryOperation(query: query, database: self)
             operation.pagingCompletionBlock = { results in
@@ -33,7 +34,7 @@ extension CKDatabase: DatabaseType {
             }
             operation.start()
         }
-
+        
     }
-
+    
 }

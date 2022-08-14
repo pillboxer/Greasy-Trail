@@ -6,25 +6,26 @@
 //
 
 import CloudKit
+import Core
 
-enum DylanRecordType: CKRecord.RecordType {
+public enum DylanRecordType: CKRecord.RecordType {
     case song = "Song"
     case album = "Album"
     case performance = "Performance"
     case appMetadata =  "AppMetadata"
     
-    static var displayedTypes: [DylanRecordType] {
+    public static var displayedTypes: [DylanRecordType] {
         return [.song, .album, .performance]
     }
 
 }
 
-enum DylanReferenceType: CKRecord.RecordType {
+public enum DylanReferenceType: CKRecord.RecordType {
     case albums = "albums"
     case songs = "songs"
 }
 
-enum DylanRecordField: String {
+public enum DylanRecordField: String {
     // Song
     case title
     case author
@@ -43,4 +44,20 @@ enum DylanRecordField: String {
     case name
 
     case modificationDate
+}
+
+enum CloudKitManagerError: LocalizedError {
+   
+    case query(code: Int)
+    case unknown
+    
+    var errorDescription: String? {
+        switch self {
+        case .query(let code):
+            return String(formatted: "cloud_kit_query_error_\(code)")
+        case .unknown:
+            return String(formatted: "cloud_kit_upload_unknown")
+        }
+    }
+   
 }

@@ -8,7 +8,7 @@
 import Foundation
 import CloudKit
 
-extension CloudKitManager {
+public extension CloudKitManager {
     
     // swiftlint: disable force_cast
     func edit(_ field: DylanRecordField,

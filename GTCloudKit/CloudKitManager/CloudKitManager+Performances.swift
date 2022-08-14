@@ -11,6 +11,7 @@ import OSLog
 import CoreData
 import GTCoreData
 import GTLogging
+import Model
 
 extension CloudKitManager {
 
@@ -58,7 +59,7 @@ extension CloudKitManager {
         }
     }
 
-    func upload(_ performanceUploadModel: PerformanceUploadModel) async {
+    public func upload(_ performanceUploadModel: PerformanceUploadModel) async {
         let result = await _upload(performanceUploadModel)
         switch result {
         case .success:

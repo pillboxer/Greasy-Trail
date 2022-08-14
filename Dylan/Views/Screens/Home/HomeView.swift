@@ -8,6 +8,7 @@
 import SwiftUI
 import ComposableArchitecture
 import Search
+import GTCloudKit
 
 enum SidebarSection: String, CaseIterable {
     case songs = "Song"
@@ -18,7 +19,6 @@ enum SidebarSection: String, CaseIterable {
 struct HomeView: View {
     
     @EnvironmentObject var store: Store<AppState, AppAction>
-    
     let fetchingType: DylanRecordType?
     var progress: Double? = 0
     @State var recordTypeToAdd: DylanRecordType?

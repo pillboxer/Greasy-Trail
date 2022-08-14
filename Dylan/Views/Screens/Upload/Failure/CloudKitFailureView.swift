@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UI
+import GTCloudKit
 
 struct CloudKitFailureView: View {
 

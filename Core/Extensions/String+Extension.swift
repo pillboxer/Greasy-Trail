@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension String {
+public extension String {
     
     init(formatted: String, args: CVarArg...) {
         self.init(format: NSLocalizedString(formatted, comment: ""), args)

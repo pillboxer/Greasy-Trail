@@ -16,11 +16,8 @@ class AppState: ObservableObject {
     var selection: Set<ObjectIdentifier> = []    
     @Published var model: Model?
     @Published var failedSearch: Search?
-    @Published var currentSearch: Search? {
-        didSet {
-            print("NOW \(currentSearch)")
-        }
-    }
+    @Published var currentSearch: Search?
+    
 }
 
 extension AppState {

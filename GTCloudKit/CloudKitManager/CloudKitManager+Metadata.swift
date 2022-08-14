@@ -37,7 +37,7 @@ extension CloudKitManager {
     }
 }
 
-extension CloudKitManager {
+public extension CloudKitManager {
     // swiftlint: disable force_cast
     func upload(_ metdata: AppMetadata) async -> Result<CKRecord, Error> {
         let query = CKQuery(recordType: .appMetadata, predicate: .misspellings)

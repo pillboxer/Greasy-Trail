@@ -8,6 +8,8 @@
 import SwiftUI
 import GTFormatter
 import UI
+import Model
+import GTCloudKit
 
 struct PerformanceAddingView: View {
 

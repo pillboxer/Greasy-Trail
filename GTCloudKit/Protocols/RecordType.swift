@@ -7,7 +7,7 @@
 
 import CloudKit
 
-protocol RecordType {
+public protocol RecordType {
     var recordID: CKRecord.ID { get }
     func string(for field: DylanRecordField) -> String?
     func ints(for field: DylanRecordField) -> [Int]?

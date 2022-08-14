@@ -11,10 +11,16 @@ import CoreData
 import OSLog
 import GTCoreData
 import GTLogging
+import Core
+import GTFormatter
 
-class CloudKitManager: ObservableObject {
+// swiftlint:disable identifier_name
+let DylanContainer = CKContainer(identifier: "iCloud.Dylan")
+public let DylanDatabase = DylanContainer.publicCloudDatabase
+
+public class CloudKitManager: ObservableObject {
     
-    enum CloudKitStep {
+    public enum CloudKitStep {
         case fetching(DylanRecordType)
         case uploading(String)
         case failure(String)
@@ -25,19 +31,19 @@ class CloudKitManager: ObservableObject {
     @UserDefaultsBacked(key: "last_fetch_date_performances") static var lastFetchDatePerformances: Date?
     @UserDefaultsBacked(key: "last_fetch_date_appMetadata") static var lastFetchDateAppMetadata: Date?
 
-    @Published private(set) var currentStep: CloudKitStep?
-    @Published var progress: Double? = 0
+    @Published private(set) public var currentStep: CloudKitStep?
+    @Published public var progress: Double? = 0
 
     let database: DatabaseType
     let container: NSPersistentContainer
 
-    init(_ database: DatabaseType = DylanDatabase,
-         container: NSPersistentContainer = PersistenceController.shared.container) {
+    public init(_ database: DatabaseType = DylanDatabase,
+                container: NSPersistentContainer = PersistenceController.shared.container) {
         self.database = database
         self.container = container
     }
 
-    func start() async {
+    public func start() async {
         subscribeToDatabase()
         do {
             try await fetchLatestMetadata()
@@ -80,7 +86,7 @@ class CloudKitManager: ObservableObject {
 extension CloudKitManager {
     
     @MainActor
-    func setCurrentStep(to step: CloudKitStep?) {
+    public func setCurrentStep(to step: CloudKitStep?) {
         currentStep = step
     }
     
@@ -90,7 +96,7 @@ extension CloudKitManager {
     
 }
 
-extension CloudKitManager {
+public extension CloudKitManager {
     
     var fetchingType: DylanRecordType? {
         guard case let .fetching(type) = currentStep else {
@@ -101,7 +107,7 @@ extension CloudKitManager {
     
 }
 
-extension CloudKitManager {
+public extension CloudKitManager {
     
     static func resetAllFetchDates() {
         lastFetchDateSongs = nil

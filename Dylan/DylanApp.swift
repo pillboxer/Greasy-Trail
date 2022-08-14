@@ -9,6 +9,7 @@ import SwiftUI
 import GTLogging
 import ComposableArchitecture
 import GTCoreData
+import GTCloudKit
 
 @main
 struct DylanApp: App {

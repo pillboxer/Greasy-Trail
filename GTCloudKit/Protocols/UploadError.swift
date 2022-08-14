@@ -7,9 +7,8 @@
 
 import Foundation
 
-enum UploadError: Error {
+public enum UploadError: Error {
     case songNotRecognized(String)
     case missingField
     case invalidDate(String)
-
 }
