@@ -18,17 +18,20 @@ public struct AllPerformancesView {
     
     @ObservedObject var store: Store<TableListState, TableListAction>
     let formatter = GTFormatter.Formatter()
-    
-    @FetchRequest(entity: Performance.entity(),
-                  sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)])
-    public var fetched: FetchedResults<Performance>
+    let predicate: NSPredicate
+    @FetchRequest public var fetched: FetchedResults<Performance>
     @State public var sortOrder: [KeyPathComparator<Performance>] = [
         .init(\.date, order: SortOrder.reverse),
         .init(\.venue, order: SortOrder.forward)
     ]
     
-    public init(store: Store<TableListState, TableListAction>) {
+    public init(store: Store<TableListState, TableListAction>,
+                predicate: NSPredicate = NSPredicate(value: true)) {
         self.store = store
+        self.predicate = predicate
+        _fetched = FetchRequest<Performance>(entity: Performance.entity(),
+                                            sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)],
+                                             predicate: predicate)
     }
     
     @State private var ids: Set<ObjectIdentifier> = []
@@ -52,7 +55,10 @@ public struct AllPerformancesView {
                     .simultaneousGesture(singleTap(id: performance.id))
             }
         }
-        .onAppear { ids = store.value.ids }
+        .onAppear {
+            ids = store.value.ids
+            
+        }
         .onChange(of: store.value.ids) { newValue in
             ids = newValue
         }

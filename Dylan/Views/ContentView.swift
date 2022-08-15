@@ -11,6 +11,7 @@ import GTCoreData
 import Result
 import Search
 import GTCloudKit
+import Sidebar
 
 struct ContentView: View {
     @ObservedObject var store: Store<AppState, AppAction>
@@ -29,7 +30,7 @@ struct ContentView: View {
                     .search($0)
                 }))
             } else {
-                HomeView(fetchingType: cloudKitManager.fetchingType,
+                HomeView(fetchingType: cloudKitManager.fetchingType?.sidebarDisplayType,
                          progress: cloudKitManager.progress,
                          selectedID: $selectedID)
                 .environmentObject(store)
@@ -38,4 +39,21 @@ struct ContentView: View {
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         .frame(width: 900, height: 600)
     }
+}
+
+private extension DylanRecordType {
+    
+    var sidebarDisplayType: SidebarDisplayType? {
+        switch self {
+        case .song:
+            return .songs
+        case .album:
+            return .albums
+        case .performance:
+            return .performances
+        case .appMetadata:
+            return nil
+        }
+    }
+    
 }

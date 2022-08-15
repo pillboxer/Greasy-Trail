@@ -12,13 +12,13 @@ public struct ListRowView: View {
     let headline: String
     var subheadline: String?
     private let buttons: [ListRowButton]?
-    let onTap: () -> Void
+    let onTap: (() -> Void)?
     let buttonTap: ((ListRowButton) -> Void)?
-    
+        
     public init(headline: String,
                 subheadline: String? = nil,
                 buttons: [ListRowButton]? = nil,
-                onTap: @escaping () -> Void,
+                onTap: (() -> Void)? = nil,
                 buttonTap: ((ListRowButton) -> Void)? = nil) {
         self.headline = headline
         self.subheadline = subheadline

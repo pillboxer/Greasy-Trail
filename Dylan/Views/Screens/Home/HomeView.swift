@@ -6,46 +6,33 @@
 //
 
 import SwiftUI
-import ComposableArchitecture
 import Search
 import GTCloudKit
-
-enum SidebarSection: String, CaseIterable {
-    case songs = "Song"
-    case album = "Album"
-    case performances = "Performance"
-}
+import ComposableArchitecture
+import Sidebar
 
 struct HomeView: View {
     
     @EnvironmentObject var store: Store<AppState, AppAction>
-    let fetchingType: DylanRecordType?
+    let fetchingType: SidebarDisplayType?
     var progress: Double? = 0
-    @State var recordTypeToAdd: DylanRecordType?
     @Binding var selectedID: String?
+    @State private var existingSelectedID: String?
     @EnvironmentObject private var cloudKitManager: CloudKitManager
     
     var body: some View {
         NavigationView {
             VStack {
-                List(DylanRecordType.displayedTypes, id: \.self) { item in
+                List(SidebarDisplayType.displayedTypes,
+                     id: \.self,
+                     children: \.children) { item in
                     HStack {
-                        SidebarListRowView(recordType: item,
+                        SidebarListRowView(displayType: item,
                                            isFetching: fetchingType == item,
                                            progress: progress,
-                                           selectedID: $selectedID) {
-                            recordTypeToAdd = item
-                        }
+                                           selectedID: $selectedID)
                     }
                     .padding(4)
-                }
-                if let recordType = recordTypeToAdd {
-                    // FIXME: UPloade view model
-                    UploadView(recordType: recordType) { model in
-                        Task {
-                            await cloudKitManager.upload(model)
-                        }
-                    }
                 }
                 SearchView(store: store.view(value: {
                     SearchState(model: $0.model, failedSearch: $0.failedSearch, currentSearch: $0.currentSearch)
@@ -54,6 +41,15 @@ struct HomeView: View {
                 }))
                 .padding()
             }
+        }
+        .onChange(of: selectedID) { newValue in
+            if newValue == SidebarDisplayType.performances.rawValue {
+                selectedID = existingSelectedID
+            }
+            existingSelectedID = selectedID
+        }
+        .onAppear {
+            selectedID = SidebarDisplayType.songs.rawValue
         }
     }
 }

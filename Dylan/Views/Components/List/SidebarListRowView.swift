@@ -13,39 +13,36 @@ import UI
 import TableList
 import GTCloudKit
 import AllSongs
+import Sidebar
 
 struct SidebarListRowView: View {
     
     @EnvironmentObject var store: Store<AppState, AppAction>
     
-    let recordType: DylanRecordType
+    let displayType: SidebarDisplayType
     let isFetching: Bool
     var progress: Double?
     
     @State private var selection: String
+    @State private var expandedListShowing = false
     @Binding var selectedID: String?
     
-    init(recordType: DylanRecordType,
+    init(displayType: SidebarDisplayType,
          isFetching: Bool, progress: Double?,
-         selectedID: Binding<String?>,
-         onTap: @escaping () -> Void) {
-        self.recordType = recordType
+         selectedID: Binding<String?>) {
+        self.displayType = displayType
         self.isFetching = isFetching
         self.progress = progress
-        self.selection = recordType.rawValue
-        self.onTap = onTap
+        self.selection = displayType.rawValue
         _selectedID = selectedID
     }
-    
-    let onTap: () -> Void
-    
+        
     var body: some View {
         NavigationLink(destination: destinationFor(selection).environmentObject(store),
-                       tag: recordType.rawValue,
+                       tag: displayType.rawValue,
                        selection: $selectedID) {
             HStack {
-                Text(selection.capitalized + "s")
-                    .font(.headline)
+                ListRowView(headline: displayType.rawValue)
                 Spacer()
                 if isFetching {
                     VStack {
@@ -53,11 +50,6 @@ struct SidebarListRowView: View {
                             .frame(maxWidth: 50)
                         Spacer()
                     }
-                } else {
-                    OnTapButton(systemImage: "cross.fill") {
-                        onTap()
-                    }
-                    .buttonStyle(.plain)
                 }
             }
         }
@@ -65,24 +57,22 @@ struct SidebarListRowView: View {
 
     @ViewBuilder
     func destinationFor(_ selection: String) -> some View {
-        if let section = DylanRecordType(rawValue: selection) {
+        if let section = SidebarDisplayType(rawValue: selection) {
             switch section {
-            case .song:
+            case .songs:
                 AllSongsView(store: store.view(value: {
                     TableListState(ids: $0.selection, model: $0.model, failedSearch: $0.failedSearch)
                 }, action: { action in
                     return .tableList(action)
                 }))
-            case .album:
+            case .albums:
                 AllAlbumsView()
-            case .performance:
+            default:
                 AllPerformancesView(store: store.view(value: {
                     TableListState(ids: $0.selection, model: $0.model, failedSearch: $0.failedSearch)
                 }, action: { action in
                     return .tableList(action)
-                }))
-            default:
-                fatalError("Should not reach here")
+                }), predicate: section.predicate)
             }
         } else {
             fatalError()

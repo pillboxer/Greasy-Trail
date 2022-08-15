@@ -42,12 +42,6 @@ public struct NSTextFieldRepresentable: NSViewRepresentable {
         textField.layer?.borderColor = NSColor.lightGray.cgColor
         textField.layer?.borderWidth = 0.8
         textField.layer?.cornerRadius = 4.0
-        DispatchQueue.main.async {
-            if let responder = textField.window?.firstResponder,
-               !(responder is NSTextView) {
-                textField.window?.makeFirstResponder(textField)
-            }
-        }
     }
 
 }
@@ -61,7 +55,6 @@ public class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
 
     public func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
         if commandSelector == #selector(NSResponder.insertNewline(_:)) {
-            // Do something against ENTER key
             textField.onCommit()
             return true
         }

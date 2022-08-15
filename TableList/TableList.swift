@@ -14,7 +14,7 @@ public let tableListReducer = combine(
     pullback(tableSelectionReducer, value: \TableListState.ids, action: \TableListAction.tableSelect),
     pullback(searchReducer, value: \TableListState.searchState, action: \TableListAction.search))
 
-public class TableListState {
+public struct TableListState {
     
     public var ids: Set<ObjectIdentifier> = []
     public var model: Model?
