@@ -27,6 +27,24 @@ extension NSManagedObjectContext {
             return (try? fetch(request) as? [T]) ?? []
         }
     }
+    
+    public func performFetch<T: NSManagedObject>(_ t: T.Type,
+                                                 with predicate: NSPredicate? = nil,
+                                                 sortDescriptors: [NSSortDescriptor]? = nil,
+                                                 fetchLimit: Int? = nil,
+                                                 propertiesToFetch: [String]? = nil,
+                                                 completion: @escaping ([T]) -> Void) {
+        return perform {
+            let request: NSFetchRequest = T.fetchRequest()
+            request.predicate = predicate
+            request.sortDescriptors = sortDescriptors
+            request.propertiesToFetch = propertiesToFetch
+            if let limit = fetchLimit {
+                request.fetchLimit = limit
+            }
+            completion((try? self.fetch(request) as? [T]) ?? [])
+        }
+    }
 
     public func performSave() {
         perform {

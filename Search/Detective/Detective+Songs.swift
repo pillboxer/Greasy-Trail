@@ -36,24 +36,31 @@ extension Detective {
         }
     }
     
-    func fetchModel(for title: String) -> Model? {
+    func fetchModel(for title: String, completion: @escaping (Model?) -> Void) {
         let context = container.newBackgroundContext()
-        guard let song = fetch(song: title) ?? fetch(song: resolveSpellingOf(song: title)) else {
-            return nil
-        }
-        let id = song.objectID
-        return context.syncPerform { [self] in
-            if let song = context.object(with: id) as? Song {
-                let albums = albumsThatInclude(song: id)
-                let performances = performancesThatInclude(song: song)
-                let sSong = sSong(uuid: song.uuid!,
-                                  title: song.title!,
-                                  author: song.songAuthor,
-                                  performances: performances,
-                                  albums: albums)
-                return SongDisplayModel(song: sSong)
+
+        context.perform { [self] in
+            guard let song = fetch(song: title) ?? fetch(song: resolveSpellingOf(song: title)) else {
+                return completion(nil)
             }
-            return nil
+            let id = song.objectID
+
+            if let song = context.object(with: id) as? Song {
+                let uuid = song.uuid!
+                let title = song.title!
+                let author = song.songAuthor
+                let albums = albumsThatInclude(song: id)
+                fetchPerformancesThatInclude(song: song) { performances in
+                    let sSong = sSong(uuid: uuid,
+                                      title: title,
+                                      author: author,
+                                      performances: performances,
+                                      albums: albums)
+                    completion(SongDisplayModel(song: sSong))
+                }
+            } else {
+                completion(nil)
+            }
         }
         
     }

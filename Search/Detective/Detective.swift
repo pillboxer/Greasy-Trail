@@ -21,19 +21,19 @@ public class Detective: ObservableObject {
         self.container = container
     }
 
-    func search(song title: String) -> Model? {
+    func search(song title: String, completion: @escaping (Model?) -> Void) {
         os_log("Searching song: %{public}@", log: Log_Detective, title)
-        return fetchModel(for: title)
+        fetchModel(for: title, completion: completion)
     }
 
-    func search(album title: String) -> Model? {
+    func search(album title: String, completion: @escaping (Model?) -> Void) {
         os_log("Searching album: %{public}@", log: Log_Detective, title)
-        return fetch(album: title)
+        fetch(album: title, completion: completion)
     }
 
-    func search(performance date: Double) -> Model? {
+    func search(performance date: Double, completion: @escaping (Model?) -> Void) {
         os_log("Searching date: %{public}@", log: Log_Detective, String(describing: date))
-        return fetch(performance: date)
+        return fetch(performance: date, completion: completion)
     }
 
     func objects<T: NSManagedObject>(_ object: T.Type,
@@ -42,6 +42,14 @@ public class Detective: ObservableObject {
         let predicate = NSPredicate(format: "songs CONTAINS %@", song)
         let objects = context.fetchAndWait(T.self, with: predicate)
         return objects
+    }
+    
+    func objects<T: NSManagedObject>(_ object: T.Type,
+                                     including song: Song,
+                                     context: NSManagedObjectContext,
+                                     completion: @escaping ([T]) -> Void) {
+        let predicate = NSPredicate(format: "songs CONTAINS %@", song)
+        context.performFetch(T.self, with: predicate, completion: completion)
     }
 
 }

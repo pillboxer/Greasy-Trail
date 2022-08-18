@@ -7,22 +7,28 @@
 
 import Combine
 import CloudKit
-// swiftlint: disable identifier_name
+// swiftlint: disable opening_brace
+public typealias Reducer<Value, Action> = (inout Value, Action) -> [Effect<Action>]
+public typealias Effect<Action> = (@escaping (Action) -> Void) -> Void
+
 public final class Store<State, Action>: ObservableObject {
     
-    let reducer: (inout State, Action) -> Void
+    let reducer: Reducer<State, Action>
     @Published public private(set) var value: State
     private var cancellable: AnyCancellable?
     
-    public init(initialValue: State, reducing: @escaping (inout State, Action) -> Void) {
+    public init(initialValue: State, reducing: @escaping Reducer<State, Action>) {
         self.reducer = reducing
         self.value = initialValue
     }
     
     public func send(_ action: Action) {
-        reducer(&value, action)
+        let effects = reducer(&value, action)
+        effects.forEach { effect in
+            effect(self.send)
+        }
     }
-
+    
     public func view<LocalState, LocalAction>(value toLocalValue: @escaping (State) -> LocalState,
                                               action toGlobalAction:  @escaping (LocalAction) -> Action)
     -> Store<LocalState, LocalAction> {
@@ -32,7 +38,7 @@ public final class Store<State, Action>: ObservableObject {
             // Send parent store the action
             self.send(toGlobalAction(localAction))
             localValue = toLocalValue(self.value)
-
+            return []
         }
         // Local store subscribes to my value
         localStore.cancellable = self.$value.sink { [weak localStore] myValue in
@@ -41,46 +47,53 @@ public final class Store<State, Action>: ObservableObject {
         return localStore
     }
     
-    public func transform<LocalAction>(_ f: @escaping (LocalAction) -> Action) -> Store<State, LocalAction> {
-        return Store<State, LocalAction>(initialValue: self.value) { state, localAction  in
-            self.send(f(localAction))
-            state = self.value
-        }
-    }
-    
 }
 
-public func combine<Value, Action>(_ reducers: (inout Value, Action) -> Void...) -> (inout Value, Action) -> Void {
+public func combine<Value, Action>(_ reducers: Reducer<Value, Action>...) -> Reducer<Value, Action> {
     return { value, action in
-        for reducer in reducers {
-            // Pullback
-            reducer(&value, action)
-        }
+        let effects = reducers.flatMap { $0(&value, action) }
+        return effects
     }
 }
 
 public func logging<Value, Action>(_ reducer:
-                                   @escaping (inout Value, Action) -> Void) -> (inout Value, Action) -> Void {
+                                   @escaping Reducer<Value, Action>) -> Reducer<Value, Action> {
     return { value, action in
-        // Combine reducer
-        reducer(&value, action)
-        print("Action: \(action)")
-        print("Value: ")
-        dump(value)
-        print("-----")
+        let effects = reducer(&value, action)
+        let newValue = value
+        return [{ _ in
+            print("Action: \(action)")
+            print("Value: ")
+            dump(newValue)
+            print("-----")
+        }] + effects
     }
 }
 
-// tableSelectionReducer, value: \AllPerformancesState.ids, action: \AllPerformancesViewAction.tableSelect
-
+/// Transforms a reducer on local state to one on global state
 public func pullback<LocalValue, GlobalValue, LocalAction, GlobalAction>(
-    _ reducer: @escaping (inout LocalValue, LocalAction) -> Void,
+    _ reducer: @escaping Reducer<LocalValue, LocalAction>,
     value: WritableKeyPath<GlobalValue, LocalValue>,
-    action: WritableKeyPath<GlobalAction, LocalAction?>)-> (inout GlobalValue, GlobalAction) -> Void {
+    action: WritableKeyPath<GlobalAction, LocalAction?>) -> Reducer<GlobalValue, GlobalAction> {
+        
+        // Return our new reducer. We feed this in with the global state and action.
+        // Then we go down and call the ultimate local reducer with our global state
         return { globalValue, globalAction in
             guard let localAction = globalAction[keyPath: action] else {
-                return
+                return []
             }
-            reducer(&globalValue[keyPath: value], localAction)
+            // Read the value using &globalValue[keyPath: value] and set it using &globalValue[keyPath: value]
+            let localEffects = reducer(&globalValue[keyPath: value], localAction)
+            return localEffects.map { localEffect in
+                return { callback in
+                    // () -> GlobalAction? is just a GlobalEffect
+                    // localEffect() is returning an action
+                    localEffect { localAction in
+                        var globalAction = globalAction
+                        globalAction[keyPath: action] = localAction
+                        callback(globalAction)
+                    }
+                }
+            }
         }
     }

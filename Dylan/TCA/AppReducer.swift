@@ -11,7 +11,7 @@ import ComposableArchitecture
 import Search
 import TableList
 
-let appReducer: (inout AppState, AppAction) -> Void =
-logging(combine(
+let appReducer: Reducer<AppState, AppAction> =
+combine(
     pullback(tableListReducer, value: \.tableListState, action: \.tableListAction),
-    pullback(searchReducer, value: \.searchState, action: \.searchAction)))
+    pullback(searchReducer, value: \.searchState, action: \.searchAction))

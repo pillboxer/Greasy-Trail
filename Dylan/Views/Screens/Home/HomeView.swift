@@ -49,7 +49,7 @@ struct HomeView: View {
             existingSelectedID = selectedID
         }
         .onAppear {
-            selectedID = SidebarDisplayType.songs.rawValue
+            selectedID = selectedID ?? SidebarDisplayType.songs.rawValue
         }
     }
 }

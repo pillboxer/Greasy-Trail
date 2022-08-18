@@ -40,7 +40,7 @@ extension AppState {
     
     var tableListState: TableListState {
         get {
-            TableListState(ids: self.selection, model: self.model, failedSearch: self.failedSearch)
+            TableListState(ids: selection, model: model, failedSearch: failedSearch)
         }
         set {
             self.selection = newValue.ids

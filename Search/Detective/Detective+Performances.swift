@@ -13,14 +13,14 @@ import Model
 
 extension Detective {
     
-    func fetch(performance date: Double) -> Model? {
+    func fetch(performance date: Double, completion: @escaping (Model?) -> Void) {
         let context = container.newBackgroundContext()
         
             return context.syncPerform { [self] in 
                 let predicate = NSPredicate(format: "date == %d", Int(date))
                 guard let performance = context.fetchAndWait(Performance.self, with: predicate).first,
                       let songs = performance.songs?.array as? [Song] else {
-                    return nil
+                    return completion(nil)
                 }
                 var sSongs: [sSong] = []
                 for song in songs {
@@ -37,25 +37,38 @@ extension Detective {
                                                 songs: sSongs,
                                                 date: performance.date,
                                                 lbNumbers: performance.lbNumbers)
-                return PerformanceDisplayModel(sPerformance: sPerformance)
+                completion(PerformanceDisplayModel(sPerformance: sPerformance))
             }
     }
     
-    func performancesThatInclude(song: Song) -> [sPerformance] {
-        let context = container.newBackgroundContext()
-        let objects = objects(Performance.self, including: song, context: context)
-        let objectID = song.objectID
-        return context.syncPerform {
-            if let song = context.object(with: objectID) as? Song {
-                os_log("%{public}@ found on %{public}@ performances(s)", song.title!, String(describing: objects.count))
-                let sPerformances = objects.compactMap { sPerformance(uuid: $0.uuid!,
-                                                                      venue: $0.venue!,
-                                                                      songs: [],
-                                                                      date: $0.date) }
-                return sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
+    // For when we move to async
+    private func _performancesThatInclude(song: Song) async -> [sPerformance] {
+        await withCheckedContinuation { continuation in
+            fetchPerformancesThatInclude(song: song) { performances in
+                continuation.resume(returning: performances)
             }
-            return []
         }
     }
-
+    
+    func fetchPerformancesThatInclude(song: Song, completion: @escaping ([sPerformance]) -> Void) {
+        let context = container.newBackgroundContext()
+        let objectID = song.objectID
+        context.perform { [weak self] in
+            self?.objects(Performance.self, including: song, context: context) { objects in
+                if let song = context.object(with: objectID) as? Song {
+                    os_log("%{public}@ found on %{public}@ performances(s)",
+                           song.title!,
+                           String(describing: objects.count))
+                    let sPerformances = objects.compactMap { sPerformance(uuid: $0.uuid!,
+                                                                          venue: $0.venue!,
+                                                                          songs: [],
+                                                                          date: $0.date) }
+                    let sorted = sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
+                    completion(sorted)
+                } else {
+                    completion([])
+                }
+            }
+        }
+    }
 }
