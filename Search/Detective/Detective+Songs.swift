@@ -12,6 +12,7 @@ import GTCoreData
 import GTLogging
 import Model
 import Combine
+import ComposableArchitecture
 
 struct Misspellings: Codable {
     var songs: [String: String]
@@ -36,33 +37,34 @@ extension Detective {
         }
     }
     
-    func fetchModel(for title: String, completion: @escaping (Model?) -> Void) {
+    func fetchModel(for title: String) -> Effect<Model?> {
         let context = container.newBackgroundContext()
-
-        context.perform { [self] in
-            guard let song = fetch(song: title) ?? fetch(song: resolveSpellingOf(song: title)) else {
-                return completion(nil)
-            }
-            let id = song.objectID
-
-            if let song = context.object(with: id) as? Song {
-                let uuid = song.uuid!
-                let title = song.title!
-                let author = song.songAuthor
-                let albums = albumsThatInclude(song: id)
-                fetchPerformancesThatInclude(song: song) { performances in
-                    let sSong = sSong(uuid: uuid,
-                                      title: title,
-                                      author: author,
-                                      performances: performances,
-                                      albums: albums)
-                    completion(SongDisplayModel(song: sSong))
+        
+        return .async { completion in
+            context.perform { [self] in
+                guard let song = fetch(song: title) ?? fetch(song: resolveSpellingOf(song: title)) else {
+                    return completion(nil)
                 }
-            } else {
-                completion(nil)
+                let id = song.objectID
+
+                if let song = context.object(with: id) as? Song {
+                    let uuid = song.uuid!
+                    let title = song.title!
+                    let author = song.songAuthor
+                    let albums = albumsThatInclude(song: id)
+                    fetchPerformancesThatInclude(song: song) { performances in
+                        let sSong = sSong(uuid: uuid,
+                                          title: title,
+                                          author: author,
+                                          performances: performances,
+                                          albums: albums)
+                        completion(SongDisplayModel(song: sSong))
+                    }
+                } else {
+                    return completion(nil)
+                }
             }
         }
-        
     }
 }
 

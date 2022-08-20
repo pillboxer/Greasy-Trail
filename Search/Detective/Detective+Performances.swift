@@ -10,13 +10,15 @@ import CoreData
 import Combine
 import GTCoreData
 import Model
+import ComposableArchitecture
 
 extension Detective {
     
-    func fetch(performance date: Double, completion: @escaping (Model?) -> Void) {
+    func fetch(performance date: Double) -> Effect<Model?> {
         let context = container.newBackgroundContext()
         
-            return context.syncPerform { [self] in 
+        return .async { completion in
+            context.perform { [self] in
                 let predicate = NSPredicate(format: "date == %d", Int(date))
                 guard let performance = context.fetchAndWait(Performance.self, with: predicate).first,
                       let songs = performance.songs?.array as? [Song] else {
@@ -39,6 +41,7 @@ extension Detective {
                                                 lbNumbers: performance.lbNumbers)
                 completion(PerformanceDisplayModel(sPerformance: sPerformance))
             }
+        }
     }
     
     // For when we move to async

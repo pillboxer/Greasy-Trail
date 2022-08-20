@@ -11,8 +11,6 @@ import TwoColumnTable
 import GTFormatter
 
 struct AllAlbumsView {
-
-    @EnvironmentObject private var searchViewModel: SearchViewModel
     
     @State var selection: Set<Album.ID> = []
     
@@ -51,7 +49,7 @@ extension AllAlbumsView: TwoColumnTableViewType {
     func doubleTap(on string: String, id: Album.ID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
             selection.removeAll()
-            searchViewModel.search(.init(title: string, type: .album))
+            // FIXME: Search
             selection.insert(id)
         }
     }

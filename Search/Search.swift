@@ -11,8 +11,6 @@ import Core
 import GTFormatter
 import ComposableArchitecture
 
-// swiftlint: disable opening_brace
-
 public enum DylanSearchType {
     case song
     case album
@@ -65,13 +63,12 @@ public func searchReducer(state: inout SearchState, action: SearchAction) -> [Ef
     switch action {
     case .makeSearch(let search):
         state.currentSearch = search
-        return [{ callback in
-            searcher.search(search) { model in
-                DispatchQueue.main.async {
-                    callback(.completeSearch(model, search))
-                }
+        return [ searcher.search(search)
+            .map {
+                return .completeSearch($0, search)
             }
-        }]
+            .receive(on: DispatchQueue.main)
+            .eraseToEffect()]
     case .completeSearch(let model, let search):
         state.model = model
         state.failedSearch = model == nil ? search : nil
@@ -90,34 +87,30 @@ private class Searcher {
     private var cancellables: Set<AnyCancellable> = []
     private let detective = Detective()
     
-    func search(_ search: Search, completion: @escaping (Model?) -> Void) {
+    func search(_ search: Search) -> Effect<Model?> {
         guard let type = search.type else {
-            return self.search(Search(title: search.title, type: .album)) { model in
-                if let model = model {
-                    completion(model)
-                } else {
-                    self.search(Search(title: search.title, type: .song)) { model in
-                        if let model = model {
-                            completion(model)
-                        } else {
-                            self.search(Search(title: search.title, type: .performance), completion: completion)
-                        }
-                    }
-                }
-            }
+            return [self.search(Search(title: search.title, type: .album)),
+                    self.search(Search(title: search.title, type: .song)),
+                    self.search(Search(title: search.title, type: .performance))]
+                .publisher
+                .flatMap(maxPublishers: .max(1)) { $0 }
+                .compactMap { $0 }
+                .replaceEmpty(with: nil)
+                .eraseToEffect()
         }
         switch type {
         case .album:
-            detective.search(album: search.title, completion: completion)
+            return detective.search(album: search.title)
         case .song:
-            detective.search(song: search.title, completion: completion)
+            return detective.search(song: search.title)
         case .performance:
             if let toFetch = Double(search.title) ?? formatter.date(from: search.title) {
-                detective.fetch(performance: toFetch, completion: completion)
+                return detective.fetch(performance: toFetch)
             } else {
-                completion(nil)
+                return Just(nil)
+                    .eraseToEffect()
             }
         }
     }
-
+    
 }

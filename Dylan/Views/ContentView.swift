@@ -37,7 +37,7 @@ struct ContentView: View {
             }
         }
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
-        .frame(width: 900, height: 600)
+        .frame(minWidth: 900, minHeight: 600)
     }
 }
 

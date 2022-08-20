@@ -12,6 +12,7 @@ import Combine
 import GTCoreData
 import Model
 import GTLogging
+import ComposableArchitecture
 
 public class Detective: ObservableObject {
 
@@ -21,19 +22,19 @@ public class Detective: ObservableObject {
         self.container = container
     }
 
-    func search(song title: String, completion: @escaping (Model?) -> Void) {
+    func search(song title: String) -> Effect<Model?> {
         os_log("Searching song: %{public}@", log: Log_Detective, title)
-        fetchModel(for: title, completion: completion)
+        return fetchModel(for: title)
     }
 
-    func search(album title: String, completion: @escaping (Model?) -> Void) {
+    func search(album title: String) -> Effect<Model?> {
         os_log("Searching album: %{public}@", log: Log_Detective, title)
-        fetch(album: title, completion: completion)
+        return fetch(album: title)
     }
 
-    func search(performance date: Double, completion: @escaping (Model?) -> Void) {
+    func search(performance date: Double) -> Effect<Model?> {
         os_log("Searching date: %{public}@", log: Log_Detective, String(describing: date))
-        return fetch(performance: date, completion: completion)
+        return fetch(performance: date)
     }
 
     func objects<T: NSManagedObject>(_ object: T.Type,

@@ -10,25 +10,23 @@ import SongsList
 import UI
 
 struct ResultAlbumOverviewView: View {
-
-    @EnvironmentObject private var searchViewModel: SearchViewModel
     
     var body: some View {
         VStack(spacing: 16) {
             HStack {
                 OnTapButton(systemImage: "house") {
-                    searchViewModel.reset()
+                    // FIXME: Reset
                 }
                 Spacer()
-                Text(searchViewModel.albumModel?.title ?? "")
-                    .font(.headline)
+//                Text(searchViewModel.albumModel?.title ?? "")
+//                    .font(.headline)
                 Spacer()
             }
             Spacer()
             HStack {
-                SongsListView(songs: searchViewModel.albumModel?.songs ?? []) { title in
-                    searchViewModel.search(.init(title: title, type: .song))
-                }
+//                SongsListView(songs: searchViewModel.albumModel?.songs ?? []) { title in
+//                    // FIXME: Search
+//                }
             }
         }
         .padding()

@@ -11,12 +11,13 @@ import OSLog
 import Combine
 import GTCoreData
 import Model
+import ComposableArchitecture
 
 extension Detective {
     
-    func fetch(album title: String, completion: @escaping (Model?) -> Void) {
+    func fetch(album title: String) -> Effect<Model?> {
         let context = container.newBackgroundContext()
-        return context.perform {
+        return .async { completion in
             // Fetch album with given title
             let predicate = NSPredicate(format: "title =[c] %@", title)
             guard let album = context.fetchAndWait(Album.self, with: predicate).first,

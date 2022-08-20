@@ -41,6 +41,7 @@ struct HomeView: View {
                 }))
                 .padding()
             }
+            .padding()
         }
         .onChange(of: selectedID) { newValue in
             if newValue == SidebarDisplayType.performances.rawValue {
