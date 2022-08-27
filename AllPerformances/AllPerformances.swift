@@ -33,12 +33,9 @@ public struct AllPerformancesView {
                                             sortDescriptors: [NSSortDescriptor(key: "date", ascending: false)],
                                              predicate: predicate)
     }
-    
-    @State private var ids: Set<ObjectIdentifier> = []
-    
-    public var body: some View {
         
-        Table(tableData, selection: $ids, sortOrder: $sortOrder) {
+    public var body: some View {
+        Table(tableData, selection: .constant(store.value.ids), sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_performances_0"), value: \.venue!) { performance in
                 let venue = performance.venue!
                 let date = String(performance.date)
@@ -54,13 +51,6 @@ public struct AllPerformancesView {
                     .gesture(doubleTap(on: date, id: performance.id))
                     .simultaneousGesture(singleTap(id: performance.id))
             }
-        }
-        .onAppear {
-            ids = store.value.ids
-            
-        }
-        .onChange(of: store.value.ids) { newValue in
-            ids = newValue
         }
     }
 }

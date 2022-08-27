@@ -11,6 +11,8 @@ import Core
 import GTFormatter
 import ComposableArchitecture
 
+public typealias SearchEnvironment = (Search) -> Effect<Model?>
+
 public enum DylanSearchType {
     case song
     case album
@@ -27,8 +29,6 @@ public enum DylanSearchType {
         }
     }
 }
-
-private let searcher = Searcher()
 
 public class SearchState: ObservableObject {
     public var model: Model?
@@ -58,12 +58,14 @@ public enum SearchAction {
     case reset
 }
 
-public func searchReducer(state: inout SearchState, action: SearchAction) -> [Effect<SearchAction>] {
+public func searchReducer(state: inout SearchState,
+                          action: SearchAction,
+                          environment: SearchEnvironment) -> [Effect<SearchAction>] {
     
     switch action {
     case .makeSearch(let search):
         state.currentSearch = search
-        return [ searcher.search(search)
+        return [ environment(search)
             .map {
                 return .completeSearch($0, search)
             }
@@ -81,13 +83,15 @@ public func searchReducer(state: inout SearchState, action: SearchAction) -> [Ef
     }
 }
 
-private class Searcher {
+public class Searcher {
     
     private let formatter = GTFormatter.Formatter()
     private var cancellables: Set<AnyCancellable> = []
     private let detective = Detective()
     
-    func search(_ search: Search) -> Effect<Model?> {
+    public init() {}
+    
+    public func search(_ search: Search) -> Effect<Model?> {
         guard let type = search.type else {
             return [self.search(Search(title: search.title, type: .album)),
                     self.search(Search(title: search.title, type: .song)),

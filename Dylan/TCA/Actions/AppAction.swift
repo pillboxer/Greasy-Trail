@@ -7,31 +7,10 @@
 
 import TableList
 import Search
+import Add
 
 enum AppAction {
     case tableList(TableListAction)
     case search(SearchAction)
-    
-    var tableListAction: TableListAction? {
-      get {
-        guard case let .tableList(value) = self else { return nil }
-        return value
-      }
-      set {
-        guard case .tableList = self, let newValue = newValue else { return }
-        self = .tableList(newValue)
-      }
-    }
-    
-    var searchAction: SearchAction? {
-      get {
-        guard case let .search(value) = self else { return nil }
-        return value
-      }
-      set {
-        guard case .search = self, let newValue = newValue else { return }
-        self = .search(newValue)
-      }
-    }
-    
+    case add(AddAction)
 }

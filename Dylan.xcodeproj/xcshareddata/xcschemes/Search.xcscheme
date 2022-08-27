@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1400"
+   LastUpgradeVersion = "1340"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "866863E82865EB6200510DDF"
-               BuildableName = "Greasy Trail.app"
-               BlueprintName = "Greasy Trail"
+               BlueprintIdentifier = "865963FF28A01676003F43A4"
+               BuildableName = "Search.framework"
+               BlueprintName = "Search"
                ReferencedContainer = "container:Dylan.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,26 +26,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8668640C28662E2B00510DDF"
-               BuildableName = "DylanTests.xctest"
-               BlueprintName = "DylanTests"
-               ReferencedContainer = "container:Dylan.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "865962D2289C5A0B003F43A4"
-               BuildableName = "AllPerformancesTests.xctest"
-               BlueprintName = "AllPerformancesTests"
+               BlueprintIdentifier = "8634314628B1569600092931"
+               BuildableName = "SearchTests.xctest"
+               BlueprintName = "SearchTests"
                ReferencedContainer = "container:Dylan.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,26 +45,6 @@
                BlueprintIdentifier = "865962F5289C5A50003F43A4"
                BuildableName = "ComposableArchitectureTests.xctest"
                BlueprintName = "ComposableArchitectureTests"
-               ReferencedContainer = "container:Dylan.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8659631B289D6510003F43A4"
-               BuildableName = "TableSelectionTests.xctest"
-               BlueprintName = "TableSelectionTests"
-               ReferencedContainer = "container:Dylan.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "86DEC35828B5504500A875C5"
-               BuildableName = "CasePathsTests.xctest"
-               BlueprintName = "CasePathsTests"
                ReferencedContainer = "container:Dylan.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -91,22 +60,6 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "866863E82865EB6200510DDF"
-            BuildableName = "Greasy Trail.app"
-            BlueprintName = "Greasy Trail"
-            ReferencedContainer = "container:Dylan.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-com.apple.CoreData.ConcurrencyDebug 1"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -114,16 +67,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "866863E82865EB6200510DDF"
-            BuildableName = "Greasy Trail.app"
-            BlueprintName = "Greasy Trail"
+            BlueprintIdentifier = "865963FF28A01676003F43A4"
+            BuildableName = "Search.framework"
+            BlueprintName = "Search"
             ReferencedContainer = "container:Dylan.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

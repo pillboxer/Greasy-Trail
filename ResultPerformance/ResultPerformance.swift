@@ -14,7 +14,7 @@ import UI
 
 public struct ResultPerformanceOverviewView: View {
     
-    @ObservedObject var store: Store<SearchState, SearchAction>
+    let store: Store<SearchState, SearchAction>
     let model: PerformanceDisplayModel
     @State private var presentAlert = false
     

@@ -6,47 +6,54 @@
 //
 
 import Combine
-
-public final class Store<State, Action>: ObservableObject {
+// swiftlint: disable force_cast
+public final class Store<Value, Action>: ObservableObject {
     
-    let reducer: Reducer<State, Action>
-    @Published public private(set) var value: State
+    let reducer: Reducer<Value, Action, Any>
+    @Published public private(set) var value: Value
+    private let environment: Any
     private var viewCancellable: AnyCancellable?
-    private var effectCancellables: Set<AnyCancellable> = []
+    private var effectCancellables: [UUID: AnyCancellable] = [:]
     
-    public init(initialValue: State, reducing: @escaping Reducer<State, Action>) {
-        self.reducer = reducing
+    public init<Environment>(
+        initialValue: Value,
+        reducer: @escaping Reducer<Value, Action, Environment>,
+        environment: Environment
+    ) {
+        self.reducer = { value, action, environment in
+            reducer(&value, action, environment as! Environment)
+        }
         self.value = initialValue
+        self.environment = environment
     }
-    
     public func send(_ action: Action) {
-        let effects = reducer(&value, action)
+        let effects = reducer(&value, action, self.environment)
         effects.forEach { effect in
-            var cancellable: AnyCancellable?
             var didComplete = false
-            cancellable = effect.sink(receiveCompletion: { [weak self] _ in
-                didComplete = true
-                if let cancellable = cancellable {
-                    self?.effectCancellables.remove(cancellable)}
-            }, receiveValue: self.send)
-            if didComplete, let cancellable = cancellable {
-                self.effectCancellables.insert(cancellable)
+            let uuid = UUID()
+            let effectCancellable = effect.sink(
+                receiveCompletion: { [weak self] _ in
+                    didComplete = true
+                    self?.effectCancellables[uuid] = nil
+                },
+                receiveValue: { [weak self] in self?.send($0) }
+            )
+            if !didComplete {
+                self.effectCancellables[uuid] = effectCancellable
             }
         }
     }
     
-    public func view<LocalState, LocalAction>(value toLocalValue: @escaping (State) -> LocalState,
+    public func scope<LocalState, LocalAction>(value toLocalValue: @escaping (Value) -> LocalState,
                                               action toGlobalAction:  @escaping (LocalAction) -> Action)
     -> Store<LocalState, LocalAction> {
         let localValue = toLocalValue(self.value)
-        let localStore = Store<LocalState, LocalAction>(initialValue: localValue) { localValue, localAction in
-            // Local store has a new reducer
-            // Send parent store the action
+        let localStore = Store<LocalState, LocalAction>(initialValue: localValue,
+                                                        reducer: { localValue, localAction, _ in
             self.send(toGlobalAction(localAction))
             localValue = toLocalValue(self.value)
             return []
-        }
-        // Local store subscribes to my value
+        }, environment: self.environment)
         localStore.viewCancellable = self.$value.sink { [weak localStore] myValue in
             localStore?.value = toLocalValue(myValue)
         }

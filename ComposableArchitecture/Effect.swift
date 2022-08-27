@@ -15,8 +15,8 @@ public struct Effect<Output>: Publisher {
     public let publisher: AnyPublisher<Output, Failure>
     
     public func receive<S>(subscriber: S) where S: Subscriber,
-                                                Never == S.Failure,
-                                                Output == S.Input {
+                                                Self.Failure == S.Failure,
+                                                Self.Output == S.Input {
                                                     publisher.receive(subscriber: subscriber)
                                                 }
     
@@ -34,6 +34,13 @@ public extension Effect {
             }
         }.eraseToEffect()
     }
+    
+    static func sync(work: @escaping () -> Output) -> Effect {
+        Deferred {
+            Just(work())
+        }.eraseToEffect()
+    }
+    
 }
 extension Publisher where Failure == Never {
     

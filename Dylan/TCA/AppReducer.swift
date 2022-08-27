@@ -9,9 +9,25 @@ import Foundation
 
 import ComposableArchitecture
 import Search
+import CasePaths
 import TableList
+import Add
 
-let appReducer: Reducer<AppState, AppAction> =
+struct AppEnvironment {
+    let searchEnvironment: SearchEnvironment
+}
+
+let appReducer: Reducer<AppState, AppAction, AppEnvironment> =
 combine(
-    pullback(tableListReducer, value: \.tableListState, action: \.tableListAction),
-    pullback(searchReducer, value: \.searchState, action: \.searchAction))
+    pullback(tableListReducer,
+             value: \.tableListState,
+             action: /AppAction.tableList,
+             environment: { $0.searchEnvironment }),
+    pullback(searchReducer,
+             value: \.searchState,
+             action: /AppAction.search,
+             environment: { $0.searchEnvironment }),
+    pullback(addReducer,
+             value: \.addState,
+             action: /AppAction.add,
+             environment: { _ in () }))

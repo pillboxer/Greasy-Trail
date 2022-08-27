@@ -13,7 +13,8 @@ public enum TableSelectionAction {
 }
 
 public func tableSelectionReducer(state: inout Set<ObjectIdentifier>,
-                                  action: TableSelectionAction) -> [Effect<TableSelectionAction>] {
+                                  action: TableSelectionAction,
+                                  environment: Void) -> [Effect<TableSelectionAction>] {
     switch action {
     case .select(let identifier):
         state.removeAll()

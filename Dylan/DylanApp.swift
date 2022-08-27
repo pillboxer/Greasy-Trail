@@ -10,23 +10,37 @@ import GTLogging
 import ComposableArchitecture
 import GTCoreData
 import GTCloudKit
+import Add
+import Search
 
 @main
 struct DylanApp: App {
  
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
+    let appStore = Store(initialValue: AppState(),
+                         reducer: appReducer,
+                         environment: AppEnvironment(searchEnvironment: Searcher().search))
+    
     var body: some Scene {
         WindowGroup {
-            ContentView(store: Store(initialValue: AppState(), reducing: appReducer))
+            ContentView(store: appStore)
                 .environmentObject(appDelegate.cloudKitManager)
         }
         WindowGroup {
-            SpellingResolverView(manager: SpellingResolverManager(cloudKitManager: appDelegate.cloudKitManager))
+            AddView(store: appStore.scope(value: { state in
+                AddState(selectedRecordToAdd: state.selectedRecordToAdd)
+            }, action: { action in
+                return .add(action)
+            }))
         }
-        .handlesExternalEvents(matching: Set(Array(["SpellingResolverView"])))
-        
+        .handlesExternalEvents(matching: Set(Array(["Add"])))
         .commands {
+            CommandGroup(replacing: .newItem) {
+                Button("Add...") {
+                    OpenWindows.Add.open()
+                }.keyboardShortcut("N", modifiers: .command)
+            }
             CommandMenu("developer_menu_title") {
                 Button("developer_menu_button_0") {
                     PersistenceController.shared.reset()
@@ -34,9 +48,6 @@ struct DylanApp: App {
                     Task {
                         await appDelegate.cloudKitManager.start()
                     }
-                }
-                Button("developer_menu_button_1") {
-                    OpenWindows.SpellingResolver.open()
                 }
                 Button("developer_menu_button_2") {
                     Logger.copyLogs()
@@ -49,8 +60,8 @@ struct DylanApp: App {
 
 // swiftlint: disable identifier_name
 enum OpenWindows: String, CaseIterable {
-    case SpellingResolver = "SpellingResolverView"
-
+    case Add
+    
     func open() {
         if let url = URL(string: "dylan://\(self.rawValue)") {
             NSWorkspace.shared.open(url)

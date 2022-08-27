@@ -9,12 +9,19 @@ import ComposableArchitecture
 import TableSelection
 import Search
 import Model
+import CasePaths
 
-public let tableListReducer = combine(
-    pullback(tableSelectionReducer, value: \TableListState.ids, action: \TableListAction.tableSelect),
-    pullback(searchReducer, value: \TableListState.searchState, action: \TableListAction.search))
+public let tableListReducer: Reducer<TableListState, TableListAction, SearchEnvironment> = combine(
+    pullback(tableSelectionReducer,
+             value: \TableListState.ids,
+             action: /TableListAction.tableSelect,
+             environment: { _ in () }),
+    pullback(searchReducer,
+             value: \TableListState.searchState,
+             action: /TableListAction.search,
+             environment: { $0 }))
 
-public struct TableListState {
+public struct TableListState: Equatable {
     
     public var ids: Set<ObjectIdentifier> = []
     public var model: Model?
@@ -27,6 +34,14 @@ public struct TableListState {
         self.failedSearch = failedSearch
     }
     
+    public static func == (lhs: TableListState, rhs: TableListState) -> Bool {
+        guard lhs.model?.uuid == rhs.model?.uuid else {
+            return false
+        }
+        let lhsTuple = (lhs.ids, lhs.failedSearch, lhs.currentSearch)
+        let rhsTuple = (rhs.ids, rhs.failedSearch, rhs.currentSearch)
+        return (lhsTuple) == (rhsTuple)
+    }
 }
 
 extension TableListState {
@@ -47,27 +62,4 @@ extension TableListState {
 public enum TableListAction {
     case tableSelect(TableSelectionAction)
     case search(SearchAction)
-    
-    var tableSelect: TableSelectionAction? {
-        get {
-            guard case let .tableSelect(value) = self else { return nil }
-            return value
-        }
-        set {
-            guard case .tableSelect = self, let newValue = newValue else { return }
-            self = .tableSelect(newValue)
-        }
-    }
-    
-    var search: SearchAction? {
-        get {
-            guard case let .search(value) = self else { return nil }
-            return value
-        }
-        set {
-            guard case .search = self, let newValue = newValue else { return }
-            self = .search(newValue)
-        }
-    }
-    
 }

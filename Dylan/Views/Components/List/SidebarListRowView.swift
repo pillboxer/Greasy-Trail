@@ -60,7 +60,7 @@ struct SidebarListRowView: View {
         if let section = SidebarDisplayType(rawValue: selection) {
             switch section {
             case .songs:
-                AllSongsView(store: store.view(value: {
+                AllSongsView(store: store.scope(value: {
                     TableListState(ids: $0.selection, model: $0.model, failedSearch: $0.failedSearch)
                 }, action: { action in
                     return .tableList(action)
@@ -68,7 +68,7 @@ struct SidebarListRowView: View {
             case .albums:
                 AllAlbumsView()
             default:
-                AllPerformancesView(store: store.view(value: {
+                AllPerformancesView(store: store.scope(value: {
                     TableListState(ids: $0.selection, model: $0.model, failedSearch: $0.failedSearch)
                 }, action: { action in
                     return .tableList(action)

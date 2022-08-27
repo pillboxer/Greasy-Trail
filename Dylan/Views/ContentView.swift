@@ -19,12 +19,13 @@ struct ContentView: View {
     @State private var selectedID: String?
     
     var body: some View {
-        Group {
+        print("ContentView.body")
+        return Group {
             if let step = cloudKitManager.currentStep,
                case let .failure(error) = step {
                 CloudKitFailureView(error: error)
             } else if store.value.model != nil {
-                ResultView(store: store.view(value: {
+                ResultView(store: store.scope(value: {
                     return SearchState(model: $0.model, failedSearch: $0.failedSearch, currentSearch: $0.currentSearch)
                 }, action: {
                     .search($0)

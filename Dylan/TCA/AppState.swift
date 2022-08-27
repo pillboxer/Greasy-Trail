@@ -10,10 +10,13 @@ import Search
 import Model
 import AllPerformances
 import TableList
+import GTCloudKit
+import Add
 
 class AppState: ObservableObject {
     
-    var selection: Set<ObjectIdentifier> = []    
+    @Published var selection: Set<ObjectIdentifier> = []
+    @Published var selectedRecordToAdd: DylanRecordType = .song
     @Published var model: Model?
     @Published var failedSearch: Search?
     @Published var currentSearch: Search?
@@ -57,6 +60,15 @@ extension AppState {
             self.failedSearch = newValue.failedSearch
             self.model = newValue.model
             self.currentSearch = newValue.currentSearch
+        }
+    }
+    
+    var addState: AddState {
+        get {
+            AddState(selectedRecordToAdd: selectedRecordToAdd)
+        }
+        set {
+            self.selectedRecordToAdd = newValue.selectedRecordToAdd
         }
     }
 }

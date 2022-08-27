@@ -34,7 +34,7 @@ struct HomeView: View {
                     }
                     .padding(4)
                 }
-                SearchView(store: store.view(value: {
+                SearchView(store: store.scope(value: {
                     SearchState(model: $0.model, failedSearch: $0.failedSearch, currentSearch: $0.currentSearch)
                 }, action: {
                     .search($0)
