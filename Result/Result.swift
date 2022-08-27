@@ -21,12 +21,16 @@ public struct ResultView: View {
         self.store = store
     }
     
+    private var model: AnyModel? {
+        store.value.model
+    }
+    
     public var body: some View {
-        if let model = store.value.model as? SongDisplayModel {
+        if let model = model?.value as? SongDisplayModel {
             ResultSongOverviewView(model: model, store: store)
-        } else if let model = store.value.model as? AlbumDisplayModel {
+        } else if let model = model?.value as? AlbumDisplayModel {
 //            ResultAlbumOverviewView()
-        } else if let model = store.value.model as? PerformanceDisplayModel {
+        } else if let model = model?.value as? PerformanceDisplayModel {
             ResultPerformanceOverviewView(model: model, store: store)
         }
     }

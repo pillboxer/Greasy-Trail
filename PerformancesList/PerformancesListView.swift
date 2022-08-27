@@ -14,7 +14,7 @@ import UI
 
 public struct PerformancesListView: View {
     
-    @ObservedObject var store: Store<Model?, SearchAction>
+    @ObservedObject var store: Store<AnyModel?, SearchAction>
 
     private let performances: [sPerformance]
 
@@ -22,7 +22,7 @@ public struct PerformancesListView: View {
         performances.sorted { $0.date ?? 0 < $1.date ?? 0 }
     }
  
-    public init(performances: [sPerformance], store: Store<Model?, SearchAction>) {
+    public init(performances: [sPerformance], store: Store<AnyModel?, SearchAction>) {
         self.performances = performances
         self.store = store
     }

@@ -11,7 +11,7 @@ import Core
 import GTFormatter
 import ComposableArchitecture
 
-public typealias SearchEnvironment = (Search) -> Effect<Model?>
+public typealias SearchEnvironment = (Search) -> Effect<AnyModel?>
 
 public enum DylanSearchType {
     case song
@@ -31,11 +31,11 @@ public enum DylanSearchType {
 }
 
 public class SearchState: ObservableObject {
-    public var model: Model?
+    public var model: AnyModel?
     public var failedSearch: Search?
     public var currentSearch: Search?
     
-    public init(model: Model?, failedSearch: Search?, currentSearch: Search?) {
+    public init(model: AnyModel?, failedSearch: Search?, currentSearch: Search?) {
         self.model = model
         self.failedSearch = failedSearch
         self.currentSearch = currentSearch
@@ -54,7 +54,7 @@ public struct Search: Equatable {
 
 public enum SearchAction {
     case makeSearch(Search)
-    case completeSearch(Model?, Search)
+    case completeSearch(AnyModel?, Search)
     case reset
 }
 
@@ -91,7 +91,7 @@ public class Searcher {
     
     public init() {}
     
-    public func search(_ search: Search) -> Effect<Model?> {
+    public func search(_ search: Search) -> Effect<AnyModel?> {
         guard let type = search.type else {
             return [self.search(Search(title: search.title, type: .album)),
                     self.search(Search(title: search.title, type: .song)),

@@ -14,7 +14,7 @@ import ComposableArchitecture
 
 extension Detective {
     
-    func fetch(performance date: Double) -> Effect<Model?> {
+    func fetch(performance date: Double) -> Effect<AnyModel?> {
         let context = container.newBackgroundContext()
         
         return .async { completion in
@@ -39,7 +39,7 @@ extension Detective {
                                                 songs: sSongs,
                                                 date: performance.date,
                                                 lbNumbers: performance.lbNumbers)
-                completion(PerformanceDisplayModel(sPerformance: sPerformance))
+                completion(AnyModel(PerformanceDisplayModel(sPerformance: sPerformance)))
             }
         }
     }

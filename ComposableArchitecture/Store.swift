@@ -45,7 +45,7 @@ public final class Store<Value, Action>: ObservableObject {
     }
     
     public func scope<LocalState, LocalAction>(value toLocalValue: @escaping (Value) -> LocalState,
-                                              action toGlobalAction:  @escaping (LocalAction) -> Action)
+                                               action toGlobalAction:  @escaping (LocalAction) -> Action)
     -> Store<LocalState, LocalAction> {
         let localValue = toLocalValue(self.value)
         let localStore = Store<LocalState, LocalAction>(initialValue: localValue,

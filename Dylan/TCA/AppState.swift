@@ -17,7 +17,7 @@ class AppState: ObservableObject {
     
     @Published var selection: Set<ObjectIdentifier> = []
     @Published var selectedRecordToAdd: DylanRecordType = .song
-    @Published var model: Model?
+    @Published var model: AnyModel?
     @Published var failedSearch: Search?
     @Published var currentSearch: Search?
     
@@ -26,15 +26,15 @@ class AppState: ObservableObject {
 extension AppState {
     
     var songDisplayModel: SongDisplayModel? {
-        model as? SongDisplayModel
+        model?.value as? SongDisplayModel
     }
     
     var performanceDisplayModel: PerformanceDisplayModel? {
-        model as? PerformanceDisplayModel
+        model?.value as? PerformanceDisplayModel
     }
     
     var albumDisplayModel: AlbumDisplayModel? {
-        model as? AlbumDisplayModel
+        model?.value as? AlbumDisplayModel
     }
     
 }

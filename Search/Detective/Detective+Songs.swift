@@ -37,7 +37,7 @@ extension Detective {
         }
     }
     
-    func fetchModel(for title: String) -> Effect<Model?> {
+    func fetchModel(for title: String) -> Effect<AnyModel?> {
         let context = container.newBackgroundContext()
         
         return .async { completion in
@@ -58,7 +58,7 @@ extension Detective {
                                           author: author,
                                           performances: performances,
                                           albums: albums)
-                        completion(SongDisplayModel(song: sSong))
+                        completion(AnyModel(SongDisplayModel(song: sSong)))
                     }
                 } else {
                     return completion(nil)

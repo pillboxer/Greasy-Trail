@@ -21,26 +21,17 @@ public let tableListReducer: Reducer<TableListState, TableListAction, SearchEnvi
              action: /TableListAction.search,
              environment: { $0 }))
 
-public struct TableListState: Equatable {
+public struct TableListState {
     
     public var ids: Set<ObjectIdentifier> = []
-    public var model: Model?
+    public var model: AnyModel?
     public var failedSearch: Search?
     public var currentSearch: Search?
     
-    public init(ids: Set<ObjectIdentifier>, model: Model?, failedSearch: Search?) {
+    public init(ids: Set<ObjectIdentifier>, model: AnyModel?, failedSearch: Search?) {
         self.ids = ids
         self.model = model
         self.failedSearch = failedSearch
-    }
-    
-    public static func == (lhs: TableListState, rhs: TableListState) -> Bool {
-        guard lhs.model?.uuid == rhs.model?.uuid else {
-            return false
-        }
-        let lhsTuple = (lhs.ids, lhs.failedSearch, lhs.currentSearch)
-        let rhsTuple = (rhs.ids, rhs.failedSearch, rhs.currentSearch)
-        return (lhsTuple) == (rhsTuple)
     }
 }
 

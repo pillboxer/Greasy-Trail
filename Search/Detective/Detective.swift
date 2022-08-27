@@ -22,17 +22,17 @@ public class Detective: ObservableObject {
         self.container = container
     }
 
-    func search(song title: String) -> Effect<Model?> {
+    func search(song title: String) -> Effect<AnyModel?> {
         os_log("Searching song: %{public}@", log: Log_Detective, title)
         return fetchModel(for: title)
     }
 
-    func search(album title: String) -> Effect<Model?> {
+    func search(album title: String) -> Effect<AnyModel?> {
         os_log("Searching album: %{public}@", log: Log_Detective, title)
         return fetch(album: title)
     }
 
-    func search(performance date: Double) -> Effect<Model?> {
+    func search(performance date: Double) -> Effect<AnyModel?> {
         os_log("Searching date: %{public}@", log: Log_Detective, String(describing: date))
         return fetch(performance: date)
     }
