@@ -7,10 +7,10 @@
 
 import Combine
 // swiftlint: disable force_cast
-public final class Store<Value, Action>: ObservableObject {
+public final class Store<Value, Action> {
     
     let reducer: Reducer<Value, Action, Any>
-    @Published public private(set) var value: Value
+    @Published private var value: Value
     private let environment: Any
     private var viewCancellable: AnyCancellable?
     private var effectCancellables: [UUID: AnyCancellable] = [:]
@@ -59,4 +59,39 @@ public final class Store<Value, Action>: ObservableObject {
         }
         return localStore
     }
+}
+
+public final class ViewStore<Value>: ObservableObject {
+    
+    let id: String
+    fileprivate var cancellable: AnyCancellable?
+    @Published public fileprivate(set) var value: Value
+    
+    public init(initialValue: Value, id: String) {
+        self.value = initialValue
+        self.id = id
+    }
+    
+}
+
+extension Store where Value: Equatable {
+    
+    public func view(id: String) -> ViewStore<Value> {
+        view(removeDuplicates: ==, id: id)
+    }
+}
+
+extension Store {
+    public func view(
+        removeDuplicates predicate: @escaping (Value, Value) -> Bool,
+        id: String) -> ViewStore<Value> {
+            let viewStore = ViewStore(initialValue: self.value, id: id)
+            viewStore.cancellable = self.$value
+                .removeDuplicates(by: predicate)
+                .sink { newValue in
+                    print("NEWVALUE on \(viewStore.id)")
+                    viewStore.value = newValue }
+            _ = self
+            return viewStore
+        }
 }

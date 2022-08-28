@@ -10,7 +10,6 @@ import Foundation
 import ComposableArchitecture
 import Search
 import CasePaths
-import TableList
 import Add
 
 struct AppEnvironment {
@@ -18,12 +17,7 @@ struct AppEnvironment {
 }
 
 let appReducer: Reducer<AppState, AppAction, AppEnvironment> =
-combine(
-    pullback(tableListReducer,
-             value: \.tableListState,
-             action: /AppAction.tableList,
-             environment: { $0.searchEnvironment }),
-    pullback(searchReducer,
+combine(pullback(searchReducer,
              value: \.searchState,
              action: /AppAction.search,
              environment: { $0.searchEnvironment }),

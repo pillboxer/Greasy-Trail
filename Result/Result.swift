@@ -15,14 +15,16 @@ import Search
 /// Coordinates between different result views
 public struct ResultView: View {
     
-    @ObservedObject private var store: Store<SearchState, SearchAction>
+    let store: Store<SearchState, SearchAction>
+    @ObservedObject private var viewStore: ViewStore<AnyModel?>
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
+        self.viewStore = store.scope(value: { $0.model}, action: {$0 }).view(id: "RESULTS")
     }
     
     private var model: AnyModel? {
-        store.value.model
+        viewStore.value
     }
     
     public var body: some View {

@@ -9,18 +9,18 @@ import Foundation
 import Search
 import Model
 import AllPerformances
-import TableList
 import GTCloudKit
 import Add
+import Sidebar
 
-class AppState: ObservableObject {
-    
-    @Published var selection: Set<ObjectIdentifier> = []
-    @Published var selectedRecordToAdd: DylanRecordType = .song
-    @Published var model: AnyModel?
-    @Published var failedSearch: Search?
-    @Published var currentSearch: Search?
-    
+struct AppState: Equatable {
+    var selectedModel: Set<ObjectIdentifier> = []
+    var selectedRecordToAdd: DylanRecordType = .song
+    var selectedSidebarType: SidebarDisplayType = .songs
+    var model: AnyModel?
+    var failedSearch: Search?
+    var currentSearch: Search?
+    var isSearching = false
 }
 
 extension AppState {
@@ -41,25 +41,20 @@ extension AppState {
 
 extension AppState {
     
-    var tableListState: TableListState {
-        get {
-            TableListState(ids: selection, model: model, failedSearch: failedSearch)
-        }
-        set {
-            self.selection = newValue.ids
-            self.model = newValue.model
-            self.failedSearch = newValue.failedSearch
-        }
-    }
-
     var searchState: SearchState {
         get {
-            SearchState(model: model, failedSearch: failedSearch, currentSearch: currentSearch)
+            SearchState(model: model,
+                        failedSearch: failedSearch,
+                        currentSearch: currentSearch,
+                        ids: selectedModel,
+                        isSearching: isSearching)
         }
         set {
             self.failedSearch = newValue.failedSearch
             self.model = newValue.model
             self.currentSearch = newValue.currentSearch
+            self.selectedModel = newValue.ids
+            self.isSearching = newValue.isSearching
         }
     }
     

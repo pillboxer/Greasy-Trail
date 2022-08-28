@@ -30,15 +30,29 @@ public enum DylanSearchType {
     }
 }
 
-public class SearchState: ObservableObject {
+public class SearchState: ObservableObject, Equatable {
+    public static func == (lhs: SearchState, rhs: SearchState) -> Bool {
+        return lhs.model == rhs.model
+        && lhs.failedSearch == rhs.failedSearch
+        && lhs.currentSearch == rhs.currentSearch
+    }
+    
     public var model: AnyModel?
     public var failedSearch: Search?
     public var currentSearch: Search?
+    public var ids: Set<ObjectIdentifier>
+    public var isSearching = false
     
-    public init(model: AnyModel?, failedSearch: Search?, currentSearch: Search?) {
+    public init(model: AnyModel?,
+                failedSearch: Search?,
+                currentSearch: Search?,
+                ids: Set<ObjectIdentifier>,
+                isSearching: Bool) {
         self.model = model
         self.failedSearch = failedSearch
         self.currentSearch = currentSearch
+        self.ids = ids
+        self.isSearching = isSearching
     }
 }
 
@@ -53,6 +67,7 @@ public struct Search: Equatable {
 }
 
 public enum SearchAction {
+    case select(identifier: ObjectIdentifier)
     case makeSearch(Search)
     case completeSearch(AnyModel?, Search)
     case reset
@@ -64,6 +79,7 @@ public func searchReducer(state: inout SearchState,
     
     switch action {
     case .makeSearch(let search):
+        state.isSearching = true
         state.currentSearch = search
         return [ environment(search)
             .map {
@@ -72,6 +88,7 @@ public func searchReducer(state: inout SearchState,
             .receive(on: DispatchQueue.main)
             .eraseToEffect()]
     case .completeSearch(let model, let search):
+        state.isSearching = false
         state.model = model
         state.failedSearch = model == nil ? search : nil
         return []
@@ -79,6 +96,10 @@ public func searchReducer(state: inout SearchState,
         state.currentSearch = nil
         state.failedSearch = nil
         state.model = nil
+        return []
+    case .select(let identifier):
+        state.ids.removeAll()
+        state.ids.insert(identifier)
         return []
     }
 }

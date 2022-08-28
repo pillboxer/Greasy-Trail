@@ -39,6 +39,9 @@ public struct OnTapButton: View {
                 Text(String(format: NSLocalizedString(text, comment: ""), arguments: args ?? []))
             }
         }
+        .onHover { hover in
+            hover ? NSCursor.pointingHand.push() : NSCursor.pop()
+        }
     }
 
 }

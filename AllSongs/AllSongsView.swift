@@ -9,11 +9,12 @@ import SwiftUI
 import GTCoreData
 import TwoColumnTable
 import ComposableArchitecture
-import TableList
+import Search
 
 public struct AllSongsView: View {
     
-    @ObservedObject var store: Store<TableListState, TableListAction>
+    let store: Store<SearchState, SearchAction>
+    @ObservedObject private var viewStore: ViewStore<Set<ObjectIdentifier>>
     
     @FetchRequest(entity: Song.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)],
@@ -25,12 +26,13 @@ public struct AllSongsView: View {
         .init(\.author, order: SortOrder.forward)
     ]
     
-    public init(store: Store<TableListState, TableListAction>) {
+    public init(store: Store<SearchState, SearchAction>) {
         self.store = store
+        self.viewStore = store.scope(value: { $0.ids }, action: { $0 }).view(id: "ALL SONGS")
     }
     
     public var body: some View {
-        Table(tableData, selection: .constant(store.value.ids), sortOrder: $sortOrder) {
+        return Table(tableData, selection: .constant(viewStore.value), sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_songs_0"), value: \.title!) { song in
                 let title = song.title!
                 HStack {
@@ -61,14 +63,14 @@ extension AllSongsView: TwoColumnTableViewType {
     
     public func doubleTap(on string: String, id: Song.ID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
-            store.send(.search(.makeSearch(.init(title: string, type: .song))))
+            store.send(.makeSearch(.init(title: string, type: .song)))
         }
     }
     
     public func singleTap(id: Song.ID) -> _EndedGesture<TapGesture> {
         TapGesture()
             .onEnded {
-                store.send(.tableSelect(.select(identifier: id)))
+                store.send(.select(identifier: id))
             }
     }
     

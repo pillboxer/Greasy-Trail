@@ -13,15 +13,17 @@ import Model
 
 public struct SearchFieldView: View {
     
-    @ObservedObject var store: Store<SearchState, SearchAction>
+    let store: Store<SearchState, SearchAction>
+    @ObservedObject var viewStore: ViewStore<Search?>
     @State private var text = ""
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
+        self.viewStore = store.scope(value: { $0.currentSearch }, action: { $0 }).view(id: "SEARCH FIELD")
     }
 
    public var body: some View {
-       if store.value.currentSearch != nil {
+       if viewStore.value != nil {
            ProgressView("searching_progress")
         } else {
             HStack {

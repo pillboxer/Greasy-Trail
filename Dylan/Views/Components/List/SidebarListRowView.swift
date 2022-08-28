@@ -5,40 +5,42 @@
 //  Created by Henry Cooper on 12/07/2022.
 //
 
-import SwiftUI
-import ComposableArchitecture
-import TableSelection
 import AllPerformances
-import UI
-import TableList
-import GTCloudKit
 import AllSongs
+import ComposableArchitecture
+import GTCloudKit
+import Search
 import Sidebar
+import SwiftUI
+import UI
 
 struct SidebarListRowView: View {
     
-    @EnvironmentObject var store: Store<AppState, AppAction>
+    let store: Store<AppState, AppAction>
+    @ObservedObject private var viewStore: ViewStore<AppState>
     
     let displayType: SidebarDisplayType
     let isFetching: Bool
     var progress: Double?
     
     @State private var selection: String
-    @State private var expandedListShowing = false
     @Binding var selectedID: String?
     
-    init(displayType: SidebarDisplayType,
+    init(store: Store<AppState, AppAction>,
+         displayType: SidebarDisplayType,
          isFetching: Bool, progress: Double?,
          selectedID: Binding<String?>) {
+        self.store = store
         self.displayType = displayType
         self.isFetching = isFetching
         self.progress = progress
         self.selection = displayType.rawValue
+        self.viewStore = store.view(id: "Sidebar")
         _selectedID = selectedID
     }
-        
+    
     var body: some View {
-        NavigationLink(destination: destinationFor(selection).environmentObject(store),
+        NavigationLink(destination: destinationFor(selection),
                        tag: displayType.rawValue,
                        selection: $selectedID) {
             HStack {
@@ -54,24 +56,32 @@ struct SidebarListRowView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     func destinationFor(_ selection: String) -> some View {
         if let section = SidebarDisplayType(rawValue: selection) {
             switch section {
             case .songs:
                 AllSongsView(store: store.scope(value: {
-                    TableListState(ids: $0.selection, model: $0.model, failedSearch: $0.failedSearch)
+                    SearchState(model: $0.model,
+                                failedSearch: $0.failedSearch,
+                                currentSearch: $0.currentSearch,
+                                ids: $0.selectedModel,
+                                isSearching: $0.isSearching)
                 }, action: { action in
-                    return .tableList(action)
+                    return .search(action)
                 }))
             case .albums:
                 AllAlbumsView()
             default:
                 AllPerformancesView(store: store.scope(value: {
-                    TableListState(ids: $0.selection, model: $0.model, failedSearch: $0.failedSearch)
+                    SearchState(model: $0.model,
+                                failedSearch: $0.failedSearch,
+                                currentSearch: $0.currentSearch,
+                                ids: $0.selectedModel,
+                                isSearching: $0.isSearching)
                 }, action: { action in
-                    return .tableList(action)
+                    return .search(action)
                 }), predicate: section.predicate)
             }
         } else {

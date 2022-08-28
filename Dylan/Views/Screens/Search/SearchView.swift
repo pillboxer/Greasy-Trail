@@ -13,10 +13,16 @@ import ComposableArchitecture
 
 struct SearchView: View {
     
-    @ObservedObject var store: Store<SearchState, SearchAction>
+    let store: Store<SearchState, SearchAction>
+    @ObservedObject private var viewStore: ViewStore<Search?>
+    
+    init(store: Store<SearchState, SearchAction>) {
+        self.store = store
+        self.viewStore = store.scope(value: { $0.failedSearch }, action: { $0 }).view(id: "SEARCH")
+    }
 
     var body: some View {
-        if let search = store.value.failedSearch {
+        if let search = viewStore.value {
             Text(LocalizedStringKey(String(format: NSLocalizedString("search_failed", comment: ""),
                                            search.title)))
             OnTapButton(text: "generic_ok") {

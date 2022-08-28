@@ -8,13 +8,13 @@
 import SwiftUI
 
 public struct ListRowView: View {
-
+    
     let headline: String
     var subheadline: String?
     private let buttons: [ListRowButton]?
     let onTap: (() -> Void)?
     let buttonTap: ((ListRowButton) -> Void)?
-        
+    
     public init(headline: String,
                 subheadline: String? = nil,
                 buttons: [ListRowButton]? = nil,
@@ -31,6 +31,10 @@ public struct ListRowView: View {
         VStack(alignment: .leading) {
             HStack {
                 Text(headline).font(.headline)
+                if let onTap = onTap {
+                    OnTapButton(systemImage: "arrow.forward.circle", onTap: onTap)
+                        .buttonStyle(.plain)
+                }
             }
             if let subHeadline = subheadline {
                 HStack(spacing: 8) {

@@ -14,7 +14,7 @@ import PerformancesList
 import Search
 public struct ResultSongOverviewView: View {
     
-    @ObservedObject private var store: Store<SearchState, SearchAction>
+    let store: Store<SearchState, SearchAction>
     private let formatter = GTFormatter.Formatter()
     private let model: SongDisplayModel
     

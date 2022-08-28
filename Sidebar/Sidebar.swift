@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SidebarDisplayType: String, CaseIterable {
+public enum SidebarDisplayType: String, CaseIterable, Equatable {
     case songs = "Songs"
     case albums = "Albums"
     case performances = "Performances"

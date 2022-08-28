@@ -9,7 +9,7 @@ import SwiftUI
 import GTCloudKit
 import ComposableArchitecture
 
-public struct AddState {
+public struct AddState: Equatable {
     public var selectedRecordToAdd: DylanRecordType
     
     public init(selectedRecordToAdd: DylanRecordType) {
@@ -33,14 +33,16 @@ public func addReducer(state: inout AddState,
 
 public struct AddView: View {
     
-    @ObservedObject var store: Store<AddState, AddAction>
+    let store: Store<AddState, AddAction>
+    @ObservedObject var viewStore: ViewStore<AddState>
     
     public init(store: Store<AddState, AddAction>) {
         self.store = store
+        self.viewStore = store.scope(value: { $0 }, action: { $0 }).view(id: "ADD")
     }
     
     public var body: some View {
-        Picker("", selection: .constant(store.value.selectedRecordToAdd)) {
+        Picker("", selection: .constant(viewStore.value.selectedRecordToAdd)) {
             ForEach(DylanRecordType.allCases, id: \.self) {
                 Text($0.rawValue)
             }
