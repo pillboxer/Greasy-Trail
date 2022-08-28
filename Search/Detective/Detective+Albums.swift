@@ -20,34 +20,40 @@ extension Detective {
         return .async { completion in
             // Fetch album with given title
             let predicate = NSPredicate(format: "title =[c] %@", title)
-            guard let album = context.fetchAndWait(Album.self, with: predicate).first,
-                  let songs = album.songs?.array as? [Song] else {
-                return completion(nil)
+            context.performFetch(Album.self, with: predicate) { [self] albums in
+                guard let first = albums.first,
+                      let songs = first.songs?.array as? [Song] else {
+                    return completion(nil)
+                }
+                let model = createAlbumDisplayModel(from: first, with: songs)
+                completion(AnyModel(model))
+
             }
-            // Get the songs
-            let sSongs = songs.compactMap { sSong(uuid: $0.uuid!, title: $0.title!, author: $0.songAuthor) }
-            let sAlbum = sAlbum(uuid: album.uuid!,
-                                title: album.title!,
-                                songs: sSongs,
-                                releaseDate: album.releaseDate)
-            completion(AnyModel(AlbumDisplayModel(album: sAlbum)))
+        }
+    }
+    
+    func randomAlbum() -> Effect<AlbumDisplayModel?> {
+        let context = container.newBackgroundContext()
+        return .async { completion in
+            context.performFetch(Album.self) { [self] albums in
+                guard let random = albums.randomElement(),
+                      let songs = random.songs?.array as? [Song] else {
+                     return completion(nil)
+                }
+                let model = createAlbumDisplayModel(from: random, with: songs)
+                completion(model)
+            }
         }
     }
 
-    func albumsThatInclude(song objectID: NSManagedObjectID) -> [sAlbum] {
-        let context = container.newBackgroundContext()
-        return context.syncPerform { 
-            if let song = context.object(with: objectID) as? Song {
-                let objects = objects(Album.self, including: song, context: context)
-                os_log("%{public}@ found on %{public}@ album(s)", song.title!, String(describing: objects.count))
-                let sAlbums = objects.compactMap { sAlbum(uuid: $0.uuid!,
-                                                          title: $0.title!,
-                                                          songs: [],
-                                                          releaseDate: $0.releaseDate) }
-                return sAlbums.sorted { $0.releaseDate < $1.releaseDate }
-            }
-            return []
-        }
+    private func createAlbumDisplayModel(from album: Album, with songs: [Song]) -> AlbumDisplayModel {
+        let sSongs = songs.compactMap { sSong(uuid: $0.uuid!, title: $0.title!, author: $0.songAuthor) }
+        let sAlbum = sAlbum(uuid: album.uuid!,
+                            title: album.title!,
+                            songs: sSongs,
+                            releaseDate: album.releaseDate)
+        return AlbumDisplayModel(album: sAlbum)
+
     }
 
 }

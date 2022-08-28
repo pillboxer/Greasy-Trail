@@ -38,7 +38,7 @@ public struct AddView: View {
     
     public init(store: Store<AddState, AddAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { $0 }, action: { $0 }).view(id: "ADD")
+        self.viewStore = store.scope(value: { $0 }, action: { $0 }).view
     }
     
     public var body: some View {

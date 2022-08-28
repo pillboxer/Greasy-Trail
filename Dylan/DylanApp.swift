@@ -20,7 +20,10 @@ struct DylanApp: App {
 
     let appStore = Store(initialValue: AppState(),
                          reducer: appReducer,
-                         environment: AppEnvironment(searchEnvironment: Searcher().search))
+                         environment: AppEnvironment(search: Searcher().search,
+                                                     randomSong: Searcher().randomSong,
+                                                     randomAlbum: Searcher().randomAlbum,
+                                                     randomPerformance: Searcher().randomPerformance))
     
     var body: some Scene {
         WindowGroup {

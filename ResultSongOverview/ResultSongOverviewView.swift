@@ -18,7 +18,8 @@ public struct ResultSongOverviewView: View {
     private let formatter = GTFormatter.Formatter()
     private let model: SongDisplayModel
     
-    public init(model: SongDisplayModel, store: Store<SearchState, SearchAction>) {
+    public init(store: Store<SearchState, SearchAction>,
+                model: SongDisplayModel) {
         self.model = model
         self.store = store
     }
@@ -26,10 +27,6 @@ public struct ResultSongOverviewView: View {
     public var body: some View {
         VStack {
             HStack {
-                OnTapButton(systemImage: "house") {
-                    store.send(.reset)
-                }
-                .buttonStyle(.plain)
                 Spacer()
                 Text(model.title)
                     .font(.headline)

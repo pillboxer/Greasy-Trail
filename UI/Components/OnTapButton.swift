@@ -8,23 +8,26 @@
 import SwiftUI
 
 public struct OnTapButton: View {
-
-    var text: String?
-    var image: String?
-    var systemImage: String?
-    var onTap: () -> Void
-    var args: [CVarArg]?
+    
+    private var text: String?
+    private var image: String?
+    private var systemImage: String?
+    private var onTap: () -> Void
+    private var args: [CVarArg]?
+    private var plainButtonStyle: Bool
     
     public init(text: String? = nil,
+                args: [CVarArg]? = nil,
                 image: String? = nil,
                 systemImage: String? = nil,
-                onTap: @escaping () -> Void,
-                args: [CVarArg]? = nil) {
+                plainButtonStyle: Bool = true,
+                onTap: @escaping () -> Void) {
         self.text = text
         self.image = image
         self.systemImage = systemImage
         self.onTap = onTap
         self.args = args
+        self.plainButtonStyle = plainButtonStyle
     }
     
     public var body: some View {
@@ -42,6 +45,7 @@ public struct OnTapButton: View {
         .onHover { hover in
             hover ? NSCursor.pointingHand.push() : NSCursor.pop()
         }
+        .if(plainButtonStyle) { $0.buttonStyle(.plain) }
     }
-
+    
 }

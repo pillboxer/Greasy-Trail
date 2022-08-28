@@ -12,6 +12,7 @@ import AllPerformances
 import GTCloudKit
 import Add
 import Sidebar
+import BottomBar
 
 struct AppState: Equatable {
     var selectedModel: Set<ObjectIdentifier> = []
@@ -21,6 +22,7 @@ struct AppState: Equatable {
     var failedSearch: Search?
     var currentSearch: Search?
     var isSearching = false
+    var isSearchFieldShowing = false
 }
 
 extension AppState {
@@ -64,6 +66,19 @@ extension AppState {
         }
         set {
             self.selectedRecordToAdd = newValue.selectedRecordToAdd
+        }
+    }
+    
+    var bottomViewState: BottomBarFeatureState {
+        get {
+            return BottomBarFeatureState(searchState: searchState,
+                                         isSearchFieldShowing: isSearchFieldShowing,
+                                         isSearching: isSearching,
+                                         model: model)
+        }
+        set {
+            self.searchState = newValue.searchState
+            self.isSearchFieldShowing = newValue.bottomBarState.isSearchFieldShowing
         }
     }
 }

@@ -7,8 +7,10 @@
 
 import Search
 import Add
+import BottomBar
 
 enum AppAction {
     case search(SearchAction)
     case add(AddAction)
+    case bottomBar(BottomBarFeatureAction)
 }

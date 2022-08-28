@@ -33,7 +33,7 @@ public struct ListRowView: View {
                 Text(headline).font(.headline)
                 if let onTap = onTap {
                     OnTapButton(systemImage: "arrow.forward.circle", onTap: onTap)
-                        .buttonStyle(.plain)
+                        
                 }
             }
             if let subHeadline = subheadline {
@@ -44,7 +44,7 @@ public struct ListRowView: View {
                             OnTapButton(systemImage: button.rawValue) {
                                 buttonTap?(button)
                             }
-                            .buttonStyle(.plain)
+                            
                         }
                     }
                 }

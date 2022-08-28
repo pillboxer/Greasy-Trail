@@ -26,18 +26,6 @@ public extension SongDisplayModel {
         song.title
     }
 
-    var firstAlbumAppearance: sAlbum? {
-        song.albums?.first
-    }
-
-    var numberOfAlbums: Int {
-        song.albums?.count ?? 0
-    }
-
-    var albums: [sAlbum]? {
-        song.albums
-    }
-
     var author: String {
         song.author
     }

@@ -18,24 +18,20 @@ public struct ResultPerformanceOverviewView: View {
     let model: PerformanceDisplayModel
     @State private var presentAlert = false
     
-    public init(model: PerformanceDisplayModel,
-                store: Store<SearchState, SearchAction>) {
-        self.model = model
+    public init(store: Store<SearchState, SearchAction>,
+                model: PerformanceDisplayModel) {
         self.store = store
+        self.model = model
     }
     
     public var body: some View {
         VStack(spacing: 16) {
             HStack {
-                OnTapButton(systemImage: "house") {
-                    store.send(.reset)
-                }
-                .buttonStyle(.plain)
                 Spacer()
                 Text(model.venue)
                     .font(.headline)
                 if let url = model.officialURL() {
-                    OnTapButton(systemImage: "globe") {
+                    OnTapButton(systemImage: "globe", plainButtonStyle: false) {
                         NSWorkspace.shared.open(url)
                     }
                     .buttonStyle(.link)

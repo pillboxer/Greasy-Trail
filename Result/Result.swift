@@ -9,6 +9,7 @@ import SwiftUI
 import ComposableArchitecture
 import ResultPerformance
 import ResultSongOverview
+import ResultAlbum
 import Model
 import Search
 
@@ -20,7 +21,7 @@ public struct ResultView: View {
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { $0.model}, action: {$0 }).view(id: "RESULTS")
+        self.viewStore = store.scope(value: { $0.model}, action: { $0 }).view
     }
     
     private var model: AnyModel? {
@@ -29,11 +30,11 @@ public struct ResultView: View {
     
     public var body: some View {
         if let model = model?.value as? SongDisplayModel {
-            ResultSongOverviewView(model: model, store: store)
+            ResultSongOverviewView(store: store, model: model)
         } else if let model = model?.value as? AlbumDisplayModel {
-//            ResultAlbumOverviewView()
+            ResultAlbumOverviewView(store: store, model: model)
         } else if let model = model?.value as? PerformanceDisplayModel {
-            ResultPerformanceOverviewView(model: model, store: store)
+            ResultPerformanceOverviewView(store: store, model: model)
         }
     }
 }

@@ -11,7 +11,7 @@ import ComposableArchitecture
 import Search
 import Model
 
-public struct SearchFieldView: View {
+struct SearchFieldView: View {
     
     let store: Store<SearchState, SearchAction>
     @ObservedObject var viewStore: ViewStore<Search?>
@@ -19,33 +19,23 @@ public struct SearchFieldView: View {
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { $0.currentSearch }, action: { $0 }).view(id: "SEARCH FIELD")
+        self.viewStore = store.scope(value: { $0.currentSearch }, action: { $0 }).view
     }
-
-   public var body: some View {
-       if viewStore.value != nil {
-           ProgressView("searching_progress")
-        } else {
-            HStack {
-                OnTapButton(systemImage: "arrow.clockwise") {
-                    // FIXME: refresh
-                }
-                .buttonStyle(.plain)
-                NSTextFieldRepresentable(placeholder: "search_placeholder", text: $text) {
-                    search()
-                }
-                .frame(maxWidth: 250)
-                OnTapButton(systemImage: "magnifyingglass.circle") {
-                    search()
-                }
-                .buttonStyle(.plain)
+    
+    var body: some View {
+        HStack {
+            NSTextFieldRepresentable(placeholder: "search_placeholder", text: $text) {
+                search()
             }
-            .padding(4)
+            .frame(maxWidth: 250)
+            
         }
+        .padding(4)
     }
     
     private func search() {
         let search = Search(title: text, type: nil)
+        text = ""
         store.send(.makeSearch(search))
     }
 }

@@ -13,7 +13,7 @@
 "developer_menu_button_2" = "Copy logs";
 
 //Misc
-"search_placeholder" = "Enter your search term";
+"search_placeholder" = "Press return to search";
 "searching_progress" = "Searching";
 "default_author" = "Bob Dylan";
 "results_information_title_first_appearance" = "First appearance";
@@ -61,3 +61,7 @@
 "result_error_get" = "Could not get success from result. Received error: %@";
 "lb_editing_error_prefix" = "%@ is missing prefix \"LB-\"";
 "lb_editing_error_nan" = "One or more entries is not a number. Please try again";
+
+// Bottom Bar
+"bottom_bar_tooltip_0" = "I'm feeling lucky";
+"bottom_bar_tooltip_1" = "Show search bar";

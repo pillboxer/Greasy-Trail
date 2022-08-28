@@ -14,18 +14,15 @@ public struct sSong: Codable {
     public let title: String
     public var author: String
     var performances: [sPerformance]?
-    var albums: [sAlbum]?
     
     public init(uuid: String,
                 title: String,
                 author: String = NSLocalizedString("default_author", comment: ""),
-                performances: [sPerformance]? = nil,
-                albums: [sAlbum]? = nil) {
+                performances: [sPerformance]? = nil) {
         self.uuid = uuid
         self.title = title
         self.author = author
         self.performances = performances
-        self.albums = albums
     }
 }
 

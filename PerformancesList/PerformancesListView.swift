@@ -15,13 +15,8 @@ import UI
 public struct PerformancesListView: View {
     
     let store: Store<AnyModel?, SearchAction>
-    
     private let performances: [sPerformance]
-    
-    private var sorted: [sPerformance] {
-        performances.sorted { $0.date ?? 0 < $1.date ?? 0 }
-    }
-    
+ 
     public init(performances: [sPerformance], store: Store<AnyModel?, SearchAction>) {
         self.performances = performances
         self.store = store

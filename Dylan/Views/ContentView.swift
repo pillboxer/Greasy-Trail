@@ -12,6 +12,7 @@ import Result
 import Search
 import GTCloudKit
 import Sidebar
+import BottomBar
 
 struct ContentView: View {
     
@@ -22,7 +23,7 @@ struct ContentView: View {
     
     init(store: Store<AppState, AppAction>) {
         self.store = store
-        self.viewStore = store.view(id: "CONTENT")
+        self.viewStore = store.view
     }
     
     var body: some View {
@@ -50,15 +51,7 @@ struct ContentView: View {
             }
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
             .frame(minWidth: 900, minHeight: 600)
-            HStack(alignment: .top) {
-                Spacer()
-                if viewStore.value.isSearching {
-                ProgressView()
-                    .scaleEffect(0.4)
-                }
-                    
-            }
-            .frame(maxHeight: 24)
+            BottomBarView(store: store.scope(value: { $0.bottomViewState }, action: { .bottomBar($0)}))
         }
        
     }

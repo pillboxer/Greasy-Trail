@@ -35,7 +35,7 @@ struct SidebarListRowView: View {
         self.isFetching = isFetching
         self.progress = progress
         self.selection = displayType.rawValue
-        self.viewStore = store.view(id: "Sidebar")
+        self.viewStore = store.view
         _selectedID = selectedID
     }
     

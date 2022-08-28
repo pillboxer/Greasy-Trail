@@ -36,14 +36,6 @@ public class Detective: ObservableObject {
         os_log("Searching date: %{public}@", log: Log_Detective, String(describing: date))
         return fetch(performance: date)
     }
-
-    func objects<T: NSManagedObject>(_ object: T.Type,
-                                     including song: Song,
-                                     context: NSManagedObjectContext) -> [T] {
-        let predicate = NSPredicate(format: "songs CONTAINS %@", song)
-        let objects = context.fetchAndWait(T.self, with: predicate)
-        return objects
-    }
     
     func objects<T: NSManagedObject>(_ object: T.Type,
                                      including song: Song,

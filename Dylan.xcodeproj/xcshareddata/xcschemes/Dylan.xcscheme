@@ -79,6 +79,26 @@
                ReferencedContainer = "container:Dylan.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "860A3A5228BB7C7400D54074"
+               BuildableName = "BottomBarTests.xctest"
+               BlueprintName = "BottomBarTests"
+               ReferencedContainer = "container:Dylan.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "860A3A7D28BBC13400D54074"
+               BuildableName = "ResultAlbumTests.xctest"
+               BlueprintName = "ResultAlbumTests"
+               ReferencedContainer = "container:Dylan.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

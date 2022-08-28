@@ -63,33 +63,29 @@ public final class Store<Value, Action> {
 
 public final class ViewStore<Value>: ObservableObject {
     
-    let id: String
     fileprivate var cancellable: AnyCancellable?
     @Published public fileprivate(set) var value: Value
     
-    public init(initialValue: Value, id: String) {
+    public init(initialValue: Value) {
         self.value = initialValue
-        self.id = id
     }
     
 }
 
 extension Store where Value: Equatable {
     
-    public func view(id: String) -> ViewStore<Value> {
-        view(removeDuplicates: ==, id: id)
+    public var view: ViewStore<Value> {
+        view(removeDuplicates: ==)
     }
 }
 
 extension Store {
     public func view(
-        removeDuplicates predicate: @escaping (Value, Value) -> Bool,
-        id: String) -> ViewStore<Value> {
-            let viewStore = ViewStore(initialValue: self.value, id: id)
+        removeDuplicates predicate: @escaping (Value, Value) -> Bool) -> ViewStore<Value> {
+            let viewStore = ViewStore(initialValue: self.value)
             viewStore.cancellable = self.$value
                 .removeDuplicates(by: predicate)
                 .sink { newValue in
-                    print("NEWVALUE on \(viewStore.id)")
                     viewStore.value = newValue }
             _ = self
             return viewStore

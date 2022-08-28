@@ -20,35 +20,44 @@ extension Detective {
         return .async { completion in
             context.perform { [self] in
                 let predicate = NSPredicate(format: "date == %d", Int(date))
-                guard let performance = context.fetchAndWait(Performance.self, with: predicate).first,
-                      let songs = performance.songs?.array as? [Song] else {
-                    return completion(nil)
+                context.performFetch(Performance.self, with: predicate) { [self] performances in
+                    guard let first = performances.first,
+                          let songs = first.songs?.array as? [Song] else {
+                        return completion(nil)
+                    }
+                    let displayModel = createPerformanceDisplayModel(from: first, with: songs)
+                    completion(AnyModel(displayModel))
                 }
-                var sSongs: [sSong] = []
-                for song in songs {
-                    let id = song.objectID
-                    let albums = albumsThatInclude(song: id)
-                    sSongs.append(sSong(uuid: song.uuid!,
-                                        title: song.title!,
-                                        author: song.songAuthor,
-                                        albums: albums))
-                }
-                
-                let sPerformance = sPerformance(uuid: performance.uuid!,
-                                                venue: performance.venue!,
-                                                songs: sSongs,
-                                                date: performance.date,
-                                                lbNumbers: performance.lbNumbers)
-                completion(AnyModel(PerformanceDisplayModel(sPerformance: sPerformance)))
             }
         }
     }
     
-    // For when we move to async
-    private func _performancesThatInclude(song: Song) async -> [sPerformance] {
-        await withCheckedContinuation { continuation in
-            fetchPerformancesThatInclude(song: song) { performances in
-                continuation.resume(returning: performances)
+    private func createPerformanceDisplayModel(from performance: Performance,
+                                               with songs: [Song]) -> PerformanceDisplayModel {
+        var sSongs: [sSong] = []
+        for song in songs {
+            sSongs.append(sSong(uuid: song.uuid!,
+                                title: song.title!,
+                                author: song.songAuthor))
+        }
+        let sPerformance = sPerformance(uuid: performance.uuid!,
+                                        venue: performance.venue!,
+                                        songs: sSongs,
+                                        date: performance.date,
+                                        lbNumbers: performance.lbNumbers)
+        return PerformanceDisplayModel(sPerformance: sPerformance)
+        
+    }
+    
+    func randomPerformance() -> Effect<PerformanceDisplayModel?> {
+        let context = container.newBackgroundContext()
+        return .async { completion in
+            context.performFetch(Performance.self) { [self] performances in
+                guard let random = performances.randomElement(),
+                      let songs = random.songs?.array as? [Song] else {
+                     return completion(nil)
+                }
+                completion(createPerformanceDisplayModel(from: random, with: songs))
             }
         }
     }

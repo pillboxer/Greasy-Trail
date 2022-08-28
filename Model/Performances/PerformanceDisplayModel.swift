@@ -43,11 +43,6 @@ public extension PerformanceDisplayModel {
         sPerformance.lbNumbers
     }
 
-    var albums: [sAlbum] {
-        songs.compactMap { $0.albums?.first }
-
-    }
-
     func officialURL() -> URL? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

@@ -37,6 +37,18 @@ extension Detective {
         }
     }
     
+    func randomSong() -> Effect<SongDisplayModel?> {
+        let context = container.newBackgroundContext()
+        return .async { [self] completion in
+            context.performFetch(Song.self) { [self] songs in
+                guard let random = songs.randomElement() else {
+                     return completion(nil)
+                }
+                createSongDisplayModel(from: random, completion: completion)
+            }
+        }
+    }
+    
     func fetchModel(for title: String) -> Effect<AnyModel?> {
         let context = container.newBackgroundContext()
         
@@ -46,24 +58,27 @@ extension Detective {
                     return completion(nil)
                 }
                 let id = song.objectID
-
                 if let song = context.object(with: id) as? Song {
-                    let uuid = song.uuid!
-                    let title = song.title!
-                    let author = song.songAuthor
-                    let albums = albumsThatInclude(song: id)
-                    fetchPerformancesThatInclude(song: song) { performances in
-                        let sSong = sSong(uuid: uuid,
-                                          title: title,
-                                          author: author,
-                                          performances: performances,
-                                          albums: albums)
-                        completion(AnyModel(SongDisplayModel(song: sSong)))
+                    createSongDisplayModel(from: song) { songDisplayModel in
+                        completion(AnyModel(songDisplayModel))
                     }
                 } else {
                     return completion(nil)
                 }
             }
+        }
+    }
+    
+    private func createSongDisplayModel(from song: Song, completion: @escaping (SongDisplayModel) -> Void) {
+        let uuid = song.uuid!
+        let title = song.title!
+        let author = song.songAuthor
+        fetchPerformancesThatInclude(song: song) { performances in
+            let sSong = sSong(uuid: uuid,
+                              title: title,
+                              author: author,
+                              performances: performances)
+            completion(SongDisplayModel(song: sSong))
         }
     }
 }

@@ -29,7 +29,7 @@ public struct AllPerformancesView {
                 predicate: NSPredicate = NSPredicate(value: true)) {
         self.store = store
         self.predicate = predicate
-        self.viewStore = store.scope(value: { $0.ids }, action: { $0 }).view(id: "ALL PERFORMANCES")
+        self.viewStore = store.scope(value: { $0.ids }, action: { $0 }).view
         _fetched = FetchRequest<Performance>(entity: Performance.entity(),
                                             sortDescriptors: [NSSortDescriptor(key: "date",
                                                                                ascending: false)],
