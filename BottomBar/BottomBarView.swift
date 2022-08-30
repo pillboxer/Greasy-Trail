@@ -12,24 +12,24 @@ import SearchField
 
 public struct BottomBarView: View {
 
-    let store: Store<BottomBarFeatureState, BottomBarFeatureAction>
-    @ObservedObject private var viewStore: ViewStore<BottomBarState>
+    let store: Store<BottomBarState, BottomBarFeatureAction>
+    @ObservedObject private var viewStore: ViewStore<BottomBarViewState, BottomViewAction>
     
-    public init(store: Store<BottomBarFeatureState, BottomBarFeatureAction>) {
+    public init(store: Store<BottomBarState, BottomBarFeatureAction>) {
         self.store = store
-        self.viewStore = store.scope(value: {
-            BottomBarState(isSearchFieldShowing: $0.bottomBarState.isSearchFieldShowing,
-                           isSearching: $0.searchState.isSearching,
-                           model: $0.model)},
-                                     action: { $0 }).view }
+        self.viewStore = store.scope(value: BottomBarViewState.init,
+                                     action: BottomBarFeatureAction.init).view
+    }
     
     public var body: some View {
         HStack {
             if viewStore.value.model != nil {
                 OnTapButton(systemImage: "house") {
-                    store.send(.search(.reset))
+                    withAnimation {
+                        viewStore.send(.reset)
+                    }
                 }
-                
+                .help("bottom_bar_tooltip_house")
             }
             if viewStore.value.isSearchFieldShowing {
                 SearchView(store: store.scope(value: { $0.searchState }, action: { .search($0) })) 
@@ -37,24 +37,43 @@ public struct BottomBarView: View {
             }
             OnTapButton(systemImage: "magnifyingglass") {
                 withAnimation {
-                    store.send(.bottom(.toggleSearchField))
+                    viewStore.send(.toggleSearchField)
                 }
             }
-            .help("bottom_bar_tooltip_1")
-            
+            .help("bottom_bar_tooltip_search")
             OnTapButton(systemImage: "dice") {
-                store.send(.search(.makeRandomSearch))
+                viewStore.send(.makeRandomSearch)
             }
-            
-            .help("bottom_bar_tooltip_0")
+            .help("bottom_bar_tooltip_random")
             Spacer()
             if viewStore.value.isSearching {
                 ProgressView()
                     .scaleEffect(0.4)
+                    .help("bottom_bar_tooltip_progress")
             }
-            
         }
         .padding()
         .frame(maxHeight: 36)
+    }
+}
+
+extension BottomBarViewState {
+    init(bottomBarViewState: BottomBarState) {
+        self.isSearchFieldShowing = bottomBarViewState.isSearchFieldShowing
+        self.isSearching = bottomBarViewState.searchState.isSearching
+        self.model = bottomBarViewState.model
+    }
+}
+
+extension BottomBarFeatureAction {
+    init(_ action: BottomViewAction) {
+        switch action {
+        case .reset:
+            self = .search(.reset)
+        case .toggleSearchField:
+            self = .bottom(.toggleSearchField)
+        case .makeRandomSearch:
+            self = .search(.makeRandomSearch)
+        }
     }
 }

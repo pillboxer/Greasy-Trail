@@ -13,13 +13,20 @@ import Model
 
 struct SearchFieldView: View {
     
+    fileprivate enum SearchFieldAction {
+        case search(Search)
+    }
+    
+    private struct SearchFieldState: Equatable {}
+    
     let store: Store<SearchState, SearchAction>
-    @ObservedObject var viewStore: ViewStore<Search?>
+    @ObservedObject private  var viewStore: ViewStore<SearchFieldState, SearchFieldAction>
     @State private var text = ""
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { $0.currentSearch }, action: { $0 }).view
+        self.viewStore = store.scope(value: { _ in SearchFieldState() },
+                                     action: SearchAction.init).view
     }
     
     var body: some View {
@@ -36,6 +43,16 @@ struct SearchFieldView: View {
     private func search() {
         let search = Search(title: text, type: nil)
         text = ""
-        store.send(.makeSearch(search))
+        viewStore.send(.search(search))
+    }
+}
+
+fileprivate extension SearchAction {
+    
+    init(action: SearchFieldView.SearchFieldAction) {
+        switch action {
+        case .search(let search):
+            self = .makeSearch(search)
+        }
     }
 }

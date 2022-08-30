@@ -11,25 +11,8 @@ import CasePaths
 import Model
 import Core
 
+// State
 public struct BottomBarState: Equatable {
-    public var isSearchFieldShowing: Bool
-    public var isSearching: Bool
-    public var model: AnyModel?
-    
-    public init(isSearchFieldShowing: Bool,
-                isSearching: Bool,
-                model: AnyModel?) {
-        self.model = model
-        self.isSearchFieldShowing = isSearchFieldShowing
-        self.isSearching = isSearching
-    }
-}
-
-public enum BottomBarAction {
-    case toggleSearchField
-}
-
-public struct BottomBarFeatureState {
     public var isSearchFieldShowing: Bool
     public var isSearching: Bool
     public var model: AnyModel?
@@ -45,9 +28,9 @@ public struct BottomBarFeatureState {
         self.model = model
     }
     
-    public var bottomBarState: BottomBarState {
+    public var bottomBarViewState: BottomBarViewState {
         get {
-            BottomBarState(isSearchFieldShowing: isSearchFieldShowing,
+            BottomBarViewState(isSearchFieldShowing: isSearchFieldShowing,
                            isSearching: isSearching,
                            model: model)
         }
@@ -59,16 +42,42 @@ public struct BottomBarFeatureState {
     }
 }
 
+public struct BottomBarViewState: Equatable {
+    public var isSearchFieldShowing: Bool
+    public var isSearching: Bool
+    public var model: AnyModel?
+    
+    public init(isSearchFieldShowing: Bool,
+                isSearching: Bool,
+                model: AnyModel?) {
+        self.model = model
+        self.isSearchFieldShowing = isSearchFieldShowing
+        self.isSearching = isSearching
+    }
+}
+
+// Action
+
+enum BottomViewAction {
+    case reset
+    case toggleSearchField
+    case makeRandomSearch
+}
+
 public enum BottomBarFeatureAction {
     case bottom(BottomBarAction)
     case search(SearchAction)
 }
 
-public let bottomBarFeatureReducer: Reducer<BottomBarFeatureState, BottomBarFeatureAction, SearchEnvironment> =
+public enum BottomBarAction {
+    case toggleSearchField
+}
+
+public let bottomBarFeatureReducer: Reducer<BottomBarState, BottomBarFeatureAction, SearchEnvironment> =
 combine(
     pullback(
         bottomBarReducer,
-        value: \.bottomBarState,
+        value: \.bottomBarViewState,
         action: /BottomBarFeatureAction.bottom,
         environment: { _ in ()}),
     pullback(searchReducer,
@@ -76,7 +85,7 @@ combine(
              action: /BottomBarFeatureAction.search,
              environment: { $0 }))
 
-public func bottomBarReducer(state: inout BottomBarState,
+public func bottomBarReducer(state: inout BottomBarViewState,
                              action: BottomBarAction,
                              environment: Void) -> [Effect<BottomBarAction>] {
     switch action {

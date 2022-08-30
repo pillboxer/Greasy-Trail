@@ -14,12 +14,22 @@ import Search
 
 public struct ResultAlbumOverviewView: View {
     
+    enum ResultAlbumOverviewAction {
+        case search(Search)
+    }
+    
+    private struct ResultAlbumOverviewState: Equatable {}
+    
     let store: Store<SearchState, SearchAction>
+    
+    @ObservedObject private var viewStore: ViewStore<ResultAlbumOverviewState, ResultAlbumOverviewAction>
     private let model: AlbumDisplayModel
     
     public init(store: Store<SearchState, SearchAction>,
                 model: AlbumDisplayModel) {
         self.store = store
+        self.viewStore = store.scope(value: { _ in return ResultAlbumOverviewState() },
+                                     action: SearchAction.init).view
         self.model = model
     }
     
@@ -34,10 +44,20 @@ public struct ResultAlbumOverviewView: View {
             Spacer()
             HStack {
                 SongsListView(songs: model.songs) { title in
-                    store.send(.makeSearch(Search(title: title, type: .song)))
+                    viewStore.send(.search(.init(title: title, type: .song)))
                 }
             }
         }
         .padding()
+    }
+}
+
+fileprivate extension SearchAction {
+    
+    init(action: ResultAlbumOverviewView.ResultAlbumOverviewAction) {
+        switch action {
+        case .search(let search):
+            self = .makeSearch(search)
+        }
     }
 }

@@ -15,8 +15,18 @@ import ComposableArchitecture
 
 public struct AllPerformancesView {
     
+    fileprivate enum AllPerformancesAction {
+        case search(Search)
+        case select(ObjectIdentifier)
+    }
+    
+    private struct AllPerformancesState: Equatable {
+        var ids: Set<ObjectIdentifier>
+    }
+    
     let store: Store<SearchState, SearchAction>
-    @ObservedObject var viewStore: ViewStore<Set<ObjectIdentifier>>
+    @ObservedObject private var viewStore: ViewStore<Set<ObjectIdentifier>, AllPerformancesAction>
+    
     let formatter = GTFormatter.Formatter()
     let predicate: NSPredicate
     @FetchRequest public var fetched: FetchedResults<Performance>
@@ -29,7 +39,7 @@ public struct AllPerformancesView {
                 predicate: NSPredicate = NSPredicate(value: true)) {
         self.store = store
         self.predicate = predicate
-        self.viewStore = store.scope(value: { $0.ids }, action: { $0 }).view
+        self.viewStore = store.scope(value: { $0.ids }, action: SearchAction.init).view
         _fetched = FetchRequest<Performance>(entity: Performance.entity(),
                                             sortDescriptors: [NSSortDescriptor(key: "date",
                                                                                ascending: false)],
@@ -61,14 +71,27 @@ extension AllPerformancesView: TwoColumnTableViewType {
     
     public func doubleTap(on string: String, id: Performance.ID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
-            store.send(.makeSearch(.init(title: string, type: .performance)))
+            viewStore.send(.search(.init(title: string, type: .performance)))
         }
     }
     
     public func singleTap(id: Performance.ID) -> _EndedGesture<TapGesture> {
         TapGesture()
             .onEnded {
-                store.send(.select(identifier: id))
+                viewStore.send(.select(id))
             }
     }
 }
+
+private extension SearchAction {
+    
+    init(action: AllPerformancesView.AllPerformancesAction) {
+        switch action {
+        case .search(let search):
+            self = .makeSearch(search)
+        case .select(let id):
+            self = .select(identifier: id)
+        }
+    }
+}
+

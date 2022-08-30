@@ -26,7 +26,8 @@ public final class Store<Value, Action> {
         self.value = initialValue
         self.environment = environment
     }
-    public func send(_ action: Action) {
+
+    func send(_ action: Action) {
         let effects = reducer(&value, action, self.environment)
         effects.forEach { effect in
             var didComplete = false
@@ -45,12 +46,14 @@ public final class Store<Value, Action> {
     }
     
     public func scope<LocalState, LocalAction>(value toLocalValue: @escaping (Value) -> LocalState,
-                                               action toGlobalAction:  @escaping (LocalAction) -> Action)
+                                               action toGlobalAction: ((LocalAction) -> Action)?)
     -> Store<LocalState, LocalAction> {
         let localValue = toLocalValue(self.value)
         let localStore = Store<LocalState, LocalAction>(initialValue: localValue,
                                                         reducer: { localValue, localAction, _ in
-            self.send(toGlobalAction(localAction))
+            if let action = toGlobalAction?(localAction) {
+                self.send(action)
+            }
             localValue = toLocalValue(self.value)
             return []
         }, environment: self.environment)
@@ -61,33 +64,36 @@ public final class Store<Value, Action> {
     }
 }
 
-public final class ViewStore<Value>: ObservableObject {
+public final class ViewStore<Value, Action>: ObservableObject {
     
     fileprivate var cancellable: AnyCancellable?
     @Published public fileprivate(set) var value: Value
+    public let send: (Action) -> Void
     
-    public init(initialValue: Value) {
+    public init(initialValue: Value, send: @escaping (Action) -> Void) {
         self.value = initialValue
+        self.send = send
     }
-    
+
 }
 
 extension Store where Value: Equatable {
     
-    public var view: ViewStore<Value> {
+    public var view: ViewStore<Value, Action> {
         view(removeDuplicates: ==)
     }
 }
 
 extension Store {
     public func view(
-        removeDuplicates predicate: @escaping (Value, Value) -> Bool) -> ViewStore<Value> {
-            let viewStore = ViewStore(initialValue: self.value)
+        removeDuplicates predicate: @escaping (Value, Value) -> Bool) -> ViewStore<Value, Action> {
+            let viewStore = ViewStore(initialValue: value,
+                                      send: send)
             viewStore.cancellable = self.$value
                 .removeDuplicates(by: predicate)
-                .sink { newValue in
-                    viewStore.value = newValue }
-            _ = self
+                .sink { [weak viewStore] newValue in
+                    viewStore?.value = newValue
+                }
             return viewStore
         }
 }

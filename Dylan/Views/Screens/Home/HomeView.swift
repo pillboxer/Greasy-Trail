@@ -13,7 +13,7 @@ import Sidebar
 struct HomeView: View {
     
     var store: Store<AppState, AppAction>
-    @ObservedObject private var viewStore: ViewStore<AppState>
+    @ObservedObject private var viewStore: ViewStore<AppState, Never>
     let fetchingType: SidebarDisplayType?
     var progress: Double? = 0
     @Binding var selectedID: String?
@@ -27,7 +27,7 @@ struct HomeView: View {
         self.store = store
         self.fetchingType = fetchingType
         self.progress = progress
-        self.viewStore = store.view
+        self.viewStore = store.scope(value: { $0 }, action: nil).view
         _selectedID = selectedID
     }
     

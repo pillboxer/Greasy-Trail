@@ -69,16 +69,16 @@ extension AppState {
         }
     }
     
-    var bottomViewState: BottomBarFeatureState {
+    var bottomBarState: BottomBarState {
         get {
-            return BottomBarFeatureState(searchState: searchState,
+            return BottomBarState(searchState: searchState,
                                          isSearchFieldShowing: isSearchFieldShowing,
                                          isSearching: isSearching,
                                          model: model)
         }
         set {
             self.searchState = newValue.searchState
-            self.isSearchFieldShowing = newValue.bottomBarState.isSearchFieldShowing
+            self.isSearchFieldShowing = newValue.bottomBarViewState.isSearchFieldShowing
         }
     }
 }

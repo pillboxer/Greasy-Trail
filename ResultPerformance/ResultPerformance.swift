@@ -14,13 +14,21 @@ import UI
 
 public struct ResultPerformanceOverviewView: View {
     
+    fileprivate enum ResultPerformanceAction {
+        case search(Search)
+    }
+    
+    private struct ResultPerformanceState: Equatable {}
+    
     let store: Store<SearchState, SearchAction>
+    @ObservedObject private var viewStore: ViewStore<ResultPerformanceState, ResultPerformanceAction>
     let model: PerformanceDisplayModel
-    @State private var presentAlert = false
     
     public init(store: Store<SearchState, SearchAction>,
                 model: PerformanceDisplayModel) {
         self.store = store
+        self.viewStore = store.scope(value: { _ in ResultPerformanceState() },
+                                     action: SearchAction.init).view
         self.model = model
     }
     
@@ -42,11 +50,21 @@ public struct ResultPerformanceOverviewView: View {
             Spacer()
             HStack {
                 SongsListView(songs: model.songs) { title in
-                    store.send(.makeSearch(.init(title: title, type: .song)))
+                    viewStore.send(.search(.init(title: title, type: .song)))
                 }
                 Spacer()
             }
         }
         .padding()
+    }
+}
+
+fileprivate extension SearchAction {
+    
+    init(action: ResultPerformanceOverviewView.ResultPerformanceAction) {
+        switch action {
+        case .search(let search):
+            self = .makeSearch(search)
+        }
     }
 }

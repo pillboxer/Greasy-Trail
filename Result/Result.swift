@@ -8,8 +8,8 @@
 import SwiftUI
 import ComposableArchitecture
 import ResultPerformance
-import ResultSongOverview
 import ResultAlbum
+import ResultSongOverview
 import Model
 import Search
 
@@ -17,11 +17,11 @@ import Search
 public struct ResultView: View {
     
     let store: Store<SearchState, SearchAction>
-    @ObservedObject private var viewStore: ViewStore<AnyModel?>
+    @ObservedObject private var viewStore: ViewStore<AnyModel?, Never>
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { $0.model}, action: { $0 }).view
+        self.viewStore = store.scope(value: { $0.model}, action: nil).view
     }
     
     private var model: AnyModel? {

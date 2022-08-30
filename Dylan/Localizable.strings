@@ -63,5 +63,7 @@
 "lb_editing_error_nan" = "One or more entries is not a number. Please try again";
 
 // Bottom Bar
-"bottom_bar_tooltip_0" = "I'm feeling lucky";
-"bottom_bar_tooltip_1" = "Show search bar";
+"bottom_bar_tooltip_random" = "You may like to gamble, you might like to dance";
+"bottom_bar_tooltip_search" = "You will search, babe";
+"bottom_bar_tooltip_progress" = "Searching for a gem";
+"bottom_bar_tooltip_house" = "It’s not a house, it’s a home";

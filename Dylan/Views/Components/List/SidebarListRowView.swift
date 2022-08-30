@@ -17,7 +17,7 @@ import UI
 struct SidebarListRowView: View {
     
     let store: Store<AppState, AppAction>
-    @ObservedObject private var viewStore: ViewStore<AppState>
+    @ObservedObject private var viewStore: ViewStore<AppState, Never>
     
     let displayType: SidebarDisplayType
     let isFetching: Bool
@@ -35,7 +35,8 @@ struct SidebarListRowView: View {
         self.isFetching = isFetching
         self.progress = progress
         self.selection = displayType.rawValue
-        self.viewStore = store.view
+        self.viewStore = store.scope(value: { $0 },
+                                     action: nil).view
         _selectedID = selectedID
     }
     

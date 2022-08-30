@@ -17,13 +17,14 @@ import BottomBar
 struct ContentView: View {
     
     let store: Store<AppState, AppAction>
-    @ObservedObject private var viewStore: ViewStore<AppState>
+    @ObservedObject private var viewStore: ViewStore<AppState, Never>
     @EnvironmentObject private var cloudKitManager: CloudKitManager
     @State private var selectedID: String?
     
     init(store: Store<AppState, AppAction>) {
         self.store = store
-        self.viewStore = store.view
+        self.viewStore = store.scope(value: { $0 },
+                                     action: nil).view
     }
     
     var body: some View {
@@ -47,18 +48,19 @@ struct ContentView: View {
                              fetchingType: cloudKitManager.fetchingType?.sidebarDisplayType,
                              progress: cloudKitManager.progress,
                              selectedID: $selectedID)
+                    .transition(.opacity)
                 }
             }
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
             .frame(minWidth: 900, minHeight: 600)
-            BottomBarView(store: store.scope(value: { $0.bottomViewState }, action: { .bottomBar($0)}))
+            BottomBarView(store: store.scope(value: { $0.bottomBarState },
+                                             action: { .bottomBar($0) }))
         }
        
     }
 }
 
 private extension DylanRecordType {
-    
     var sidebarDisplayType: SidebarDisplayType? {
         switch self {
         case .song:
@@ -71,5 +73,4 @@ private extension DylanRecordType {
             return nil
         }
     }
-    
 }

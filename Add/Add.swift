@@ -34,7 +34,7 @@ public func addReducer(state: inout AddState,
 public struct AddView: View {
     
     let store: Store<AddState, AddAction>
-    @ObservedObject var viewStore: ViewStore<AddState>
+    @ObservedObject var viewStore: ViewStore<AddState, AddAction>
     
     public init(store: Store<AddState, AddAction>) {
         self.store = store
