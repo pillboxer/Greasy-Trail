@@ -67,3 +67,13 @@
 "bottom_bar_tooltip_search" = "You will search, babe";
 "bottom_bar_tooltip_progress" = "Searching for a gem";
 "bottom_bar_tooltip_house" = "It’s not a house, it’s a home";
+"bottom_bar_tooltip_add" = "New morning";
+
+// Adding
+"add_song_field_0" = "Title";
+"add_song_field_1" = "Author";
+"add_performance_field_0" = "Venue & Date";
+"add_performance_field_1" = "LB Numbers";
+"add_performance_field_1_placeholder" = "LB";
+"add_performance_field_2" = "Songs";
+"add_performance_field_2_placeholder" = "Song";

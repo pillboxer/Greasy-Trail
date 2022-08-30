@@ -44,7 +44,7 @@ extension Detective {
                                         venue: performance.venue!,
                                         songs: sSongs,
                                         date: performance.date,
-                                        lbNumbers: performance.lbNumbers)
+                                        lbNumbers: performance.lbNumbers ?? [])
         return PerformanceDisplayModel(sPerformance: sPerformance)
         
     }
@@ -55,7 +55,7 @@ extension Detective {
             context.performFetch(Performance.self) { [self] performances in
                 guard let random = performances.randomElement(),
                       let songs = random.songs?.array as? [Song] else {
-                     return completion(nil)
+                    return completion(nil)
                 }
                 completion(createPerformanceDisplayModel(from: random, with: songs))
             }
@@ -81,6 +81,24 @@ extension Detective {
                     completion([])
                 }
             }
+        }
+    }
+}
+
+extension Detective {
+    
+    func fetchPerformanceModel(for id: NSManagedObjectID) -> Effect<AnyModel?> {
+        let context = container.newBackgroundContext()
+        return .async { callback in
+            context.perform { [self] in
+                guard let object = context.object(with: id) as? Performance,
+                        let songs = object.songs?.array as? [Song] else {
+                    return callback(nil)
+                }
+                let displayModel = createPerformanceDisplayModel(from: object, with: songs)
+                callback(AnyModel(displayModel))
+            }
+   
         }
     }
 }

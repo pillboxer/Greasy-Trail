@@ -10,34 +10,66 @@ import Search
 import CasePaths
 import Model
 import Core
+import GTCloudKit
+import CoreData
 
 // State
 public struct BottomBarState: Equatable {
+    
     public var isSearchFieldShowing: Bool
     public var isSearching: Bool
     public var model: AnyModel?
-    public var searchState: SearchState
+    public var selectedSection: BottomBarSection
+    public var selectedRecordToAdd: DylanRecordType
+    public var selectedObjectID: NSManagedObjectID?
     
-    public init(searchState: SearchState,
-                isSearchFieldShowing: Bool,
+    public init(isSearchFieldShowing: Bool,
                 isSearching: Bool,
-                model: AnyModel?) {
-        self.searchState = searchState
+                model: AnyModel?,
+                selectedSection: BottomBarSection,
+                selectedObjectID: NSManagedObjectID?,
+                selectedRecordToAdd: DylanRecordType) {
+        
         self.isSearchFieldShowing = isSearchFieldShowing
         self.isSearching = isSearching
         self.model = model
+        self.selectedSection = selectedSection
+        self.selectedRecordToAdd = selectedRecordToAdd
+        self.selectedObjectID = selectedObjectID
     }
     
-    public var bottomBarViewState: BottomBarViewState {
+    var bottomBarViewState: BottomBarViewState {
         get {
             BottomBarViewState(isSearchFieldShowing: isSearchFieldShowing,
-                           isSearching: isSearching,
-                           model: model)
+                               isSearching: isSearching,
+                               model: model,
+                               selectedSection: selectedSection,
+                               selectedObjectID: selectedObjectID,
+                               selectedRecordToAdd: selectedRecordToAdd)
         }
         set {
             isSearching = newValue.isSearching
             model = newValue.model
             isSearchFieldShowing = newValue.isSearchFieldShowing
+            selectedSection = newValue.selectedSection
+        }
+    }
+    
+    public var searchState: SearchState {
+        get {
+            return SearchState(model: model,
+                               failedSearch: nil,
+                               currentSearch: nil,
+                               selectedID: nil,
+                               selectedObjectID: selectedObjectID,
+                               selectedRecordToAdd: selectedRecordToAdd,
+                               isSearching: isSearching)
+        }
+        set {
+            selectedRecordToAdd = newValue.selectedRecordToAdd
+            isSearching = newValue.isSearching
+            model = newValue.model
+            selectedObjectID = newValue.selectedObjectID
         }
     }
 }
@@ -46,13 +78,22 @@ public struct BottomBarViewState: Equatable {
     public var isSearchFieldShowing: Bool
     public var isSearching: Bool
     public var model: AnyModel?
-    
+    public var selectedSection: BottomBarSection
+    public var selectedRecordToAdd: DylanRecordType
+    public var selectedObjectID: NSManagedObjectID?
     public init(isSearchFieldShowing: Bool,
                 isSearching: Bool,
-                model: AnyModel?) {
+                model: AnyModel?,
+                selectedSection: BottomBarSection,
+                selectedObjectID: NSManagedObjectID?,
+                selectedRecordToAdd: DylanRecordType
+    ) {
         self.model = model
         self.isSearchFieldShowing = isSearchFieldShowing
         self.isSearching = isSearching
+        self.selectedSection = selectedSection
+        self.selectedRecordToAdd = selectedRecordToAdd
+        self.selectedObjectID = selectedObjectID
     }
 }
 
@@ -62,6 +103,9 @@ enum BottomViewAction {
     case reset
     case toggleSearchField
     case makeRandomSearch
+    case selectSection(BottomBarSection)
+    case selectRecordToAdd(DylanRecordType)
+    case search(NSManagedObjectID)
 }
 
 public enum BottomBarFeatureAction {
@@ -71,26 +115,31 @@ public enum BottomBarFeatureAction {
 
 public enum BottomBarAction {
     case toggleSearchField
+    case selectSection(BottomBarSection)
+    case selectRecordToAdd(DylanRecordType)
 }
 
 public let bottomBarFeatureReducer: Reducer<BottomBarState, BottomBarFeatureAction, SearchEnvironment> =
-combine(
-    pullback(
-        bottomBarReducer,
-        value: \.bottomBarViewState,
+Reducer.combine(
+    bottomBarReducer.pullback(
+        value: \.self,
         action: /BottomBarFeatureAction.bottom,
         environment: { _ in ()}),
-    pullback(searchReducer,
-             value: \.searchState,
-             action: /BottomBarFeatureAction.search,
-             environment: { $0 }))
+    searchReducer.pullback(
+        value: \.searchState,
+        action: /BottomBarFeatureAction.search,
+        environment: { $0 }))
 
-public func bottomBarReducer(state: inout BottomBarViewState,
-                             action: BottomBarAction,
-                             environment: Void) -> [Effect<BottomBarAction>] {
+public let bottomBarReducer = Reducer<BottomBarState, BottomBarAction, Void> { state, action, _ in
     switch action {
     case .toggleSearchField:
         state.isSearchFieldShowing.toggle()
+        return []
+    case .selectSection(let section):
+        state.selectedSection = section
+        return []
+    case .selectRecordToAdd(let record):
+        state.selectedRecordToAdd = record
         return []
     }
 }

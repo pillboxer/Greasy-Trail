@@ -9,44 +9,52 @@ import SwiftUI
 import ComposableArchitecture
 import UI
 import SearchField
+import Search
+
+public enum BottomBarSection {
+    case home
+    case add
+}
 
 public struct BottomBarView: View {
 
     let store: Store<BottomBarState, BottomBarFeatureAction>
-    @ObservedObject private var viewStore: ViewStore<BottomBarViewState, BottomViewAction>
+    @ObservedObject var viewStore: ViewStore<BottomBarViewState, BottomViewAction>
     
     public init(store: Store<BottomBarState, BottomBarFeatureAction>) {
         self.store = store
-        self.viewStore = store.scope(value: BottomBarViewState.init,
-                                     action: BottomBarFeatureAction.init).view
+        self.viewStore = store.scope(value: BottomBarViewState.init, action: BottomBarFeatureAction.init).view
     }
     
     public var body: some View {
         HStack {
-            if viewStore.value.model != nil {
-                OnTapButton(systemImage: "house") {
-                    withAnimation {
-                        viewStore.send(.reset)
-                    }
+            switch viewStore.selectedSection {
+            case .add:
+                closeAddButton
+                Spacer()
+                songButton
+                albumButton
+                performanceButton
+                Spacer()
+                uploadButton
+            case .home:
+                if viewStore.model != nil {
+                    homeButton
                 }
-                .help("bottom_bar_tooltip_house")
-            }
-            if viewStore.value.isSearchFieldShowing {
-                SearchView(store: store.scope(value: { $0.searchState }, action: { .search($0) })) 
-                    .transition(.move(edge: .leading))
-            }
-            OnTapButton(systemImage: "magnifyingglass") {
-                withAnimation {
-                    viewStore.send(.toggleSearchField)
+                if viewStore.selectedObjectID != nil {
+                    editButton
                 }
+                if viewStore.isSearchFieldShowing {
+                    SearchView(store: store.scope(value: { $0.searchState },
+                                                  action: { .search($0) }))
+                        .transition(.move(edge: .leading))
+                }
+                searchButton
+                randomButton
+                openAddButton
+                Spacer()
             }
-            .help("bottom_bar_tooltip_search")
-            OnTapButton(systemImage: "dice") {
-                viewStore.send(.makeRandomSearch)
-            }
-            .help("bottom_bar_tooltip_random")
-            Spacer()
-            if viewStore.value.isSearching {
+            if viewStore.isSearching {
                 ProgressView()
                     .scaleEffect(0.4)
                     .help("bottom_bar_tooltip_progress")
@@ -58,10 +66,13 @@ public struct BottomBarView: View {
 }
 
 extension BottomBarViewState {
-    init(bottomBarViewState: BottomBarState) {
-        self.isSearchFieldShowing = bottomBarViewState.isSearchFieldShowing
-        self.isSearching = bottomBarViewState.searchState.isSearching
-        self.model = bottomBarViewState.model
+    init(bottomBarState: BottomBarState) {
+        self.isSearchFieldShowing = bottomBarState.isSearchFieldShowing
+        self.isSearching = bottomBarState.searchState.isSearching
+        self.model = bottomBarState.model
+        self.selectedSection = bottomBarState.selectedSection
+        self.selectedRecordToAdd = bottomBarState.selectedRecordToAdd
+        self.selectedObjectID = bottomBarState.selectedObjectID
     }
 }
 
@@ -74,6 +85,12 @@ extension BottomBarFeatureAction {
             self = .bottom(.toggleSearchField)
         case .makeRandomSearch:
             self = .search(.makeRandomSearch)
+        case .selectSection(let section):
+            self = .bottom(.selectSection(section))
+        case .selectRecordToAdd(let record):
+            self = .bottom(.selectRecordToAdd(record))
+        case .search(let objectID):
+            self = .search(.makeSearch(Search(id: objectID)))
         }
     }
 }

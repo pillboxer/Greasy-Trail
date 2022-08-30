@@ -17,15 +17,16 @@ public struct AllPerformancesView {
     
     fileprivate enum AllPerformancesAction {
         case search(Search)
-        case select(ObjectIdentifier)
+        case selectID(objectIdentifier: ObjectIdentifier?)
+        case select(objectIdentifier: ObjectIdentifier, id: NSManagedObjectID)
     }
     
     private struct AllPerformancesState: Equatable {
-        var ids: Set<ObjectIdentifier>
+        var selectedID: ObjectIdentifier?
     }
     
     let store: Store<SearchState, SearchAction>
-    @ObservedObject private var viewStore: ViewStore<Set<ObjectIdentifier>, AllPerformancesAction>
+    @ObservedObject private var viewStore: ViewStore<AllPerformancesState, AllPerformancesAction>
     
     let formatter = GTFormatter.Formatter()
     let predicate: NSPredicate
@@ -39,29 +40,39 @@ public struct AllPerformancesView {
                 predicate: NSPredicate = NSPredicate(value: true)) {
         self.store = store
         self.predicate = predicate
-        self.viewStore = store.scope(value: { $0.ids }, action: SearchAction.init).view
+        self.viewStore = store.scope(value: { AllPerformancesState(selectedID: $0.selectedID) },
+                                     action: SearchAction.init).view
         _fetched = FetchRequest<Performance>(entity: Performance.entity(),
-                                            sortDescriptors: [NSSortDescriptor(key: "date",
-                                                                               ascending: false)],
+                                             sortDescriptors: [NSSortDescriptor(key: "date",
+                                                                                ascending: false)],
                                              predicate: predicate)
     }
-        
+    
     public var body: some View {
-        Table(tableData, selection: .constant(viewStore.value), sortOrder: $sortOrder) {
+        Table(tableData, selection: viewStore.binding(get: \.selectedID,
+                                                      send: { .selectID(objectIdentifier: $0) }),
+              sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_performances_0"),
                         value: \.venue!) { performance in
                 let venue = performance.venue!
-                let date = String(performance.date)
-                Text(venue)
-                    .gesture(doubleTap(on: date, id: performance.id))
-                    .simultaneousGesture(singleTap(id: performance.id))
+                HStack {
+                    Text(venue)
+                    Spacer()
+                }
+                .contentShape(Rectangle())
+                .gesture(doubleTap(objectID: performance.objectID))
+                .simultaneousGesture(singleTap(objectIdentifier: performance.id, objectID: performance.objectID))
+                
             }
             TableColumn(LocalizedStringKey("table_column_title_performances_1"),
                         value: \.date) { performance in
-                let date = String(performance.date)
-                Text(formatter.dateString(of: performance.date))
-                    .gesture(doubleTap(on: date, id: performance.id))
-                    .simultaneousGesture(singleTap(id: performance.id))
+                HStack {
+                    Text(formatter.dateString(of: performance.date))
+                    Spacer()
+                }
+                .contentShape(Rectangle())
+                .gesture(doubleTap(objectID: performance.objectID))
+                .simultaneousGesture(singleTap(objectIdentifier: performance.id, objectID: performance.objectID))
             }
         }
     }
@@ -69,18 +80,19 @@ public struct AllPerformancesView {
 
 extension AllPerformancesView: TwoColumnTableViewType {
     
-    public func doubleTap(on string: String, id: Performance.ID) -> _EndedGesture<TapGesture> {
+    public func doubleTap(objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
-            viewStore.send(.search(.init(title: string, type: .performance)))
+            viewStore.send(.search(.init(id: objectID)))
         }
     }
     
-    public func singleTap(id: Performance.ID) -> _EndedGesture<TapGesture> {
+    public func singleTap(objectIdentifier: Performance.ID, objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
         TapGesture()
             .onEnded {
-                viewStore.send(.select(id))
+                viewStore.send(.select(objectIdentifier: objectIdentifier, id: objectID))
             }
     }
+    
 }
 
 private extension SearchAction {
@@ -89,9 +101,10 @@ private extension SearchAction {
         switch action {
         case .search(let search):
             self = .makeSearch(search)
-        case .select(let id):
-            self = .select(identifier: id)
+        case .selectID(let objectIdentifier):
+            self = .selectID(objectIdentifier: objectIdentifier)
+        case .select(objectIdentifier: let objectIdentifier, id: let id):
+            self = .select(objectIdentifier: objectIdentifier, objectID: id)
         }
     }
 }
-

@@ -20,7 +20,7 @@ struct Misspellings: Codable {
 
 extension Detective {
 
-    func uuid(for song: String) -> String? {
+    public func uuid(for song: String) -> String? {
         let songObject: NSManagedObject?
         songObject = fetch(song: song) ?? fetch(song: resolveSpellingOf(song: song))
         guard let song = songObject else {
@@ -49,7 +49,7 @@ extension Detective {
         }
     }
     
-    func fetchModel(for title: String) -> Effect<AnyModel?> {
+    public func fetchModel(for title: String) -> Effect<AnyModel?> {
         let context = container.newBackgroundContext()
         
         return .async { completion in
@@ -128,6 +128,24 @@ private extension String {
           }
           return ""
       }
+}
+
+extension Detective {
+    
+    func fetchSongModel(for id: NSManagedObjectID) -> Effect<AnyModel?> {
+        let context = container.newBackgroundContext()
+        return .async { callback in
+            context.perform { [self] in
+                guard let object = context.object(with: id) as? Song else {
+                    return callback(nil)
+                }
+                createSongDisplayModel(from: object) { displayModel in
+                    callback(AnyModel(displayModel))
+                }
+            }
+
+        }
+    }
 }
 
 extension Data {

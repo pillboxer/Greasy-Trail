@@ -32,7 +32,7 @@ class LBsEditorViewModel: EditorViewModel {
     }
     
     var lbNumbers: String {
-        sPerformance.lbNumbers?.compactMap { "LB-\(String($0))"}.joined(separator: "\n") ?? ""
+        sPerformance.lbNumbers.map { "LB-\(String($0))"}.joined(separator: "\n")
     }
     
     func saveLBs(_ lbs: String) {

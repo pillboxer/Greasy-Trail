@@ -6,6 +6,7 @@
 //
 
 import Combine
+import SwiftUI
 // swiftlint: disable force_cast
 public final class Store<Value, Action> {
     
@@ -17,10 +18,10 @@ public final class Store<Value, Action> {
     
     public init<Environment>(
         initialValue: Value,
-        reducer: @escaping Reducer<Value, Action, Environment>,
+        reducer: Reducer<Value, Action, Environment>,
         environment: Environment
     ) {
-        self.reducer = { value, action, environment in
+        self.reducer = .init { value, action, environment in
             reducer(&value, action, environment as! Environment)
         }
         self.value = initialValue
@@ -50,7 +51,7 @@ public final class Store<Value, Action> {
     -> Store<LocalState, LocalAction> {
         let localValue = toLocalValue(self.value)
         let localStore = Store<LocalState, LocalAction>(initialValue: localValue,
-                                                        reducer: { localValue, localAction, _ in
+                                                        reducer: .init { localValue, localAction, _ in
             if let action = toGlobalAction?(localAction) {
                 self.send(action)
             }
@@ -64,6 +65,7 @@ public final class Store<Value, Action> {
     }
 }
 
+@dynamicMemberLookup
 public final class ViewStore<Value, Action>: ObservableObject {
     
     fileprivate var cancellable: AnyCancellable?
@@ -73,6 +75,34 @@ public final class ViewStore<Value, Action>: ObservableObject {
     public init(initialValue: Value, send: @escaping (Action) -> Void) {
         self.value = initialValue
         self.send = send
+    }
+    
+    public subscript<LocalValue>(dynamicMember keyPath: KeyPath<Value, LocalValue>) -> LocalValue {
+        self.value[keyPath: keyPath]
+    }
+    
+    public func binding<LocalValue>(get: (Value) -> LocalValue,
+                                    send action: Action) -> Binding<LocalValue> {
+        let localValue = get(value)
+        return Binding(get: { localValue },
+                       set: { _ in  self.send(action) }
+        )
+    }
+    
+    public func binding<LocalValue>(
+        get: @escaping (Value) -> LocalValue,
+        send toAction: @escaping (LocalValue) -> Action?
+    ) -> Binding<LocalValue> {
+        Binding(
+            get: { get(self.value) },
+            set: { value in
+                guard let action = toAction(value) else {
+                    return
+                }
+                self.send(action)
+                
+            }
+        )
     }
 
 }

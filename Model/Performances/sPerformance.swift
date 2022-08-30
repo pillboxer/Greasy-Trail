@@ -10,17 +10,21 @@ import Foundation
 // swiftlint:disable type_name
 public struct sPerformance: Codable, Editable {
 
-    public let uuid: String
-    public let venue: String
-    let songs: [sSong]
-    public let date: Double?
-    public var lbNumbers: [Int]?
+    public var uuid: String
+    public var venue: String
+    public var songs: [sSong]
+    public var date: Double?
+    public var lbNumbers: [Int]
 
     var id: String {
         venue + String(date ?? 0)
     }
     
-    public init(uuid: String, venue: String, songs: [sSong], date: Double?, lbNumbers: [Int]? = nil) {
+    public init(uuid: String,
+                venue: String,
+                songs: [sSong],
+                date: Double?,
+                lbNumbers: [Int] = []) {
         self.uuid = uuid
         self.venue = venue
         self.songs = songs

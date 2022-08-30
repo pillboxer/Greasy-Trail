@@ -16,6 +16,10 @@ public struct AlbumDisplayModel: Model {
         self.album = album
         self.uuid = album.uuid
     }
+    
+    public var uploadAllowed: Bool {
+        uuid != .invalid
+    }
 
 }
 

@@ -10,9 +10,9 @@ import Foundation
 // swiftlint:disable type_name
 public struct sSong: Codable {
     
-    let uuid: String
+    public let uuid: String
     public let title: String
-    public var author: String
+    public let author: String
     var performances: [sPerformance]?
     
     public init(uuid: String,

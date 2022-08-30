@@ -12,11 +12,16 @@ public struct NSTextFieldRepresentable: NSViewRepresentable {
 
     let placeholder: String
     var text: Binding<String>
-    var onCommit: () -> Void
+    let textColor: NSColor?
+    var onCommit: (() -> Void)?
     
-    public init(placeholder: String, text: Binding<String>, onCommit: @escaping () -> Void) {
+    public init(placeholder: String,
+                text: Binding<String>,
+                textColor: NSColor? = nil,
+                onCommit: (() -> Void)? = nil) {
         self.placeholder = placeholder
         self.text = text
+        self.textColor = textColor
         self.onCommit = onCommit
     }
 
@@ -39,8 +44,10 @@ public struct NSTextFieldRepresentable: NSViewRepresentable {
         textField.placeholderString = NSLocalizedString(placeholder, comment: "")
         textField.focusRingType = .none
         textField.wantsLayer = true
+        textField.maximumNumberOfLines = 1
         textField.layer?.borderColor = NSColor.lightGray.cgColor
         textField.layer?.borderWidth = 0.8
+        textField.textColor = textColor ?? .labelColor
         textField.layer?.cornerRadius = 4.0
     }
 
@@ -55,7 +62,7 @@ public class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
 
     public func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
         if commandSelector == #selector(NSResponder.insertNewline(_:)) {
-            textField.onCommit()
+            textField.onCommit?()
             return true
         }
         return false
@@ -64,5 +71,4 @@ public class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
     public func controlTextDidChange(_ obj: Notification) {
         textField.text.wrappedValue = (obj.object as? NSTextField)?.stringValue ?? ""
     }
-
 }

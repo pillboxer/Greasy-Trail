@@ -18,8 +18,18 @@ public class Detective: ObservableObject {
 
     let container: NSPersistentContainer
 
-    init(_ container: NSPersistentContainer = PersistenceController.shared.container) {
+    public init(_ container: NSPersistentContainer = PersistenceController.shared.container) {
         self.container = container
+    }
+    
+    func search(performance id: NSManagedObjectID) -> Effect<AnyModel?> {
+        os_log("Searching performance by ID: %{public}@", log: Log_Detective, id)
+        return fetchPerformanceModel(for: id)
+    }
+    
+    func search(song id: NSManagedObjectID) -> Effect<AnyModel?> {
+        os_log("Searching song by ID: %{public}@", log: Log_Detective, id)
+        return fetchSongModel(for: id)
     }
 
     func search(song title: String) -> Effect<AnyModel?> {

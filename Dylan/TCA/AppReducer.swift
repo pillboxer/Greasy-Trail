@@ -1,6 +1,6 @@
 //
 //  AppReducer.swift
-//  TableSelection
+//
 //
 //  Created by Henry Cooper on 05/08/2022.
 //
@@ -22,18 +22,18 @@ struct AppEnvironment {
 }
 
 let appReducer: Reducer<AppState, AppAction, AppEnvironment> =
-combine(pullback(searchReducer,
-             value: \.searchState,
-             action: /AppAction.search,
+Reducer.combine(searchReducer.pullback(
+                 value: \.searchState,
+                 action: /AppAction.search,
                  environment: SearchEnvironment.init),
-        pullback(bottomBarFeatureReducer,
+        bottomBarFeatureReducer.pullback(
                  value: \.bottomBarState,
                  action: /AppAction.bottomBar,
                  environment: SearchEnvironment.init),
-    pullback(addReducer,
-             value: \.addState,
-             action: /AppAction.add,
-             environment: { _ in () }))
+        addReducer.pullback(
+                 value: \.addState,
+                 action: /AppAction.add,
+                 environment: { _ in () }))
 
 extension SearchEnvironment {
     

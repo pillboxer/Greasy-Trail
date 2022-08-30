@@ -29,14 +29,11 @@ struct AllAlbumsView {
             TableColumn(LocalizedStringKey("table_column_title_albums_0"), value: \.title!) { album in
                 let title = album.title!
                 Text(title)
-                    .gesture(doubleTap(on: title, id: album.id))
-                    .simultaneousGesture(singleTap(id: album.id))
+                    .gesture(doubleTap(objectID: album.objectID))
             }
             TableColumn(LocalizedStringKey("table_column_title_albums_1"), value: \.releaseDate) { album in
-                let title = album.title!
                 Text(formatter.dateString(of: album.releaseDate))
-                    .gesture(doubleTap(on: title, id: album.id))
-                    .simultaneousGesture(singleTap(id: album.id))
+                    .gesture(doubleTap(objectID: album.objectID))
             }
         }
 
@@ -45,21 +42,16 @@ struct AllAlbumsView {
 }
 
 extension AllAlbumsView: TwoColumnTableViewType {
-
-    func doubleTap(on string: String, id: Album.ID) -> _EndedGesture<TapGesture> {
-        TapGesture(count: 2).onEnded { _ in
-            selection.removeAll()
-            // FIXME: Search
-            selection.insert(id)
+    func doubleTap(objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
+        TapGesture().onEnded { _ in
+            //
         }
     }
-
-    func singleTap(id: Album.ID) -> _EndedGesture<TapGesture> {
-        TapGesture()
-            .onEnded {
-                selection.removeAll()
-                selection.insert(id)
-            }
+    
+    func singleTap(objectIdentifier: String, objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
+        TapGesture().onEnded { _ in
+            //
+        }
     }
-
+   
 }

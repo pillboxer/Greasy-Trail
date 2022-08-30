@@ -17,6 +17,10 @@ public struct SongDisplayModel: Model {
         self.song = song
         self.uuid = song.uuid
     }
+    
+    public var uploadAllowed: Bool {
+        uuid != .invalid
+    }
 
 }
 

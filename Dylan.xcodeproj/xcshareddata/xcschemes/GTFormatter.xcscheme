@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "86596314289D6510003F43A4"
-               BuildableName = "TableSelection.framework"
-               BlueprintName = "TableSelection"
+               BlueprintIdentifier = "865963E628A01152003F43A4"
+               BuildableName = "GTFormatter.framework"
+               BlueprintName = "GTFormatter"
                ReferencedContainer = "container:Dylan.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,19 +26,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8659631B289D6510003F43A4"
-               BuildableName = "TableSelectionTests.xctest"
-               BlueprintName = "TableSelectionTests"
-               ReferencedContainer = "container:Dylan.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -61,9 +50,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "86596314289D6510003F43A4"
-            BuildableName = "TableSelection.framework"
-            BlueprintName = "TableSelection"
+            BlueprintIdentifier = "865963E628A01152003F43A4"
+            BuildableName = "GTFormatter.framework"
+            BlueprintName = "GTFormatter"
             ReferencedContainer = "container:Dylan.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

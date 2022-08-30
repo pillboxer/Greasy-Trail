@@ -11,8 +11,8 @@ import CoreData
 public protocol TwoColumnTableViewType: View {
     // swiftlint:disable type_name
     associatedtype T: NSManagedObject, Identifiable
-    func doubleTap(on string: String, id: T.ID) -> _EndedGesture<TapGesture>
-    func singleTap(id: T.ID) -> _EndedGesture<TapGesture>
+    func doubleTap(objectID: NSManagedObjectID) -> _EndedGesture<TapGesture>
+    func singleTap(objectIdentifier: T.ID, objectID: NSManagedObjectID) -> _EndedGesture<TapGesture>
     var fetched: FetchedResults<T> { get }
     var sortOrder: [KeyPathComparator<T>] { get }
 }

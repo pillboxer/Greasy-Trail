@@ -6,17 +6,34 @@
 //
 
 import Foundation
-import GTFormatter
+import Core
 
-public struct PerformanceDisplayModel: Model {
+public struct PerformanceDisplayModel: Model, CustomStringConvertible {
 
-    let formatter = GTFormatter.Formatter()
     public let sPerformance: sPerformance
     public let uuid: String
 
     public init(sPerformance: sPerformance) {
         self.sPerformance = sPerformance
         self.uuid = sPerformance.uuid
+    }
+    
+    public var uploadAllowed: Bool {
+        let songUUIDs = songs.map { $0.uuid }
+        return uuid != .invalid
+        && !(songUUIDs.contains(.invalid))
+        && !(lbNumbers.contains(0))
+    }
+    
+    public var description: String {
+        """
+        \n
+        \(venue) - \(date ?? 0)
+        -- SONGS --
+        \(songTitles.joined(separator: "\n"))
+        -- LB Numbers --
+        \(lbNumbers)
+        """
     }
 
 }
@@ -35,11 +52,11 @@ public extension PerformanceDisplayModel {
         sPerformance.venue
     }
     
-    var date: String {
-        formatter.dateString(of: sPerformance.date)
+    var date: Double? {
+        sPerformance.date
     }
 
-    var lbNumbers: [Int]? {
+    var lbNumbers: [Int] {
         sPerformance.lbNumbers
     }
 

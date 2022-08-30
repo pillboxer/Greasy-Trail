@@ -30,9 +30,9 @@ public struct SearchView: View {
     }
 
     public var body: some View {
-        if let search = viewStore.value.search {
+        if let search = viewStore.search {
             Text(LocalizedStringKey(String(format: NSLocalizedString("search_failed", comment: ""),
-                                           search.title)))
+                                           search.title ?? "")))
             OnTapButton(text: "generic_ok", plainButtonStyle: false) {
                 viewStore.send(.reset)
             }

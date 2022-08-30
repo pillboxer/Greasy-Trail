@@ -15,11 +15,12 @@ public struct AllSongsView: View {
     
     fileprivate enum AllSongsAction {
         case search(Search)
-        case select(ObjectIdentifier)
+        case selectID(objectIdentifier: ObjectIdentifier?)
+        case select(objectIdentifier: ObjectIdentifier, id: NSManagedObjectID)
     }
     
     private struct AllSongsState: Equatable {
-        var ids: Set<ObjectIdentifier>
+        var selectedID: ObjectIdentifier?
     }
     
     let store: Store<SearchState, SearchAction>
@@ -37,14 +38,15 @@ public struct AllSongsView: View {
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { AllSongsState(ids: $0.ids) },
+        self.viewStore = store.scope(value: { AllSongsState(selectedID: $0.selectedID) },
                                      action: SearchAction.init).view
     }
     
     public var body: some View {
         
         return Table(tableData,
-                     selection: .constant(viewStore.value.ids),
+                     selection: viewStore.binding(get: \.selectedID,
+                                                  send: { .selectID(objectIdentifier: $0) }),
                      sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_songs_0"),
                         value: \.title!) { song in
@@ -55,22 +57,20 @@ public struct AllSongsView: View {
                     Spacer()
                 }
                 .contentShape(Rectangle())
-                .gesture(doubleTap(on: title, id: song.id))
-                .simultaneousGesture(singleTap(id: song.id))
+                .gesture(doubleTap(objectID: song.objectID))
+                .simultaneousGesture(singleTap(objectIdentifier: song.id, objectID: song.objectID))
                 
             }
             
             TableColumn(LocalizedStringKey("table_column_title_songs_1"),
                         value: \.songAuthor) { song in
-                
-                let title = song.title!
                 HStack {
                     Text(song.songAuthor)
                     Spacer()
                 }
                 .contentShape(Rectangle())
-                .gesture(doubleTap(on: title, id: song.id))
-                .simultaneousGesture(singleTap(id: song.id))
+                .gesture(doubleTap(objectID: song.objectID))
+                .simultaneousGesture(singleTap(objectIdentifier: song.id, objectID: song.objectID))
             }
         }
     }
@@ -79,19 +79,18 @@ public struct AllSongsView: View {
 
 extension AllSongsView: TwoColumnTableViewType {
     
-    public func doubleTap(on string: String, id: Song.ID) -> _EndedGesture<TapGesture> {
+    public func doubleTap(objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
         TapGesture(count: 2).onEnded { _ in
-            viewStore.send(.search(.init(title: string, type: .song)))
+            viewStore.send(.search(.init(id: objectID)))
         }
     }
     
-    public func singleTap(id: Song.ID) -> _EndedGesture<TapGesture> {
+    public func singleTap(objectIdentifier: Song.ID, objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
         TapGesture()
             .onEnded {
-                viewStore.send(.select(id))
+                viewStore.send(.select(objectIdentifier: objectIdentifier, id: objectID))
             }
     }
-    
 }
 
 fileprivate extension SearchAction {
@@ -100,8 +99,10 @@ fileprivate extension SearchAction {
         switch action {
         case .search(let search):
             self = .makeSearch(search)
-        case .select(let id):
-            self = .select(identifier: id)
+        case .selectID(let objectIdentifier):
+            self = .selectID(objectIdentifier: objectIdentifier)
+        case .select(objectIdentifier: let objectIdentifier, id: let id):
+            self = .select(objectIdentifier: objectIdentifier, objectID: id)
         }
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 import Model
 import SongsList
 import Search
+import GTFormatter
 import ComposableArchitecture
 import UI
 
@@ -20,10 +21,11 @@ public struct ResultPerformanceOverviewView: View {
     
     private struct ResultPerformanceState: Equatable {}
     
+    private let formatter = GTFormatter.Formatter()
     let store: Store<SearchState, SearchAction>
-    @ObservedObject private var viewStore: ViewStore<ResultPerformanceState, ResultPerformanceAction>
     let model: PerformanceDisplayModel
-    
+    @ObservedObject private var viewStore: ViewStore<ResultPerformanceState, ResultPerformanceAction>
+
     public init(store: Store<SearchState, SearchAction>,
                 model: PerformanceDisplayModel) {
         self.store = store
@@ -46,7 +48,7 @@ public struct ResultPerformanceOverviewView: View {
                 }
                 Spacer()
             }
-            Text(model.date)
+            Text(formatter.dateString(of: model.date))
             Spacer()
             HStack {
                 SongsListView(songs: model.songs) { title in

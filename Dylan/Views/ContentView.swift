@@ -13,6 +13,7 @@ import Search
 import GTCloudKit
 import Sidebar
 import BottomBar
+import Add
 
 struct ContentView: View {
     
@@ -30,25 +31,22 @@ struct ContentView: View {
     var body: some View {
         VStack(spacing: 0) {
             Group {
-                if let step = cloudKitManager.currentStep,
-                   case let .failure(error) = step {
-                    CloudKitFailureView(error: error)
-                } else if viewStore.value.model != nil {
-                    ResultView(store: store.scope(value: {
-                        return SearchState(model: $0.model,
-                                           failedSearch: $0.failedSearch,
-                                           currentSearch: $0.currentSearch,
-                                           ids: $0.selectedModel,
-                                           isSearching: $0.isSearching)
-                    }, action: {
-                        .search($0)
-                    }))
-                } else {
-                    HomeView(store: store,
-                             fetchingType: cloudKitManager.fetchingType?.sidebarDisplayType,
-                             progress: cloudKitManager.progress,
-                             selectedID: $selectedID)
-                    .transition(.opacity)
+                switch viewStore.selectedSection {
+                case .add:
+                    AddView(store: store.scope(value: { $0.addState }, action: { .add($0) }))
+                case .home:
+                    if let step = cloudKitManager.currentStep,
+                       case let .failure(error) = step {
+                        CloudKitFailureView(error: error)
+                    } else if viewStore.model != nil {
+                        ResultView(store: store.scope(value: { $0.searchState }, action: { .search($0) }))
+                    } else {
+                        HomeView(store: store,
+                                 fetchingType: cloudKitManager.fetchingType?.sidebarDisplayType,
+                                 progress: cloudKitManager.progress,
+                                 selectedID: $selectedID)
+                        .transition(.move(edge: .bottom))
+                    }
                 }
             }
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
@@ -56,7 +54,6 @@ struct ContentView: View {
             BottomBarView(store: store.scope(value: { $0.bottomBarState },
                                              action: { .bottomBar($0) }))
         }
-       
     }
 }
 

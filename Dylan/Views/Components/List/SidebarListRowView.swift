@@ -63,25 +63,13 @@ struct SidebarListRowView: View {
         if let section = SidebarDisplayType(rawValue: selection) {
             switch section {
             case .songs:
-                AllSongsView(store: store.scope(value: {
-                    SearchState(model: $0.model,
-                                failedSearch: $0.failedSearch,
-                                currentSearch: $0.currentSearch,
-                                ids: $0.selectedModel,
-                                isSearching: $0.isSearching)
-                }, action: { action in
+                AllSongsView(store: store.scope(value: { $0.searchState }, action: { action in
                     return .search(action)
                 }))
             case .albums:
                 AllAlbumsView()
             default:
-                AllPerformancesView(store: store.scope(value: {
-                    SearchState(model: $0.model,
-                                failedSearch: $0.failedSearch,
-                                currentSearch: $0.currentSearch,
-                                ids: $0.selectedModel,
-                                isSearching: $0.isSearching)
-                }, action: { action in
+                AllPerformancesView(store: store.scope(value: { $0.searchState }, action: { action in
                     return .search(action)
                 }), predicate: section.predicate)
             }

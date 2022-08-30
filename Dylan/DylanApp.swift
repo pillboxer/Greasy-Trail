@@ -30,13 +30,6 @@ struct DylanApp: App {
             ContentView(store: appStore)
                 .environmentObject(appDelegate.cloudKitManager)
         }
-        WindowGroup {
-            AddView(store: appStore.scope(value: { state in
-                AddState(selectedRecordToAdd: state.selectedRecordToAdd)
-            }, action: { action in
-                return .add(action)
-            }))
-        }
         .handlesExternalEvents(matching: Set(Array(["Add"])))
         .commands {
             CommandGroup(replacing: .newItem) {
