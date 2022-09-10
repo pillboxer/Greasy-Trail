@@ -28,8 +28,8 @@ public struct ResultAlbumOverviewView: View {
     public init(store: Store<SearchState, SearchAction>,
                 model: AlbumDisplayModel) {
         self.store = store
-        self.viewStore = store.scope(value: { _ in return ResultAlbumOverviewState() },
-                                     action: SearchAction.init).view
+        self.viewStore = ViewStore(store.scope(state: { _ in return ResultAlbumOverviewState() },
+                                     action: SearchAction.init))
         self.model = model
     }
     

@@ -93,7 +93,8 @@ extension AppState {
                                   model: model,
                                   selectedSection: selectedSection,
                                   selectedObjectID: selectedObjectID,
-                                  selectedRecordToAdd: selectedRecordToAdd)
+                                  selectedRecordToAdd: selectedRecordToAdd,
+                                  selectedID: selectedID)
         }
         set {
             self.isSearchFieldShowing = newValue.isSearchFieldShowing
@@ -101,6 +102,7 @@ extension AppState {
             self.selectedRecordToAdd = newValue.selectedRecordToAdd
             self.model = newValue.model
             self.selectedObjectID = newValue.selectedObjectID
+            self.selectedID = newValue.selectedID
         }
     }
 }

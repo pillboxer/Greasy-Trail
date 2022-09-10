@@ -14,19 +14,19 @@ import ComposableArchitecture
 
 extension Detective {
     
-    func fetch(performance date: Double) -> Effect<AnyModel?> {
+    func fetch(performance date: Double) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
         
-        return .async { completion in
-            context.perform { [self] in
+        return .future { completion in
+            context.perform {
                 let predicate = NSPredicate(format: "date == %d", Int(date))
                 context.performFetch(Performance.self, with: predicate) { [self] performances in
                     guard let first = performances.first,
                           let songs = first.songs?.array as? [Song] else {
-                        return completion(nil)
+                        return completion(.success(nil))
                     }
                     let displayModel = createPerformanceDisplayModel(from: first, with: songs)
-                    completion(AnyModel(displayModel))
+                    completion(.success(AnyModel(displayModel)))
                 }
             }
         }
@@ -49,15 +49,15 @@ extension Detective {
         
     }
     
-    func randomPerformance() -> Effect<PerformanceDisplayModel?> {
+    func randomPerformance() -> Effect<PerformanceDisplayModel?, Never> {
         let context = container.newBackgroundContext()
-        return .async { completion in
+        return .future { completion in
             context.performFetch(Performance.self) { [self] performances in
                 guard let random = performances.randomElement(),
                       let songs = random.songs?.array as? [Song] else {
-                    return completion(nil)
+                    return completion(.success(nil))
                 }
-                completion(createPerformanceDisplayModel(from: random, with: songs))
+                completion(.success(createPerformanceDisplayModel(from: random, with: songs)))
             }
         }
     }
@@ -87,16 +87,16 @@ extension Detective {
 
 extension Detective {
     
-    func fetchPerformanceModel(for id: NSManagedObjectID) -> Effect<AnyModel?> {
+    func fetchPerformanceModel(for id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
-        return .async { callback in
-            context.perform { [self] in
+        return .future { callback in
+            context.perform {
                 guard let object = context.object(with: id) as? Performance,
                         let songs = object.songs?.array as? [Song] else {
-                    return callback(nil)
+                    return callback(.success(nil))
                 }
-                let displayModel = createPerformanceDisplayModel(from: object, with: songs)
-                callback(AnyModel(displayModel))
+                let displayModel = self.createPerformanceDisplayModel(from: object, with: songs)
+                callback(.success(AnyModel(displayModel)))
             }
    
         }

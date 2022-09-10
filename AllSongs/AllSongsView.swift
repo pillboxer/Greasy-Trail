@@ -10,13 +10,14 @@ import GTCoreData
 import TwoColumnTable
 import ComposableArchitecture
 import Search
+import UI
 
 public struct AllSongsView: View {
     
     fileprivate enum AllSongsAction {
         case search(Search)
         case selectID(objectIdentifier: ObjectIdentifier?)
-        case select(objectIdentifier: ObjectIdentifier, id: NSManagedObjectID)
+        case select(objectIdentifier: ObjectIdentifier?, id: NSManagedObjectID?)
     }
     
     private struct AllSongsState: Equatable {
@@ -26,42 +27,43 @@ public struct AllSongsView: View {
     let store: Store<SearchState, SearchAction>
     @ObservedObject private var viewStore: ViewStore<AllSongsState, AllSongsAction>
     
+    @State public var sortOrder: [KeyPathComparator<Song>] = [
+        .init(\.title, order: SortOrder.forward),
+        .init(\.author, order: SortOrder.forward)
+    ]
     @FetchRequest(entity: Song.entity(),
                   sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)],
                   predicate: NSPredicate(format: "title != %@", "BREAK"))
     public var fetched: FetchedResults<Song>
     
-    @State public var sortOrder: [KeyPathComparator<Song>] = [
-        .init(\.title, order: SortOrder.forward),
-        .init(\.author, order: SortOrder.forward)
-    ]
+    private func toggleBinding(on song: Song) -> Binding<Bool> {
+        let ids = idsOnToggle(on: song)
+        return viewStore.binding(get: { $0.selectedID == song.id },
+                                 send: .select(objectIdentifier: ids.0,
+                                               id: ids.1))
+    }
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { AllSongsState(selectedID: $0.selectedID) },
-                                     action: SearchAction.init).view
+        self.viewStore = ViewStore(store.scope(state: { AllSongsState(selectedID: $0.selectedID) },
+                                               action: SearchAction.init))
     }
     
     public var body: some View {
         
-        return Table(tableData,
-                     selection: viewStore.binding(get: \.selectedID,
-                                                  send: { .selectID(objectIdentifier: $0) }),
-                     sortOrder: $sortOrder) {
+        return Table(tableData, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_songs_0"),
                         value: \.title!) { song in
-                
                 let title = song.title!
-                HStack {
+                Toggle(isOn: toggleBinding(on: song)) {
                     Text(title)
-                    Spacer()
+                        .padding(.leading, 4)
                 }
-                .contentShape(Rectangle())
-                .gesture(doubleTap(objectID: song.objectID))
-                .simultaneousGesture(singleTap(objectIdentifier: song.id, objectID: song.objectID))
-                
+                .padding(.top, 4)
+                .toggleStyle(CheckboxToggleStyle())
+                Spacer()
+                    .gesture(doubleTap(objectID: song.objectID))
             }
-            
             TableColumn(LocalizedStringKey("table_column_title_songs_1"),
                         value: \.songAuthor) { song in
                 HStack {
@@ -70,11 +72,9 @@ public struct AllSongsView: View {
                 }
                 .contentShape(Rectangle())
                 .gesture(doubleTap(objectID: song.objectID))
-                .simultaneousGesture(singleTap(objectIdentifier: song.id, objectID: song.objectID))
             }
         }
     }
-    
 }
 
 extension AllSongsView: TwoColumnTableViewType {
@@ -84,13 +84,18 @@ extension AllSongsView: TwoColumnTableViewType {
             viewStore.send(.search(.init(id: objectID)))
         }
     }
+}
+
+private extension AllSongsView {
     
-    public func singleTap(objectIdentifier: Song.ID, objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
-        TapGesture()
-            .onEnded {
-                viewStore.send(.select(objectIdentifier: objectIdentifier, id: objectID))
-            }
+    func idsOnToggle(on song: Song) -> (objectIdentifier: ObjectIdentifier?,
+                                        objectID: NSManagedObjectID?) {
+        if viewStore.selectedID == song.id {
+            return (nil, nil)
+        }
+        return (song.id, song.objectID)
     }
+    
 }
 
 fileprivate extension SearchAction {

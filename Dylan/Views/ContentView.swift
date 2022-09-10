@@ -24,8 +24,7 @@ struct ContentView: View {
     
     init(store: Store<AppState, AppAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { $0 },
-                                     action: nil).view
+        self.viewStore = ViewStore(store.actionless.scope(state: { $0 }))
     }
     
     var body: some View {
@@ -33,13 +32,13 @@ struct ContentView: View {
             Group {
                 switch viewStore.selectedSection {
                 case .add:
-                    AddView(store: store.scope(value: { $0.addState }, action: { .add($0) }))
+                    AddView(store: store.scope(state: { $0.addState }, action: { .add($0) }))
                 case .home:
                     if let step = cloudKitManager.currentStep,
                        case let .failure(error) = step {
                         CloudKitFailureView(error: error)
                     } else if viewStore.model != nil {
-                        ResultView(store: store.scope(value: { $0.searchState }, action: { .search($0) }))
+                        ResultView(store: store.scope(state: { $0.searchState }, action: { .search($0) }))
                     } else {
                         HomeView(store: store,
                                  fetchingType: cloudKitManager.fetchingType?.sidebarDisplayType,
@@ -51,7 +50,7 @@ struct ContentView: View {
             }
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
             .frame(minWidth: 900, minHeight: 600)
-            BottomBarView(store: store.scope(value: { $0.bottomBarState },
+            BottomBarView(store: store.scope(state: { $0.bottomBarState },
                                              action: { .bottomBar($0) }))
         }
     }

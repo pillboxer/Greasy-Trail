@@ -36,7 +36,7 @@ public struct ResultSongOverviewView: View {
             Spacer()
             HStack {
                 if let performances = model.performances, !performances.isEmpty {
-                    PerformancesListView(performances: performances, store: store.scope(value: {
+                    PerformancesListView(performances: performances, store: store.scope(state: {
                         $0.model
                     }, action: {
                         $0

@@ -12,7 +12,6 @@ import OSLog
 import GTCoreData
 import GTLogging
 import Core
-import GTFormatter
 
 // swiftlint:disable identifier_name
 let DylanContainer = CKContainer(identifier: "iCloud.Dylan")

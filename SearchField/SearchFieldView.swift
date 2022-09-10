@@ -25,8 +25,8 @@ struct SearchFieldView: View {
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { _ in SearchFieldState() },
-                                     action: SearchAction.init).view
+        self.viewStore = ViewStore(store.scope(state: { _ in SearchFieldState() },
+                                     action: SearchAction.init))
     }
     
     var body: some View {

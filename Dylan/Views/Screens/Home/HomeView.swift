@@ -27,7 +27,7 @@ struct HomeView: View {
         self.store = store
         self.fetchingType = fetchingType
         self.progress = progress
-        self.viewStore = store.scope(value: { $0 }, action: nil).view
+        self.viewStore = ViewStore(store.actionless.scope(state: { $0 }))
         _selectedID = selectedID
     }
     

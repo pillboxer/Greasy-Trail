@@ -23,7 +23,7 @@ public struct BottomBarView: View {
     
     public init(store: Store<BottomBarState, BottomBarFeatureAction>) {
         self.store = store
-        self.viewStore = store.scope(value: BottomBarViewState.init, action: BottomBarFeatureAction.init).view
+        self.viewStore = ViewStore(store.scope(state: BottomBarViewState.init, action: BottomBarFeatureAction.init))
     }
     
     public var body: some View {
@@ -45,7 +45,7 @@ public struct BottomBarView: View {
                     editButton
                 }
                 if viewStore.isSearchFieldShowing {
-                    SearchView(store: store.scope(value: { $0.searchState },
+                    SearchView(store: store.scope(state: { $0.searchState },
                                                   action: { .search($0) }))
                         .transition(.move(edge: .leading))
                 }

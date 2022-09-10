@@ -29,8 +29,8 @@ public struct ResultPerformanceOverviewView: View {
     public init(store: Store<SearchState, SearchAction>,
                 model: PerformanceDisplayModel) {
         self.store = store
-        self.viewStore = store.scope(value: { _ in ResultPerformanceState() },
-                                     action: SearchAction.init).view
+        self.viewStore = ViewStore(store.scope(state: { _ in ResultPerformanceState() },
+                                     action: SearchAction.init))
         self.model = model
     }
     

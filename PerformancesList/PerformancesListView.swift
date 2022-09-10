@@ -28,8 +28,8 @@ public struct PerformancesListView: View {
     public init(performances: [sPerformance], store: Store<AnyModel?, SearchAction>) {
         self.performances = performances
         self.store = store
-        self.viewStore = store.scope(value: { _ in PerformancesListState() },
-                                     action: SearchAction.init).view
+        self.viewStore = ViewStore(store.scope(state: { _ in PerformancesListState() },
+                                     action: SearchAction.init))
     }
     
     private let formatter = GTFormatter.Formatter()

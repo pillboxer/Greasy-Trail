@@ -18,7 +18,7 @@ public struct AllPerformancesView {
     fileprivate enum AllPerformancesAction {
         case search(Search)
         case selectID(objectIdentifier: ObjectIdentifier?)
-        case select(objectIdentifier: ObjectIdentifier, id: NSManagedObjectID)
+        case select(objectIdentifier: ObjectIdentifier?, id: NSManagedObjectID?)
     }
     
     private struct AllPerformancesState: Equatable {
@@ -36,12 +36,19 @@ public struct AllPerformancesView {
         .init(\.venue, order: SortOrder.forward)
     ]
     
+    private func toggleBinding(on performance: Performance) -> Binding<Bool> {
+        let ids = idsOnToggle(on: performance)
+        return viewStore.binding(get: { $0.selectedID == performance.id },
+                                 send: .select(objectIdentifier: ids.0,
+                                               id: ids.1))
+    }
+    
     public init(store: Store<SearchState, SearchAction>,
                 predicate: NSPredicate = NSPredicate(value: true)) {
         self.store = store
         self.predicate = predicate
-        self.viewStore = store.scope(value: { AllPerformancesState(selectedID: $0.selectedID) },
-                                     action: SearchAction.init).view
+        self.viewStore = ViewStore(store.scope(state: { AllPerformancesState(selectedID: $0.selectedID) },
+                                               action: SearchAction.init))
         _fetched = FetchRequest<Performance>(entity: Performance.entity(),
                                              sortDescriptors: [NSSortDescriptor(key: "date",
                                                                                 ascending: false)],
@@ -49,19 +56,17 @@ public struct AllPerformancesView {
     }
     
     public var body: some View {
-        Table(tableData, selection: viewStore.binding(get: \.selectedID,
-                                                      send: { .selectID(objectIdentifier: $0) }),
-              sortOrder: $sortOrder) {
+        return Table(tableData, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_performances_0"),
                         value: \.venue!) { performance in
                 let venue = performance.venue!
-                HStack {
+                Toggle(isOn: toggleBinding(on: performance)) {
                     Text(venue)
-                    Spacer()
+                        .padding(.leading, 4)
                 }
-                .contentShape(Rectangle())
-                .gesture(doubleTap(objectID: performance.objectID))
-                .simultaneousGesture(singleTap(objectIdentifier: performance.id, objectID: performance.objectID))
+                .padding(.top, 4)
+                Spacer()
+                    .gesture(doubleTap(objectID: performance.objectID))
                 
             }
             TableColumn(LocalizedStringKey("table_column_title_performances_1"),
@@ -72,7 +77,6 @@ public struct AllPerformancesView {
                 }
                 .contentShape(Rectangle())
                 .gesture(doubleTap(objectID: performance.objectID))
-                .simultaneousGesture(singleTap(objectIdentifier: performance.id, objectID: performance.objectID))
             }
         }
     }
@@ -86,11 +90,16 @@ extension AllPerformancesView: TwoColumnTableViewType {
         }
     }
     
-    public func singleTap(objectIdentifier: Performance.ID, objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
-        TapGesture()
-            .onEnded {
-                viewStore.send(.select(objectIdentifier: objectIdentifier, id: objectID))
-            }
+}
+
+private extension AllPerformancesView {
+    
+    func idsOnToggle(on performance: Performance) -> (objectIdentifier: ObjectIdentifier?,
+                                                      objectID: NSManagedObjectID?) {
+        if viewStore.selectedID == performance.id {
+            return (nil, nil)
+        }
+        return (performance.id, performance.objectID)
     }
     
 }

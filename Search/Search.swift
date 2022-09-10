@@ -9,20 +9,20 @@ import Model
 import Combine
 import Core
 import GTFormatter
-import ComposableArchitecture
 import CoreData
 import GTCloudKit
+import ComposableArchitecture
 
 public struct SearchEnvironment {
-    public let search: (Search) -> Effect<AnyModel?>
-    public let randomSong: () -> Effect<SongDisplayModel?>
-    public let randomAlbum: () -> Effect<AlbumDisplayModel?>
-    public let randomPerformance: () -> Effect<PerformanceDisplayModel?>
+    public let search: (Search) -> Effect<AnyModel?, Never>
+    public let randomSong: () -> Effect<SongDisplayModel?, Never>
+    public let randomAlbum: () -> Effect<AlbumDisplayModel?, Never>
+    public let randomPerformance: () -> Effect<PerformanceDisplayModel?, Never>
     
-    public init(search: @escaping (Search) -> Effect<AnyModel?>,
-                randomSong: @escaping () -> Effect<SongDisplayModel?>,
-                randomAlbum: @escaping () -> Effect<AlbumDisplayModel?>,
-                randomPerformance: @escaping () -> Effect<PerformanceDisplayModel?>) {
+    public init(search: @escaping (Search) -> Effect<AnyModel?, Never>,
+                randomSong: @escaping () -> Effect<SongDisplayModel?, Never>,
+                randomAlbum: @escaping () -> Effect<AlbumDisplayModel?, Never>,
+                randomPerformance: @escaping () -> Effect<PerformanceDisplayModel?, Never>) {
         self.search = search
         self.randomSong = randomSong
         self.randomAlbum = randomAlbum
@@ -86,7 +86,7 @@ public struct Search: Equatable {
 
 public enum SearchAction: Equatable {
     case selectID(objectIdentifier: ObjectIdentifier?)
-    case select(objectIdentifier: ObjectIdentifier, objectID: NSManagedObjectID)
+    case select(objectIdentifier: ObjectIdentifier?, objectID: NSManagedObjectID?)
     case makeSearch(Search)
     case completeSearch(AnyModel?, Search)
     case makeRandomSearch
@@ -100,32 +100,29 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
     case .makeSearch(let search):
         state.isSearching = true
         state.currentSearch = search
-        return [searchEffect(search: search, environment: environment)]
+        return searchEffect(search: search, environment: environment)
     case .completeSearch(let model, let search):
         state.isSearching = false
         state.model = model ?? state.model
         state.failedSearch = model == nil ? search : nil
-        return [.sync(work: { .updateEditSelection })]
+        return Effect(value: .updateEditSelection)
     case .reset:
         state.currentSearch = nil
         state.failedSearch = nil
         state.model = nil
         state.selectedObjectID = nil
         state.selectedID = nil
-        return []
     case .select(let objectIdentifier, let objectID):
         state.selectedObjectID = objectID
-        return [ .sync(work: { .selectID(objectIdentifier: objectIdentifier) })]
+        return Effect(value: .selectID(objectIdentifier: objectIdentifier))
     case .selectID(let objectIdentifier):
         state.selectedID = objectIdentifier
-        return []
     case .todayInHistory:
         print("Today in history")
-        return []
     case .makeRandomSearch:
         state.isSearching = true
         let random = DylanSearchType.allCases.randomElement()!
-        return [randomSearchEffect(environment: environment, type: random)]
+        return randomSearchEffect(environment: environment, type: random)
     case .updateEditSelection:
         if let model = state.model?.value as? PerformanceDisplayModel {
             state.selectedRecordToAdd = .performance
@@ -134,12 +131,12 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         } else if let model = state.model?.value as? SongDisplayModel? {
             state.selectedRecordToAdd = .song
         }
-        return []
     }
+    return .none
 }
 
 private func searchEffect(search: Search,
-                          environment: SearchEnvironment) -> Effect<SearchAction> {
+                          environment: SearchEnvironment) -> Effect<SearchAction, Never> {
     environment.search(search)
         .map {
             return .completeSearch($0, search)
@@ -149,7 +146,7 @@ private func searchEffect(search: Search,
 }
 
 private func randomSearchEffect(environment: SearchEnvironment,
-                                type: DylanSearchType) -> Effect<SearchAction> {
+                                type: DylanSearchType) -> Effect<SearchAction, Never> {
     switch type {
     case .song:
         return environment.randomSong()
@@ -187,19 +184,19 @@ public class Searcher {
     
     public init() {}
     
-    public func randomSong() -> Effect<SongDisplayModel?> {
+    public func randomSong() -> Effect<SongDisplayModel?, Never> {
         detective.randomSong()
     }
     
-    public func randomAlbum() -> Effect<AlbumDisplayModel?> {
+    public func randomAlbum() -> Effect<AlbumDisplayModel?, Never> {
         detective.randomAlbum()
     }
     
-    public func randomPerformance() -> Effect<PerformanceDisplayModel?> {
+    public func randomPerformance() -> Effect<PerformanceDisplayModel?, Never> {
         detective.randomPerformance()
     }
         
-    public func search(_ search: Search) -> Effect<AnyModel?> {
+    public func search(_ search: Search) -> Effect<AnyModel?, Never> {
         
         guard let title = search.title else {
             if let id = search.id {

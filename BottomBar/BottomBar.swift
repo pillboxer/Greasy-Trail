@@ -22,13 +22,15 @@ public struct BottomBarState: Equatable {
     public var selectedSection: BottomBarSection
     public var selectedRecordToAdd: DylanRecordType
     public var selectedObjectID: NSManagedObjectID?
+    public var selectedID: ObjectIdentifier?
     
     public init(isSearchFieldShowing: Bool,
                 isSearching: Bool,
                 model: AnyModel?,
                 selectedSection: BottomBarSection,
                 selectedObjectID: NSManagedObjectID?,
-                selectedRecordToAdd: DylanRecordType) {
+                selectedRecordToAdd: DylanRecordType,
+                selectedID: ObjectIdentifier?) {
         
         self.isSearchFieldShowing = isSearchFieldShowing
         self.isSearching = isSearching
@@ -36,6 +38,7 @@ public struct BottomBarState: Equatable {
         self.selectedSection = selectedSection
         self.selectedRecordToAdd = selectedRecordToAdd
         self.selectedObjectID = selectedObjectID
+        self.selectedID = selectedID
     }
     
     var bottomBarViewState: BottomBarViewState {
@@ -60,7 +63,7 @@ public struct BottomBarState: Equatable {
             return SearchState(model: model,
                                failedSearch: nil,
                                currentSearch: nil,
-                               selectedID: nil,
+                               selectedID: selectedID,
                                selectedObjectID: selectedObjectID,
                                selectedRecordToAdd: selectedRecordToAdd,
                                isSearching: isSearching)
@@ -70,6 +73,7 @@ public struct BottomBarState: Equatable {
             isSearching = newValue.isSearching
             model = newValue.model
             selectedObjectID = newValue.selectedObjectID
+            selectedID = newValue.selectedID
         }
     }
 }
@@ -122,11 +126,11 @@ public enum BottomBarAction {
 public let bottomBarFeatureReducer: Reducer<BottomBarState, BottomBarFeatureAction, SearchEnvironment> =
 Reducer.combine(
     bottomBarReducer.pullback(
-        value: \.self,
+        state: \.self,
         action: /BottomBarFeatureAction.bottom,
         environment: { _ in ()}),
     searchReducer.pullback(
-        value: \.searchState,
+        state: \.searchState,
         action: /BottomBarFeatureAction.search,
         environment: { $0 }))
 
@@ -134,12 +138,10 @@ public let bottomBarReducer = Reducer<BottomBarState, BottomBarAction, Void> { s
     switch action {
     case .toggleSearchField:
         state.isSearchFieldShowing.toggle()
-        return []
     case .selectSection(let section):
         state.selectedSection = section
-        return []
     case .selectRecordToAdd(let record):
         state.selectedRecordToAdd = record
-        return []
     }
+    return .none
 }

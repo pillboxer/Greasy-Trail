@@ -37,33 +37,35 @@ extension Detective {
         }
     }
     
-    func randomSong() -> Effect<SongDisplayModel?> {
+    func randomSong() -> Effect<SongDisplayModel?, Never> {
         let context = container.newBackgroundContext()
-        return .async { [self] completion in
-            context.performFetch(Song.self) { [self] songs in
+        return .future { completion in
+            context.performFetch(Song.self) { songs in
                 guard let random = songs.randomElement() else {
-                     return completion(nil)
+                    return completion(.success(nil))
                 }
-                createSongDisplayModel(from: random, completion: completion)
+                self.createSongDisplayModel(from: random) { model in
+                    return completion(.success(model))
+                }
             }
         }
     }
     
-    public func fetchModel(for title: String) -> Effect<AnyModel?> {
+    public func fetchModel(for title: String) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
         
-        return .async { completion in
+        return .future { completion in
             context.perform { [self] in
                 guard let song = fetch(song: title) ?? fetch(song: resolveSpellingOf(song: title)) else {
-                    return completion(nil)
+                    return completion(.success(nil))
                 }
                 let id = song.objectID
                 if let song = context.object(with: id) as? Song {
                     createSongDisplayModel(from: song) { songDisplayModel in
-                        completion(AnyModel(songDisplayModel))
+                        completion(.success(AnyModel(songDisplayModel)))
                     }
                 } else {
-                    return completion(nil)
+                    return completion(.success(nil))
                 }
             }
         }
@@ -132,15 +134,15 @@ private extension String {
 
 extension Detective {
     
-    func fetchSongModel(for id: NSManagedObjectID) -> Effect<AnyModel?> {
+    func fetchSongModel(for id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
-        return .async { callback in
+        return .future { callback in
             context.perform { [self] in
                 guard let object = context.object(with: id) as? Song else {
-                    return callback(nil)
+                    return callback(.success(nil))
                 }
                 createSongDisplayModel(from: object) { displayModel in
-                    callback(AnyModel(displayModel))
+                    callback(.success(AnyModel(displayModel)))
                 }
             }
 

@@ -18,7 +18,7 @@ struct DylanApp: App {
  
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
-    let appStore = Store(initialValue: AppState(),
+    let appStore = Store(initialState: AppState(),
                          reducer: appReducer,
                          environment: AppEnvironment(search: Searcher().search,
                                                      randomSong: Searcher().randomSong,

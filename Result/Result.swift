@@ -21,11 +21,11 @@ public struct ResultView: View {
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { $0.model}, action: nil).view
+        self.viewStore = ViewStore(store.actionless.scope(state: { $0.model }))
     }
     
     private var model: AnyModel? {
-        viewStore.value
+        viewStore.state
     }
     
     public var body: some View {

@@ -35,8 +35,7 @@ struct SidebarListRowView: View {
         self.isFetching = isFetching
         self.progress = progress
         self.selection = displayType.rawValue
-        self.viewStore = store.scope(value: { $0 },
-                                     action: nil).view
+        self.viewStore = ViewStore(store.actionless.scope(state: { $0 }))
         _selectedID = selectedID
     }
     
@@ -63,13 +62,13 @@ struct SidebarListRowView: View {
         if let section = SidebarDisplayType(rawValue: selection) {
             switch section {
             case .songs:
-                AllSongsView(store: store.scope(value: { $0.searchState }, action: { action in
+                AllSongsView(store: store.scope(state: { $0.searchState }, action: { action in
                     return .search(action)
                 }))
             case .albums:
                 AllAlbumsView()
             default:
-                AllPerformancesView(store: store.scope(value: { $0.searchState }, action: { action in
+                AllPerformancesView(store: store.scope(state: { $0.searchState }, action: { action in
                     return .search(action)
                 }), predicate: section.predicate)
             }

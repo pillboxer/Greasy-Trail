@@ -15,23 +15,23 @@ import Add
 import Model
 
 struct AppEnvironment {
-    let search: (Search) -> Effect<AnyModel?>
-    let randomSong: () -> Effect<SongDisplayModel?>
-    let randomAlbum: () -> Effect<AlbumDisplayModel?>
-    let randomPerformance: () -> Effect<PerformanceDisplayModel?>
+    let search: (Search) -> Effect<AnyModel?, Never>
+    let randomSong: () -> Effect<SongDisplayModel?, Never>
+    let randomAlbum: () -> Effect<AlbumDisplayModel?, Never>
+    let randomPerformance: () -> Effect<PerformanceDisplayModel?, Never>
 }
 
 let appReducer: Reducer<AppState, AppAction, AppEnvironment> =
 Reducer.combine(searchReducer.pullback(
-                 value: \.searchState,
+                 state: \.searchState,
                  action: /AppAction.search,
                  environment: SearchEnvironment.init),
         bottomBarFeatureReducer.pullback(
-                 value: \.bottomBarState,
+            state: \.bottomBarState,
                  action: /AppAction.bottomBar,
                  environment: SearchEnvironment.init),
         addReducer.pullback(
-                 value: \.addState,
+            state: \.addState,
                  action: /AppAction.add,
                  environment: { _ in () }))
 

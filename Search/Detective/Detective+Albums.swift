@@ -15,33 +15,33 @@ import ComposableArchitecture
 
 extension Detective {
     
-    func fetch(album title: String) -> Effect<AnyModel?> {
+    func fetch(album title: String) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
-        return .async { completion in
+        return .future { completion in
             // Fetch album with given title
             let predicate = NSPredicate(format: "title =[c] %@", title)
             context.performFetch(Album.self, with: predicate) { [self] albums in
                 guard let first = albums.first,
                       let songs = first.songs?.array as? [Song] else {
-                    return completion(nil)
+                    return completion(.success(nil))
                 }
                 let model = createAlbumDisplayModel(from: first, with: songs)
-                completion(AnyModel(model))
+                completion(.success(AnyModel(model)))
 
             }
         }
     }
     
-    func randomAlbum() -> Effect<AlbumDisplayModel?> {
+    func randomAlbum() -> Effect<AlbumDisplayModel?, Never> {
         let context = container.newBackgroundContext()
-        return .async { completion in
+        return .future { completion in
             context.performFetch(Album.self) { [self] albums in
                 guard let random = albums.randomElement(),
                       let songs = random.songs?.array as? [Song] else {
-                     return completion(nil)
+                    return completion(.success(nil))
                 }
                 let model = createAlbumDisplayModel(from: random, with: songs)
-                completion(model)
+                completion(.success(model))
             }
         }
     }

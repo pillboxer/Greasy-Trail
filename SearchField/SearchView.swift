@@ -25,8 +25,8 @@ public struct SearchView: View {
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = store.scope(value: { SearchViewState(search: $0.failedSearch) },
-                                     action: SearchAction.init).view
+        self.viewStore = ViewStore(store.scope(state: { SearchViewState(search: $0.failedSearch) },
+                                     action: SearchAction.init))
     }
 
     public var body: some View {

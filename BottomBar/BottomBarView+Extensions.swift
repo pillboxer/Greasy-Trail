@@ -14,18 +14,14 @@ extension BottomBarView {
     
     var homeButton: some View {
         OnTapButton(systemImage: "house") {
-            withAnimation {
-                viewStore.send(.reset)
-            }
+            viewStore.send(.reset, animation: .default)
         }
         .help("bottom_bar_tooltip_house")
     }
     
     var searchButton: some View {
         OnTapButton(systemImage: "magnifyingglass") {
-            withAnimation {
-                viewStore.send(.toggleSearchField)
-            }
+            viewStore.send(.toggleSearchField, animation: .default)
         }
         .help("bottom_bar_tooltip_search")
     }
@@ -39,45 +35,35 @@ extension BottomBarView {
     
     var openAddButton: some View {
         OnTapButton(systemImage: "plus.square") {
-            withAnimation {
-                viewStore.send(.selectSection(.add))
-            }
+            viewStore.send(.selectSection(.add), animation: .default)
         }
         .help("bottom_bar_tooltip_new")
     }
     
     var closeAddButton: some View {
         OnTapButton(systemImage: "minus.square") {
-            withAnimation {
-                viewStore.send(.selectSection(.home))
-                viewStore.send(.reset)
-            }
+            viewStore.send(.reset, animation: .default)
+            viewStore.send(.selectSection(.home))
         }
     }
     
     var songButton: some View {
         OnTapButton(systemImage: "music.note") {
-            withAnimation {
-                viewStore.send(.selectRecordToAdd(.song))
-            }
+            viewStore.send(.selectRecordToAdd(.song), animation: .default)
         }
         .highlighting(viewStore.selectedRecordToAdd == .song)
     }
     
     var albumButton: some View {
         OnTapButton(systemImage: "record.circle") {
-            withAnimation {
-                viewStore.send(.selectRecordToAdd(.album))
-            }
+            viewStore.send(.selectRecordToAdd(.album), animation: .default)
         }
         .highlighting(viewStore.selectedRecordToAdd == .album)
     }
     
     var performanceButton: some View {
         OnTapButton(systemImage: "music.mic.circle") {
-            withAnimation {
-                viewStore.send(.selectRecordToAdd(.performance))
-            }
+            viewStore.send(.selectRecordToAdd(.performance), animation: .default)
         }
         .highlighting(viewStore.selectedRecordToAdd == .performance)
     }
