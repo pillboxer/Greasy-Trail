@@ -24,7 +24,7 @@ public struct AllSongsView: View {
         var selectedID: ObjectIdentifier?
     }
     
-    let store: Store<SearchState, SearchAction>
+    let store: Store<ObjectIdentifier?, SearchAction>
     @ObservedObject private var viewStore: ViewStore<AllSongsState, AllSongsAction>
     
     @State public var sortOrder: [KeyPathComparator<Song>] = [
@@ -43,9 +43,9 @@ public struct AllSongsView: View {
                                                id: ids.1))
     }
     
-    public init(store: Store<SearchState, SearchAction>) {
+    public init(store: Store<ObjectIdentifier?, SearchAction>) {
         self.store = store
-        self.viewStore = ViewStore(store.scope(state: { AllSongsState(selectedID: $0.selectedID) },
+        self.viewStore = ViewStore(store.scope(state: { AllSongsState(selectedID: $0) },
                                                action: SearchAction.init))
     }
     
@@ -61,30 +61,23 @@ public struct AllSongsView: View {
                 }
                 .padding(.top, 4)
                 .toggleStyle(CheckboxToggleStyle())
-                Spacer()
-                    .gesture(doubleTap(objectID: song.objectID))
             }
             TableColumn(LocalizedStringKey("table_column_title_songs_1"),
                         value: \.songAuthor) { song in
                 HStack {
                     Text(song.songAuthor)
                     Spacer()
+                    PlainOnTapButton(systemImage: "chevron.right.circle") {
+                        viewStore.send(.search(.init(id: song.objectID)))
+                    }
                 }
                 .contentShape(Rectangle())
-                .gesture(doubleTap(objectID: song.objectID))
             }
         }
     }
 }
 
-extension AllSongsView: TwoColumnTableViewType {
-    
-    public func doubleTap(objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
-        TapGesture(count: 2).onEnded { _ in
-            viewStore.send(.search(.init(id: objectID)))
-        }
-    }
-}
+extension AllSongsView: TwoColumnTableViewType {}
 
 private extension AllSongsView {
     

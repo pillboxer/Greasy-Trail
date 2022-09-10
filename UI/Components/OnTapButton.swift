@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+public enum ButtonStyle {
+    case plain
+    case link
+    case regular
+}
+
 public struct OnTapButton: View {
     
     private var text: String?
@@ -14,20 +20,17 @@ public struct OnTapButton: View {
     private var systemImage: String?
     private var onTap: () -> Void
     private var args: [CVarArg]?
-    private var plainButtonStyle: Bool
     
     public init(text: String? = nil,
                 args: [CVarArg]? = nil,
                 image: String? = nil,
                 systemImage: String? = nil,
-                plainButtonStyle: Bool = true,
                 onTap: @escaping () -> Void) {
         self.text = text
         self.image = image
         self.systemImage = systemImage
         self.onTap = onTap
         self.args = args
-        self.plainButtonStyle = plainButtonStyle
     }
     
     public var body: some View {
@@ -45,7 +48,37 @@ public struct OnTapButton: View {
         .onHover { hover in
             hover ? NSCursor.pointingHand.push() : NSCursor.pop()
         }
-        .if(plainButtonStyle) { $0.buttonStyle(.plain) }
+    }
+    
+}
+
+public struct PlainOnTapButton: View {
+    
+    private var text: String?
+    private var image: String?
+    private var systemImage: String?
+    private var onTap: () -> Void
+    private var args: [CVarArg]?
+    
+    public init(text: String? = nil,
+                args: [CVarArg]? = nil,
+                image: String? = nil,
+                systemImage: String? = nil,
+                onTap: @escaping () -> Void) {
+        self.text = text
+        self.image = image
+        self.systemImage = systemImage
+        self.onTap = onTap
+        self.args = args
+    }
+    
+    public var body: some View {
+        OnTapButton(text: text,
+                    args: args,
+                    image: image,
+                    systemImage: systemImage,
+                    onTap: onTap)
+            .buttonStyle(.plain)
     }
     
 }

@@ -39,9 +39,9 @@ class CKPagingQueryOperation {
             switch result {
             case .success(let cursor):
                 if let cursor = cursor {
-                   os_log("Cursor received in CKPagingQueryOperation, attempting query with cursor",
-                          log: Log_CloudKit,
-                          type: .debug)
+//                   os_log("Cursor received in CKPagingQueryOperation, attempting query with cursor",
+//                          log: Log_CloudKit,
+//                          type: .debug)
                    let operation = CKPagingQueryOperation(query: query,
                                                           cursor: cursor,
                                                           database: database,

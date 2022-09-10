@@ -179,7 +179,7 @@
 		<key>SongsList.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>25</integer>
+			<integer>26</integer>
 		</dict>
 		<key>TableList.xcscheme_^#shared#^_</key>
 		<dict>
@@ -194,7 +194,7 @@
 		<key>TwoColumnTable.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>26</integer>
+			<integer>25</integer>
 		</dict>
 		<key>UI.xcscheme_^#shared#^_</key>
 		<dict>

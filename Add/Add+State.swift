@@ -8,6 +8,8 @@
 import GTCloudKit
 import Model
 import GTFormatter
+import Search
+import BottomBar
 
 public struct AddState: Equatable {
     
@@ -19,8 +21,17 @@ public struct AddState: Equatable {
     var performanceLBs: [Int] = []
     var performanceSongs: [sSong] = []
     
-    public var selectedRecordToAdd: DylanRecordType
-    public var model: AnyModel?
+    public var selectedRecordToAdd: DylanWork
+    public var search: SearchState
+    
+    private var model: AnyModel? {
+        get {
+            search.model
+        }
+        set {
+            search.model = newValue
+        }
+    }
     
     var song: SongDisplayModel? {
         get {
@@ -58,9 +69,10 @@ public struct AddState: Equatable {
         }
     }
     
-    public init(model: AnyModel?, selectedRecordToAdd: DylanRecordType) {
+    public init(searchState: SearchState, selectedRecordToAdd: DylanWork) {
         self.selectedRecordToAdd = selectedRecordToAdd
-        self.model = model
+        print("SelectedRecord in AddState \(selectedRecordToAdd)", selectedRecordToAdd)
+        self.search = searchState
         if let model = model?.value as? SongDisplayModel {
             songTitleField = model.title
             songAuthorField = model.author

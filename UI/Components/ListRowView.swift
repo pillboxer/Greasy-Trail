@@ -32,7 +32,7 @@ public struct ListRowView: View {
             HStack {
                 Text(headline).font(.headline)
                 if let onTap = onTap {
-                    OnTapButton(systemImage: "arrow.forward.circle", onTap: onTap)
+                    PlainOnTapButton(systemImage: "arrow.forward.circle", onTap: onTap)
                         
                 }
             }
@@ -41,7 +41,7 @@ public struct ListRowView: View {
                     Text(subHeadline).font(.subheadline)
                     if let buttons = buttons {
                         ForEach(buttons, id: \.self) { button in
-                            OnTapButton(systemImage: button.rawValue) {
+                            PlainOnTapButton(systemImage: button.rawValue) {
                                 buttonTap?(button)
                             }
                             

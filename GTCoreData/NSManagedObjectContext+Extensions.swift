@@ -52,6 +52,12 @@ extension NSManagedObjectContext {
         }
     }
     
+    public func asyncSave() async {
+        await perform {
+            self.saveWithTry()
+        }
+    }
+    
     public func syncSave() {
         syncPerform {
             self.saveWithTry()

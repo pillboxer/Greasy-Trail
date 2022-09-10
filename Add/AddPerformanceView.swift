@@ -75,7 +75,7 @@ extension AddPerformanceView {
                 HStack {
                     Text("add_performance_field_1").font(.footnote)
                     Spacer()
-                    OnTapButton(systemImage: "plus.circle") {
+                    PlainOnTapButton(systemImage: "plus.circle") {
                         viewStore.send(.incrLBCount)
                     }
                 }
@@ -86,7 +86,7 @@ extension AddPerformanceView {
                         HStack {
                             NSTextFieldRepresentable(placeholder: "add_performance_field_1_placeholder",
                                                      text: bindingForLB(at: index))
-                            OnTapButton(systemImage: "minus.circle") {
+                            PlainOnTapButton(systemImage: "minus.circle") {
                                 viewStore.send(.removeLB(at: index))
                             }
                         }
@@ -117,7 +117,7 @@ extension AddPerformanceView {
                 HStack {
                     Text("add_performance_field_2").font(.footnote)
                     Spacer()
-                    OnTapButton(systemImage: "plus.circle") {
+                    PlainOnTapButton(systemImage: "plus.circle") {
                         viewStore.send(.incrSongCount)
                     }
                 }
@@ -128,7 +128,7 @@ extension AddPerformanceView {
                                                  text: bindingForSong(at: index),
                                                  textColor: viewStore.performanceSongs[index].uuid ==
                             .invalid ? .red : nil)
-                        OnTapButton(systemImage: "minus.circle") {
+                        PlainOnTapButton(systemImage: "minus.circle") {
                             viewStore.send(.removeSong(at: index))
                         }
                     }

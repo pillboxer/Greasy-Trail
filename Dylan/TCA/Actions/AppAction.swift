@@ -8,9 +8,13 @@
 import Search
 import Add
 import BottomBar
+import GTCloudKit
+import AllPerformances
 
 enum AppAction {
     case search(SearchAction)
     case add(AddAction)
     case bottomBar(BottomBarFeatureAction)
+    case cloudKit(CloudKitAction)
+    case allPerformances(AllPerformancesFeatureAction)
 }

@@ -46,7 +46,7 @@ public enum DylanRecordField: String {
     case modificationDate
 }
 
-enum CloudKitManagerError: LocalizedError {
+enum CloudKitManagerError: Error {
    
     case query(code: Int)
     case unknown

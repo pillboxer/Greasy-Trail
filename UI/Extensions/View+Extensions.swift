@@ -12,7 +12,7 @@ public extension View {
     func errorAlert(error: Binding<Error?>, title: String = "Error", action: (() -> Void)? = nil) -> some View {
         let alertError = AlertError(error: error.wrappedValue)
         return alert(String(describing: error), isPresented: .constant(alertError != nil)) {
-            OnTapButton(text: "OK") {
+            PlainOnTapButton(text: "OK") {
                 if let action = action {
                     action()
                 } else {
@@ -26,7 +26,7 @@ public extension View {
     
     func alert(string: Binding<String?>, title: String = "", action: (() -> Void)? = nil) -> some View {
         return alert(title, isPresented: .constant(string.wrappedValue != nil)) {
-            OnTapButton(text: "OK") {
+            PlainOnTapButton(text: "OK") {
                 if let action = action {
                     action()
                 } else {
@@ -71,6 +71,20 @@ public extension View {
             transform(self)
         } else {
             self
+        }
+    }
+}
+
+public extension View {
+    
+    func highlighting(_ shouldHighlight: Bool) -> some View {
+        VStack {
+            self
+            if shouldHighlight {
+                Divider()
+                    .frame(maxWidth: 6)
+                    .foregroundColor(.accentColor)
+            }
         }
     }
 }

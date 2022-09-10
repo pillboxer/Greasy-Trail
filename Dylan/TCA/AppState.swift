@@ -14,95 +14,109 @@ import Add
 import Sidebar
 import BottomBar
 import CoreData
+import Core
 
 struct AppState: Equatable {
-    
-    // Selection
-    var selectedID: ObjectIdentifier?
-    var selectedObjectID: NSManagedObjectID?
 
     // Bottom Bar
-    var selectedSection: BottomBarSection = .home
-    var selectedRecordToAdd: DylanRecordType = .song
-
+    var selectedRecordToAdd: DylanWork = .songs
+    var isSearchFieldShowing = false
+    var selectedSection: BottomBarSection = .home(.songs)
     // Navigation
     var selectedSidebarType: SidebarDisplayType = .songs
-    
     // Search
+    var model: AnyModel?
     var failedSearch: Search?
     var currentSearch: Search?
+    var selectedID: ObjectIdentifier?
+    var selectedObjectID: NSManagedObjectID?
     var isSearching = false
-    var isSearchFieldShowing = false
-    var model: AnyModel?
+    // CloudKit
+    var downloadingRecordType: DylanRecordType?
+    var mode: Mode = .notDownloaded
+    @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
     
+    // AllPerformances
+    var selectedPerformanceDecade: PerformanceDecade = .sixties
+
 }
 
 extension AppState {
     
-    var songDisplayModel: SongDisplayModel? {
-        model?.value as? SongDisplayModel
-    }
-    
-    var performanceDisplayModel: PerformanceDisplayModel? {
-        model?.value as? PerformanceDisplayModel
-    }
-    
-    var albumDisplayModel: AlbumDisplayModel? {
-        model?.value as? AlbumDisplayModel
-    }
-    
-}
-
-extension AppState {
-    
-    var searchState: SearchState {
+    var search: SearchState {
         get {
-            SearchState(model: model,
-                        failedSearch: failedSearch,
-                        currentSearch: currentSearch,
-                        selectedID: selectedID,
-                        selectedObjectID: selectedObjectID,
-                        selectedRecordToAdd: selectedRecordToAdd,
-                        isSearching: isSearching)
+            return SearchState(model: model,
+                               failedSearch: failedSearch,
+                               currentSearch: currentSearch,
+                               selectedID: selectedID,
+                               selectedObjectID: selectedObjectID,
+                               isSearching: isSearching)
         }
         set {
-            self.failedSearch = newValue.failedSearch
-            self.model = newValue.model
-            self.currentSearch = newValue.currentSearch
-            self.selectedID = newValue.selectedID
-            self.isSearching = newValue.isSearching
-            self.selectedObjectID = newValue.selectedObjectID
-            self.selectedRecordToAdd = newValue.selectedRecordToAdd
+            selectedID = newValue.selectedID
+            model = newValue.model
+            failedSearch = newValue.failedSearch
+            currentSearch = newValue.currentSearch
+            selectedObjectID = newValue.selectedObjectID
+            isSearching = newValue.isSearching
         }
     }
     
     var addState: AddState {
         get {
-            AddState(model: model, selectedRecordToAdd: selectedRecordToAdd)
+            return AddState(searchState: search,
+                     selectedRecordToAdd: selectedRecordToAdd)
         }
         set {
-            self.selectedRecordToAdd = newValue.selectedRecordToAdd
-            self.model = newValue.model
+            self.search = newValue.search
+            selectedRecordToAdd = newValue.selectedRecordToAdd
         }
     }
     
     var bottomBarState: BottomBarState {
         get {
-            return BottomBarState(isSearchFieldShowing: isSearchFieldShowing,
-                                  isSearching: isSearching,
-                                  model: model,
-                                  selectedSection: selectedSection,
-                                  selectedObjectID: selectedObjectID,
-                                  selectedRecordToAdd: selectedRecordToAdd,
-                                  selectedID: selectedID)
+            return BottomBarState(
+                selectedSection: selectedSection,
+                selectedRecordToAdd: selectedRecordToAdd,
+                isSearchFieldShowing: isSearchFieldShowing,
+                search: search)
         }
         set {
-            self.isSearchFieldShowing = newValue.isSearchFieldShowing
             self.selectedSection = newValue.selectedSection
-            self.selectedRecordToAdd = newValue.selectedRecordToAdd
-            self.model = newValue.model
-            self.selectedObjectID = newValue.selectedObjectID
-            self.selectedID = newValue.selectedID
+            self.search = newValue.search
+            if (search.model?.value as? PerformanceDisplayModel) != nil {
+                self.selectedRecordToAdd = .performances
+            } else if (search.model?.value as? AlbumDisplayModel) != nil {
+                self.selectedRecordToAdd = .albums
+            } else if (search.model?.value as? SongDisplayModel) != nil {
+                self.selectedRecordToAdd = .songs
+            } else {
+                selectedRecordToAdd = newValue.selectedRecordToAdd
+            }
+            self.isSearchFieldShowing = newValue.isSearchFieldShowing
+        }
+    }
+    
+    var allPerformancesState: AllPerformancesState {
+        get {
+            return AllPerformancesState(search: search, selectedPerformanceDecade: selectedPerformanceDecade)
+        }
+        set {
+            search = newValue.search
+            selectedPerformanceDecade = newValue.selectedPerformanceDecade
+        }
+    }
+    
+    var cloudKitState: CloudKitState {
+        get {
+            return CloudKitState(downloadingRecordType: downloadingRecordType,
+                                 mode: mode,
+                                 lastFetchDate: lastFetchDate)
+        }
+        set {
+            downloadingRecordType = newValue.downloadingRecordType
+            mode = newValue.mode
+            lastFetchDate = newValue.lastFetchDate
         }
     }
 }

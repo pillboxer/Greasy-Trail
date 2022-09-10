@@ -13,89 +13,97 @@ extension BottomBarView {
     // TODO: help
     
     var homeButton: some View {
-        OnTapButton(systemImage: "house") {
+        PlainOnTapButton(systemImage: "house") {
             viewStore.send(.reset, animation: .default)
         }
         .help("bottom_bar_tooltip_house")
     }
     
     var searchButton: some View {
-        OnTapButton(systemImage: "magnifyingglass") {
+        PlainOnTapButton(systemImage: "magnifyingglass") {
             viewStore.send(.toggleSearchField, animation: .default)
         }
         .help("bottom_bar_tooltip_search")
     }
     
     var randomButton: some View {
-        OnTapButton(systemImage: "dice") {
+        PlainOnTapButton(systemImage: "dice") {
             viewStore.send(.makeRandomSearch)
         }
         .help("bottom_bar_tooltip_random")
     }
     
     var openAddButton: some View {
-        OnTapButton(systemImage: "plus.square") {
+        PlainOnTapButton(systemImage: "plus.square") {
             viewStore.send(.selectSection(.add), animation: .default)
         }
         .help("bottom_bar_tooltip_new")
     }
     
     var closeAddButton: some View {
-        OnTapButton(systemImage: "minus.square") {
+        PlainOnTapButton(systemImage: "minus.square") {
             viewStore.send(.reset, animation: .default)
-            viewStore.send(.selectSection(.home))
+            viewStore.send(.selectSection(.home(.songs)))
         }
     }
     
+    @ViewBuilder
     var songButton: some View {
-        OnTapButton(systemImage: "music.note") {
-            viewStore.send(.selectRecordToAdd(.song), animation: .default)
+        switch viewStore.selectedSection {
+        case .add:
+            PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
+                viewStore.send(.reset, animation: .default)
+                viewStore.send(.selectRecordToAdd(.songs), animation: .default)
+            }
+            .highlighting(viewStore.selectedRecordToAdd == .songs)
+        case .home(let selectedRecord):
+            PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
+                viewStore.send(.selectSection(.home(.songs)), animation: .default)
+            }
+            .highlighting(BottomBarSection.home(selectedRecord) == BottomBarSection.home(.songs))
         }
-        .highlighting(viewStore.selectedRecordToAdd == .song)
     }
     
     var albumButton: some View {
-        OnTapButton(systemImage: "record.circle") {
-            viewStore.send(.selectRecordToAdd(.album), animation: .default)
+        PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
+            viewStore.send(.reset, animation: .default)
+            viewStore.send(.selectRecordToAdd(.albums), animation: .default)
         }
-        .highlighting(viewStore.selectedRecordToAdd == .album)
+        .highlighting(viewStore.selectedRecordToAdd == .albums)
     }
     
+    @ViewBuilder
     var performanceButton: some View {
-        OnTapButton(systemImage: "music.mic.circle") {
-            viewStore.send(.selectRecordToAdd(.performance), animation: .default)
+        switch viewStore.selectedSection {
+        case .add:
+            PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
+            viewStore.send(.reset, animation: .default)
+            viewStore.send(.selectRecordToAdd(.performances), animation: .default)
         }
-        .highlighting(viewStore.selectedRecordToAdd == .performance)
+        .highlighting(viewStore.selectedRecordToAdd == .performances)
+        case .home(let selectedRecord):
+            PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
+                viewStore.send(.selectSection(.home(.performances)), animation: .default)
+            }
+            .highlighting(BottomBarSection.home(selectedRecord) == BottomBarSection.home(.performances))
+        }
+            
     }
     
     var uploadButton: some View {
-        OnTapButton(systemImage: "arrow.up.circle") {
+        PlainOnTapButton(systemImage: "arrow.up.circle") {
             print("Must upload \(viewStore.model)")
         }
         .disabled(!(viewStore.model?.uploadAllowed ?? true))
     }
     
     var editButton: some View {
-        OnTapButton(systemImage: "pencil") {
+        PlainOnTapButton(systemImage: "pencil") {
             guard let id = viewStore.selectedObjectID else {
                 return
             }
             viewStore.send(.selectSection(.add))
             viewStore.send(.search(id))
-        }
-    }
-}
-
-private extension View {
-    
-    func highlighting(_ shouldHighlight: Bool) -> some View {
-        VStack {
-            self
-            if shouldHighlight {
-                Divider()
-                    .frame(maxWidth: 6)
-                    .foregroundColor(.accentColor)
-            }
         }
     }
 }

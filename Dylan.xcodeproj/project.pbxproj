@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03FBA0782885E28A00751ECD /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03FBA0772885E28A00751ECD /* HomeView.swift */; };
 		860A3A5428BB7C7400D54074 /* BottomBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; };
 		860A3A5C28BB7C7400D54074 /* BottomBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 860A3A4E28BB7C7400D54074 /* BottomBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		860A3A5F28BB7C7400D54074 /* BottomBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; };
@@ -33,6 +32,9 @@
 		860A3AA828BE663900D54074 /* BottomBarView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860A3AA728BE663900D54074 /* BottomBarView+Extensions.swift */; };
 		860E2E0C289574E5006F968F /* EditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860E2E0B289574E5006F968F /* EditorViewModel.swift */; };
 		860E2E1D2897025D006F968F /* LBsEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860E2E1C2897025D006F968F /* LBsEditorViewModel.swift */; };
+		8613E0F528CE075900D3DA06 /* AllPerformances+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8613E0F428CE075900D3DA06 /* AllPerformances+State.swift */; };
+		8613E0F728CE079300D3DA06 /* AllPerformances+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8613E0F628CE079300D3DA06 /* AllPerformances+Action.swift */; };
+		8613E0F928CE07AD00D3DA06 /* AllPerformances+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8613E0F828CE07AD00D3DA06 /* AllPerformances+Reducer.swift */; };
 		86179B4C28C34A1E006A248E /* AddPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86179B4B28C34A1E006A248E /* AddPerformanceView.swift */; };
 		86179B4E28C34C5F006A248E /* AddSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86179B4D28C34C5F006A248E /* AddSong.swift */; };
 		86179B7E28C5119E006A248E /* GTCloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */; };
@@ -78,7 +80,6 @@
 		8659637028A00B86003F43A4 /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526D82875F5B00035DD31 /* PersistenceController.swift */; };
 		8659637128A00B86003F43A4 /* Album+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868C12232876D89C0054FF2D /* Album+CoreDataProperties.swift */; };
 		8659637228A00B86003F43A4 /* AppMetadata+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A60C54288BF34B00813778 /* AppMetadata+CoreDataClass.swift */; };
-		8659638628A00C2B003F43A4 /* Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659638528A00C2B003F43A4 /* Deletable.swift */; };
 		8659638F28A00C63003F43A4 /* GTLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 8659638E28A00C63003F43A4 /* GTLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8659639228A00C63003F43A4 /* GTLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8659638C28A00C63003F43A4 /* GTLogging.framework */; };
 		8659639328A00C63003F43A4 /* GTLogging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8659638C28A00C63003F43A4 /* GTLogging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -222,7 +223,9 @@
 		869B380628A91D0800ABE4FD /* ResultSongOverview.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8659649628A42F88003F43A4 /* ResultSongOverview.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86BCAEEB28CBDF4D00B671D6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 86BCAEEA28CBDF4D00B671D6 /* ComposableArchitecture */; };
 		86C5269B286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C5269A286F074D0035DD31 /* ResultInformationTitleAndDetailView.swift */; };
-		86C526DB2875F91A0035DD31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C526DA2875F91A0035DD31 /* AppDelegate.swift */; };
+		86C9991D28CCEEF10004BBFD /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 86C9991C28CCEEF10004BBFD /* ComposableArchitecture */; };
+		86C9991E28CCEEF10004BBFD /* ComposableArchitecture in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 86C9991C28CCEEF10004BBFD /* ComposableArchitecture */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		86C9992028CCEF610004BBFD /* CloudKitManager+TCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C9991F28CCEF610004BBFD /* CloudKitManager+TCA.swift */; };
 		86CB743328CBE11200FFEA6C /* GTCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8659635F28A0098F003F43A4 /* GTCoreData.framework */; };
 		86CB743428CBE11200FFEA6C /* GTCoreData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8659635F28A0098F003F43A4 /* GTCoreData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86CB743828CBE13800FFEA6C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 86CB743728CBE13800FFEA6C /* ComposableArchitecture */; };
@@ -277,10 +280,13 @@
 		86CD7A3328A949BA00D2C219 /* CKDatabase+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */; };
 		86CD7A3428A949BA00D2C219 /* CKRecord+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A31228679C880013F595 /* CKRecord+Extensions.swift */; };
 		86CD7A3528A949BA00D2C219 /* CKQueryOperation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */; };
-		86D9C2B1287DD04400D5A0D3 /* SidebarListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2B0287DD04400D5A0D3 /* SidebarListRowView.swift */; };
 		86D9C2B6287DFFAE00D5A0D3 /* AllAlbumsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2B5287DFFAE00D5A0D3 /* AllAlbumsView.swift */; };
 		86D9C2C5287F0C0A00D5A0D3 /* AlbumsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2C4287F0C0A00D5A0D3 /* AlbumsListView.swift */; };
 		86D9C2E128840A7800D5A0D3 /* CloudKitFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E028840A7800D5A0D3 /* CloudKitFailureView.swift */; };
+		86E0490128D103B200821096 /* CloudKit+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E0490028D103B100821096 /* CloudKit+Reducer.swift */; };
+		86E0490328D103CD00821096 /* CloudKitClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E0490228D103CD00821096 /* CloudKitClient.swift */; };
+		86F925C428D08EA900F67070 /* BottomBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; };
+		86F925C528D08EA900F67070 /* BottomBar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -753,6 +759,13 @@
 			remoteGlobalIDString = 8659642228A03FDF003F43A4;
 			remoteInfo = Model;
 		};
+		86F925C628D08EA900F67070 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 866863E12865EB6200510DDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 860A3A4B28BB7C7400D54074;
+			remoteInfo = BottomBar;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -800,6 +813,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				86950DF328CBD5C3007B65CC /* Search.framework in Embed Frameworks */,
+				86F925C528D08EA900F67070 /* BottomBar.framework in Embed Frameworks */,
 				8634312D28B14C4400092931 /* GTCloudKit.framework in Embed Frameworks */,
 				86CB745828CCD0B800FFEA6C /* ComposableArchitecture in Embed Frameworks */,
 			);
@@ -993,6 +1007,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				86C9991E28CCEEF10004BBFD /* ComposableArchitecture in Embed Frameworks */,
 				86CD7A2E28A942FD00D2C219 /* Model.framework in Embed Frameworks */,
 				868529E828A94DDF00292EE7 /* GTCoreData.framework in Embed Frameworks */,
 				868529E428A94DD300292EE7 /* GTLogging.framework in Embed Frameworks */,
@@ -1004,7 +1019,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		03FBA0772885E28A00751ECD /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		860712322868604300E54209 /* ReferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceType.swift; sourceTree = "<group>"; };
 		860A3A4C28BB7C7400D54074 /* BottomBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BottomBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860A3A4E28BB7C7400D54074 /* BottomBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BottomBar.h; sourceTree = "<group>"; };
@@ -1025,6 +1039,9 @@
 		860E2E1C2897025D006F968F /* LBsEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LBsEditorViewModel.swift; sourceTree = "<group>"; };
 		860E2E20289721AF006F968F /* Editable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Editable.swift; sourceTree = "<group>"; };
 		860E2E22289721C2006F968F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		8613E0F428CE075900D3DA06 /* AllPerformances+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllPerformances+State.swift"; sourceTree = "<group>"; };
+		8613E0F628CE079300D3DA06 /* AllPerformances+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllPerformances+Action.swift"; sourceTree = "<group>"; };
+		8613E0F828CE07AD00D3DA06 /* AllPerformances+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllPerformances+Reducer.swift"; sourceTree = "<group>"; };
 		86179B4B28C34A1E006A248E /* AddPerformanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPerformanceView.swift; sourceTree = "<group>"; };
 		86179B4D28C34C5F006A248E /* AddSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSong.swift; sourceTree = "<group>"; };
 		86179B8628C5148A006A248E /* Add+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Add+State.swift"; sourceTree = "<group>"; };
@@ -1054,7 +1071,6 @@
 		86596333289D66B8003F43A4 /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		8659635F28A0098F003F43A4 /* GTCoreData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTCoreData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8659636128A0098F003F43A4 /* GTCoreData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTCoreData.h; sourceTree = "<group>"; };
-		8659638528A00C2B003F43A4 /* Deletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deletable.swift; sourceTree = "<group>"; };
 		8659638C28A00C63003F43A4 /* GTLogging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTLogging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8659638E28A00C63003F43A4 /* GTLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTLogging.h; sourceTree = "<group>"; };
 		8659639728A00C6B003F43A4 /* GTLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTLogging.swift; sourceTree = "<group>"; };
@@ -1135,14 +1151,13 @@
 		86C526CB2875D63E0035DD31 /* PerformanceDisplayModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceDisplayModel.swift; sourceTree = "<group>"; };
 		86C526D62875F55C0035DD31 /* Main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Main.xcdatamodel; sourceTree = "<group>"; };
 		86C526D82875F5B00035DD31 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
-		86C526DA2875F91A0035DD31 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86C526DC28760AAA0035DD31 /* Song+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song+CoreDataClass.swift"; sourceTree = "<group>"; };
 		86C526DD28760AAA0035DD31 /* Song+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		86C9991F28CCEF610004BBFD /* CloudKitManager+TCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+TCA.swift"; sourceTree = "<group>"; };
 		86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTCloudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CD7A0F28A93FFC00D2C219 /* GTCloudKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTCloudKit.h; sourceTree = "<group>"; };
 		86CD7A2528A9413100D2C219 /* DatabaseType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DatabaseType.swift; path = ../DatabaseType.swift; sourceTree = "<group>"; };
 		86D9C2AD287DD00700D5A0D3 /* AllSongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSongsView.swift; sourceTree = "<group>"; };
-		86D9C2B0287DD04400D5A0D3 /* SidebarListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarListRowView.swift; sourceTree = "<group>"; };
 		86D9C2B5287DFFAE00D5A0D3 /* AllAlbumsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllAlbumsView.swift; sourceTree = "<group>"; };
 		86D9C2BD287ECAE800D5A0D3 /* SongsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsListView.swift; sourceTree = "<group>"; };
 		86D9C2C1287ED26700D5A0D3 /* ListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRowView.swift; sourceTree = "<group>"; };
@@ -1156,6 +1171,8 @@
 		86D9C2E22884136100D5A0D3 /* CKBisectingModifyRecordsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKBisectingModifyRecordsOperation.swift; sourceTree = "<group>"; };
 		86D9C2E62884539B00D5A0D3 /* CloudKitManager+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitManager+Subscriptions.swift"; sourceTree = "<group>"; };
 		86DEC39628B91DA000A875C5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		86E0490028D103B100821096 /* CloudKit+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Reducer.swift"; sourceTree = "<group>"; };
+		86E0490228D103CD00821096 /* CloudKitClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1207,6 +1224,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86950DF228CBD5C3007B65CC /* Search.framework in Frameworks */,
+				86F925C428D08EA900F67070 /* BottomBar.framework in Frameworks */,
 				8634312C28B14C4400092931 /* GTCloudKit.framework in Frameworks */,
 				86CB745728CCD0B800FFEA6C /* ComposableArchitecture in Frameworks */,
 			);
@@ -1398,6 +1416,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86C9991D28CCEEF10004BBFD /* ComposableArchitecture in Frameworks */,
 				86CD7A2D28A942FD00D2C219 /* Model.framework in Frameworks */,
 				868529E728A94DDF00292EE7 /* GTCoreData.framework in Frameworks */,
 				868529E328A94DD300292EE7 /* GTLogging.framework in Frameworks */,
@@ -1408,14 +1427,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03FBA0762885E28200751ECD /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				03FBA0772885E28A00751ECD /* HomeView.swift */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
 		860A3A4D28BB7C7400D54074 /* BottomBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1562,7 +1573,6 @@
 				86A60C55288BF34B00813778 /* AppMetadata+CoreDataProperties.swift */,
 				86C526D52875F55C0035DD31 /* Main.xcdatamodeld */,
 				8659636128A0098F003F43A4 /* GTCoreData.h */,
-				8659638528A00C2B003F43A4 /* Deletable.swift */,
 			);
 			path = GTCoreData;
 			sourceTree = "<group>";
@@ -1582,6 +1592,9 @@
 			children = (
 				865963A828A00F51003F43A4 /* AllPerformances.h */,
 				865963B128A00F5E003F43A4 /* AllPerformances.swift */,
+				8613E0F828CE07AD00D3DA06 /* AllPerformances+Reducer.swift */,
+				8613E0F628CE079300D3DA06 /* AllPerformances+Action.swift */,
+				8613E0F428CE075900D3DA06 /* AllPerformances+State.swift */,
 			);
 			path = AllPerformances;
 			sourceTree = "<group>";
@@ -1743,7 +1756,6 @@
 				865792EE289B0C18008E9886 /* TCA */,
 				866863F52865EB6400510DDF /* Dylan.entitlements */,
 				8678FD302869F76700DF1E69 /* Localizable.strings */,
-				86C526DA2875F91A0035DD31 /* AppDelegate.swift */,
 				866863EC2865EB6200510DDF /* DylanApp.swift */,
 				866863F02865EB6400510DDF /* Assets.xcassets */,
 				86563C6E287CA8DF00104879 /* Other */,
@@ -1776,7 +1788,6 @@
 			isa = PBXGroup;
 			children = (
 				86D9C2B4287DFF9100D5A0D3 /* Albums */,
-				03FBA0762885E28200751ECD /* Home */,
 				86C52695286F04CD0035DD31 /* Results */,
 				86D9C2D92884064B00D5A0D3 /* Upload */,
 			);
@@ -1910,10 +1921,13 @@
 			isa = PBXGroup;
 			children = (
 				8668641B286709FB00510DDF /* CloudKitManager.swift */,
+				86C9991F28CCEF610004BBFD /* CloudKitManager+TCA.swift */,
 				8678FD2E2869AC8B00DF1E69 /* CloudKitManager+Albums.swift */,
 				86C526A4287092A70035DD31 /* CloudKitManager+Song.swift */,
 				86C526C42874C2E70035DD31 /* CloudKitManager+Performances.swift */,
 				86A60C58288BF38300813778 /* CloudKitManager+Metadata.swift */,
+				86E0490028D103B100821096 /* CloudKit+Reducer.swift */,
+				86E0490228D103CD00821096 /* CloudKitClient.swift */,
 			);
 			path = CloudKitManager;
 			sourceTree = "<group>";
@@ -1937,7 +1951,6 @@
 		86D9C2C3287ED2C200D5A0D3 /* List */ = {
 			isa = PBXGroup;
 			children = (
-				86D9C2B0287DD04400D5A0D3 /* SidebarListRowView.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -2251,6 +2264,7 @@
 			dependencies = (
 				8634312F28B14C4400092931 /* PBXTargetDependency */,
 				86950DF528CBD5C3007B65CC /* PBXTargetDependency */,
+				86F925C728D08EA900F67070 /* PBXTargetDependency */,
 			);
 			name = Add;
 			packageProductDependencies = (
@@ -2678,6 +2692,9 @@
 				868529EE28A94DE600292EE7 /* PBXTargetDependency */,
 			);
 			name = GTCloudKit;
+			packageProductDependencies = (
+				86C9991C28CCEEF10004BBFD /* ComposableArchitecture */,
+			);
 			productName = GTCloudKit;
 			productReference = 86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */;
 			productType = "com.apple.product-type.framework";
@@ -2690,7 +2707,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					860A3A4B28BB7C7400D54074 = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -3079,7 +3096,6 @@
 				8659637028A00B86003F43A4 /* PersistenceController.swift in Sources */,
 				8659636E28A00B86003F43A4 /* Performance+CoreDataClass.swift in Sources */,
 				8659636B28A00B86003F43A4 /* AppMetadata+CoreDataProperties.swift in Sources */,
-				8659638628A00C2B003F43A4 /* Deletable.swift in Sources */,
 				8659636D28A00B86003F43A4 /* Album+CoreDataClass.swift in Sources */,
 				8659644128A042D8003F43A4 /* NSPredicate+Extensions.swift in Sources */,
 				8659637128A00B86003F43A4 /* Album+CoreDataProperties.swift in Sources */,
@@ -3103,7 +3119,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8613E0F528CE075900D3DA06 /* AllPerformances+State.swift in Sources */,
+				8613E0F728CE079300D3DA06 /* AllPerformances+Action.swift in Sources */,
 				865963B228A00F5E003F43A4 /* AllPerformances.swift in Sources */,
+				8613E0F928CE07AD00D3DA06 /* AllPerformances+Reducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3206,7 +3225,6 @@
 				860E2E0C289574E5006F968F /* EditorViewModel.swift in Sources */,
 				86596332289D6636003F43A4 /* AppState.swift in Sources */,
 				86D9C2E128840A7800D5A0D3 /* CloudKitFailureView.swift in Sources */,
-				86C526DB2875F91A0035DD31 /* AppDelegate.swift in Sources */,
 				865792F5289B0D9E008E9886 /* AppAction.swift in Sources */,
 				86563C70287CA8FA00104879 /* TestHelper.swift in Sources */,
 				8659633628A00090003F43A4 /* AppReducer.swift in Sources */,
@@ -3214,8 +3232,6 @@
 				86D9C2B6287DFFAE00D5A0D3 /* AllAlbumsView.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,
 				860E2E1D2897025D006F968F /* LBsEditorViewModel.swift in Sources */,
-				03FBA0782885E28A00751ECD /* HomeView.swift in Sources */,
-				86D9C2B1287DD04400D5A0D3 /* SidebarListRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3270,13 +3286,16 @@
 				86CD7A1828A9400B00D2C219 /* CloudKitManager+Metadata.swift in Sources */,
 				86CD7A2B28A9422700D2C219 /* DatabaseType.swift in Sources */,
 				86CD7A2A28A9422300D2C219 /* UploadError.swift in Sources */,
+				86E0490128D103B200821096 /* CloudKit+Reducer.swift in Sources */,
 				86CD7A3428A949BA00D2C219 /* CKRecord+Extensions.swift in Sources */,
 				86CD7A1928A9400B00D2C219 /* CKBisectingModifyRecordsOperation.swift in Sources */,
 				86CD7A3328A949BA00D2C219 /* CKDatabase+Extensions.swift in Sources */,
+				86C9992028CCEF610004BBFD /* CloudKitManager+TCA.swift in Sources */,
 				86CD7A2028A9400B00D2C219 /* CloudKitManager+Performances.swift in Sources */,
 				86CD7A2128A9400B00D2C219 /* CloudKitManager+Subscriptions.swift in Sources */,
 				86CD7A2928A9422000D2C219 /* ReferenceType.swift in Sources */,
 				86CD7A1C28A9400B00D2C219 /* CloudKitManager+Song.swift in Sources */,
+				86E0490328D103CD00821096 /* CloudKitClient.swift in Sources */,
 				86CD7A1A28A9400B00D2C219 /* CloudKitManager+Upload.swift in Sources */,
 				86CD7A3528A949BA00D2C219 /* CKQueryOperation+Extensions.swift in Sources */,
 			);
@@ -3620,6 +3639,11 @@
 			target = 8659642228A03FDF003F43A4 /* Model */;
 			targetProxy = 86CD7A2F28A942FD00D2C219 /* PBXContainerItemProxy */;
 		};
+		86F925C728D08EA900F67070 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 860A3A4B28BB7C7400D54074 /* BottomBar */;
+			targetProxy = 86F925C628D08EA900F67070 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -3627,7 +3651,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3661,7 +3685,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3729,7 +3753,7 @@
 		860A3A8D28BBC13400D54074 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3761,7 +3785,7 @@
 		860A3A8E28BBC13400D54074 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3830,7 +3854,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3864,7 +3888,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3897,7 +3921,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3931,7 +3955,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3963,7 +3987,7 @@
 		8659636828A0098F003F43A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -3995,7 +4019,7 @@
 		8659636928A0098F003F43A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4028,7 +4052,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4062,7 +4086,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4095,7 +4119,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4129,7 +4153,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4162,7 +4186,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4196,7 +4220,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4229,7 +4253,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4263,7 +4287,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4296,7 +4320,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4330,7 +4354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4362,7 +4386,7 @@
 		8659642C28A03FDF003F43A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4394,7 +4418,7 @@
 		8659642D28A03FDF003F43A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4427,7 +4451,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4461,7 +4485,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4494,7 +4518,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4528,7 +4552,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4560,7 +4584,7 @@
 		8659647628A1B466003F43A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4592,7 +4616,7 @@
 		8659647728A1B466003F43A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4624,7 +4648,7 @@
 		8659649F28A42F88003F43A4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4656,7 +4680,7 @@
 		865964A028A42F88003F43A4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4688,7 +4712,7 @@
 		86646A2828A435BC00B4099E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4720,7 +4744,7 @@
 		86646A2928A435BC00B4099E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4805,6 +4829,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -4861,6 +4886,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = "$(ARCHS_STANDARD)";
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -4938,7 +4964,7 @@
 		869B377728A58D8C00ABE4FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -4970,7 +4996,7 @@
 		869B377828A58D8C00ABE4FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5002,7 +5028,7 @@
 		869B37BD28A5998C00ABE4FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5034,7 +5060,7 @@
 		869B37BE28A5998C00ABE4FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5066,7 +5092,7 @@
 		869B37E428A5AC4500ABE4FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5098,7 +5124,7 @@
 		869B37E528A5AC4500ABE4FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5130,7 +5156,7 @@
 		869B37F928A7EAAB00ABE4FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5162,7 +5188,7 @@
 		869B37FA28A7EAAB00ABE4FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5194,7 +5220,7 @@
 		86CD7A1628A93FFC00D2C219 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5226,7 +5252,7 @@
 		86CD7A1728A93FFC00D2C219 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -5500,6 +5526,10 @@
 		86BCAEEA28CBDF4D00B671D6 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 86BCAEE928CBDF4C00B671D6 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		86C9991C28CCEEF10004BBFD /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
 			productName = ComposableArchitecture;
 		};
 		86CB743728CBE13800FFEA6C /* ComposableArchitecture */ = {

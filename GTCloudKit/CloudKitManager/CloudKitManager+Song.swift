@@ -24,7 +24,7 @@ extension CloudKitManager {
             await setProgress(to: Double(index) / Double(records.count))
             await setCurrentStep(to: .fetching(.song))
             
-            context.syncPerform {
+            await context.perform {
                 let title = titles[index] ?? "Unknown Title"
                 let author = authors[index]
                 let predicate = NSPredicate(format: "title == %@", title)
@@ -74,5 +74,4 @@ extension CloudKitManager {
         }
         return ordered
     }
-
 }

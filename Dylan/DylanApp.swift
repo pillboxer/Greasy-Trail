@@ -8,59 +8,28 @@
 import SwiftUI
 import GTLogging
 import ComposableArchitecture
-import GTCoreData
-import GTCloudKit
-import Add
 import Search
+import Core
 
 @main
 struct DylanApp: App {
- 
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
+    
+    @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
+    
     let appStore = Store(initialState: AppState(),
                          reducer: appReducer,
                          environment: AppEnvironment(search: Searcher().search,
                                                      randomSong: Searcher().randomSong,
                                                      randomAlbum: Searcher().randomAlbum,
-                                                     randomPerformance: Searcher().randomPerformance))
+                                                     randomPerformance: Searcher().randomPerformance,
+                                                     cloudKitClient: .live))
     
     var body: some Scene {
         WindowGroup {
             ContentView(store: appStore)
-                .environmentObject(appDelegate.cloudKitManager)
-        }
-        .handlesExternalEvents(matching: Set(Array(["Add"])))
-        .commands {
-            CommandGroup(replacing: .newItem) {
-                Button("Add...") {
-                    OpenWindows.Add.open()
-                }.keyboardShortcut("N", modifiers: .command)
-            }
-            CommandMenu("developer_menu_title") {
-                Button("developer_menu_button_0") {
-                    PersistenceController.shared.reset()
-                    CloudKitManager.resetAllFetchDates()
-                    Task {
-                        await appDelegate.cloudKitManager.start()
-                    }
+                .onAppear {
+                    ViewStore(appStore).send(.cloudKit(.start(date: lastFetchDate)))
                 }
-                Button("developer_menu_button_2") {
-                    Logger.copyLogs()
-                }
-            }
-        }
-
-    }
-}
-
-// swiftlint: disable identifier_name
-enum OpenWindows: String, CaseIterable {
-    case Add
-    
-    func open() {
-        if let url = URL(string: "dylan://\(self.rawValue)") {
-            NSWorkspace.shared.open(url)
         }
     }
 }

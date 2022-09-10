@@ -36,7 +36,7 @@ public enum DylanSearchType: CaseIterable {
     case performance
 }
 
-public class SearchState: ObservableObject, Equatable {
+public struct SearchState: Equatable {
     public static func == (lhs: SearchState, rhs: SearchState) -> Bool {
         return lhs.model == rhs.model
         && lhs.failedSearch == rhs.failedSearch
@@ -48,8 +48,6 @@ public class SearchState: ObservableObject, Equatable {
     public var currentSearch: Search?
     public var selectedID: ObjectIdentifier?
     public var selectedObjectID: NSManagedObjectID?
-    public var selectedRecordToAdd: DylanRecordType
-
     public var isSearching = false
     
     public init(model: AnyModel?,
@@ -57,7 +55,6 @@ public class SearchState: ObservableObject, Equatable {
                 currentSearch: Search?,
                 selectedID: ObjectIdentifier?,
                 selectedObjectID: NSManagedObjectID?,
-                selectedRecordToAdd: DylanRecordType,
                 isSearching: Bool) {
         self.model = model
         self.failedSearch = failedSearch
@@ -65,7 +62,6 @@ public class SearchState: ObservableObject, Equatable {
         self.selectedID = selectedID
         self.selectedObjectID = selectedObjectID
         self.isSearching = isSearching
-        self.selectedRecordToAdd = selectedRecordToAdd
     }
 }
 
@@ -92,7 +88,6 @@ public enum SearchAction: Equatable {
     case makeRandomSearch
     case todayInHistory
     case reset
-    case updateEditSelection
 }
 
 public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment> { state, action, environment in
@@ -105,7 +100,6 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         state.isSearching = false
         state.model = model ?? state.model
         state.failedSearch = model == nil ? search : nil
-        return Effect(value: .updateEditSelection)
     case .reset:
         state.currentSearch = nil
         state.failedSearch = nil
@@ -123,14 +117,6 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         state.isSearching = true
         let random = DylanSearchType.allCases.randomElement()!
         return randomSearchEffect(environment: environment, type: random)
-    case .updateEditSelection:
-        if let model = state.model?.value as? PerformanceDisplayModel {
-            state.selectedRecordToAdd = .performance
-        } else if let model = state.model?.value as? AlbumDisplayModel {
-            state.selectedRecordToAdd = .album
-        } else if let model = state.model?.value as? SongDisplayModel? {
-            state.selectedRecordToAdd = .song
-        }
     }
     return .none
 }
@@ -195,7 +181,7 @@ public class Searcher {
     public func randomPerformance() -> Effect<PerformanceDisplayModel?, Never> {
         detective.randomPerformance()
     }
-        
+    
     public func search(_ search: Search) -> Effect<AnyModel?, Never> {
         
         guard let title = search.title else {

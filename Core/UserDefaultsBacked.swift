@@ -7,7 +7,7 @@
 
 import Foundation
 
-@propertyWrapper public struct UserDefaultsBacked<Value> {
+@propertyWrapper public struct UserDefaultsBacked<Value: Equatable>: Equatable {
     
     private let key: String
     private let storage: UserDefaults

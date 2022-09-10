@@ -41,7 +41,7 @@ public struct ResultPerformanceOverviewView: View {
                 Text(model.venue)
                     .font(.headline)
                 if let url = model.officialURL() {
-                    OnTapButton(systemImage: "globe", plainButtonStyle: false) {
+                    OnTapButton(systemImage: "globe") {
                         NSWorkspace.shared.open(url)
                     }
                     .buttonStyle(.link)
@@ -53,6 +53,18 @@ public struct ResultPerformanceOverviewView: View {
             HStack {
                 SongsListView(songs: model.songs) { title in
                     viewStore.send(.search(.init(title: title, type: .song)))
+                }
+                Spacer()
+            }
+            HStack {
+                Text("LB Numbers:")
+                    .font(.caption)
+                ForEach(model.lbNumbers, id: \.self) { lb in
+                    OnTapButton(text: String(lb)) {
+                        NSWorkspace.shared.open(model.lbURL(for: lb))
+                    }
+                    .font(.caption)
+                    .buttonStyle(.link)
                 }
                 Spacer()
             }

@@ -6,30 +6,19 @@
 //
 
 import SwiftUI
-import GTCoreData
 import GTFormatter
-import Model
 import Search
+import UI
+import GTCoreData
 import TwoColumnTable
 import ComposableArchitecture
 
 public struct AllPerformancesView {
     
-    fileprivate enum AllPerformancesAction {
-        case search(Search)
-        case selectID(objectIdentifier: ObjectIdentifier?)
-        case select(objectIdentifier: ObjectIdentifier?, id: NSManagedObjectID?)
-    }
-    
-    private struct AllPerformancesState: Equatable {
-        var selectedID: ObjectIdentifier?
-    }
-    
-    let store: Store<SearchState, SearchAction>
-    @ObservedObject private var viewStore: ViewStore<AllPerformancesState, AllPerformancesAction>
-    
+    let store: Store<AllPerformancesState, AllPerformancesFeatureAction>
     let formatter = GTFormatter.Formatter()
     let predicate: NSPredicate
+    @ObservedObject private var viewStore: ViewStore<AllPerformancesViewState, AllPerformancesViewAction>
     @FetchRequest public var fetched: FetchedResults<Performance>
     @State public var sortOrder: [KeyPathComparator<Performance>] = [
         .init(\.date, order: SortOrder.reverse),
@@ -43,12 +32,14 @@ public struct AllPerformancesView {
                                                id: ids.1))
     }
     
-    public init(store: Store<SearchState, SearchAction>,
+    public init(store: Store<AllPerformancesState, AllPerformancesFeatureAction>,
                 predicate: NSPredicate = NSPredicate(value: true)) {
         self.store = store
         self.predicate = predicate
-        self.viewStore = ViewStore(store.scope(state: { AllPerformancesState(selectedID: $0.selectedID) },
-                                               action: SearchAction.init))
+        self.viewStore = ViewStore(store.scope(state: {
+            AllPerformancesViewState(selectedID: $0.search.selectedID,
+                                     selectedDecade: $0.selectedPerformanceDecade) },
+                                               action: AllPerformancesFeatureAction.init))
         _fetched = FetchRequest<Performance>(entity: Performance.entity(),
                                              sortDescriptors: [NSSortDescriptor(key: "date",
                                                                                 ascending: false)],
@@ -56,27 +47,39 @@ public struct AllPerformancesView {
     }
     
     public var body: some View {
-        return Table(tableData, sortOrder: $sortOrder) {
-            TableColumn(LocalizedStringKey("table_column_title_performances_0"),
-                        value: \.venue!) { performance in
-                let venue = performance.venue!
-                Toggle(isOn: toggleBinding(on: performance)) {
-                    Text(venue)
-                        .padding(.leading, 4)
+        VStack {
+            HStack {
+                ForEach(PerformanceDecade.allCases, id: \.rawValue) { decade in
+                    PlainOnTapButton(text: decade.rawValue) {
+                        let decade = PerformanceDecade(rawValue: decade.rawValue)!
+                        viewStore.send(.selectPerformanceDecade(decade))
+                    }
+                    .font(.caption.weight(decade == viewStore.state.selectedDecade ? .bold : .regular))
                 }
-                .padding(.top, 4)
-                Spacer()
-                    .gesture(doubleTap(objectID: performance.objectID))
-                
             }
-            TableColumn(LocalizedStringKey("table_column_title_performances_1"),
-                        value: \.date) { performance in
-                HStack {
-                    Text(formatter.dateString(of: performance.date))
-                    Spacer()
+            .frame(height: 32)
+            Table(tableData, sortOrder: $sortOrder) {
+                TableColumn(LocalizedStringKey("table_column_title_performances_0"),
+                            value: \.venue!) { performance in
+                    let venue = performance.venue!
+                    Toggle(isOn: toggleBinding(on: performance)) {
+                        Text(venue)
+                            .padding(.leading, 4)
+                    }
+                    .padding(.top, 4)
+                    .toggleStyle(CheckboxToggleStyle())
                 }
-                .contentShape(Rectangle())
-                .gesture(doubleTap(objectID: performance.objectID))
+                TableColumn(LocalizedStringKey("table_column_title_performances_1"),
+                            value: \.date) { performance in
+                    HStack {
+                        Text(formatter.dateString(of: performance.date))
+                        Spacer()
+                        PlainOnTapButton(systemImage: "chevron.right.circle") {
+                            viewStore.send(.search(.init(id: performance.objectID)))
+                        }
+                    }
+                    .contentShape(Rectangle())
+                }
             }
         }
     }
@@ -89,7 +92,6 @@ extension AllPerformancesView: TwoColumnTableViewType {
             viewStore.send(.search(.init(id: objectID)))
         }
     }
-    
 }
 
 private extension AllPerformancesView {
@@ -100,20 +102,5 @@ private extension AllPerformancesView {
             return (nil, nil)
         }
         return (performance.id, performance.objectID)
-    }
-    
-}
-
-private extension SearchAction {
-    
-    init(action: AllPerformancesView.AllPerformancesAction) {
-        switch action {
-        case .search(let search):
-            self = .makeSearch(search)
-        case .selectID(let objectIdentifier):
-            self = .selectID(objectIdentifier: objectIdentifier)
-        case .select(objectIdentifier: let objectIdentifier, id: let id):
-            self = .select(objectIdentifier: objectIdentifier, objectID: id)
-        }
     }
 }

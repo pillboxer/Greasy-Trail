@@ -20,14 +20,12 @@ public struct AddView: View {
         WithViewStore(store) { viewStore in
             Group {
                 switch viewStore.selectedRecordToAdd {
-                case .song:
+                case .songs:
                     AddSongView()
-                case .performance:
+                case .performances:
                     AddPerformanceView()
-                case .album:
+                case .albums:
                     AddSongView()
-                default:
-                    fatalError()
                 }
             }
             .environmentObject(viewStore)

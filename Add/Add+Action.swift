@@ -1,11 +1,9 @@
 // swiftlint: disable identifier_name
-
-import GTCloudKit
-import ComposableArchitecture
 import Model
+import BottomBar
 
 public enum AddAction: Equatable {
-    case selectRecordToAdd(DylanRecordType)
+    case selectRecordToAdd(DylanWork)
 
     // Songs
     case updateSong(title: String, author: String)

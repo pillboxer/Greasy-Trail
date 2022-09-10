@@ -10,8 +10,4 @@ import Foundation
 import CoreData
 
 @objc(Album)
-public class Album: NSManagedObject {
-
-}
-
-extension Album: Deletable {}
+public class Album: NSManagedObject {}
