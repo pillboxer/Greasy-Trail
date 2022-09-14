@@ -86,7 +86,6 @@
 		8659639828A00C6B003F43A4 /* GTLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659639728A00C6B003F43A4 /* GTLogging.swift */; };
 		8659639928A00CDE003F43A4 /* GTLogging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8659638C28A00C63003F43A4 /* GTLogging.framework */; };
 		8659639A28A00CDE003F43A4 /* GTLogging.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8659638C28A00C63003F43A4 /* GTLogging.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8659639E28A00D51003F43A4 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86B61AC4288DBD8B00C78E38 /* Logger.swift */; };
 		865963A928A00F51003F43A4 /* AllPerformances.h in Headers */ = {isa = PBXBuildFile; fileRef = 865963A828A00F51003F43A4 /* AllPerformances.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		865963AC28A00F51003F43A4 /* AllPerformances.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 865963A628A00F51003F43A4 /* AllPerformances.framework */; };
 		865963AD28A00F51003F43A4 /* AllPerformances.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 865963A628A00F51003F43A4 /* AllPerformances.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -285,6 +284,21 @@
 		86D9C2E128840A7800D5A0D3 /* CloudKitFailureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2E028840A7800D5A0D3 /* CloudKitFailureView.swift */; };
 		86E0490128D103B200821096 /* CloudKit+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E0490028D103B100821096 /* CloudKit+Reducer.swift */; };
 		86E0490328D103CD00821096 /* CloudKitClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E0490228D103CD00821096 /* CloudKitClient.swift */; };
+		86E0490C28D27EFB00821096 /* Downloading.h in Headers */ = {isa = PBXBuildFile; fileRef = 86E0490B28D27EFB00821096 /* Downloading.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86E0490F28D27EFB00821096 /* Downloading.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86E0490928D27EFB00821096 /* Downloading.framework */; };
+		86E0491028D27EFB00821096 /* Downloading.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86E0490928D27EFB00821096 /* Downloading.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		86E0491528D27F0500821096 /* Downloading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E0491428D27F0500821096 /* Downloading.swift */; };
+		86E0491728D27FC700821096 /* DylanWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86E0491628D27FC700821096 /* DylanWork.swift */; };
+		86E0491928D27FE400821096 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 86E0491828D27FE400821096 /* ComposableArchitecture */; };
+		86E0491A28D27FE400821096 /* ComposableArchitecture in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 86E0491828D27FE400821096 /* ComposableArchitecture */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		86E0491C28D27FE800821096 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 869B37DB28A5AC4500ABE4FD /* Core.framework */; };
+		86E0491D28D27FE800821096 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 869B37DB28A5AC4500ABE4FD /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		86E0492028D27FEB00821096 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8659645A28A1B3D4003F43A4 /* UI.framework */; };
+		86E0492128D27FEB00821096 /* UI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8659645A28A1B3D4003F43A4 /* UI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		86E0492428D2801400821096 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 869B37DB28A5AC4500ABE4FD /* Core.framework */; };
+		86E0492528D2801400821096 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 869B37DB28A5AC4500ABE4FD /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		86E0492828D3C55A00821096 /* GTCloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */; };
+		86E0492928D3C55A00821096 /* GTCloudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86F925C428D08EA900F67070 /* BottomBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; };
 		86F925C528D08EA900F67070 /* BottomBar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -759,6 +773,41 @@
 			remoteGlobalIDString = 8659642228A03FDF003F43A4;
 			remoteInfo = Model;
 		};
+		86E0490D28D27EFB00821096 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 866863E12865EB6200510DDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86E0490828D27EFB00821096;
+			remoteInfo = Downloading;
+		};
+		86E0491E28D27FE800821096 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 866863E12865EB6200510DDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 869B37DA28A5AC4500ABE4FD;
+			remoteInfo = Core;
+		};
+		86E0492228D27FEB00821096 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 866863E12865EB6200510DDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8659645928A1B3D4003F43A4;
+			remoteInfo = UI;
+		};
+		86E0492628D2801400821096 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 866863E12865EB6200510DDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 869B37DA28A5AC4500ABE4FD;
+			remoteInfo = Core;
+		};
+		86E0492A28D3C55A00821096 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 866863E12865EB6200510DDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86CD7A0C28A93FFC00D2C219;
+			remoteInfo = GTCloudKit;
+		};
 		86F925C628D08EA900F67070 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 866863E12865EB6200510DDF /* Project object */;
@@ -815,6 +864,7 @@
 				86950DF328CBD5C3007B65CC /* Search.framework in Embed Frameworks */,
 				86F925C528D08EA900F67070 /* BottomBar.framework in Embed Frameworks */,
 				8634312D28B14C4400092931 /* GTCloudKit.framework in Embed Frameworks */,
+				86E0492528D2801400821096 /* Core.framework in Embed Frameworks */,
 				86CB745828CCD0B800FFEA6C /* ComposableArchitecture in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -836,6 +886,7 @@
 				865963EE28A01152003F43A4 /* GTFormatter.framework in Embed Frameworks */,
 				86CD7A1428A93FFC00D2C219 /* GTCloudKit.framework in Embed Frameworks */,
 				8659639328A00C63003F43A4 /* GTLogging.framework in Embed Frameworks */,
+				86E0491028D27EFB00821096 /* Downloading.framework in Embed Frameworks */,
 				869B37E228A5AC4500ABE4FD /* Core.framework in Embed Frameworks */,
 				8659647428A1B466003F43A4 /* SongsList.framework in Embed Frameworks */,
 				8659640728A01676003F43A4 /* Search.framework in Embed Frameworks */,
@@ -1016,6 +1067,20 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		86E0491B28D27FE500821096 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				86E0492128D27FEB00821096 /* UI.framework in Embed Frameworks */,
+				86E0491A28D27FE400821096 /* ComposableArchitecture in Embed Frameworks */,
+				86E0492928D3C55A00821096 /* GTCloudKit.framework in Embed Frameworks */,
+				86E0491D28D27FE800821096 /* Core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -1134,7 +1199,6 @@
 		86A60C62288C58D400813778 /* Data+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extensions.swift"; sourceTree = "<group>"; };
 		86A60C67288C5B8D00813778 /* NSPredicate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Extensions.swift"; sourceTree = "<group>"; };
 		86B49416286DB7EC00B0C4EC /* NSTextFieldRepresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTextFieldRepresentable.swift; sourceTree = "<group>"; };
-		86B61AC4288DBD8B00C78E38 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		86BCAEE628CBDE2B00B671D6 /* swift-composable-architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-composable-architecture"; path = "../../swift-composable-architecture"; sourceTree = "<group>"; };
 		86BCAEE728CBDE4400B671D6 /* swift-composable-architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-composable-architecture"; path = "../../swift-composable-architecture"; sourceTree = "<group>"; };
 		86BCAEE828CBDE5400B671D6 /* swift-composable-architecture */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "swift-composable-architecture"; path = "../../swift-composable-architecture"; sourceTree = "<group>"; };
@@ -1173,6 +1237,10 @@
 		86DEC39628B91DA000A875C5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		86E0490028D103B100821096 /* CloudKit+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Reducer.swift"; sourceTree = "<group>"; };
 		86E0490228D103CD00821096 /* CloudKitClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitClient.swift; sourceTree = "<group>"; };
+		86E0490928D27EFB00821096 /* Downloading.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Downloading.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86E0490B28D27EFB00821096 /* Downloading.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Downloading.h; sourceTree = "<group>"; };
+		86E0491428D27F0500821096 /* Downloading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Downloading.swift; sourceTree = "<group>"; };
+		86E0491628D27FC700821096 /* DylanWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DylanWork.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1226,6 +1294,7 @@
 				86950DF228CBD5C3007B65CC /* Search.framework in Frameworks */,
 				86F925C428D08EA900F67070 /* BottomBar.framework in Frameworks */,
 				8634312C28B14C4400092931 /* GTCloudKit.framework in Frameworks */,
+				86E0492428D2801400821096 /* Core.framework in Frameworks */,
 				86CB745728CCD0B800FFEA6C /* ComposableArchitecture in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1352,6 +1421,7 @@
 				860A3A8A28BBC13400D54074 /* ResultAlbum.framework in Frameworks */,
 				869B377528A58D8C00ABE4FD /* AllSongs.framework in Frameworks */,
 				8659647328A1B466003F43A4 /* SongsList.framework in Frameworks */,
+				86E0490F28D27EFB00821096 /* Downloading.framework in Frameworks */,
 				869B37BA28A5998C00ABE4FD /* SearchField.framework in Frameworks */,
 				869B37F628A7EAAB00ABE4FD /* Result.framework in Frameworks */,
 				8659644E28A1B35A003F43A4 /* ResultPerformance.framework in Frameworks */,
@@ -1421,6 +1491,17 @@
 				868529E728A94DDF00292EE7 /* GTCoreData.framework in Frameworks */,
 				868529E328A94DD300292EE7 /* GTLogging.framework in Frameworks */,
 				868529EB28A94DE600292EE7 /* Core.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86E0490628D27EFB00821096 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86E0492028D27FEB00821096 /* UI.framework in Frameworks */,
+				86E0491928D27FE400821096 /* ComposableArchitecture in Frameworks */,
+				86E0492828D3C55A00821096 /* GTCloudKit.framework in Frameworks */,
+				86E0491C28D27FE800821096 /* Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1580,7 +1661,6 @@
 		8659638D28A00C63003F43A4 /* GTLogging */ = {
 			isa = PBXGroup;
 			children = (
-				86B61AC4288DBD8B00C78E38 /* Logger.swift */,
 				8659638E28A00C63003F43A4 /* GTLogging.h */,
 				8659639728A00C6B003F43A4 /* GTLogging.swift */,
 			);
@@ -1697,6 +1777,7 @@
 				860A3A4D28BB7C7400D54074 /* BottomBar */,
 				869B37DC28A5AC4500ABE4FD /* Core */,
 				866863EB2865EB6200510DDF /* Dylan */,
+				86E0490A28D27EFB00821096 /* Downloading */,
 				866863FB2865EC0500510DDF /* Frameworks */,
 				86A60C5E288C56AC00813778 /* Greasy-Trail-Info.plist */,
 				86CD7A0E28A93FFC00D2C219 /* GTCloudKit */,
@@ -1746,6 +1827,7 @@
 				860A3A5328BB7C7400D54074 /* BottomBarTests.xctest */,
 				860A3A7728BBC13400D54074 /* ResultAlbum.framework */,
 				860A3A7E28BBC13400D54074 /* ResultAlbumTests.xctest */,
+				86E0490928D27EFB00821096 /* Downloading.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1830,6 +1912,7 @@
 				860E2E052895714B006F968F /* Convenience.swift */,
 				865C451B287615BD0056E01A /* UserDefaultsBacked.swift */,
 				869B37DD28A5AC4500ABE4FD /* Core.h */,
+				86E0491628D27FC700821096 /* DylanWork.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1969,6 +2052,15 @@
 				86D9C2E028840A7800D5A0D3 /* CloudKitFailureView.swift */,
 			);
 			path = Failure;
+			sourceTree = "<group>";
+		};
+		86E0490A28D27EFB00821096 /* Downloading */ = {
+			isa = PBXGroup;
+			children = (
+				86E0490B28D27EFB00821096 /* Downloading.h */,
+				86E0491428D27F0500821096 /* Downloading.swift */,
+			);
+			path = Downloading;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2142,6 +2234,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		86E0490428D27EFB00821096 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86E0490C28D27EFB00821096 /* Downloading.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -2265,6 +2365,7 @@
 				8634312F28B14C4400092931 /* PBXTargetDependency */,
 				86950DF528CBD5C3007B65CC /* PBXTargetDependency */,
 				86F925C728D08EA900F67070 /* PBXTargetDependency */,
+				86E0492728D2801400821096 /* PBXTargetDependency */,
 			);
 			name = Add;
 			packageProductDependencies = (
@@ -2569,6 +2670,7 @@
 				8634312228B1491600092931 /* PBXTargetDependency */,
 				860A3A5E28BB7C7400D54074 /* PBXTargetDependency */,
 				860A3A8928BBC13400D54074 /* PBXTargetDependency */,
+				86E0490E28D27EFB00821096 /* PBXTargetDependency */,
 			);
 			name = "Greasy Trail";
 			packageProductDependencies = (
@@ -2699,6 +2801,31 @@
 			productReference = 86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		86E0490828D27EFB00821096 /* Downloading */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86E0491328D27EFB00821096 /* Build configuration list for PBXNativeTarget "Downloading" */;
+			buildPhases = (
+				86E0490428D27EFB00821096 /* Headers */,
+				86E0490528D27EFB00821096 /* Sources */,
+				86E0490628D27EFB00821096 /* Frameworks */,
+				86E0490728D27EFB00821096 /* Resources */,
+				86E0491B28D27FE500821096 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				86E0491F28D27FE800821096 /* PBXTargetDependency */,
+				86E0492328D27FEB00821096 /* PBXTargetDependency */,
+				86E0492B28D3C55A00821096 /* PBXTargetDependency */,
+			);
+			name = Downloading;
+			packageProductDependencies = (
+				86E0491828D27FE400821096 /* ComposableArchitecture */,
+			);
+			productName = Downloading;
+			productReference = 86E0490928D27EFB00821096 /* Downloading.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2793,6 +2920,10 @@
 					86CD7A0C28A93FFC00D2C219 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
+					86E0490828D27EFB00821096 = {
+						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1340;
+					};
 				};
 			};
 			buildConfigurationList = 866863E42865EB6200510DDF /* Build configuration list for PBXProject "Dylan" */;
@@ -2835,6 +2966,7 @@
 				860A3A5228BB7C7400D54074 /* BottomBarTests */,
 				860A3A7628BBC13400D54074 /* ResultAlbum */,
 				860A3A7D28BBC13400D54074 /* ResultAlbumTests */,
+				86E0490828D27EFB00821096 /* Downloading */,
 			);
 		};
 /* End PBXProject section */
@@ -3010,6 +3142,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		86E0490728D27EFB00821096 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -3111,7 +3250,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8659639828A00C6B003F43A4 /* GTLogging.swift in Sources */,
-				8659639E28A00D51003F43A4 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3260,6 +3398,7 @@
 				86CD7A2C28A9424A00D2C219 /* UserDefaultsBacked.swift in Sources */,
 				863430D328A94F9A00092931 /* ResultError.swift in Sources */,
 				863430D628A94FD200092931 /* Data+Extensions.swift in Sources */,
+				86E0491728D27FC700821096 /* DylanWork.swift in Sources */,
 				869B37E628A5AC5200ABE4FD /* Convenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3298,6 +3437,14 @@
 				86E0490328D103CD00821096 /* CloudKitClient.swift in Sources */,
 				86CD7A1A28A9400B00D2C219 /* CloudKitManager+Upload.swift in Sources */,
 				86CD7A3528A949BA00D2C219 /* CKQueryOperation+Extensions.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86E0490528D27EFB00821096 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86E0491528D27F0500821096 /* Downloading.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3638,6 +3785,31 @@
 			isa = PBXTargetDependency;
 			target = 8659642228A03FDF003F43A4 /* Model */;
 			targetProxy = 86CD7A2F28A942FD00D2C219 /* PBXContainerItemProxy */;
+		};
+		86E0490E28D27EFB00821096 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86E0490828D27EFB00821096 /* Downloading */;
+			targetProxy = 86E0490D28D27EFB00821096 /* PBXContainerItemProxy */;
+		};
+		86E0491F28D27FE800821096 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 869B37DA28A5AC4500ABE4FD /* Core */;
+			targetProxy = 86E0491E28D27FE800821096 /* PBXContainerItemProxy */;
+		};
+		86E0492328D27FEB00821096 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8659645928A1B3D4003F43A4 /* UI */;
+			targetProxy = 86E0492228D27FEB00821096 /* PBXContainerItemProxy */;
+		};
+		86E0492728D2801400821096 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 869B37DA28A5AC4500ABE4FD /* Core */;
+			targetProxy = 86E0492628D2801400821096 /* PBXContainerItemProxy */;
+		};
+		86E0492B28D3C55A00821096 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86CD7A0C28A93FFC00D2C219 /* GTCloudKit */;
+			targetProxy = 86E0492A28D3C55A00821096 /* PBXContainerItemProxy */;
 		};
 		86F925C728D08EA900F67070 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5281,6 +5453,73 @@
 			};
 			name = Release;
 		};
+		86E0491128D27EFB00821096 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZUT4ATB28X;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sixeye.Downloading;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		86E0491228D27EFB00821096 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZUT4ATB28X;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sixeye.Downloading;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5509,6 +5748,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		86E0491328D27EFB00821096 /* Build configuration list for PBXNativeTarget "Downloading" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86E0491128D27EFB00821096 /* Debug */,
+				86E0491228D27EFB00821096 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -5573,6 +5821,10 @@
 			productName = ComposableArchitecture;
 		};
 		86CB745928CCD0BF00FFEA6C /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ComposableArchitecture;
+		};
+		86E0491828D27FE400821096 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ComposableArchitecture;
 		};

@@ -15,6 +15,8 @@ import AllSongs
 import Sidebar
 import BottomBar
 import Add
+import UI
+import Downloading
 import Model
 import AllPerformances
 
@@ -30,6 +32,7 @@ struct ContentView: View {
         var selectedSection: BottomBarSection
         var selectedPerformanceDecade: PerformanceDecade
         var mode: Mode
+        var showingCloudKitError: Bool
     }
     
     init(store: Store<AppState, AppAction>) {
@@ -39,15 +42,16 @@ struct ContentView: View {
                              model: $0.search.model,
                              selectedSection: $0.selectedSection,
                              selectedPerformanceDecade: $0.selectedPerformanceDecade,
-                             mode: $0.mode)}))
+                             mode: $0.mode,
+                             showingCloudKitError: $0.showingCloudKitError)}))
     }
     
     var body: some View {
         VStack(spacing: 0) {
-            if case let Mode.downloading(progress, type) = viewStore.mode {
-                DownloadingView(store: store.actionless.scope { _ in
-                    DownloadingView.DownloadingViewState(type: type.bridged, progress: progress)
-                })
+            if viewStore.mode.showsDownloadingView {
+                DownloadingView(store: store.scope(state: {
+                    $0.downloadingState
+                }, action: { .downloading($0) }))
                 .padding(.horizontal)
                 .transition(.move(edge: .bottom))
                 Divider()
@@ -84,67 +88,13 @@ struct ContentView: View {
         
     }
 }
-
-private extension DylanRecordType {
-    var sidebarDisplayType: SidebarDisplayType? {
+private extension Mode {
+    var showsDownloadingView: Bool {
         switch self {
-        case .song:
-            return .songs
-        case .album:
-            return .albums
-        case .performance:
-            return .performances
-        case .appMetadata:
-            return nil
-        }
-    }
-}
-
-struct DownloadingView: View {
-    
-    struct DownloadingViewState: Equatable {
-        let type: DylanWork
-        let progress: Double
-    }
-    
-    let store: Store<DownloadingViewState, Never>
-    
-    var body: some View {
-        WithViewStore(store) { viewStore in
-            VStack {
-                HStack {
-                    Image(systemName: viewStore.type.imageName)
-                        .resizable()
-                        .aspectRatio(contentMode: ContentMode.fit)
-                        .frame(width: 12, height: 12)
-                    Text("Fetching latest \(viewStore.type.rawValue.capitalized)")
-                        .font(.caption)
-                    Spacer()
-                    ProgressView(value: viewStore.progress)
-                        .frame(width: 256)
-                    Text(String(Int(viewStore.progress * 100)) + "%")
-                        .font(.caption)
-                        .frame(width: 36)
-                }
-            }
-            .frame(maxHeight: 36)
-        }
-    }
-}
-
-extension DylanRecordType {
-    
-    var bridged: DylanWork {
-        switch self {
-        case .song:
-            return .songs
-        case .performance:
-            return .performances
-        case .album:
-            return .albums
+        case .notDownloaded:
+            return false
         default:
-            fatalError()
+            return true
         }
     }
-    
 }

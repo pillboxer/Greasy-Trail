@@ -10,6 +10,7 @@ import Add
 import BottomBar
 import GTCloudKit
 import AllPerformances
+import Downloading
 
 enum AppAction {
     case search(SearchAction)
@@ -17,4 +18,5 @@ enum AppAction {
     case bottomBar(BottomBarFeatureAction)
     case cloudKit(CloudKitAction)
     case allPerformances(AllPerformancesFeatureAction)
+    case downloading(DownloadingFeatureAction)
 }

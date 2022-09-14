@@ -10,28 +10,12 @@ import ComposableArchitecture
 import UI
 import SearchField
 import GTCloudKit
+import Core
 import Search
 
 public enum BottomBarSection: Equatable {
     case home(DylanWork)
     case add
-}
-
-public enum DylanWork: String, Equatable {
-    case songs
-    case albums
-    case performances
-    
-    public var imageName: String {
-        switch self {
-        case .songs:
-            return "music.note"
-        case .albums:
-            return "record.circle"
-        case .performances:
-            return "music.mic.circle"
-        }
-    }
 }
 
 public struct BottomBarView: View {

@@ -10,6 +10,7 @@ import Model
 import GTFormatter
 import Search
 import BottomBar
+import Core
 
 public struct AddState: Equatable {
     

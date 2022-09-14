@@ -22,14 +22,9 @@
 "generic_ok" = "OK";
 
 // CloudKit
-"cloud_kit_fetch_songs_progress_description" = "Starting fetch of type %@";
-"cloud_kit_progress_description" = "Processing %@";
-"cloud_kit_fetch_albums_progress_description" = "Fetching latest albums";
-"cloud_kit_fetch_performances_progress_description" = "Fetching latest performances";
-"cloud_kit_subscription_songs" = "SONGS-V1";
-"cloud_kit_subscription_albums" = "ALBUMS-V1";
-"cloud_kit_subscription_performances" = "PERFORMANCES-V1";
-"cloud_kit_failed" = "CloudKit failed with error %@";
+"cloud_kit_fetch_success" = "Records updated successfully";
+"cloud_kit_fetch_error" = "Could not fetch records. Please try again";
+"cloud_kit_feching_in_progress" = "Fetching latest %@";
 
 // Songs
 "table_column_title_songs_0" = "Title";
@@ -45,6 +40,7 @@
 // Performances
 "table_column_title_performances_0" = "Venue";
 "table_column_title_performances_1" = "Date";
+"table_column_title_performances_2" = "LB Count";
 "performances_list_empty" = "Not performed yet!";
 "performances_list_title" = "Performances";
 
@@ -56,11 +52,7 @@
 "edit_alert_failure" = "Unable to edit record. Received error: %@";
 
 // Errors
-"cloud_kit_query_error_0" = "No corresponding record found to upload";
-"cloud_kit_upload_unknown" = "Unknown error whilst uploading";
-"result_error_get" = "Could not get success from result. Received error: %@";
-"lb_editing_error_prefix" = "%@ is missing prefix \"LB-\"";
-"lb_editing_error_nan" = "One or more entries is not a number. Please try again";
+
 
 // Bottom Bar
 "bottom_bar_tooltip_random" = "You may like to gamble, you might like to dance";

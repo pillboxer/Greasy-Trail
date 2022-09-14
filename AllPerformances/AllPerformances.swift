@@ -78,8 +78,11 @@ public struct AllPerformancesView {
                             viewStore.send(.search(.init(id: performance.objectID)))
                         }
                     }
-                    .contentShape(Rectangle())
                 }
+                TableColumn(LocalizedStringKey("table_column_title_performances_2")) { performance in
+                    Text(String(performance.lbNumbers?.count ?? 0))
+                }
+                .width(56)
             }
         }
     }

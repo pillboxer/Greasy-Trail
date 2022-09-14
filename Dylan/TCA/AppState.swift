@@ -15,6 +15,7 @@ import Sidebar
 import BottomBar
 import CoreData
 import Core
+import Downloading
 
 struct AppState: Equatable {
 
@@ -35,6 +36,7 @@ struct AppState: Equatable {
     var downloadingRecordType: DylanRecordType?
     var mode: Mode = .notDownloaded
     @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
+    var showingCloudKitError = false
     
     // AllPerformances
     var selectedPerformanceDecade: PerformanceDecade = .sixties
@@ -117,6 +119,17 @@ extension AppState {
             downloadingRecordType = newValue.downloadingRecordType
             mode = newValue.mode
             lastFetchDate = newValue.lastFetchDate
+        }
+    }
+    
+    var downloadingState: DownloadingState {
+        get {
+            return DownloadingState(cloudKitState: cloudKitState,
+                                    showingCloudKitError: showingCloudKitError)
+        }
+        set {
+            showingCloudKitError = newValue.showingCloudKitError
+            cloudKitState = newValue.cloudKit
         }
     }
 }

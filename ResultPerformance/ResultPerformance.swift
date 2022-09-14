@@ -5,6 +5,8 @@
 //  Created by Henry Cooper on 08/08/2022.
 //
 
+// swiftlint: disable identifier_name
+
 import SwiftUI
 import Model
 import SongsList
@@ -56,17 +58,23 @@ public struct ResultPerformanceOverviewView: View {
                 }
                 Spacer()
             }
-            HStack {
-                Text("LB Numbers:")
-                    .font(.caption)
-                ForEach(model.lbNumbers, id: \.self) { lb in
-                    OnTapButton(text: String(lb)) {
-                        NSWorkspace.shared.open(model.lbURL(for: lb))
+            if !model.lbNumbers.isEmpty {
+                HStack {
+                    Text("LB Numbers:")
+                        .font(.caption)
+                    ScrollView(.horizontal) {
+                        HStack {
+                            ForEach(model.lbNumbers.sorted(), id: \.self) { lb in
+                                OnTapButton(text: String(lb)) {
+                                    NSWorkspace.shared.open(model.lbURL(for: lb))
+                                }
+                                .font(.caption)
+                                .buttonStyle(.link)
+                            }
+                        }
                     }
-                    .font(.caption)
-                    .buttonStyle(.link)
+                    Spacer()
                 }
-                Spacer()
             }
         }
         .padding()

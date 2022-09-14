@@ -15,7 +15,7 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
         return .run { send in await send(.fetchSongs(date)) }
     case .fetchSongs(let date):
         state.downloadingRecordType = .song
-        return .run { send in
+        return .run(operation: { send in
             for try await event in environment.client.fetchSongs(date) {
                 switch event {
                 case .updateProgress(let progress, let type):
@@ -24,7 +24,9 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                     await send(.fetchAlbums(date, newValues), animation: .default)
                 }
             }
-        }
+        }, catch: { error, send in
+           await send(.cloudKitClient(.failure(error)))
+        })
     case .fetchAlbums(let date, let newValues):
         state.downloadingRecordType = .album
         return .run { send in
@@ -59,9 +61,10 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
         state.downloadingRecordType = nil
         state.lastFetchDate = newValues ? Date() : state.lastFetchDate
         return Effect.timer(id: TimerID(), every: 3, on: DispatchQueue.main.eraseToAnyScheduler())
+            .animation()
           .map { _ in .completeDownload }
-    case .cloudKitClient(.failure):
-        state.mode = .notDownloaded
+    case .cloudKitClient(.failure(let error)):
+        state.mode = .downloadFailed(.init(error))
         return .none
     case .completeDownload:
         state.mode = .notDownloaded
