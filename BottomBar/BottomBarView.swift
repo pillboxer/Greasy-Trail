@@ -14,8 +14,11 @@ import Core
 import Search
 
 public enum BottomBarSection: Equatable {
-    case home(DylanWork)
+    case home
     case add
+    case songs
+    case albums
+    case performances
 }
 
 public struct BottomBarView: View {
@@ -39,7 +42,7 @@ public struct BottomBarView: View {
                 performanceButton
                 Spacer()
                 uploadButton
-            case .home:
+            default:
                homeView
             }
             if viewStore.isSearching {

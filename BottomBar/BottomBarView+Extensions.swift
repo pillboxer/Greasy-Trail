@@ -44,7 +44,7 @@ extension BottomBarView {
     var closeAddButton: some View {
         PlainOnTapButton(systemImage: "minus.square") {
             viewStore.send(.reset, animation: .default)
-            viewStore.send(.selectSection(.home(.songs)))
+            viewStore.send(.selectSection(.home))
         }
     }
     
@@ -57,11 +57,11 @@ extension BottomBarView {
                 viewStore.send(.selectRecordToAdd(.songs), animation: .default)
             }
             .highlighting(viewStore.selectedRecordToAdd == .songs)
-        case .home(let selectedRecord):
+        default:
             PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
-                viewStore.send(.selectSection(.home(.songs)), animation: .default)
+                viewStore.send(.selectSection(.songs), animation: .default)
             }
-            .highlighting(BottomBarSection.home(selectedRecord) == BottomBarSection.home(.songs))
+            .highlighting(BottomBarSection.songs == viewStore.selectedSection)
         }
     }
     
@@ -82,11 +82,11 @@ extension BottomBarView {
             viewStore.send(.selectRecordToAdd(.performances), animation: .default)
         }
         .highlighting(viewStore.selectedRecordToAdd == .performances)
-        case .home(let selectedRecord):
+        default:
             PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
-                viewStore.send(.selectSection(.home(.performances)), animation: .default)
+                viewStore.send(.selectSection(.performances), animation: .default)
             }
-            .highlighting(BottomBarSection.home(selectedRecord) == BottomBarSection.home(.performances))
+            .highlighting(BottomBarSection.performances == viewStore.selectedSection)
         }
             
     }

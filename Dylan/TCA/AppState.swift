@@ -22,7 +22,7 @@ struct AppState: Equatable {
     // Bottom Bar
     var selectedRecordToAdd: DylanWork = .songs
     var isSearchFieldShowing = false
-    var selectedSection: BottomBarSection = .home(.songs)
+    var selectedSection: BottomBarSection = .home
     // Navigation
     var selectedSidebarType: SidebarDisplayType = .songs
     // Search
