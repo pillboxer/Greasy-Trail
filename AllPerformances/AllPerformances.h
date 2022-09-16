@@ -1,10 +1,3 @@
-//
-//  AllPerformances.h
-//  AllPerformances
-//
-//  Created by Henry Cooper on 07/08/2022.
-//
-
 #import <Foundation/Foundation.h>
 
 //! Project version number for AllPerformances.

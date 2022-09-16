@@ -12,7 +12,7 @@ import GTCoreData
 import Model
 import ComposableArchitecture
 
-extension Detective {
+public extension Detective {
     
     func fetch(performance date: Double) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
@@ -32,23 +32,6 @@ extension Detective {
         }
     }
     
-    private func createPerformanceDisplayModel(from performance: Performance,
-                                               with songs: [Song]) -> PerformanceDisplayModel {
-        var sSongs: [sSong] = []
-        for song in songs {
-            sSongs.append(sSong(uuid: song.uuid!,
-                                title: song.title!,
-                                author: song.songAuthor))
-        }
-        let sPerformance = sPerformance(uuid: performance.uuid!,
-                                        venue: performance.venue!,
-                                        songs: sSongs,
-                                        date: performance.date,
-                                        lbNumbers: performance.lbNumbers ?? [])
-        return PerformanceDisplayModel(sPerformance: sPerformance)
-        
-    }
-    
     func randomPerformance() -> Effect<PerformanceDisplayModel?, Never> {
         let context = container.newBackgroundContext()
         return .future { completion in
@@ -58,6 +41,23 @@ extension Detective {
                     return completion(.success(nil))
                 }
                 completion(.success(createPerformanceDisplayModel(from: random, with: songs)))
+            }
+        }
+    }
+}
+
+extension Detective {
+    
+    func fetchPerformanceModel(for id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
+        let context = container.newBackgroundContext()
+        return .future { callback in
+            context.perform {
+                guard let object = context.object(with: id) as? Performance,
+                      let songs = object.songs?.array as? [Song] else {
+                    return callback(.success(nil))
+                }
+                let displayModel = self.createPerformanceDisplayModel(from: object, with: songs)
+                callback(.success(AnyModel(displayModel)))
             }
         }
     }
@@ -75,7 +75,7 @@ extension Detective {
                                                                           venue: $0.venue!,
                                                                           songs: [],
                                                                           date: $0.date) }
-                    let sorted = sPerformances.sorted { $0.date ?? -1 < $1.date ?? -1 }
+                    let sorted = sPerformances.sorted { $0.date < $1.date }
                     completion(sorted)
                 } else {
                     completion([])
@@ -85,20 +85,23 @@ extension Detective {
     }
 }
 
-extension Detective {
+private extension Detective {
     
-    func fetchPerformanceModel(for id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
-        let context = container.newBackgroundContext()
-        return .future { callback in
-            context.perform {
-                guard let object = context.object(with: id) as? Performance,
-                        let songs = object.songs?.array as? [Song] else {
-                    return callback(.success(nil))
-                }
-                let displayModel = self.createPerformanceDisplayModel(from: object, with: songs)
-                callback(.success(AnyModel(displayModel)))
-            }
-   
+    func createPerformanceDisplayModel(from performance: Performance,
+                                       with songs: [Song]) -> PerformanceDisplayModel {
+        var sSongs: [sSong] = []
+        for song in songs {
+            sSongs.append(sSong(uuid: song.uuid!,
+                                title: song.title!,
+                                author: song.songAuthor))
         }
+        let sPerformance = sPerformance(uuid: performance.uuid!,
+                                        venue: performance.venue!,
+                                        songs: sSongs,
+                                        date: performance.date,
+                                        lbNumbers: performance.lbNumbers ?? [])
+        return PerformanceDisplayModel(sPerformance: sPerformance)
+        
     }
+    
 }

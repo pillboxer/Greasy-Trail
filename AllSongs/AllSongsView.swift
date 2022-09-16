@@ -1,10 +1,3 @@
-//
-//  AllSongsView.swift
-//  Greasy Trail
-//
-//  Created by Henry Cooper on 12/07/2022.
-//
-
 import SwiftUI
 import GTCoreData
 import TwoColumnTable

@@ -22,27 +22,27 @@ public class Detective: ObservableObject {
         self.container = container
     }
     
-    func search(performance id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
+    public func search(performance id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
         os_log("Searching performance by ID: %{public}@", log: Log_Detective, id)
         return fetchPerformanceModel(for: id)
     }
     
-    func search(song id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
+    public func search(song id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
         os_log("Searching song by ID: %{public}@", log: Log_Detective, id)
         return fetchSongModel(for: id)
     }
 
-    func search(song title: String) -> Effect<AnyModel?, Never> {
+    public func search(song title: String) -> Effect<AnyModel?, Never> {
         os_log("Searching song: %{public}@", log: Log_Detective, title)
         return fetchModel(for: title)
     }
 
-    func search(album title: String) -> Effect<AnyModel?, Never> {
+    public func search(album title: String) -> Effect<AnyModel?, Never> {
         os_log("Searching album: %{public}@", log: Log_Detective, title)
         return fetch(album: title)
     }
 
-    func search(performance date: Double) -> Effect<AnyModel?, Never> {
+    public func search(performance date: Double) -> Effect<AnyModel?, Never> {
         os_log("Searching date: %{public}@", log: Log_Detective, String(describing: date))
         return fetch(performance: date)
     }

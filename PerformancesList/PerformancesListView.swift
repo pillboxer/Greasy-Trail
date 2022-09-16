@@ -44,8 +44,7 @@ public struct PerformancesListView: View {
                 HStack(alignment: .top) {
                     ListRowView(headline: title,
                                 subheadline: formatter.dateString(of: performance.date)) {
-                        guard let date = performance.date else { return }
-                        viewStore.send(.search(.init(title: String(date),
+                        viewStore.send(.search(.init(title: String(performance.date),
                                                      type: .performance)))
                     }
                 }

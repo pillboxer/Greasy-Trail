@@ -1,10 +1,3 @@
-//
-//  Add+View.swift
-//  Add
-//
-//  Created by Henry Cooper on 04/09/2022.
-//
-
 import SwiftUI
 import ComposableArchitecture
 
@@ -29,9 +22,6 @@ public struct AddView: View {
                 }
             }
             .environmentObject(viewStore)
-            .transaction { transaction in
-                transaction.animation = nil
-            }
         }
     }
 }

@@ -1,10 +1,3 @@
-//
-//  AddPerformanceView.swift
-//  Add
-//
-//  Created by Henry Cooper on 03/09/2022.
-//
-
 import SwiftUI
 import ComposableArchitecture
 import UI

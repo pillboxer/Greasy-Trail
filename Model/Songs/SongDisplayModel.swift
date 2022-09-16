@@ -1,13 +1,5 @@
-//
-//  SongDisplayModel.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 25/06/2022.
-//
-
 import Foundation
 
-/// The Information Returned Upon Requesting Information About A Song
 public struct SongDisplayModel: Model {
 
     private let song: sSong

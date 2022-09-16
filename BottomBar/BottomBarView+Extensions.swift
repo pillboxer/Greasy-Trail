@@ -1,18 +1,9 @@
-//
-//  BottomBarView+Extensions.swift
-//  BottomBar
-//
-//  Created by Henry Cooper on 30/08/2022.
-//
-
 import SwiftUI
 import UI
 import Core
 
 extension BottomBarView {
-    
-    // TODO: help
-    
+        
     var homeButton: some View {
         PlainOnTapButton(systemImage: "house") {
             viewStore.send(.reset, animation: .default)
@@ -36,7 +27,7 @@ extension BottomBarView {
     
     var openAddButton: some View {
         PlainOnTapButton(systemImage: "plus.square") {
-            viewStore.send(.selectSection(.add), animation: .default)
+            viewStore.send(.selectView(.add), animation: .default)
         }
         .help("bottom_bar_tooltip_new")
     }
@@ -44,13 +35,12 @@ extension BottomBarView {
     var closeAddButton: some View {
         PlainOnTapButton(systemImage: "minus.square") {
             viewStore.send(.reset, animation: .default)
-            viewStore.send(.selectSection(.home))
         }
     }
     
     @ViewBuilder
     var songButton: some View {
-        switch viewStore.selectedSection {
+        switch viewStore.displayedView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
                 viewStore.send(.reset, animation: .default)
@@ -59,9 +49,9 @@ extension BottomBarView {
             .highlighting(viewStore.selectedRecordToAdd == .songs)
         default:
             PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
-                viewStore.send(.selectSection(.songs), animation: .default)
+                viewStore.send(.selectView(.songs), animation: .default)
             }
-            .highlighting(BottomBarSection.songs == viewStore.selectedSection)
+            .highlighting(DisplayedView.songs == viewStore.displayedView)
         }
     }
     
@@ -75,7 +65,7 @@ extension BottomBarView {
     
     @ViewBuilder
     var performanceButton: some View {
-        switch viewStore.selectedSection {
+        switch viewStore.displayedView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
             viewStore.send(.reset, animation: .default)
@@ -84,16 +74,20 @@ extension BottomBarView {
         .highlighting(viewStore.selectedRecordToAdd == .performances)
         default:
             PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
-                viewStore.send(.selectSection(.performances), animation: .default)
+                viewStore.send(.selectView(.performances), animation: .default)
             }
-            .highlighting(BottomBarSection.performances == viewStore.selectedSection)
+            .highlighting(DisplayedView.performances == viewStore.displayedView)
         }
             
     }
     
     var uploadButton: some View {
         PlainOnTapButton(systemImage: "arrow.up.circle") {
-            print("Must upload \(viewStore.model)")
+            guard let model = viewStore.model else {
+                return
+            }
+            viewStore.send(.upload(model.value))
+            viewStore.send(.reset)
         }
         .disabled(!(viewStore.model?.uploadAllowed ?? true))
     }
@@ -103,7 +97,7 @@ extension BottomBarView {
             guard let id = viewStore.selectedObjectID else {
                 return
             }
-            viewStore.send(.selectSection(.add))
+            viewStore.send(.selectView(.add))
             viewStore.send(.search(id))
         }
     }

@@ -1,10 +1,3 @@
-//
-//  AllPerformances+State.swift
-//  AllPerformances
-//
-//  Created by Henry Cooper on 11/09/2022.
-//
-
 import Foundation
 import Search
 

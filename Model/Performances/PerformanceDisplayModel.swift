@@ -1,10 +1,3 @@
-//
-//  PerformanceDisplayModel.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 06/07/2022.
-//
-
 import Foundation
 import Core
 
@@ -23,12 +16,13 @@ public struct PerformanceDisplayModel: Model, CustomStringConvertible {
         return uuid != .invalid
         && !(songUUIDs.contains(.invalid))
         && !(lbNumbers.contains(0))
+        && !venue.isEmpty
     }
     
     public var description: String {
         """
         \n
-        \(venue) - \(date ?? 0)
+        \(venue) - \(date)
         -- SONGS --
         \(songTitles.joined(separator: "\n"))
         -- LB Numbers --
@@ -52,7 +46,7 @@ public extension PerformanceDisplayModel {
         sPerformance.venue
     }
     
-    var date: Double? {
+    var date: Double {
         sPerformance.date
     }
 
@@ -63,10 +57,7 @@ public extension PerformanceDisplayModel {
     func officialURL() -> URL? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
-        guard let performanceDate = sPerformance.date else {
-            return nil
-        }
-        let date = Date(timeIntervalSince1970: performanceDate)
+        let date = Date(timeIntervalSince1970: sPerformance.date)
         let string = formatter.string(from: date)
         return URL(string: "https://www.bobdylan.com/date/\(string)")!
     }

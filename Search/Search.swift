@@ -11,6 +11,7 @@ import Core
 import GTFormatter
 import CoreData
 import GTCloudKit
+import Detective
 import ComposableArchitecture
 
 public struct SearchEnvironment {
@@ -44,6 +45,7 @@ public struct SearchState: Equatable {
     }
     
     public var model: AnyModel?
+    public var displayedView: DisplayedView
     public var failedSearch: Search?
     public var currentSearch: Search?
     public var selectedID: ObjectIdentifier?
@@ -51,6 +53,7 @@ public struct SearchState: Equatable {
     public var isSearching = false
     
     public init(model: AnyModel?,
+                displayedView: DisplayedView,
                 failedSearch: Search?,
                 currentSearch: Search?,
                 selectedID: ObjectIdentifier?,
@@ -62,6 +65,7 @@ public struct SearchState: Equatable {
         self.selectedID = selectedID
         self.selectedObjectID = selectedObjectID
         self.isSearching = isSearching
+        self.displayedView = displayedView
     }
 }
 
@@ -86,6 +90,7 @@ public enum SearchAction: Equatable {
     case makeSearch(Search)
     case completeSearch(AnyModel?, Search)
     case makeRandomSearch
+    case selectDisplayedView(DisplayedView)
     case todayInHistory
     case reset
 }
@@ -100,12 +105,14 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         state.isSearching = false
         state.model = model ?? state.model
         state.failedSearch = model == nil ? search : nil
+        return Effect(value: .selectDisplayedView(.result))
     case .reset:
         state.currentSearch = nil
         state.failedSearch = nil
         state.model = nil
         state.selectedObjectID = nil
         state.selectedID = nil
+        return Effect(value: .selectDisplayedView(.home))
     case .select(let objectIdentifier, let objectID):
         state.selectedObjectID = objectID
         return Effect(value: .selectID(objectIdentifier: objectIdentifier))
@@ -117,6 +124,9 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         state.isSearching = true
         let random = DylanSearchType.allCases.randomElement()!
         return randomSearchEffect(environment: environment, type: random)
+    case .selectDisplayedView(let displayedView):
+        if state.displayedView == .add && displayedView == .result { return .none }
+        state.displayedView = displayedView
     }
     return .none
 }
@@ -158,68 +168,6 @@ private func randomSearchEffect(environment: SearchEnvironment,
             }
             .receive(on: DispatchQueue.main)
             .eraseToEffect()
-    }
-    
-}
-
-public class Searcher {
-    
-    private let formatter = GTFormatter.Formatter()
-    private var cancellables: Set<AnyCancellable> = []
-    private let detective = Detective()
-    
-    public init() {}
-    
-    public func randomSong() -> Effect<SongDisplayModel?, Never> {
-        detective.randomSong()
-    }
-    
-    public func randomAlbum() -> Effect<AlbumDisplayModel?, Never> {
-        detective.randomAlbum()
-    }
-    
-    public func randomPerformance() -> Effect<PerformanceDisplayModel?, Never> {
-        detective.randomPerformance()
-    }
-    
-    public func search(_ search: Search) -> Effect<AnyModel?, Never> {
-        
-        guard let title = search.title else {
-            if let id = search.id {
-                return [detective.search(song: id),
-                        detective.search(performance: id)]
-                    .publisher
-                    .flatMap(maxPublishers: .max(1)) { $0 }
-                    .replaceEmpty(with: nil)
-                    .eraseToEffect()
-            } else {
-                fatalError()
-            }
-        }
-        
-        guard let type = search.type else {
-            return [self.search(Search(title: title, type: .album)),
-                    self.search(Search(title: title, type: .song)),
-                    self.search(Search(title: title, type: .performance))]
-                .publisher
-                .flatMap(maxPublishers: .max(1)) { $0 }
-                .compactMap { $0 }
-                .replaceEmpty(with: nil)
-                .eraseToEffect()
-        }
-        switch type {
-        case .album:
-            return detective.search(album: title)
-        case .song:
-            return detective.search(song: title)
-        case .performance:
-            if let toFetch = Double(title) ?? formatter.date(from: title) {
-                return detective.fetch(performance: toFetch)
-            } else {
-                return Just(nil)
-                    .eraseToEffect()
-            }
-        }
     }
     
 }

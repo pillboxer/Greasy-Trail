@@ -1,10 +1,3 @@
-//
-//  BottomBar.h
-//  BottomBar
-//
-//  Created by Henry Cooper on 28/08/2022.
-//
-
 #import <Foundation/Foundation.h>
 
 //! Project version number for BottomBar.

@@ -1,10 +1,3 @@
-//
-//  Add+State.swift
-//  Add
-//
-//  Created by Henry Cooper on 04/09/2022.
-//
-
 import GTCloudKit
 import Model
 import GTFormatter
@@ -72,7 +65,6 @@ public struct AddState: Equatable {
     
     public init(searchState: SearchState, selectedRecordToAdd: DylanWork) {
         self.selectedRecordToAdd = selectedRecordToAdd
-        print("SelectedRecord in AddState \(selectedRecordToAdd)", selectedRecordToAdd)
         self.search = searchState
         if let model = model?.value as? SongDisplayModel {
             songTitleField = model.title
@@ -82,9 +74,7 @@ public struct AddState: Equatable {
             performanceSongs = model.songs
             performanceLBs = model.lbNumbers
             performanceVenueField = model.venue
-            if let date = model.date {
-                performanceDateField = Date(timeIntervalSince1970: date)
-            }
+            performanceDateField = Date(timeIntervalSince1970: model.date)
         }
     }
 }

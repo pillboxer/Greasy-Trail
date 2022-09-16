@@ -12,11 +12,11 @@ import Result
 import Search
 import GTCloudKit
 import AllSongs
-import Sidebar
 import BottomBar
 import Add
+import Core
 import UI
-import Downloading
+import TopBar
 import Model
 import AllPerformances
 
@@ -29,9 +29,9 @@ struct ContentView: View {
     struct ContentViewState: Equatable {
         var selectedID: ObjectIdentifier?
         var model: AnyModel?
-        var selectedSection: BottomBarSection
+        var displayedView: DisplayedView
         var selectedPerformanceDecade: PerformanceDecade
-        var mode: Mode
+        var mode: Mode?
         var showingCloudKitError: Bool
     }
     
@@ -40,7 +40,7 @@ struct ContentView: View {
         self.viewStore = ViewStore(store.actionless.scope(state: {
             ContentViewState(selectedID: $0.selectedID,
                              model: $0.search.model,
-                             selectedSection: $0.selectedSection,
+                             displayedView: $0.displayedView,
                              selectedPerformanceDecade: $0.selectedPerformanceDecade,
                              mode: $0.mode,
                              showingCloudKitError: $0.showingCloudKitError)}))
@@ -48,20 +48,15 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            if viewStore.mode.showsDownloadingView {
-                DownloadingView(store: store.scope(state: {
-                    $0.downloadingState
-                }, action: { .downloading($0) }))
+            if viewStore.mode != nil {
+                TopBarView(store: store.scope(state: {
+                    $0.topBarState
+                }, action: { .topBar($0) }))
                 .padding(.horizontal)
                 .transition(.move(edge: .bottom))
                 Divider()
             }
-            if viewStore.model != nil {
-                ResultView(store: store.scope(state: { $0.search },
-                                              action: { .search($0) }))
-            } else {
-                view(for: viewStore.selectedSection)
-            }
+            view(for: viewStore.displayedView)
             Spacer()
             BottomBarView(store: store.scope(state: { $0.bottomBarState },
                                              action: { .bottomBar($0) }))
@@ -71,35 +66,26 @@ struct ContentView: View {
     }
     
     @ViewBuilder
-    func view(for section: BottomBarSection) -> some View {
+    func view(for section: DisplayedView) -> some View {
         switch section {
         case .add:
             AddView(store: store.scope(state: { $0.addState },
                                        action: { .add($0) }))
         case .home:
-            Text("Home")
+            AllSongsView(store: store.scope(state: { $0.selectedID },
+                                            action: { .search($0) }))
+        case .result:
+            ResultView(store: store.scope(state: { $0.search },
+                                          action: { .search($0) }))
         case .songs:
             AllSongsView(store: store.scope(state: { $0.selectedID },
-                                            action: { action in
-                return .search(action)
-            }))
+                                            action: { .search($0) }))
         case .albums:
             Text("Album")
         case .performances:
             AllPerformancesView(store: store.scope(state: { $0.allPerformancesState },
                                                    action: { .allPerformances($0)}),
                                 predicate: viewStore.selectedPerformanceDecade.predicate)
-        }
-    }
-}
-
-private extension Mode {
-    var showsDownloadingView: Bool {
-        switch self {
-        case .notDownloaded:
-            return false
-        default:
-            return true
         }
     }
 }

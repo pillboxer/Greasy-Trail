@@ -14,7 +14,7 @@ import BottomBar
 import GTCloudKit
 import Add
 import Model
-import Downloading
+import TopBar
 import AllPerformances
 
 struct AppEnvironment {
@@ -42,9 +42,9 @@ Reducer.combine(searchReducer.pullback(
                     state: \.allPerformancesState,
                     action: /AppAction.allPerformances,
                     environment: SearchEnvironment.init),
-                downloadingFeatureReducer.pullback(
-                    state: \.downloadingState,
-                    action: /AppAction.downloading,
+                topBarFeatureReducer.pullback(
+                    state: \.topBarState,
+                    action: /AppAction.topBar,
                     environment: CloudKitEnvironment.init),
                 cloudKitReducer.pullback(
                     state: \.cloudKitState,
@@ -65,7 +65,8 @@ extension SearchEnvironment {
 extension BottomBarEnvironment {
     init(appEnvironment: AppEnvironment) {
         let search = SearchEnvironment(appEnvironment: appEnvironment)
-        self.init(search: search)
+        let cloudKit = CloudKitEnvironment(appEnvironment: appEnvironment)
+        self.init(search: search, cloudKit: cloudKit)
     }
 }
 

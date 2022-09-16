@@ -22,9 +22,10 @@
 "generic_ok" = "OK";
 
 // CloudKit
-"cloud_kit_fetch_success" = "Records updated successfully";
+"cloud_kit_update_success" = "Records updated successfully";
 "cloud_kit_fetch_error" = "Could not fetch records. Please try again";
-"cloud_kit_feching_in_progress" = "Fetching latest %@";
+"cloud_kit_fetching_in_progress" = "Fetching latest %@";
+"cloud_kit_uploading_in_progress" = "Uploading";
 
 // Songs
 "table_column_title_songs_0" = "Title";

@@ -32,6 +32,20 @@ extension Detective {
         }
     }
     
+    private func createAlbumDisplayModel(from album: Album, with songs: [Song]) -> AlbumDisplayModel {
+        let sSongs = songs.compactMap { sSong(uuid: $0.uuid!, title: $0.title!, author: $0.songAuthor) }
+        let sAlbum = sAlbum(uuid: album.uuid!,
+                            title: album.title!,
+                            songs: sSongs,
+                            releaseDate: album.releaseDate)
+        return AlbumDisplayModel(album: sAlbum)
+
+    }
+
+}
+
+public extension Detective {
+    
     func randomAlbum() -> Effect<AlbumDisplayModel?, Never> {
         let context = container.newBackgroundContext()
         return .future { completion in
@@ -45,15 +59,5 @@ extension Detective {
             }
         }
     }
-
-    private func createAlbumDisplayModel(from album: Album, with songs: [Song]) -> AlbumDisplayModel {
-        let sSongs = songs.compactMap { sSong(uuid: $0.uuid!, title: $0.title!, author: $0.songAuthor) }
-        let sAlbum = sAlbum(uuid: album.uuid!,
-                            title: album.title!,
-                            songs: sSongs,
-                            releaseDate: album.releaseDate)
-        return AlbumDisplayModel(album: sAlbum)
-
-    }
-
+    
 }

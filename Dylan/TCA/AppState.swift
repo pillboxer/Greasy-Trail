@@ -11,20 +11,18 @@ import Model
 import AllPerformances
 import GTCloudKit
 import Add
-import Sidebar
 import BottomBar
 import CoreData
 import Core
-import Downloading
+import TopBar
 
 struct AppState: Equatable {
 
     // Bottom Bar
     var selectedRecordToAdd: DylanWork = .songs
     var isSearchFieldShowing = false
-    var selectedSection: BottomBarSection = .home
+    var displayedView: DisplayedView = .home
     // Navigation
-    var selectedSidebarType: SidebarDisplayType = .songs
     // Search
     var model: AnyModel?
     var failedSearch: Search?
@@ -33,8 +31,7 @@ struct AppState: Equatable {
     var selectedObjectID: NSManagedObjectID?
     var isSearching = false
     // CloudKit
-    var downloadingRecordType: DylanRecordType?
-    var mode: Mode = .notDownloaded
+    var mode: Mode?
     @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
     var showingCloudKitError = false
     
@@ -48,6 +45,7 @@ extension AppState {
     var search: SearchState {
         get {
             return SearchState(model: model,
+                               displayedView: displayedView,
                                failedSearch: failedSearch,
                                currentSearch: currentSearch,
                                selectedID: selectedID,
@@ -59,6 +57,7 @@ extension AppState {
             model = newValue.model
             failedSearch = newValue.failedSearch
             currentSearch = newValue.currentSearch
+            displayedView = newValue.displayedView
             selectedObjectID = newValue.selectedObjectID
             isSearching = newValue.isSearching
         }
@@ -78,13 +77,12 @@ extension AppState {
     var bottomBarState: BottomBarState {
         get {
             return BottomBarState(
-                selectedSection: selectedSection,
                 selectedRecordToAdd: selectedRecordToAdd,
                 isSearchFieldShowing: isSearchFieldShowing,
-                search: search)
+                search: search,
+                cloudKit: cloudKitState)
         }
         set {
-            self.selectedSection = newValue.selectedSection
             self.search = newValue.search
             if (search.model?.value as? PerformanceDisplayModel) != nil {
                 self.selectedRecordToAdd = .performances
@@ -96,6 +94,7 @@ extension AppState {
                 selectedRecordToAdd = newValue.selectedRecordToAdd
             }
             self.isSearchFieldShowing = newValue.isSearchFieldShowing
+            self.cloudKitState = newValue.cloudKit
         }
     }
     
@@ -111,20 +110,17 @@ extension AppState {
     
     var cloudKitState: CloudKitState {
         get {
-            return CloudKitState(downloadingRecordType: downloadingRecordType,
-                                 mode: mode,
-                                 lastFetchDate: lastFetchDate)
+            return CloudKitState(mode: mode, lastFetchDate: lastFetchDate)
         }
         set {
-            downloadingRecordType = newValue.downloadingRecordType
             mode = newValue.mode
             lastFetchDate = newValue.lastFetchDate
         }
     }
     
-    var downloadingState: DownloadingState {
+    var topBarState: TopBarState {
         get {
-            return DownloadingState(cloudKitState: cloudKitState,
+            return TopBarState(cloudKitState: cloudKitState,
                                     showingCloudKitError: showingCloudKitError)
         }
         set {

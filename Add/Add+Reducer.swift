@@ -1,4 +1,4 @@
-import Search
+import Detective
 import ComposableArchitecture
 import CasePaths
 import Model
@@ -58,6 +58,7 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
     }
     return .none
 }
+    .debug()
 
 func findSongEffect(string: String) -> Effect<sSong, Never> {
     let detective = Detective()

@@ -1,10 +1,3 @@
-//
-//  AllPerformances.swift
-//  AllPerformances
-//
-//  Created by Henry Cooper on 07/08/2022.
-//
-
 import SwiftUI
 import GTFormatter
 import Search

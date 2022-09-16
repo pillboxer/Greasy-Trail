@@ -1,12 +1,5 @@
-//
-//  Add+Performance.swift
-//  Add
-//
-//  Created by Henry Cooper on 07/09/2022.
-//
-
 import Model
-import Search
+import Detective
 
 class PerformanceEditor {
     

@@ -18,9 +18,9 @@ struct Misspellings: Codable {
     var songs: [String: String]
 }
 
-extension Detective {
-
-    public func uuid(for song: String) -> String? {
+public extension Detective {
+    
+    func uuid(for song: String) -> String? {
         let songObject: NSManagedObject?
         songObject = fetch(song: song) ?? fetch(song: resolveSpellingOf(song: song))
         guard let song = songObject else {
@@ -37,21 +37,7 @@ extension Detective {
         }
     }
     
-    func randomSong() -> Effect<SongDisplayModel?, Never> {
-        let context = container.newBackgroundContext()
-        return .future { completion in
-            context.performFetch(Song.self) { songs in
-                guard let random = songs.randomElement() else {
-                    return completion(.success(nil))
-                }
-                self.createSongDisplayModel(from: random) { model in
-                    return completion(.success(model))
-                }
-            }
-        }
-    }
-    
-    public func fetchModel(for title: String) -> Effect<AnyModel?, Never> {
+    func fetchModel(for title: String) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
         
         return .future { completion in
@@ -71,16 +57,35 @@ extension Detective {
         }
     }
     
-    private func createSongDisplayModel(from song: Song, completion: @escaping (SongDisplayModel) -> Void) {
-        let uuid = song.uuid!
-        let title = song.title!
-        let author = song.songAuthor
-        fetchPerformancesThatInclude(song: song) { performances in
-            let sSong = sSong(uuid: uuid,
-                              title: title,
-                              author: author,
-                              performances: performances)
-            completion(SongDisplayModel(song: sSong))
+    func randomSong() -> Effect<SongDisplayModel?, Never> {
+        let context = container.newBackgroundContext()
+        return .future { completion in
+            context.performFetch(Song.self) { songs in
+                guard let random = songs.randomElement() else {
+                    return completion(.success(nil))
+                }
+                self.createSongDisplayModel(from: random) { model in
+                    return completion(.success(model))
+                }
+            }
+        }
+    }
+}
+
+extension Detective {
+    
+    func fetchSongModel(for id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
+        let context = container.newBackgroundContext()
+        return .future { callback in
+            context.perform { [self] in
+                guard let object = context.object(with: id) as? Song else {
+                    return callback(.success(nil))
+                }
+                createSongDisplayModel(from: object) { displayModel in
+                    callback(.success(AnyModel(displayModel)))
+                }
+            }
+
         }
     }
 }
@@ -120,6 +125,19 @@ private extension Detective {
         }
     }
     
+    func createSongDisplayModel(from song: Song, completion: @escaping (SongDisplayModel) -> Void) {
+        let uuid = song.uuid!
+        let title = song.title!
+        let author = song.songAuthor
+        fetchPerformancesThatInclude(song: song) { performances in
+            let sSong = sSong(uuid: uuid,
+                              title: title,
+                              author: author,
+                              performances: performances)
+            completion(SongDisplayModel(song: sSong))
+        }
+    }
+    
 }
 
 private extension String {
@@ -130,24 +148,6 @@ private extension String {
           }
           return ""
       }
-}
-
-extension Detective {
-    
-    func fetchSongModel(for id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
-        let context = container.newBackgroundContext()
-        return .future { callback in
-            context.perform { [self] in
-                guard let object = context.object(with: id) as? Song else {
-                    return callback(.success(nil))
-                }
-                createSongDisplayModel(from: object) { displayModel in
-                    callback(.success(AnyModel(displayModel)))
-                }
-            }
-
-        }
-    }
 }
 
 extension Data {

@@ -1,10 +1,3 @@
-//
-//  BottomBarView.swift
-//  BottomBar
-//
-//  Created by Henry Cooper on 28/08/2022.
-//
-
 import SwiftUI
 import ComposableArchitecture
 import UI
@@ -12,14 +5,7 @@ import SearchField
 import GTCloudKit
 import Core
 import Search
-
-public enum BottomBarSection: Equatable {
-    case home
-    case add
-    case songs
-    case albums
-    case performances
-}
+import Model
 
 public struct BottomBarView: View {
 
@@ -33,7 +19,7 @@ public struct BottomBarView: View {
     
     public var body: some View {
         HStack {
-            switch viewStore.selectedSection {
+            switch viewStore.displayedView {
             case .add:
                 closeAddButton
                 Spacer()
@@ -42,6 +28,10 @@ public struct BottomBarView: View {
                 performanceButton
                 Spacer()
                 uploadButton
+            case .result:
+                homeButton
+                randomButton
+                Spacer()
             default:
                homeView
             }
@@ -92,7 +82,7 @@ extension BottomBarViewState {
         self.isSearchFieldShowing = bottomBarState.isSearchFieldShowing
         self.isSearching = bottomBarState.search.isSearching
         self.model = bottomBarState.search.model
-        self.selectedSection = bottomBarState.selectedSection
+        self.displayedView = bottomBarState.search.displayedView
         self.selectedRecordToAdd = bottomBarState.selectedRecordToAdd
         self.selectedObjectID = bottomBarState.search.selectedObjectID
     }
@@ -107,12 +97,19 @@ extension BottomBarFeatureAction {
             self = .bottom(.toggleSearchField)
         case .makeRandomSearch:
             self = .search(.makeRandomSearch)
-        case .selectSection(let section):
-            self = .bottom(.selectSection(section))
+        case .selectView(let view):
+            self = .search(.selectDisplayedView(view))
         case .selectRecordToAdd(let record):
             self = .bottom(.selectRecordToAdd(record))
         case .search(let objectID):
             self = .search(.makeSearch(Search(id: objectID)))
+        case .upload(let model):
+            if let performance = model as? PerformanceDisplayModel {
+                self = .cloudKit(.uploadPerformance(performance))
+            }
+            else {
+                fatalError()
+            }
         }
     }
 }
