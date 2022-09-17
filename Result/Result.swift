@@ -35,6 +35,8 @@ public struct ResultView: View {
             ResultAlbumOverviewView(store: store, model: model)
         } else if let model = model?.value as? PerformanceDisplayModel {
             ResultPerformanceOverviewView(store: store, model: model)
+        } else {
+            Text("Show failure")
         }
     }
 }

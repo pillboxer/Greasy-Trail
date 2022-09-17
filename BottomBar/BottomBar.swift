@@ -12,19 +12,37 @@ public struct BottomBarState: Equatable {
     // Bottom Bar
     public var isSearchFieldShowing: Bool
     public var selectedRecordToAdd: DylanWork
-    
+    public var displayedView: DisplayedView
     // Search
     public var search: SearchState
+    
+    public var searchState: SearchState {
+        get {
+            SearchState(model: search.model,
+                        displayedView: displayedView,
+                        failedSearch: search.failedSearch,
+                        currentSearch: search.currentSearch,
+                        selectedID: search.selectedID,
+                        selectedObjectID: search.selectedObjectID,
+                        isSearching: search.isSearching)
+        }
+        set {
+            self.search = newValue
+            self.displayedView = newValue.displayedView
+        }
+    }
     
     public var cloudKit: CloudKitState
   
     public init(selectedRecordToAdd: DylanWork,
                 isSearchFieldShowing: Bool,
                 search: SearchState,
+                displayedView: DisplayedView,
                 cloudKit: CloudKitState) {
         self.selectedRecordToAdd = selectedRecordToAdd
         self.isSearchFieldShowing = isSearchFieldShowing
         self.search = search
+        self.displayedView = displayedView
         self.cloudKit = cloudKit
     }
 }
@@ -68,6 +86,7 @@ public enum BottomBarFeatureAction {
 public enum BottomBarAction {
     case toggleSearchField
     case selectRecordToAdd(DylanWork)
+    case selectDisplayedView(DisplayedView)
 }
 
 public let bottomBarFeatureReducer: Reducer<BottomBarState, BottomBarFeatureAction, BottomBarEnvironment> =
@@ -77,7 +96,7 @@ Reducer.combine(
         action: /BottomBarFeatureAction.bottom,
         environment: { _ in ()}),
     searchReducer.pullback(
-        state: \.search,
+        state: \.searchState,
         action: /BottomBarFeatureAction.search,
         environment: { $0.search }),
     cloudKitReducer.pullback(
@@ -91,6 +110,8 @@ public let bottomBarReducer = Reducer<BottomBarState, BottomBarAction, Void> { s
         state.isSearchFieldShowing.toggle()
     case .selectRecordToAdd(let record):
         state.selectedRecordToAdd = record
+    case .selectDisplayedView(let displayedView):
+        state.displayedView = displayedView
     }
     return .none
 }

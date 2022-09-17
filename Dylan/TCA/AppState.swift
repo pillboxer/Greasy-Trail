@@ -22,7 +22,7 @@ struct AppState: Equatable {
     var selectedRecordToAdd: DylanWork = .songs
     var isSearchFieldShowing = false
     var displayedView: DisplayedView = .home
-    // Navigation
+
     // Search
     var model: AnyModel?
     var failedSearch: Search?
@@ -80,10 +80,12 @@ extension AppState {
                 selectedRecordToAdd: selectedRecordToAdd,
                 isSearchFieldShowing: isSearchFieldShowing,
                 search: search,
+                displayedView: displayedView,
                 cloudKit: cloudKitState)
         }
         set {
-            self.search = newValue.search
+            self.displayedView = newValue.displayedView
+            self.search = newValue.searchState
             if (search.model?.value as? PerformanceDisplayModel) != nil {
                 self.selectedRecordToAdd = .performances
             } else if (search.model?.value as? AlbumDisplayModel) != nil {
@@ -120,8 +122,7 @@ extension AppState {
     
     var topBarState: TopBarState {
         get {
-            return TopBarState(cloudKitState: cloudKitState,
-                                    showingCloudKitError: showingCloudKitError)
+            return TopBarState(cloudKitState: cloudKitState, showingCloudKitError: showingCloudKitError)
         }
         set {
             showingCloudKitError = newValue.showingCloudKitError

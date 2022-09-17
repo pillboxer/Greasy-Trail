@@ -98,7 +98,7 @@ extension BottomBarFeatureAction {
         case .makeRandomSearch:
             self = .search(.makeRandomSearch)
         case .selectView(let view):
-            self = .search(.selectDisplayedView(view))
+            self = .bottom(.selectDisplayedView(view))
         case .selectRecordToAdd(let record):
             self = .bottom(.selectRecordToAdd(record))
         case .search(let objectID):
@@ -106,8 +106,7 @@ extension BottomBarFeatureAction {
         case .upload(let model):
             if let performance = model as? PerformanceDisplayModel {
                 self = .cloudKit(.uploadPerformance(performance))
-            }
-            else {
+            } else {
                 fatalError()
             }
         }

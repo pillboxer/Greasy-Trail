@@ -55,12 +55,21 @@ extension BottomBarView {
         }
     }
     
+    @ViewBuilder
     var albumButton: some View {
-        PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
-            viewStore.send(.reset, animation: .default)
-            viewStore.send(.selectRecordToAdd(.albums), animation: .default)
+        switch viewStore.displayedView {
+        case .add:
+            PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
+                viewStore.send(.reset, animation: .default)
+                viewStore.send(.selectRecordToAdd(.albums), animation: .default)
+            }
+            .highlighting(viewStore.selectedRecordToAdd == .albums)
+        default:
+            PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
+                viewStore.send(.selectView(.albums), animation: .default)
+            }
+            .highlighting(DisplayedView.albums == viewStore.displayedView)
         }
-        .highlighting(viewStore.selectedRecordToAdd == .albums)
     }
     
     @ViewBuilder
