@@ -4,7 +4,7 @@ import GTCloudKit
 import UI
 import Core
 
-struct DownloadFailedView: View {
+struct OperationFailedView: View {
     
     @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
     
@@ -19,7 +19,7 @@ struct DownloadFailedView: View {
     var body: some View {
         HStack {
             Text(viewStore.state.showingCloudKitError ?
-                 String(describing: error) : String(formatted: "cloud_kit_fetch_error"))
+                 String(describing: error) : String(formatted: "cloud_kit_operation_error"))
             .font(.caption)
             Spacer()
             PlainOnTapButton(systemImage: "arrow.clockwise.circle.fill") {

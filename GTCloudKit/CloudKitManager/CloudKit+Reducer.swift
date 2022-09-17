@@ -27,14 +27,14 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                 case .completeFetch(let newValues):
                     await send(.fetchAlbums(date, newValues), animation: .default)
                 default:
-                    fatalError()
+                    fatalError("Received unknown event whilst fetching songs")
                 }
             }
         }, catch: { error, send in
-           await send(.cloudKitClient(.failure(error)))
+            await send(.cloudKitClient(.failure(error)))
         })
     case .fetchAlbums(let date, let newValues):
-        return .run { send in
+        return .run(operation: { send in
             for try await event in environment.client.fetchAlbums(date) {
                 switch event {
                 case .updateFetchProgress(let type, let progress):
@@ -44,12 +44,14 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                     let newValues = newAlbums ? newAlbums : newValues
                     await send(.fetchPerformances(date, newValues), animation: .default)
                 default:
-                    fatalError()
+                    fatalError("Received unknown event whilst fetching albums")
                 }
             }
-        }
+        }, catch: { error, send in
+            await send(.cloudKitClient(.failure(error)))
+        })
     case .fetchPerformances(let date, let newValues):
-        return .run { send in
+        return .run(operation: { send in
             for try await event in environment.client.fetchPerformances(date) {
                 switch event {
                 case .updateFetchProgress(let type, let progress):
@@ -59,10 +61,12 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                     let newValues = newPerformances ? newPerformances : newValues
                     await send(.cloudKitClient(.success(.completeFetch(newValues: newValues))), animation: .default)
                 default:
-                    fatalError()
+                    fatalError("Received unknown event whilst fetching performances")
                 }
             }
-        }
+        }, catch: { error, send in
+            await send(.cloudKitClient(.failure(error)))
+        })
     case .uploadPerformance(let model):
         let detective = Detective()
         let titles = model.songs.map { $0.title }
@@ -73,7 +77,7 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                                                  date: model.date,
                                                  lbs: model.lbNumbers,
                                                  uuids: uuids)
-        return .run { send in
+        return .run(operation: { send in
             for try await event in environment.client.uploadPerformance(uploadModel) {
                 switch event {
                 case .updateUploadProgress(let progress):
@@ -83,9 +87,11 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                 default: fatalError()
                 }
             }
-        }
+        }, catch: { error, send in
+            await send(.cloudKitClient(.failure(error)))
+        })
         
-    // Client
+        // Client
     case .cloudKitClient(.success(.updateUploadProgress(let progress))):
         state.mode = .uploading(progress: progress)
         return .none
@@ -97,17 +103,17 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
         state.lastFetchDate = newValues ? Date() : state.lastFetchDate
         return Effect.timer(id: TimerID(), every: 3, on: DispatchQueue.main.eraseToAnyScheduler())
             .animation()
-          .map { _ in .completeDownload }
+            .map { _ in .completeDownload }
     case .cloudKitClient(.success(.completeUpload)):
         state.mode = .uploaded
         return Effect.timer(id: TimerID(), every: 3, on: DispatchQueue.main.eraseToAnyScheduler())
             .animation()
-          .map { _ in .completeUpload }
+            .map { _ in .completeUpload }
     case .cloudKitClient(.failure(let error)):
-        state.mode = .downloadFailed(.init(error))
+        state.mode = .operationFailed(.init(error))
         return .none
         
-    // Completion
+        // Completion
     case .completeDownload:
         state.mode = nil
         return .cancel(id: TimerID())

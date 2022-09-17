@@ -174,7 +174,6 @@ extension CloudKitClient {
     
     private static func uploadPerformanceLive(from model: PerformanceUploadModel) -> AsyncThrowingStream<Event, Error> {
         .init { continuation in
-            print("CALLED UPLOAD")
             continuation.yield(.updateUploadProgress(to: 0))
             let record = CKRecord(recordType: DylanRecordType.performance.rawValue,
                                   recordID: CKRecord.ID(recordName: model.recordName))
@@ -201,13 +200,22 @@ extension CloudKitClient {
             
             operation.savePolicy = .changedKeys
             
-            operation.perRecordSaveBlock = { _, result in
+            operation.modifyRecordsResultBlock = { result in
                 switch result {
-                case .success:
-                    continuation.yield(.completeUpload)
-                    continuation.finish()
                 case .failure(let error):
                     continuation.finish(throwing: error)
+                default:
+                    continuation.yield(.completeUpload)
+                    continuation.finish()
+                }
+            }
+            
+            operation.perRecordSaveBlock = { _, result in
+                switch result {
+                case .failure(let error):
+                    continuation.finish(throwing: error)
+                default:
+                    return
                 }
             }
         }
@@ -217,7 +225,7 @@ extension CloudKitClient {
 public enum Mode: Equatable {
     case downloaded
     case downloading(progress: Double, DylanRecordType)
-    case downloadFailed(GTError)
+    case operationFailed(GTError)
     
     case uploading(progress: Double)
     case uploaded

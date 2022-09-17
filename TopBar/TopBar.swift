@@ -72,8 +72,8 @@ public struct TopBarView: View {
     public var body: some View {
         Group {
             switch viewStore.mode {
-            case .downloadFailed(let error):
-                DownloadFailedView(viewStore: viewStore, error: error)
+            case .operationFailed(let error):
+                OperationFailedView(viewStore: viewStore, error: error)
             case .downloading(progress: let progress, let type):
                 DownloadingView(type: type, progress: progress)
             case .downloaded, .uploaded:
