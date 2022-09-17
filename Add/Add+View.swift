@@ -12,13 +12,18 @@ public struct AddView: View {
     public var body: some View {
         WithViewStore(store) { viewStore in
             Group {
-                switch viewStore.selectedRecordToAdd {
-                case .songs:
-                    AddSongView()
-                case .performances:
-                    AddPerformanceView()
-                case .albums:
-                    AddSongView()
+                switch viewStore.displayedView {
+                case .add(let work):
+                    switch work {
+                    case .songs:
+                        AddSongView()
+                    case .performances:
+                        AddPerformanceView()
+                    case .albums:
+                        AddSongView()
+                    }
+                default:
+                    EmptyView()
                 }
             }
             .environmentObject(viewStore)

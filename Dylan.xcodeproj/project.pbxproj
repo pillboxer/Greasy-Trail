@@ -66,7 +66,7 @@
 		8637E0D028D4F60100A5A519 /* UI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8659645A28A1B3D4003F43A4 /* UI.framework */; };
 		8637E0D128D4F60100A5A519 /* UI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8659645A28A1B3D4003F43A4 /* UI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8637E0DD28D5003D00A5A519 /* OperationSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8637E0DC28D5003D00A5A519 /* OperationSuccessView.swift */; };
-		8637E0DF28D5007700A5A519 /* DownloadFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8637E0DE28D5007700A5A519 /* DownloadFailedView.swift */; };
+		8637E0DF28D5007700A5A519 /* OperationFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8637E0DE28D5007700A5A519 /* OperationFailedView.swift */; };
 		8637E0E128D5014400A5A519 /* DownloadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8637E0E028D5014400A5A519 /* DownloadingView.swift */; };
 		8637E0EA28D507C700A5A519 /* Detective.h in Headers */ = {isa = PBXBuildFile; fileRef = 8637E0E928D507C700A5A519 /* Detective.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8637E0ED28D507C700A5A519 /* Detective.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8637E0E728D507C700A5A519 /* Detective.framework */; };
@@ -200,6 +200,8 @@
 		868BCD0D28D51558000E5071 /* DisplayedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BCD0C28D51558000E5071 /* DisplayedView.swift */; };
 		868BCD0F28D51A47000E5071 /* UploadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BCD0E28D51A47000E5071 /* UploadingView.swift */; };
 		868BCD1328D53273000E5071 /* CloudKit+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BCD1228D53273000E5071 /* CloudKit+Helper.swift */; };
+		868BCD1528D5FFD2000E5071 /* AppState+Computed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BCD1428D5FFD2000E5071 /* AppState+Computed.swift */; };
+		868BCD1728D60163000E5071 /* Add+Computed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 868BCD1628D60163000E5071 /* Add+Computed.swift */; };
 		86950DEE28CBB628007B65CC /* GTFormatter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 865963E728A01152003F43A4 /* GTFormatter.framework */; };
 		86950DEF28CBB628007B65CC /* GTFormatter.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 865963E728A01152003F43A4 /* GTFormatter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86950DF228CBD5C3007B65CC /* Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8659640028A01676003F43A4 /* Search.framework */; };
@@ -1131,7 +1133,7 @@
 		8637E0BD28D4F5B700A5A519 /* TopBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopBar.h; sourceTree = "<group>"; };
 		8637E0C628D4F5CD00A5A519 /* TopBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBar.swift; sourceTree = "<group>"; };
 		8637E0DC28D5003D00A5A519 /* OperationSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationSuccessView.swift; sourceTree = "<group>"; };
-		8637E0DE28D5007700A5A519 /* DownloadFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadFailedView.swift; sourceTree = "<group>"; };
+		8637E0DE28D5007700A5A519 /* OperationFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationFailedView.swift; sourceTree = "<group>"; };
 		8637E0E028D5014400A5A519 /* DownloadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingView.swift; sourceTree = "<group>"; };
 		8637E0E728D507C700A5A519 /* Detective.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Detective.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8637E0E928D507C700A5A519 /* Detective.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Detective.h; sourceTree = "<group>"; };
@@ -1198,6 +1200,8 @@
 		868BCD0C28D51558000E5071 /* DisplayedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayedView.swift; sourceTree = "<group>"; };
 		868BCD0E28D51A47000E5071 /* UploadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadingView.swift; sourceTree = "<group>"; };
 		868BCD1228D53273000E5071 /* CloudKit+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Helper.swift"; sourceTree = "<group>"; };
+		868BCD1428D5FFD2000E5071 /* AppState+Computed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppState+Computed.swift"; sourceTree = "<group>"; };
+		868BCD1628D60163000E5071 /* Add+Computed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Add+Computed.swift"; sourceTree = "<group>"; };
 		868C12212876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Extensions.swift"; sourceTree = "<group>"; };
 		868C12232876D89C0054FF2D /* Album+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Album+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		868C1228287737780054FF2D /* Performance+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Performance+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -1566,6 +1570,7 @@
 				864151EB28C8E43F0031E6D6 /* Add+Performance.swift */,
 				8634312828B1494800092931 /* Add+Reducer.swift */,
 				86179B8628C5148A006A248E /* Add+State.swift */,
+				868BCD1628D60163000E5071 /* Add+Computed.swift */,
 				86179B8A28C51576006A248E /* Add+View.swift */,
 				86179B4B28C34A1E006A248E /* AddPerformanceView.swift */,
 				86179B4D28C34C5F006A248E /* AddSong.swift */,
@@ -1581,7 +1586,7 @@
 				868BCD0E28D51A47000E5071 /* UploadingView.swift */,
 				8637E0DC28D5003D00A5A519 /* OperationSuccessView.swift */,
 				8637E0E028D5014400A5A519 /* DownloadingView.swift */,
-				8637E0DE28D5007700A5A519 /* DownloadFailedView.swift */,
+				8637E0DE28D5007700A5A519 /* OperationFailedView.swift */,
 			);
 			path = TopBar;
 			sourceTree = "<group>";
@@ -1632,6 +1637,7 @@
 			children = (
 				865792F3289B0D92008E9886 /* Actions */,
 				8659630E289D64B9003F43A4 /* AppState.swift */,
+				868BCD1428D5FFD2000E5071 /* AppState+Computed.swift */,
 				86596333289D66B8003F43A4 /* AppReducer.swift */,
 			);
 			path = TCA;
@@ -3170,6 +3176,7 @@
 			files = (
 				86179B8B28C51576006A248E /* Add+View.swift in Sources */,
 				864151EC28C8E43F0031E6D6 /* Add+Performance.swift in Sources */,
+				868BCD1728D60163000E5071 /* Add+Computed.swift in Sources */,
 				86179B8928C514A3006A248E /* Add+Action.swift in Sources */,
 				8634312928B1494800092931 /* Add+Reducer.swift in Sources */,
 				86179B4C28C34A1E006A248E /* AddPerformanceView.swift in Sources */,
@@ -3183,7 +3190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				868BCD0F28D51A47000E5071 /* UploadingView.swift in Sources */,
-				8637E0DF28D5007700A5A519 /* DownloadFailedView.swift in Sources */,
+				8637E0DF28D5007700A5A519 /* OperationFailedView.swift in Sources */,
 				8637E0E128D5014400A5A519 /* DownloadingView.swift in Sources */,
 				8637E0C728D4F5CD00A5A519 /* TopBar.swift in Sources */,
 				8637E0DD28D5003D00A5A519 /* OperationSuccessView.swift in Sources */,
@@ -3331,6 +3338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				86D9C2C5287F0C0A00D5A0D3 /* AlbumsListView.swift in Sources */,
+				868BCD1528D5FFD2000E5071 /* AppState+Computed.swift in Sources */,
 				86596332289D6636003F43A4 /* AppState.swift in Sources */,
 				865792F5289B0D9E008E9886 /* AppAction.swift in Sources */,
 				86563C70287CA8FA00104879 /* TestHelper.swift in Sources */,

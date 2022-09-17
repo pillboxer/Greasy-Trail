@@ -32,6 +32,7 @@ public class Searcher {
                         detective.search(performance: id)]
                     .publisher
                     .flatMap(maxPublishers: .max(1)) { $0 }
+                    .compactMap { $0 }
                     .replaceEmpty(with: nil)
                     .eraseToEffect()
             } else {

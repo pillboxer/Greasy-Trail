@@ -11,7 +11,6 @@ public struct BottomBarState: Equatable {
     
     // Bottom Bar
     public var isSearchFieldShowing: Bool
-    public var selectedRecordToAdd: DylanWork
     public var displayedView: DisplayedView
     // Search
     public var search: SearchState
@@ -34,12 +33,10 @@ public struct BottomBarState: Equatable {
     
     public var cloudKit: CloudKitState
   
-    public init(selectedRecordToAdd: DylanWork,
-                isSearchFieldShowing: Bool,
+    public init(isSearchFieldShowing: Bool,
                 search: SearchState,
                 displayedView: DisplayedView,
                 cloudKit: CloudKitState) {
-        self.selectedRecordToAdd = selectedRecordToAdd
         self.isSearchFieldShowing = isSearchFieldShowing
         self.search = search
         self.displayedView = displayedView
@@ -53,7 +50,6 @@ public struct BottomBarViewState: Equatable {
     public var isSearching: Bool
     public var model: AnyModel?
     public var displayedView: DisplayedView
-    public var selectedRecordToAdd: DylanWork
     public var selectedObjectID: NSManagedObjectID?
 }
 
@@ -72,7 +68,6 @@ enum BottomViewAction {
     case toggleSearchField
     case makeRandomSearch
     case selectView(DisplayedView)
-    case selectRecordToAdd(DylanWork)
     case search(NSManagedObjectID)
     case upload(Model)
 }
@@ -85,7 +80,6 @@ public enum BottomBarFeatureAction {
 
 public enum BottomBarAction {
     case toggleSearchField
-    case selectRecordToAdd(DylanWork)
     case selectDisplayedView(DisplayedView)
 }
 
@@ -108,8 +102,6 @@ public let bottomBarReducer = Reducer<BottomBarState, BottomBarAction, Void> { s
     switch action {
     case .toggleSearchField:
         state.isSearchFieldShowing.toggle()
-    case .selectRecordToAdd(let record):
-        state.selectedRecordToAdd = record
     case .selectDisplayedView(let displayedView):
         state.displayedView = displayedView
     }

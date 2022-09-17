@@ -3,7 +3,7 @@ import UI
 import Core
 
 extension BottomBarView {
-        
+    
     var homeButton: some View {
         PlainOnTapButton(systemImage: "house") {
             viewStore.send(.reset, animation: .default)
@@ -27,7 +27,7 @@ extension BottomBarView {
     
     var openAddButton: some View {
         PlainOnTapButton(systemImage: "plus.square") {
-            viewStore.send(.selectView(.add), animation: .default)
+            viewStore.send(.selectView(.add(.songs)), animation: .default)
         }
         .help("bottom_bar_tooltip_new")
     }
@@ -44,9 +44,9 @@ extension BottomBarView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
                 viewStore.send(.reset, animation: .default)
-                viewStore.send(.selectRecordToAdd(.songs), animation: .default)
+                viewStore.send(.selectView(.add(.songs)), animation: .default)
             }
-            .highlighting(viewStore.selectedRecordToAdd == .songs)
+            .highlighting(DisplayedView.add(.songs) ==  viewStore.displayedView)
         default:
             PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
                 viewStore.send(.selectView(.songs), animation: .default)
@@ -61,9 +61,9 @@ extension BottomBarView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
                 viewStore.send(.reset, animation: .default)
-                viewStore.send(.selectRecordToAdd(.albums), animation: .default)
+                viewStore.send(.selectView(.add(.albums)), animation: .default)
             }
-            .highlighting(viewStore.selectedRecordToAdd == .albums)
+            .highlighting(DisplayedView.add(.albums) ==  viewStore.displayedView)
         default:
             PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
                 viewStore.send(.selectView(.albums), animation: .default)
@@ -77,17 +77,17 @@ extension BottomBarView {
         switch viewStore.displayedView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
-            viewStore.send(.reset, animation: .default)
-            viewStore.send(.selectRecordToAdd(.performances), animation: .default)
-        }
-        .highlighting(viewStore.selectedRecordToAdd == .performances)
+                viewStore.send(.reset, animation: .default)
+                viewStore.send(.selectView(.add(.performances)), animation: .default)
+            }
+            .highlighting(DisplayedView.add(.performances) ==  viewStore.displayedView)
         default:
             PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
                 viewStore.send(.selectView(.performances), animation: .default)
             }
             .highlighting(DisplayedView.performances == viewStore.displayedView)
         }
-            
+        
     }
     
     var uploadButton: some View {
@@ -106,7 +106,7 @@ extension BottomBarView {
             guard let id = viewStore.selectedObjectID else {
                 return
             }
-            viewStore.send(.selectView(.add))
+            viewStore.send(.selectView(.add(.songs)))
             viewStore.send(.search(id))
         }
     }

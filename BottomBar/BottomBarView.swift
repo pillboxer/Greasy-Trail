@@ -83,7 +83,6 @@ extension BottomBarViewState {
         self.isSearching = bottomBarState.search.isSearching
         self.model = bottomBarState.search.model
         self.displayedView = bottomBarState.search.displayedView
-        self.selectedRecordToAdd = bottomBarState.selectedRecordToAdd
         self.selectedObjectID = bottomBarState.search.selectedObjectID
     }
 }
@@ -99,8 +98,6 @@ extension BottomBarFeatureAction {
             self = .search(.makeRandomSearch)
         case .selectView(let view):
             self = .bottom(.selectDisplayedView(view))
-        case .selectRecordToAdd(let record):
-            self = .bottom(.selectRecordToAdd(record))
         case .search(let objectID):
             self = .search(.makeSearch(Search(id: objectID)))
         case .upload(let model):

@@ -15,7 +15,7 @@ public struct AddState: Equatable {
     var performanceLBs: [Int] = []
     var performanceSongs: [sSong] = []
     
-    public var selectedRecordToAdd: DylanWork
+    public var displayedView: DisplayedView
     public var search: SearchState
     
     private var model: AnyModel? {
@@ -63,8 +63,8 @@ public struct AddState: Equatable {
         }
     }
     
-    public init(searchState: SearchState, selectedRecordToAdd: DylanWork) {
-        self.selectedRecordToAdd = selectedRecordToAdd
+    public init(searchState: SearchState, displayedView: DisplayedView) {
+        self.displayedView = displayedView
         self.search = searchState
         if let model = model?.value as? SongDisplayModel {
             songTitleField = model.title

@@ -90,7 +90,7 @@ public enum SearchAction: Equatable {
     case makeSearch(Search)
     case completeSearch(AnyModel?, Search)
     case makeRandomSearch
-    case selectDisplayedView(DisplayedView)
+    case selectDisplayedView(DisplayedView, AnyModel?)
     case todayInHistory
     case reset
 }
@@ -105,14 +105,14 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         state.isSearching = false
         state.model = model ?? state.model
         state.failedSearch = model == nil ? search : nil
-        return Effect(value: .selectDisplayedView(.result))
+        return Effect(value: .selectDisplayedView(.result, model))
     case .reset:
         state.currentSearch = nil
         state.failedSearch = nil
         state.model = nil
         state.selectedObjectID = nil
         state.selectedID = nil
-        return Effect(value: .selectDisplayedView(.home))
+        return Effect(value: .selectDisplayedView(.home, nil))
     case .select(let objectIdentifier, let objectID):
         state.selectedObjectID = objectID
         return Effect(value: .selectID(objectIdentifier: objectIdentifier))
@@ -124,9 +124,18 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         state.isSearching = true
         let random = DylanSearchType.allCases.randomElement()!
         return randomSearchEffect(environment: environment, type: random)
-    case .selectDisplayedView(let displayedView):
-        if state.displayedView == .add && displayedView == .result { return .none }
-        state.displayedView = displayedView
+    case .selectDisplayedView(let displayedView, let model):
+        if state.displayedView.isAdding && displayedView == .result {
+            if (model?.value as? PerformanceDisplayModel) != nil {
+                state.displayedView = .add(.performances)
+            } else if (model?.value as? AlbumDisplayModel) != nil {
+                state.displayedView = .add(.albums)
+            } else if (model?.value as? SongDisplayModel) != nil {
+                state.displayedView = .add(.songs)
+            }
+        } else {
+            state.displayedView = displayedView 
+        }
     }
     return .none
 }

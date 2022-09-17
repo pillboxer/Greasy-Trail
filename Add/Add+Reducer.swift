@@ -7,7 +7,7 @@ import Core
 public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
     switch action {
     case .selectRecordToAdd(let dylanRecordType):
-        state.selectedRecordToAdd = dylanRecordType
+        state.displayedView = .add(dylanRecordType)
     case .updateSong(let title, let author):
         let detective = Detective()
         let uuid = detective.uuid(for: title)
