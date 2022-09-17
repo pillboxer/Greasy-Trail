@@ -54,6 +54,10 @@ public struct AddState: Equatable {
     var performance: PerformanceDisplayModel? {
         get {
             model?.value as? PerformanceDisplayModel
+            ?? PerformanceDisplayModel(sPerformance: sPerformance(uuid: "P\(UUID().uuidString)",
+                                                                  venue: "",
+                                                                  songs: [],
+                                                                  date: Date().timeIntervalSince1970))
         }
         set {
             guard let newValue = newValue else {

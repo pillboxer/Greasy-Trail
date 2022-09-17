@@ -52,9 +52,9 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
         let performanceEditor = PerformanceEditor(state.performance)
         let sPerformance = performanceEditor.editDate(date)
         return Effect(value: AddAction.updatePerformanceDisplayModel(sPerformance))
-    case .updatePerformanceDisplayModel(let model):
-        guard let model = model else { return .none }
-        state.performance = PerformanceDisplayModel(sPerformance: model)
+    case .updatePerformanceDisplayModel(let sPerformance):
+        guard let sPerformance = sPerformance else { return .none }
+        state.performance = PerformanceDisplayModel(sPerformance: sPerformance)
     }
     return .none
 }

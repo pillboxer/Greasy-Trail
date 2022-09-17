@@ -98,7 +98,7 @@ extension BottomBarView {
             viewStore.send(.upload(model.value))
             viewStore.send(.reset)
         }
-        .disabled(!(viewStore.model?.uploadAllowed ?? true))
+        .disabled(!(viewStore.model?.uploadAllowed ?? false))
     }
     
     var editButton: some View {
