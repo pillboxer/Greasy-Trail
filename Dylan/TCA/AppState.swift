@@ -5,10 +5,11 @@ import GTCloudKit
 import Add
 import BottomBar
 import CoreData
+import Stats
 import Core
 
 struct AppState: Equatable {
-
+    
     // Bottom Bar
     var isSearchFieldShowing = false
     var displayedView: DisplayedView = .home
@@ -20,6 +21,7 @@ struct AppState: Equatable {
     var selectedID: ObjectIdentifier?
     var selectedObjectID: NSManagedObjectID?
     var isSearching = false
+    
     // CloudKit
     var mode: Mode?
     @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
@@ -27,5 +29,9 @@ struct AppState: Equatable {
     
     // AllPerformances
     var selectedPerformanceDecade: PerformanceDecade = .sixties
+    
+    // Stats
+    var isFetchingMissingLBCount = false
+    var missingLBNumbers: [Int]?
 
 }

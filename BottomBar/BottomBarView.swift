@@ -32,8 +32,14 @@ public struct BottomBarView: View {
                 homeButton
                 randomButton
                 Spacer()
-            default:
-               homeView
+            case .songs, .albums, .performances:
+               selectedWorkView
+            case .home:
+                Spacer()
+                recordButtons
+            case .missingLBs:
+                homeButton
+                Spacer()
             }
             if viewStore.isSearching {
                 ProgressView()
@@ -46,10 +52,8 @@ public struct BottomBarView: View {
     }
     
     @ViewBuilder
-    var homeView: some View {
-        if viewStore.model != nil {
-            homeButton
-        }
+    var selectedWorkView: some View {
+        homeButton
         if viewStore.selectedObjectID != nil {
             editButton
         }

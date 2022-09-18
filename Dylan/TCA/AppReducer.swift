@@ -16,6 +16,7 @@ import Add
 import Model
 import TopBar
 import AllPerformances
+import Stats
 
 struct AppEnvironment {
     let search: (Search) -> Effect<AnyModel?, Never>
@@ -46,6 +47,10 @@ Reducer.combine(searchReducer.pullback(
                     state: \.topBarState,
                     action: /AppAction.topBar,
                     environment: CloudKitEnvironment.init),
+                statsReducer.pullback(
+                    state: \.statsState,
+                    action: /AppAction.stats,
+                    environment: { _ in ()}),
                 cloudKitReducer.pullback(
                     state: \.cloudKitState,
                     action: /AppAction.cloudKit,

@@ -11,6 +11,7 @@ import BottomBar
 import GTCloudKit
 import AllPerformances
 import TopBar
+import Stats
 
 enum AppAction {
     case search(SearchAction)
@@ -19,4 +20,5 @@ enum AppAction {
     case cloudKit(CloudKitAction)
     case allPerformances(AllPerformancesFeatureAction)
     case topBar(TopBarFeatureAction)
+    case stats(StatsAction)
 }

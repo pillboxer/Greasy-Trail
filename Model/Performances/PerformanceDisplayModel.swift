@@ -35,11 +35,11 @@ public struct PerformanceDisplayModel: Model, CustomStringConvertible {
 public extension PerformanceDisplayModel {
 
     var songs: [sSong] {
-        sPerformance.songs
+        sPerformance.songs.filter { $0.title != "BREAK"}
     }
 
     var songTitles: [String] {
-        sPerformance.songs.map { $0.title }
+        songs.map { $0.title }
     }
 
     var venue: String {
@@ -61,20 +61,6 @@ public extension PerformanceDisplayModel {
         let string = formatter.string(from: date)
         return URL(string: "https://www.bobdylan.com/date/\(string)")!
     }
-    
-    private func urlString(for lbNumber: Int) -> String {
-         let formatter = NumberFormatter()
-         formatter.minimumIntegerDigits = 5
-         formatter.maximumIntegerDigits = 5
-         let number = NSNumber(value: lbNumber)
-         let formatted = formatter.string(from: number)!
-         return "LB-\(formatted)"
-     }
-     
-    func lbURL(for lbNumber: Int) -> URL {
-         let url = URL(string: "http://losslessbob.wonderingwhattochoose.com/detail/\(urlString(for: lbNumber)).html")!
-         return url
-     }
 
 }
 

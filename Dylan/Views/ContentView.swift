@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AppKit
 import ComposableArchitecture
 import GTCoreData
 import Result
@@ -19,9 +20,11 @@ import UI
 import TopBar
 import Model
 import AllPerformances
+import Stats
 
 struct ContentView: View {
     
+    @Environment (\.colorScheme) private var colorScheme: ColorScheme
     let store: Store<AppState, AppAction>
     @ObservedObject private var viewStore: ViewStore<ContentViewState, Never>
     @State private var selectedID: String?
@@ -33,6 +36,7 @@ struct ContentView: View {
         var selectedPerformanceDecade: PerformanceDecade
         var mode: Mode?
         var showingCloudKitError: Bool
+        var missingLBNumbers: [Int]?
     }
     
     init(store: Store<AppState, AppAction>) {
@@ -43,26 +47,27 @@ struct ContentView: View {
                              displayedView: $0.displayedView,
                              selectedPerformanceDecade: $0.selectedPerformanceDecade,
                              mode: $0.mode,
-                             showingCloudKitError: $0.showingCloudKitError)}))
+                             showingCloudKitError: $0.showingCloudKitError,
+                             missingLBNumbers: $0.missingLBNumbers)}))
     }
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(alignment: .leading, spacing: 0) {
             if viewStore.mode != nil {
-                TopBarView(store: store.scope(state: {
-                    $0.topBarState
-                }, action: { .topBar($0) }))
+                TopBarView(store: store.scope(state: { $0.topBarState }, action: { .topBar($0) }))
                 .padding(.horizontal)
-                .transition(.move(edge: .bottom))
                 Divider()
             }
             view(for: viewStore.displayedView)
             Spacer()
+            Divider()
             BottomBarView(store: store.scope(state: { $0.bottomBarState },
                                              action: { .bottomBar($0) }))
         }
         .frame(width: 900, height: 600)
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+        .background(colorScheme == .dark ? Color(NSColor.windowBackgroundColor) : Color.white)
+
     }
     
     @ViewBuilder
@@ -72,8 +77,8 @@ struct ContentView: View {
             AddView(store: store.scope(state: { $0.addState },
                                        action: { .add($0) }))
         case .home:
-            AllSongsView(store: store.scope(state: { $0.selectedID },
-                                            action: { .search($0) }))
+            StatsView(store: store.scope(state: { $0.statsState },
+                                         action: { .stats($0) }))
         case .result:
             ResultView(store: store.scope(state: { $0.search },
                                           action: { .search($0) }))
@@ -82,6 +87,8 @@ struct ContentView: View {
                                             action: { .search($0) }))
         case .albums:
             Text("Album")
+        case .missingLBs:
+            MissingLBsView(lbNumbers: viewStore.state.missingLBNumbers!)
         case .performances:
             AllPerformancesView(store: store.scope(state: { $0.allPerformancesState },
                                                    action: { .allPerformances($0)}),

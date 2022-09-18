@@ -4,6 +4,7 @@ public enum DisplayedView: Equatable {
     case songs
     case albums
     case performances
+    case missingLBs
     case result
     
     public var isAdding: Bool {

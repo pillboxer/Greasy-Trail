@@ -24,30 +24,14 @@ public struct SongsListView: View {
             Text("songs_list_title").font(.title)
                 .padding(.bottom)
             List(songs, id: \.self) { song in
-                if song.title == "BREAK" {
-                    Divider()
-                } else {
-                    let index = (titlesWithoutBreaks.firstIndex(of: song) ?? 0)
-                    ListSongView(index: index, title: song.title, author: song.author, onTap: {
-                        onTap(song.title)
-                    }, onButtonTap: { button in
-                        print(button.rawValue)
-                    })
-                    .padding(2)
-                }
+                let index = (songs.firstIndex(of: song) ?? 0)
+                ListSongView(index: index, title: song.title, author: song.author, onTap: {
+                    onTap(song.title)
+                }, onButtonTap: { button in
+                    print(button.rawValue)
+                })
+                .padding(2)
             }
         }
     }
-}
-
-private extension SongsListView {
-    
-    var titles: [String] {
-        songs.map { $0.title }
-    }
-    
-    var titlesWithoutBreaks: [sSong] {
-        songs.filter { $0.title != "BREAK" }
-    }
-    
 }

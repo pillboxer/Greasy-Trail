@@ -43,7 +43,6 @@ public struct AllSongsView: View {
     }
     
     public var body: some View {
-        
         return Table(tableData, sortOrder: $sortOrder) {
             TableColumn(LocalizedStringKey("table_column_title_songs_0"),
                         value: \.title!) { song in

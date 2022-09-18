@@ -11,6 +11,7 @@ import SwiftUI
 import Model
 import SongsList
 import Search
+import Core
 import GTFormatter
 import ComposableArchitecture
 import UI
@@ -66,7 +67,7 @@ public struct ResultPerformanceOverviewView: View {
                         HStack {
                             ForEach(model.lbNumbers.sorted(), id: \.self) { lb in
                                 OnTapButton(text: String(lb)) {
-                                    NSWorkspace.shared.open(model.lbURL(for: lb))
+                                    NSWorkspace.shared.open(lb.lbURL())
                                 }
                                 .font(.caption)
                                 .buttonStyle(.link)

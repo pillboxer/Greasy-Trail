@@ -4,6 +4,7 @@ import BottomBar
 import TopBar
 import GTCloudKit
 import AllPerformances
+import Stats
 
 extension AppState {
     
@@ -50,10 +51,6 @@ extension AppState {
         set {
             self.displayedView = newValue.displayedView
             self.search = newValue.searchState
-            if self.displayedView.isAdding {
-                
-            }
-           
             self.isSearchFieldShowing = newValue.isSearchFieldShowing
             self.cloudKitState = newValue.cloudKit
         }
@@ -88,4 +85,18 @@ extension AppState {
             cloudKitState = newValue.cloudKit
         }
     }
+    
+    var statsState: StatsState {
+        get {
+            return StatsState(displayedView: displayedView,
+            isFetchingMissingLBCount: isFetchingMissingLBCount,
+            missingLBNumbers: missingLBNumbers)
+        }
+        set {
+            displayedView = newValue.displayedView
+            isFetchingMissingLBCount = newValue.isFetchingMissingLBCount
+            missingLBNumbers = newValue.missingLBNumbers
+        }
+    }
+    
 }

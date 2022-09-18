@@ -15,7 +15,7 @@ public enum DylanWork: String, Equatable {
     public var imageName: String {
         switch self {
         case .songs:
-            return "music.note"
+            return "waveform.circle"
         case .albums:
             return "record.circle"
         case .performances:
