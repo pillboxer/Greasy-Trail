@@ -33,7 +33,11 @@ public struct PerformanceDisplayModel: Model, CustomStringConvertible {
 }
 
 public extension PerformanceDisplayModel {
-
+    
+    var isFavorite: Bool {
+        sPerformance.isFavorite
+    }
+    
     var songs: [sSong] {
         sPerformance.songs.filter { $0.title != "BREAK"}
     }

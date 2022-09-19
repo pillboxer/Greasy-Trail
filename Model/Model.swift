@@ -1,8 +1,10 @@
 import Foundation
+import CoreData
 
 public protocol Model {
     var uuid: String { get }
     var uploadAllowed: Bool { get }
+    var isFavorite: Bool { get }
 }
 
 @dynamicMemberLookup
@@ -29,6 +31,9 @@ extension AnyModel: Equatable {
         if let lhPerformance = lhs.value as? PerformanceDisplayModel,
             let rhPerformance = rhs.value as? PerformanceDisplayModel {
             return lhPerformance == rhPerformance
+        } else if let lhSong = lhs.value as? SongDisplayModel,
+                  let rhSong = rhs.value as? SongDisplayModel {
+            return lhSong == rhSong
         }
         return true
     }

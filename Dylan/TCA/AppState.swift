@@ -9,10 +9,10 @@ import Stats
 import Core
 
 struct AppState: Equatable {
-    
     // Bottom Bar
     var isSearchFieldShowing = false
     var displayedView: DisplayedView = .home
+    var displayedFavorite: Bool?
 
     // Search
     var model: AnyModel?
@@ -28,10 +28,9 @@ struct AppState: Equatable {
     var showingCloudKitError = false
     
     // AllPerformances
-    var selectedPerformanceDecade: PerformanceDecade = .sixties
+    var selectedPerformancePredicate: PerformancePredicate = .sixties
     
     // Stats
     var isFetchingMissingLBCount = false
     var missingLBNumbers: [Int]?
-
 }

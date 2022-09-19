@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension Album {
+extension Album: Favoritable {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Album> {
         return NSFetchRequest<Album>(entityName: "Album")
@@ -20,6 +20,7 @@ extension Album {
     @NSManaged public var songs: NSOrderedSet?
     @NSManaged public var markedAsDeleted: Bool
     @NSManaged public var uuid: String?
+    @NSManaged public var isFavorite: Bool
 
 }
 

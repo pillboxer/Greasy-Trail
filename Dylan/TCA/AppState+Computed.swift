@@ -46,23 +46,25 @@ extension AppState {
                 isSearchFieldShowing: isSearchFieldShowing,
                 search: search,
                 displayedView: displayedView,
-                cloudKit: cloudKitState)
+                cloudKit: cloudKitState,
+            displayedFavorite: displayedFavorite)
         }
         set {
             self.displayedView = newValue.displayedView
             self.search = newValue.searchState
             self.isSearchFieldShowing = newValue.isSearchFieldShowing
             self.cloudKitState = newValue.cloudKit
+            self.displayedFavorite = newValue.displayedFavorite
         }
     }
     
     var allPerformancesState: AllPerformancesState {
         get {
-            return AllPerformancesState(search: search, selectedPerformanceDecade: selectedPerformanceDecade)
+            return AllPerformancesState(search: search, selectedPerformancePredicate: selectedPerformancePredicate)
         }
         set {
             search = newValue.search
-            selectedPerformanceDecade = newValue.selectedPerformanceDecade
+            selectedPerformancePredicate = newValue.selectedPerformancePredicate
         }
     }
     

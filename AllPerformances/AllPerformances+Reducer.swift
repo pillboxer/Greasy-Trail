@@ -17,7 +17,7 @@ Reducer.combine(searchReducer.pullback(
 private let allPerformancesReducer = Reducer<AllPerformancesState, AllPerformancesAction, Void> { state, action, _ in
     switch action {
     case .selectDecade(let decade):
-        state.selectedPerformanceDecade = decade
+        state.selectedPerformancePredicate = decade
         return .none
     }
 }

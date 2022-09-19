@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21F79" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Album" representedClassName="Album" syncable="YES">
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="markedAsDeleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="releaseDate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
@@ -19,6 +20,7 @@
     </entity>
     <entity name="Performance" representedClassName="Performance" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lbNumbers" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
         <attribute name="markedAsDeleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="uuid" optional="YES" attributeType="String"/>
@@ -27,6 +29,7 @@
     </entity>
     <entity name="Song" representedClassName="Song" syncable="YES">
         <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="markedAsDeleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="String"/>
@@ -39,9 +42,9 @@
         </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="Album" positionX="-63" positionY="9" width="128" height="104"/>
-        <element name="Performance" positionX="-54" positionY="27" width="128" height="119"/>
-        <element name="Song" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="Album" positionX="-63" positionY="9" width="128" height="119"/>
         <element name="AppMetadata" positionX="-54" positionY="54" width="128" height="74"/>
+        <element name="Performance" positionX="-54" positionY="27" width="128" height="134"/>
+        <element name="Song" positionX="-63" positionY="-18" width="128" height="134"/>
     </elements>
 </model>

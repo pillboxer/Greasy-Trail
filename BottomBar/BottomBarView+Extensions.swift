@@ -7,6 +7,7 @@ extension BottomBarView {
     var homeButton: some View {
         PlainOnTapButton(systemImage: "house") {
             viewStore.send(.reset, animation: .default)
+            viewStore.send(.resetFavoriteResult)
         }
         .help("bottom_bar_tooltip_house")
     }
@@ -21,6 +22,7 @@ extension BottomBarView {
     var randomButton: some View {
         PlainOnTapButton(systemImage: "dice") {
             viewStore.send(.makeRandomSearch)
+            viewStore.send(.resetFavoriteResult)
         }
         .help("bottom_bar_tooltip_random")
     }
@@ -52,6 +54,21 @@ extension BottomBarView {
                 viewStore.send(.selectView(.songs), animation: .default)
             }
             .highlighting(DisplayedView.songs == viewStore.displayedView)
+        }
+    }
+    
+    @ViewBuilder
+    var favoriteButton: some View {
+        if let success = viewStore.displayedFavorite {
+            PlainOnTapButton(systemImage: success ? "star.fill" : "star") {
+                viewStore.send(.toggleFavorite)
+            }
+        } else if let model = viewStore.model {
+            PlainOnTapButton(systemImage: model.isFavorite ? "star.fill" : "star") {
+                viewStore.send(.toggleFavorite)
+            }
+        } else {
+            EmptyView()
         }
     }
     

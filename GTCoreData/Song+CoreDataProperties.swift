@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension Song {
+extension Song: Favoritable {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Song> {
         return NSFetchRequest<Song>(entityName: "Song")
@@ -19,6 +19,7 @@ extension Song {
     @NSManaged public var author: String?
     @NSManaged public var uuid: String?
     @NSManaged public var markedAsDeleted: Bool
+    @NSManaged public var isFavorite: Bool
 
 }
 

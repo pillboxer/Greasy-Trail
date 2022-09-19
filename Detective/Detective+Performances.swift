@@ -74,7 +74,8 @@ extension Detective {
                     let sPerformances = objects.compactMap { sPerformance(uuid: $0.uuid!,
                                                                           venue: $0.venue!,
                                                                           songs: [],
-                                                                          date: $0.date) }
+                                                                          date: $0.date,
+                                                                          isFavorite: $0.isFavorite) }
                     let sorted = sPerformances.sorted { $0.date < $1.date }
                     completion(sorted)
                 } else {
@@ -93,13 +94,15 @@ private extension Detective {
         for song in songs {
             sSongs.append(sSong(uuid: song.uuid!,
                                 title: song.title!,
-                                author: song.songAuthor))
+                                author: song.songAuthor,
+                                isFavorite: song.isFavorite))
         }
         let sPerformance = sPerformance(uuid: performance.uuid!,
                                         venue: performance.venue!,
                                         songs: sSongs,
                                         date: performance.date,
-                                        lbNumbers: performance.lbNumbers ?? [])
+                                        lbNumbers: performance.lbNumbers ?? [],
+                                        isFavorite: performance.isFavorite)
         return PerformanceDisplayModel(sPerformance: sPerformance)
         
     }

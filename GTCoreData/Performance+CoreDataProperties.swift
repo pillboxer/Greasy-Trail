@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension Performance {
+extension Performance: Favoritable {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Performance> {
         return NSFetchRequest<Performance>(entityName: "Performance")
@@ -19,6 +19,7 @@ extension Performance {
     @NSManaged public var lbNumbers: [Int]?
     @NSManaged public var venue: String?
     @NSManaged public var songs: NSOrderedSet?
+    @NSManaged public var isFavorite: Bool
     @NSManaged public var markedAsDeleted: Bool
     @NSManaged public var uuid: String?
 

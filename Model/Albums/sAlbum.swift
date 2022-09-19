@@ -3,20 +3,22 @@ import Foundation
 // swiftlint:disable type_name
 public struct sAlbum: Codable, Equatable, Identifiable {
 
-    let uuid: String
     public let title: String
+    let uuid: String
     let songs: [sSong]
     public let releaseDate: Double
+    var isFavorite: Bool
 
     public var id: String {
         title + String(releaseDate)
     }
     
-    public init(uuid: String, title: String, songs: [sSong], releaseDate: Double) {
+    public init(uuid: String, title: String, songs: [sSong], releaseDate: Double, isFavorite: Bool) {
         self.uuid = uuid
         self.title = title
         self.songs = songs
         self.releaseDate = releaseDate
+        self.isFavorite = isFavorite
     }
 
 }

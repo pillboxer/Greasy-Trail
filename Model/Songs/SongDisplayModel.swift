@@ -17,6 +17,10 @@ public struct SongDisplayModel: Model {
 }
 
 public extension SongDisplayModel {
+    
+    var isFavorite: Bool {
+        song.isFavorite
+    }
 
     var title: String {
         song.title

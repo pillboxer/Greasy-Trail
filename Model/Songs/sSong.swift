@@ -6,16 +6,19 @@ public struct sSong: Codable {
     public let uuid: String
     public let title: String
     public let author: String
-    var performances: [sPerformance]?
+    public let isFavorite: Bool
+    let performances: [sPerformance]?
     
     public init(uuid: String,
                 title: String,
                 author: String = NSLocalizedString("default_author", comment: ""),
-                performances: [sPerformance]? = nil) {
+                performances: [sPerformance]? = nil,
+                isFavorite: Bool) {
         self.uuid = uuid
         self.title = title
         self.author = author
         self.performances = performances
+        self.isFavorite = isFavorite
     }
 }
 

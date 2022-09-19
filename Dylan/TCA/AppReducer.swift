@@ -11,6 +11,7 @@ import ComposableArchitecture
 import Search
 import CasePaths
 import BottomBar
+import Result
 import GTCloudKit
 import Add
 import Model
@@ -27,34 +28,35 @@ struct AppEnvironment {
 }
 
 let appReducer: Reducer<AppState, AppAction, AppEnvironment> =
-Reducer.combine(searchReducer.pullback(
-    state: \.search,
-    action: /AppAction.search,
-    environment: SearchEnvironment.init),
-                bottomBarFeatureReducer.pullback(
-                    state: \.bottomBarState,
-                    action: /AppAction.bottomBar,
-                    environment: BottomBarEnvironment.init),
-                addReducer.pullback(
-                    state: \.addState,
-                    action: /AppAction.add,
-                    environment: { _ in () }),
-                allPerformancesFeatureReducer.pullback(
-                    state: \.allPerformancesState,
-                    action: /AppAction.allPerformances,
-                    environment: SearchEnvironment.init),
-                topBarFeatureReducer.pullback(
-                    state: \.topBarState,
-                    action: /AppAction.topBar,
-                    environment: CloudKitEnvironment.init),
-                statsReducer.pullback(
-                    state: \.statsState,
-                    action: /AppAction.stats,
-                    environment: { _ in ()}),
-                cloudKitReducer.pullback(
-                    state: \.cloudKitState,
-                    action: /AppAction.cloudKit,
-                    environment: CloudKitEnvironment.init)
+Reducer.combine(
+    searchReducer.pullback(
+        state: \.search,
+        action: /AppAction.search,
+        environment: SearchEnvironment.init),
+    bottomBarFeatureReducer.pullback(
+        state: \.bottomBarState,
+        action: /AppAction.bottomBar,
+        environment: BottomBarEnvironment.init),
+    addReducer.pullback(
+        state: \.addState,
+        action: /AppAction.add,
+        environment: { _ in () }),
+    allPerformancesFeatureReducer.pullback(
+        state: \.allPerformancesState,
+        action: /AppAction.allPerformances,
+        environment: SearchEnvironment.init),
+    topBarFeatureReducer.pullback(
+        state: \.topBarState,
+        action: /AppAction.topBar,
+        environment: CloudKitEnvironment.init),
+    statsReducer.pullback(
+        state: \.statsState,
+        action: /AppAction.stats,
+        environment: { _ in ()}),
+    cloudKitReducer.pullback(
+        state: \.cloudKitState,
+        action: /AppAction.cloudKit,
+        environment: CloudKitEnvironment.init)
 )
 
 extension SearchEnvironment {

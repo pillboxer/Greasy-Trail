@@ -31,7 +31,7 @@ public struct AllPerformancesView {
         self.predicate = predicate
         self.viewStore = ViewStore(store.scope(state: {
             AllPerformancesViewState(selectedID: $0.search.selectedID,
-                                     selectedDecade: $0.selectedPerformanceDecade) },
+                                     selectedDecade: $0.selectedPerformancePredicate) },
                                                action: AllPerformancesFeatureAction.init))
         _fetched = FetchRequest<Performance>(entity: Performance.entity(),
                                              sortDescriptors: [NSSortDescriptor(key: "date",
@@ -42,10 +42,10 @@ public struct AllPerformancesView {
     public var body: some View {
         VStack {
             HStack {
-                ForEach(PerformanceDecade.allCases, id: \.rawValue) { decade in
+                ForEach(PerformancePredicate.allCases, id: \.rawValue) { decade in
                     PlainOnTapButton(text: decade.rawValue) {
-                        let decade = PerformanceDecade(rawValue: decade.rawValue)!
-                        viewStore.send(.selectPerformanceDecade(decade))
+                        let decade = PerformancePredicate(rawValue: decade.rawValue)!
+                        viewStore.send(.selectPerformancePredicate(decade))
                     }
                     .font(.caption.weight(decade == viewStore.state.selectedDecade ? .bold : .regular))
                 }

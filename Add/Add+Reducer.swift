@@ -11,7 +11,7 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
     case .updateSong(let title, let author):
         let detective = Detective()
         let uuid = detective.uuid(for: title)
-        let sSong = sSong(uuid: uuid ?? "", title: title, author: author)
+        let sSong = sSong(uuid: uuid ?? "", title: title, author: author, isFavorite: state.song?.isFavorite ?? false)
         state.song = SongDisplayModel(song: sSong)
         return Effect(value: AddAction.updateSongUUID(uuid))
     case .updateSongUUID(let uuid):
@@ -63,6 +63,6 @@ func findSongEffect(string: String) -> Effect<sSong, Never> {
     let detective = Detective()
     return detective.fetchModel(for: string)
         .compactMap { $0?.value as? SongDisplayModel }
-        .map { sSong(uuid: $0.uuid, title: $0.title, author: $0.author)}
+        .map { sSong(uuid: $0.uuid, title: $0.title, author: $0.author, isFavorite: $0.isFavorite)}
         .eraseToEffect()
 }

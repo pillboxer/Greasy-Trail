@@ -33,11 +33,15 @@ extension Detective {
     }
     
     private func createAlbumDisplayModel(from album: Album, with songs: [Song]) -> AlbumDisplayModel {
-        let sSongs = songs.compactMap { sSong(uuid: $0.uuid!, title: $0.title!, author: $0.songAuthor) }
+        let sSongs = songs.compactMap { sSong(uuid: $0.uuid!,
+                                              title: $0.title!,
+                                              author: $0.songAuthor,
+                                              isFavorite: $0.isFavorite) }
         let sAlbum = sAlbum(uuid: album.uuid!,
                             title: album.title!,
                             songs: sSongs,
-                            releaseDate: album.releaseDate)
+                            releaseDate: album.releaseDate,
+                            isFavorite: album.isFavorite)
         return AlbumDisplayModel(album: sAlbum)
 
     }

@@ -33,7 +33,7 @@ struct ContentView: View {
         var selectedID: ObjectIdentifier?
         var model: AnyModel?
         var displayedView: DisplayedView
-        var selectedPerformanceDecade: PerformanceDecade
+        var selectedPerformancePredicate: PerformancePredicate
         var mode: Mode?
         var showingCloudKitError: Bool
         var missingLBNumbers: [Int]?
@@ -45,7 +45,7 @@ struct ContentView: View {
             ContentViewState(selectedID: $0.selectedID,
                              model: $0.search.model,
                              displayedView: $0.displayedView,
-                             selectedPerformanceDecade: $0.selectedPerformanceDecade,
+                             selectedPerformancePredicate: $0.selectedPerformancePredicate,
                              mode: $0.mode,
                              showingCloudKitError: $0.showingCloudKitError,
                              missingLBNumbers: $0.missingLBNumbers)}))
@@ -92,7 +92,7 @@ struct ContentView: View {
         case .performances:
             AllPerformancesView(store: store.scope(state: { $0.allPerformancesState },
                                                    action: { .allPerformances($0)}),
-                                predicate: viewStore.selectedPerformanceDecade.predicate)
+                                predicate: viewStore.selectedPerformancePredicate.predicate)
         }
     }
 }

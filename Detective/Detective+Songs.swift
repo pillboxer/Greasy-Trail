@@ -129,11 +129,13 @@ private extension Detective {
         let uuid = song.uuid!
         let title = song.title!
         let author = song.songAuthor
+        let isFavorite = song.isFavorite
         fetchPerformancesThatInclude(song: song) { performances in
             let sSong = sSong(uuid: uuid,
                               title: title,
                               author: author,
-                              performances: performances)
+                              performances: performances,
+                              isFavorite: isFavorite)
             completion(SongDisplayModel(song: sSong))
         }
     }

@@ -7,13 +7,13 @@ public enum AllPerformancesFeatureAction {
 }
 
 public enum AllPerformancesAction {
-    case selectDecade(PerformanceDecade)
+    case selectDecade(PerformancePredicate)
 }
 
 enum AllPerformancesViewAction {
     case search(Search)
     case select(objectIdentifier: ObjectIdentifier?, id: NSManagedObjectID?)
-    case selectPerformanceDecade(PerformanceDecade)
+    case selectPerformancePredicate(PerformancePredicate)
 }
 
 extension AllPerformancesFeatureAction {
@@ -23,8 +23,8 @@ extension AllPerformancesFeatureAction {
             self = .search(.makeSearch(search))
         case .select(let objectIdentifier, let id):
             self = .search(.select(objectIdentifier: objectIdentifier, objectID: id))
-        case .selectPerformanceDecade(let performanceDecade):
-            self = .allPerformances(.selectDecade(performanceDecade))
+        case .selectPerformancePredicate(let PerformancePredicate):
+            self = .allPerformances(.selectDecade(PerformancePredicate))
         }
     }
 }

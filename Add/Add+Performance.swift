@@ -44,14 +44,14 @@ class PerformanceEditor {
         let trimmed = song.trimmingCharacters(in: .whitespacesAndNewlines)
         let detective = Detective()
         let uuid = detective.uuid(for: trimmed)
-        let song = sSong(uuid: uuid ?? .invalid, title: trimmed)
+        let song = sSong(uuid: uuid ?? .invalid, title: trimmed, isFavorite: false)
         sPerformance?.songs[index] = song
         return sPerformance
     }
     
     func createSong() -> sPerformance? {
         var sPerformance = model?.sPerformance
-        let newSong = sSong(uuid: .invalid, title: "")
+        let newSong = sSong(uuid: .invalid, title: "", isFavorite: false)
         sPerformance?.songs.append(newSong)
         return sPerformance
     }

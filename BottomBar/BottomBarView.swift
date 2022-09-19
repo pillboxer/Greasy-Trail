@@ -8,7 +8,7 @@ import Search
 import Model
 
 public struct BottomBarView: View {
-
+    
     let store: Store<BottomBarState, BottomBarFeatureAction>
     @ObservedObject var viewStore: ViewStore<BottomBarViewState, BottomViewAction>
     
@@ -31,9 +31,10 @@ public struct BottomBarView: View {
             case .result:
                 homeButton
                 randomButton
+                favoriteButton
                 Spacer()
             case .songs, .albums, .performances:
-               selectedWorkView
+                selectedWorkView
             case .home:
                 Spacer()
                 recordButtons
@@ -71,7 +72,7 @@ public struct BottomBarView: View {
 }
 
 extension BottomBarView {
-
+    
     @ViewBuilder
     var recordButtons: some View {
         songButton
@@ -88,6 +89,7 @@ extension BottomBarViewState {
         self.model = bottomBarState.search.model
         self.displayedView = bottomBarState.search.displayedView
         self.selectedObjectID = bottomBarState.search.selectedObjectID
+        self.displayedFavorite = bottomBarState.displayedFavorite
     }
 }
 
@@ -104,6 +106,10 @@ extension BottomBarFeatureAction {
             self = .bottom(.selectDisplayedView(view))
         case .search(let objectID):
             self = .search(.makeSearch(Search(id: objectID)))
+        case .toggleFavorite:
+            self = .bottom(.toggleFavorite)
+        case .resetFavoriteResult:
+            self = .bottom(.resetFavoriteResult)
         case .upload(let model):
             if let performance = model as? PerformanceDisplayModel {
                 self = .cloudKit(.uploadPerformance(performance))

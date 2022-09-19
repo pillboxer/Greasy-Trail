@@ -3,20 +3,20 @@ import Search
 
 public struct AllPerformancesState: Equatable {
     public var search: SearchState
-    public var selectedPerformanceDecade: PerformanceDecade
+    public var selectedPerformancePredicate: PerformancePredicate
     
-    public init(search: SearchState, selectedPerformanceDecade: PerformanceDecade) {
+    public init(search: SearchState, selectedPerformancePredicate: PerformancePredicate) {
         self.search = search
-        self.selectedPerformanceDecade = selectedPerformanceDecade
+        self.selectedPerformancePredicate = selectedPerformancePredicate
     }
 }
 
 struct AllPerformancesViewState: Equatable {
     var selectedID: ObjectIdentifier?
-    var selectedDecade: PerformanceDecade
+    var selectedDecade: PerformancePredicate
 }
 
-public enum PerformanceDecade: String, CaseIterable, Equatable {
+public enum PerformancePredicate: String, CaseIterable, Equatable {
     case sixties = "1960s"
     case seventies = "1970s"
     case eighties = "1980s"
@@ -24,6 +24,7 @@ public enum PerformanceDecade: String, CaseIterable, Equatable {
     case noughties = "2000s"
     case twentytens = "2010s"
     case twentytwenties = "2020s"
+    case favorites = "Favorites"
     
     public var predicate: NSPredicate {
         let after: TimeInterval
@@ -50,6 +51,8 @@ public enum PerformanceDecade: String, CaseIterable, Equatable {
         case .twentytwenties:
             after = 1577836800
             before = 1893456000
+        case .favorites:
+            return NSPredicate(format: "isFavorite = true")
         }
         return NSPredicate(format: "date >= %f AND date <= %f", after, before)
     }
