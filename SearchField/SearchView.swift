@@ -16,29 +16,19 @@ public struct SearchView: View {
         case reset
     }
     
-    private struct SearchViewState: Equatable {
-        var search: Search?
-    }
+    private struct SearchViewState: Equatable {    }
     
     let store: Store<SearchState, SearchAction>
-    @ObservedObject private var viewStore: ViewStore<SearchViewState, SearchViewAction>
+    @ObservedObject private var viewStore: ViewStore<Void, SearchViewAction>
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = ViewStore(store.scope(state: { SearchViewState(search: $0.failedSearch) },
+        self.viewStore = ViewStore(store.stateless.scope(state: { _ in ()},
                                      action: SearchAction.init))
     }
 
     public var body: some View {
-        if let search = viewStore.search {
-            Text(LocalizedStringKey(String(format: NSLocalizedString("search_failed", comment: ""),
-                                           search.title ?? "")))
-            OnTapButton(text: "generic_ok") {
-                viewStore.send(.reset)
-            }
-        } else {
-            SearchFieldView(store: store)
-        }
+        SearchFieldView(store: store)
     }
 
 }

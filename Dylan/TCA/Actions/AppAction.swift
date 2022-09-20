@@ -20,5 +20,5 @@ enum AppAction {
     case cloudKit(CloudKitAction)
     case allPerformances(AllPerformancesFeatureAction)
     case topBar(TopBarFeatureAction)
-    case stats(StatsAction)
+    case stats(StatsFeatureAction)
 }

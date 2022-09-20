@@ -14,6 +14,7 @@ extension AppState {
                                displayedView: displayedView,
                                failedSearch: failedSearch,
                                currentSearch: currentSearch,
+                               searchFieldText: searchFieldText,
                                selectedID: selectedID,
                                selectedObjectID: selectedObjectID,
                                isSearching: isSearching)
@@ -24,6 +25,7 @@ extension AppState {
             failedSearch = newValue.failedSearch
             currentSearch = newValue.currentSearch
             displayedView = newValue.displayedView
+            searchFieldText = newValue.searchFieldText
             selectedObjectID = newValue.selectedObjectID
             isSearching = newValue.isSearching
         }
@@ -94,12 +96,14 @@ extension AppState {
         get {
             return StatsState(displayedView: displayedView,
             isFetchingMissingLBCount: isFetchingMissingLBCount,
-            missingLBNumbers: missingLBNumbers)
+            missingLBNumbers: missingLBNumbers,
+            search: search)
         }
         set {
             displayedView = newValue.displayedView
             isFetchingMissingLBCount = newValue.isFetchingMissingLBCount
             missingLBNumbers = newValue.missingLBNumbers
+            search = newValue.search
         }
     }
     

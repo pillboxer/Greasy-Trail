@@ -49,10 +49,10 @@ Reducer.combine(
         state: \.topBarState,
         action: /AppAction.topBar,
         environment: CloudKitEnvironment.init),
-    statsReducer.pullback(
+    statsFeatureReducer.pullback(
         state: \.statsState,
         action: /AppAction.stats,
-        environment: { _ in ()}),
+        environment: SearchEnvironment.init),
     cloudKitReducer.pullback(
         state: \.cloudKitState,
         action: /AppAction.cloudKit,

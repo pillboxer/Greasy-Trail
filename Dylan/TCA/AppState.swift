@@ -13,6 +13,7 @@ struct AppState: Equatable {
     var isSearchFieldShowing = false
     var displayedView: DisplayedView = .home
     var displayedFavorite: Bool?
+    var searchFieldText = ""
 
     // Search
     var model: AnyModel?

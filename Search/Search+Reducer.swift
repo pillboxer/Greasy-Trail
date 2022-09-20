@@ -1,18 +1,5 @@
-//
-//  Search.swift
-//  Search
-//
-//  Created by Henry Cooper on 07/08/2022.
-//
-
-import Model
-import Combine
-import Core
-import GTFormatter
-import CoreData
-import GTCloudKit
-import Detective
 import ComposableArchitecture
+import Model
 
 public struct SearchEnvironment {
     public let search: (Search) -> Effect<AnyModel?, Never>
@@ -29,70 +16,6 @@ public struct SearchEnvironment {
         self.randomAlbum = randomAlbum
         self.randomPerformance = randomPerformance
     }
-}
-
-public enum DylanSearchType: CaseIterable {
-    case song
-    case album
-    case performance
-}
-
-public struct SearchState: Equatable {
-    public static func == (lhs: SearchState, rhs: SearchState) -> Bool {
-        return lhs.model == rhs.model
-        && lhs.failedSearch == rhs.failedSearch
-        && lhs.currentSearch == rhs.currentSearch
-    }
-    
-    public var model: AnyModel?
-    public var displayedView: DisplayedView
-    public var failedSearch: Search?
-    public var currentSearch: Search?
-    public var selectedID: ObjectIdentifier?
-    public var selectedObjectID: NSManagedObjectID?
-    public var isSearching = false
-    
-    public init(model: AnyModel?,
-                displayedView: DisplayedView,
-                failedSearch: Search?,
-                currentSearch: Search?,
-                selectedID: ObjectIdentifier?,
-                selectedObjectID: NSManagedObjectID?,
-                isSearching: Bool) {
-        self.model = model
-        self.failedSearch = failedSearch
-        self.currentSearch = currentSearch
-        self.selectedID = selectedID
-        self.selectedObjectID = selectedObjectID
-        self.isSearching = isSearching
-        self.displayedView = displayedView
-    }
-}
-
-public struct Search: Equatable {
-    public var title: String?
-    public var type: DylanSearchType?
-    public var id: NSManagedObjectID?
-    
-    public init(title: String, type: DylanSearchType?) {
-        self.title = title
-        self.type = type
-    }
-    
-    public init(id: NSManagedObjectID) {
-        self.id = id
-    }
-}
-
-public enum SearchAction: Equatable {
-    case selectID(objectIdentifier: ObjectIdentifier?)
-    case select(objectIdentifier: ObjectIdentifier?, objectID: NSManagedObjectID?)
-    case makeSearch(Search)
-    case completeSearch(AnyModel?, Search)
-    case makeRandomSearch
-    case selectDisplayedView(DisplayedView, AnyModel?)
-    case todayInHistory
-    case reset
 }
 
 public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment> { state, action, environment in
@@ -112,18 +35,19 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         state.model = nil
         state.selectedObjectID = nil
         state.selectedID = nil
+        state.searchFieldText = ""
         return Effect(value: .selectDisplayedView(.home, nil))
     case .select(let objectIdentifier, let objectID):
         state.selectedObjectID = objectID
         return Effect(value: .selectID(objectIdentifier: objectIdentifier))
     case .selectID(let objectIdentifier):
         state.selectedID = objectIdentifier
-    case .todayInHistory:
-        print("Today in history")
     case .makeRandomSearch:
         state.isSearching = true
         let random = DylanSearchType.allCases.randomElement()!
         return randomSearchEffect(environment: environment, type: random)
+    case .setSearchFieldText(let string):
+        state.searchFieldText = string
     case .selectDisplayedView(let displayedView, let model):
         if state.displayedView.isAdding && displayedView == .result {
             if (model?.value as? PerformanceDisplayModel) != nil {
@@ -134,7 +58,7 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
                 state.displayedView = .add(.songs)
             }
         } else {
-            state.displayedView = displayedView 
+            state.displayedView = displayedView
         }
     }
     return .none

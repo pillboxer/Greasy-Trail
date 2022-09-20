@@ -18,6 +18,7 @@ public struct BottomBarState: Equatable {
                         displayedView: displayedView,
                         failedSearch: search.failedSearch,
                         currentSearch: search.currentSearch,
+                        searchFieldText: search.searchFieldText,
                         selectedID: search.selectedID,
                         selectedObjectID: search.selectedObjectID,
                         isSearching: search.isSearching)
