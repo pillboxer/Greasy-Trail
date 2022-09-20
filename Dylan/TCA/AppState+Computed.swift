@@ -74,7 +74,9 @@ extension AppState {
         }
         set {
             mode = newValue.mode
-            lastFetchDate = newValue.lastFetchDate
+            if let date = newValue.lastFetchDate {
+                lastFetchDate = date
+            }
         }
     }
     

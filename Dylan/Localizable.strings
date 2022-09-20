@@ -24,7 +24,7 @@
 // CloudKit
 "cloud_kit_update_success" = "Records updated successfully";
 "cloud_kit_operation_error" = "CloudKit operation failed (select yellow triangle for more details). Please try again";
-"cloud_kit_fetching_in_progress" = "Fetching latest %@";
+"cloud_kit_fetching_in_progress" = "Fetching latest %@ records - this may take a while";
 "cloud_kit_uploading_in_progress" = "Uploading";
 
 // Songs

@@ -1,7 +1,6 @@
 import Core
 import Search
 import CoreData
-import Favorite
 import GTCloudKit
 import Model
 
@@ -30,7 +29,6 @@ public enum BottomBarFeatureAction {
     case bottom(BottomBarAction)
     case search(SearchAction)
     case cloudKit(CloudKitAction)
-    case favorite(FavoriteAction)
 }
 
 public enum BottomBarAction {
