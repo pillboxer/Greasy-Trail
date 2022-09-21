@@ -100,10 +100,11 @@ extension AppState {
             search: search)
         }
         set {
-            displayedView = newValue.displayedView
             isFetchingMissingLBCount = newValue.isFetchingMissingLBCount
             missingLBNumbers = newValue.missingLBNumbers
             search = newValue.search
+            displayedView = newValue.displayedView
+
         }
     }
     

@@ -40,7 +40,6 @@ struct SearchFieldView: View {
             NSTextFieldRepresentable(placeholder: "search_placeholder", text: textBinding) {
                 search()
             }
-            .frame(maxWidth: 250)
             .padding(4)
     }
     

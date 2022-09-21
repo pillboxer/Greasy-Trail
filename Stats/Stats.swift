@@ -34,34 +34,56 @@ public struct StatsView: View {
     
     public var body: some View {
         VStack {
+            HStack {
+                Spacer()
+                Text("v.\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")")
+                    .italic()
+            }
+            Spacer()
+            SearchView(store: store.scope(state: { $0.search }, action: { StatsFeatureAction.search($0)}))
+                .frame(width: 456)
             Spacer()
             HStack {
-                Spacer()
-                SearchView(store: store.scope(state: { $0.search }, action: { StatsFeatureAction.search($0)}))
+                StatInfoView(songsCount: songs.count,
+                                 albumsCount: albums.count,
+                                 performancesCount: performances.count,
+                                 lbCount: lbCount,
+                                 viewStore: viewStore)
                 Spacer()
             }
+        }
+        .font(.caption)
+        .padding()
+    }
+}
+
+struct StatInfoView: View {
+    
+    let songsCount: Int
+    let albumsCount: Int
+    let performancesCount: Int
+    let lbCount: Int
+    
+    @ObservedObject var viewStore: ViewStore<StatsViewState, StatsViewAction>
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Songs: \(songsCount)")
+            Text("Albums: \(albumsCount)")
+            Text("Performances: \(performancesCount)")
+            Text("LB Count: \(lbCount)")
             HStack {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Songs: \(songs.count)")
-                    Text("Albums: \(albums.count)")
-                    Text("Performances: \(performances.count)")
-                    Text("LB Count: \(lbCount)")
-                    HStack {
-                        Text("Missing LB Numbers: \(15500 - lbCount)")
-                        if viewStore.state.isFetchingMissingLBCount {
-                            ProgressView()
-                                .scaleEffect(0.4)
-                        } else {
-                            PlainOnTapButton(systemImage: "arrow.right.circle") {
-                                viewStore.send(.fetchMissingLBNumbers)
-                            }
-                        }
+                Text("Missing LB Numbers: \(15500 - lbCount)")
+                if viewStore.state.isFetchingMissingLBCount {
+                    ProgressView()
+                        .scaleEffect(0.4)
+                } else {
+                    PlainOnTapButton(systemImage: "arrow.right.circle") {
+                        viewStore.send(.fetchMissingLBNumbers)
                     }
                 }
-                Spacer()
             }
-            .font(.caption)
-            .padding()
         }
     }
+    
 }

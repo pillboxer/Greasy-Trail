@@ -10,7 +10,7 @@ Reducer.combine(
         action: /StatsFeatureAction.stats,
         environment: { _ in ()}),
     searchReducer.pullback(
-        state: \.search,
+        state: \.searchState,
         action: /StatsFeatureAction.search,
         environment: { $0 })
 )

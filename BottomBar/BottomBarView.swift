@@ -62,6 +62,7 @@ public struct BottomBarView: View {
             SearchView(store: store.scope(state: { $0.search },
                                           action: { .search($0) }))
             .transition(.move(edge: .leading))
+            .frame(width: 256)
         }
         searchButton
         randomButton
