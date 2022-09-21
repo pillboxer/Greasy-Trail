@@ -29,14 +29,14 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         state.model = model ?? state.model
         state.failedSearch = model == nil ? search : nil
         return Effect(value: .selectDisplayedView(.result, model))
-    case .reset:
+    case .reset(let displayedView):
         state.currentSearch = nil
         state.failedSearch = nil
         state.model = nil
         state.selectedObjectID = nil
         state.selectedID = nil
         state.searchFieldText = ""
-        return Effect(value: .selectDisplayedView(.home, nil))
+        return Effect(value: .selectDisplayedView(displayedView, nil))
     case .select(let objectIdentifier, let objectID):
         state.selectedObjectID = objectID
         return Effect(value: .selectID(objectIdentifier: objectIdentifier))
@@ -80,7 +80,7 @@ private func randomSearchEffect(environment: SearchEnvironment,
     case .song:
         return environment.randomSong()
             .map { model in
-                guard let model = model else { return .reset }
+                guard let model = model else { return .reset(.home) }
                 return .completeSearch(AnyModel(model), Search(title: model.title, type: .song))
             }
             .receive(on: DispatchQueue.main)
@@ -88,7 +88,7 @@ private func randomSearchEffect(environment: SearchEnvironment,
     case .album:
         return environment.randomAlbum()
             .map { model in
-                guard let model = model else { return .reset }
+                guard let model = model else { return .reset(.home) }
                 return .completeSearch(AnyModel(model), Search(title: model.title, type: .album))
             }
             .receive(on: DispatchQueue.main)
@@ -96,7 +96,7 @@ private func randomSearchEffect(environment: SearchEnvironment,
     case .performance:
         return environment.randomPerformance()
             .map { model in
-                guard let model = model else { return .reset }
+                guard let model = model else { return .reset(.home) }
                 return .completeSearch(AnyModel(model), Search(title: model.venue, type: .performance))
             }
             .receive(on: DispatchQueue.main)

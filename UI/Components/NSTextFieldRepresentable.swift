@@ -13,16 +13,19 @@ public struct NSTextFieldRepresentable: NSViewRepresentable {
     let placeholder: String
     var text: Binding<String>
     let textColor: NSColor?
+    let font: NSFont?
     var onCommit: (() -> Void)?
     
     public init(placeholder: String,
                 text: Binding<String>,
                 textColor: NSColor? = nil,
+                font: NSFont? = nil,
                 onCommit: (() -> Void)? = nil) {
         self.placeholder = placeholder
         self.text = text
         self.textColor = textColor
         self.onCommit = onCommit
+        self.font = font
     }
 
     public func makeNSView(context: Context) -> NSTextField {
@@ -48,6 +51,10 @@ public struct NSTextFieldRepresentable: NSViewRepresentable {
         textField.layer?.borderColor = NSColor.lightGray.cgColor
         textField.layer?.borderWidth = 0.8
         textField.textColor = textColor ?? .labelColor
+        if let font = font {
+            textField.font = font
+            textField.frame.size.height = font.pointSize * 1.4
+        }
         textField.layer?.cornerRadius = 4.0
     }
 

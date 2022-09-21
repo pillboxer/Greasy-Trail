@@ -21,20 +21,11 @@ public struct BottomBarView: View {
         HStack {
             switch viewStore.displayedView {
             case .add:
-                closeAddButton
-                Spacer()
-                songButton
-                albumButton
-                performanceButton
-                Spacer()
-                uploadButton
+               addButtons
             case .result:
-                homeButton
-                randomButton
-                favoriteButton
-                Spacer()
+               resultButtons
             case .songs, .albums, .performances:
-                selectedWorkView
+                selectedWorkButtons
             case .home:
                 Spacer()
                 recordButtons
@@ -51,9 +42,39 @@ public struct BottomBarView: View {
         .padding()
         .frame(maxHeight: 36)
     }
+}
+
+private extension BottomBarView {
     
     @ViewBuilder
-    var selectedWorkView: some View {
+    var recordButtons: some View {
+        songButton
+        albumButton
+        performanceButton
+    }
+    
+    @ViewBuilder
+    var addButtons: some View {
+        closeAddButton
+        Spacer()
+        songButton
+        albumButton
+        performanceButton
+        Spacer()
+        uploadButton
+    }
+    
+    @ViewBuilder
+    var resultButtons: some View {
+        homeButton
+        randomButton
+        favoriteButton
+        Spacer()
+        recordButtons
+    }
+    
+    @ViewBuilder
+    var selectedWorkButtons: some View {
         homeButton
         if viewStore.selectedObjectID != nil {
             editButton
@@ -69,16 +90,6 @@ public struct BottomBarView: View {
         openAddButton
         Spacer()
         recordButtons
-    }
-}
-
-extension BottomBarView {
-    
-    @ViewBuilder
-    var recordButtons: some View {
-        songButton
-        albumButton
-        performanceButton
     }
     
 }
@@ -97,8 +108,8 @@ extension BottomBarViewState {
 extension BottomBarFeatureAction {
     init(_ action: BottomViewAction) {
         switch action {
-        case .reset:
-            self = .search(.reset)
+        case .reset(let displayedView):
+            self = .search(.reset(displayedView))
         case .toggleSearchField:
             self = .bottom(.toggleSearchField)
         case .makeRandomSearch:

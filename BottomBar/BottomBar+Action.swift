@@ -15,7 +15,7 @@ public struct BottomBarEnvironment {
 }
 
 enum BottomViewAction {
-    case reset
+    case reset(DisplayedView)
     case toggleSearchField
     case makeRandomSearch
     case selectView(DisplayedView)

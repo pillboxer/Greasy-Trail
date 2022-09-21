@@ -6,7 +6,7 @@ extension BottomBarView {
     
     var homeButton: some View {
         PlainOnTapButton(systemImage: "house") {
-            viewStore.send(.reset, animation: .default)
+            viewStore.send(.reset(.home), animation: .default)
             viewStore.send(.resetFavoriteResult)
         }
         .help("bottom_bar_tooltip_house")
@@ -36,7 +36,7 @@ extension BottomBarView {
     
     var closeAddButton: some View {
         PlainOnTapButton(systemImage: "minus.square") {
-            viewStore.send(.reset, animation: .default)
+            viewStore.send(.reset(.songs), animation: .default)
         }
     }
     
@@ -45,8 +45,7 @@ extension BottomBarView {
         switch viewStore.displayedView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
-                viewStore.send(.reset, animation: .default)
-                viewStore.send(.selectView(.add(.songs)), animation: .default)
+                viewStore.send(.reset(.add(.songs)), animation: .default)
             }
             .highlighting(DisplayedView.add(.songs) ==  viewStore.displayedView)
         default:
@@ -77,8 +76,7 @@ extension BottomBarView {
         switch viewStore.displayedView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
-                viewStore.send(.reset, animation: .default)
-                viewStore.send(.selectView(.add(.albums)), animation: .default)
+                viewStore.send(.reset(.add(.albums)), animation: .default)
             }
             .highlighting(DisplayedView.add(.albums) ==  viewStore.displayedView)
         default:
@@ -94,8 +92,7 @@ extension BottomBarView {
         switch viewStore.displayedView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
-                viewStore.send(.reset, animation: .default)
-                viewStore.send(.selectView(.add(.performances)), animation: .default)
+                viewStore.send(.reset(.add(.performances)), animation: .default)
             }
             .highlighting(DisplayedView.add(.performances) ==  viewStore.displayedView)
         default:
@@ -112,8 +109,22 @@ extension BottomBarView {
             guard let model = viewStore.model else {
                 return
             }
+            var displayedView: DisplayedView = .home
+            switch viewStore.displayedView {
+            case .add(let work):
+                switch work {
+                case .songs:
+                    displayedView = .songs
+                case .albums:
+                    displayedView = .albums
+                case .performances:
+                    displayedView = .performances
+                }
+            default:
+                break
+            }
             viewStore.send(.upload(model.value))
-            viewStore.send(.reset)
+            viewStore.send(.reset(displayedView))
         }
         .disabled(!(viewStore.model?.uploadAllowed ?? false))
     }

@@ -22,7 +22,7 @@ struct AppState: Equatable {
     var selectedID: ObjectIdentifier?
     var selectedObjectID: NSManagedObjectID?
     var isSearching = false
-    
+
     // CloudKit
     var mode: Mode?
     @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?

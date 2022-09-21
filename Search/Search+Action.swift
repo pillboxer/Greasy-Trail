@@ -10,5 +10,5 @@ public enum SearchAction: Equatable {
     case makeRandomSearch
     case setSearchFieldText(String)
     case selectDisplayedView(DisplayedView, AnyModel?)
-    case reset
+    case reset(DisplayedView)
 }

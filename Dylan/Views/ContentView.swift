@@ -72,27 +72,29 @@ struct ContentView: View {
     
     @ViewBuilder
     func view(for section: DisplayedView) -> some View {
-        switch section {
-        case .add:
-            AddView(store: store.scope(state: { $0.addState },
-                                       action: { .add($0) }))
-        case .home:
-            StatsView(store: store.scope(state: { $0.statsState },
-                                         action: { .stats($0) }))
-        case .result:
-            ResultView(store: store.scope(state: { $0.search },
-                                          action: { .search($0) }))
-        case .songs:
-            AllSongsView(store: store.scope(state: { $0.selectedID },
-                                            action: { .search($0) }))
-        case .albums:
-            Text("Album")
-        case .missingLBs:
-            MissingLBsView(lbNumbers: viewStore.state.missingLBNumbers!)
-        case .performances:
-            AllPerformancesView(store: store.scope(state: { $0.allPerformancesState },
-                                                   action: { .allPerformances($0)}),
-                                predicate: viewStore.selectedPerformancePredicate.predicate)
+        ZStack {
+            switch section {
+            case .add:
+                AddView(store: store.scope(state: { $0.addState },
+                                           action: { .add($0) }))
+            case .home:
+                StatsView(store: store.scope(state: { $0.statsState },
+                                             action: { .stats($0) }))
+            case .result:
+                ResultView(store: store.scope(state: { $0.search },
+                                              action: { .search($0) }))
+            case .songs:
+                AllSongsView(store: store.scope(state: { $0.selectedID },
+                                                action: { .search($0) }))
+            case .albums:
+                Text("Album")
+            case .missingLBs:
+                MissingLBsView(lbNumbers: viewStore.state.missingLBNumbers!)
+            case .performances:
+                AllPerformancesView(store: store.scope(state: { $0.allPerformancesState },
+                                                       action: { .allPerformances($0)}),
+                                    predicate: viewStore.selectedPerformancePredicate.predicate) 
+            }
         }
     }
 }

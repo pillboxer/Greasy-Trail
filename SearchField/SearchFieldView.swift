@@ -11,7 +11,7 @@ import ComposableArchitecture
 import Search
 import Model
 
-struct SearchFieldView: View {
+public struct SearchFieldView: View {
     
     fileprivate enum SearchFieldAction {
         case search(Search)
@@ -22,7 +22,8 @@ struct SearchFieldView: View {
         var searchFieldText: String
     }
     
-    let store: Store<SearchState, SearchAction>
+    private let store: Store<SearchState, SearchAction>
+    private let font: NSFont?
     @ObservedObject private var viewStore: ViewStore<SearchFieldState, SearchFieldAction>
     
     private var textBinding: Binding<String> {
@@ -30,14 +31,18 @@ struct SearchFieldView: View {
                                  send: { SearchFieldAction.setText($0) })
     }
     
-    public init(store: Store<SearchState, SearchAction>) {
+    public init(store: Store<SearchState, SearchAction>, font: NSFont? = nil) {
         self.store = store
-        self.viewStore = ViewStore(store.scope(state: { SearchFieldState(searchFieldText: $0.searchFieldText) },
-                                     action: SearchAction.init))
+        self.viewStore = ViewStore(store.scope(
+            state: { SearchFieldState(searchFieldText: $0.searchFieldText) },
+            action: SearchAction.init))
+        self.font = font
     }
     
-    var body: some View {
-            NSTextFieldRepresentable(placeholder: "search_placeholder", text: textBinding) {
+    public var body: some View {
+            NSTextFieldRepresentable(placeholder: "search_placeholder",
+                                     text: textBinding,
+                                     font: font) {
                 search()
             }
             .padding(4)

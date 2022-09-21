@@ -40,7 +40,7 @@ public struct StatsView: View {
                     .italic()
             }
             Spacer()
-            SearchView(store: store.scope(state: { $0.search }, action: { StatsFeatureAction.search($0)}))
+            SearchFieldView(store: store.scope(state: { $0.search }, action: { StatsFeatureAction.search($0)}), font: .systemFont(ofSize: 28))
                 .frame(width: 456)
             Spacer()
             HStack {
