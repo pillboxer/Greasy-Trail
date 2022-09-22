@@ -1,7 +1,8 @@
 import CloudKit
 import OSLog
-import GTLogging
 import Core
+
+public let Log_CloudKit = OSLog(subsystem: .subsystem, category: "CloudKit Fetch")
 
 func fetchRecords(of type: DylanRecordType, after date: Date?) async throws -> [RecordType] {
     let predicate = NSPredicate(format: "modificationDate > %@", (date ?? .distantPast) as NSDate)

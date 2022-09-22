@@ -1,18 +1,12 @@
-//
-//  Detective.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 24/06/2022.
-//
-
+import Core
 import Foundation
-import OSLog
 import CoreData
-import Combine
 import GTCoreData
 import Model
-import GTLogging
+import os
 import ComposableArchitecture
+
+let logger = Logger(subsystem: .subsystem, category: "Detective")
 
 public class Detective: ObservableObject {
 
@@ -23,27 +17,27 @@ public class Detective: ObservableObject {
     }
     
     public func search(performance id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
-        os_log("Searching performance by ID: %{public}@", log: Log_Detective, id)
+        logger.log("Searching performance by ID: \(id, privacy: .public)")
         return fetchPerformanceModel(for: id)
     }
     
     public func search(song id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
-        os_log("Searching song by ID: %{public}@", log: Log_Detective, id)
+        logger.log("Searching song by ID: \(id, privacy: .public)")
         return fetchSongModel(for: id)
     }
 
     public func search(song title: String) -> Effect<AnyModel?, Never> {
-        os_log("Searching song: %{public}@", log: Log_Detective, title)
+        logger.log("Searching song: \(title, privacy: .public)")
         return fetchModel(for: title)
     }
 
     public func search(album title: String) -> Effect<AnyModel?, Never> {
-        os_log("Searching album: %{public}@", log: Log_Detective, title)
+        logger.log("Searching album: \(title, privacy: .public)")
         return fetch(album: title)
     }
 
     public func search(performance date: Double) -> Effect<AnyModel?, Never> {
-        os_log("Searching date: %{public}@", log: Log_Detective, String(describing: date))
+        logger.log("Searching date: \(date, privacy: .public)")
         return fetch(performance: date)
     }
     

@@ -2,9 +2,12 @@ import SwiftUI
 import GTFormatter
 import Search
 import UI
+import os
 import GTCoreData
 import TwoColumnTable
 import ComposableArchitecture
+
+let logger = Logger(subsystem: .subsystem, category: "All Performances")
 
 public struct AllPerformancesView {
     

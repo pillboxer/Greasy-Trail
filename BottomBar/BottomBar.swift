@@ -4,8 +4,11 @@ import UI
 import SearchField
 import GTCloudKit
 import Core
+import os
 import Search
 import Model
+
+let logger = Logger(subsystem: .subsystem, category: "Bottom Bar")
 
 public struct BottomBarView: View {
     

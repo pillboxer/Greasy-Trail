@@ -1,14 +1,6 @@
-//
-//  CKPagingQueryOperation.swift
-//  Greasy Trail
-//
-//  Created by Henry Cooper on 15/07/2022.
-//
-
 import Foundation
 import CloudKit
 import OSLog
-import GTLogging
 
 class CKPagingQueryOperation {
 

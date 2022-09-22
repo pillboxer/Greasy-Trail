@@ -23,13 +23,17 @@ Reducer.combine(
 
 public let bottomBarReducer = Reducer<BottomBarState, BottomBarAction, Void> { state, action, _ in
     switch action {
-    case .displayFavoriteResult(let success):
-        state.displayedFavorite = success
+    case .displayFavoriteResult(let result):
+        logger.log("Setting favorite to \(result?.description ?? "nil", privacy: .public)")
+        state.displayedFavorite = result
     case .toggleSearchField:
+        logger.log("Toggle search field")
         state.isSearchFieldShowing.toggle()
     case .resetFavoriteResult:
+        logger.log("Resetting favorite result")
         state.displayedFavorite = nil
     case .selectDisplayedView(let displayedView):
+        logger.log("Setting displayed view to \(displayedView.rawValue, privacy: .public)")
         state.displayedView = displayedView
     case .toggleFavorite:
         let uuid = state.searchState.model?.uuid
@@ -49,9 +53,10 @@ public let bottomBarReducer = Reducer<BottomBarState, BottomBarAction, Void> { s
                 let songs = (try? context.fetch(songFetch) as [Favoritable]) ?? []
                 let albums = (try? context.fetch(albumFetch) as [Favoritable]) ?? []
                 let performances = (try? context.fetch(performanceFetch) as [Favoritable]) ?? []
-                
+
                 let object = [songs, albums, performances].flatMap { $0 }.first
                 object?.isFavorite.toggle()
+                logger.log("Toggled favorite to \(object?.isFavorite.description ?? "nil", privacy: .public)")
                 newResult = object?.isFavorite
             }
             await context.asyncSave()

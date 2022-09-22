@@ -27,9 +27,9 @@ public struct StatsView: View {
     
     private var lbCount: Int {
         performances
-        .compactMap { $0.lbNumbers }
-        .flatMap { Set($0) }
-        .count
+            .compactMap { $0.lbNumbers }
+            .flatMap { Set($0) }
+            .count
     }
     
     public var body: some View {
@@ -40,15 +40,18 @@ public struct StatsView: View {
                     .italic()
             }
             Spacer()
-            SearchFieldView(store: store.scope(state: { $0.search }, action: { StatsFeatureAction.search($0)}), font: .systemFont(ofSize: 28))
-                .frame(width: 456)
+            SearchFieldView(store: store.scope(
+                state: { $0.search },
+                action: { StatsFeatureAction.search($0) }
+            ), font: .systemFont(ofSize: 28))
+            .frame(width: 456)
             Spacer()
             HStack {
                 StatInfoView(songsCount: songs.count,
-                                 albumsCount: albums.count,
-                                 performancesCount: performances.count,
-                                 lbCount: lbCount,
-                                 viewStore: viewStore)
+                             albumsCount: albums.count,
+                             performancesCount: performances.count,
+                             lbCount: lbCount,
+                             viewStore: viewStore)
                 Spacer()
             }
         }
@@ -65,7 +68,7 @@ struct StatInfoView: View {
     let lbCount: Int
     
     @ObservedObject var viewStore: ViewStore<StatsViewState, StatsViewAction>
-
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text("Songs: \(songsCount)")

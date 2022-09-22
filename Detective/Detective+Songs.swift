@@ -9,7 +9,6 @@ import Foundation
 import OSLog
 import CoreData
 import GTCoreData
-import GTLogging
 import Model
 import Combine
 import ComposableArchitecture
@@ -24,7 +23,7 @@ public extension Detective {
         let songObject: NSManagedObject?
         songObject = fetch(song: song) ?? fetch(song: resolveSpellingOf(song: song))
         guard let song = songObject else {
-            os_log("Could not find song %{public}@", log: Log_Detective, song)
+            logger.log("Could not find song \(song, privacy: .public)")
             return nil
         }
         var id: String?
@@ -104,22 +103,22 @@ private extension Detective {
     
     func resolveSpellingOf(song: String) -> String {
         let context = container.newBackgroundContext()
-        os_log("Attempting to resolve %{public}@", log: Log_Detective, song)
+        logger.log("Attempting to resolve \(song, privacy: .public)")
 
         return context.syncPerform {
             guard let metadata = context.fetchAndWait(AppMetadata.self, with: .misspellings).first,
                   let data = metadata.file,
                   let decoded = try? data.decoded() as Misspellings else {
-                os_log("Could not find misspellings data", log: Log_Detective, type: .error)
+                logger.log(level: .error, "Could not find misspellings data")
                 return song
             }
             let songsDict = decoded.songs
             let correctlySpelt = songsDict[caseInsensitive: song]
             if let correctlySpelt = correctlySpelt {
-                os_log("Resolved to %{public}@", log: Log_Detective, correctlySpelt)
+                logger.log("Resolved to \(correctlySpelt, privacy: .public)")
                 return correctlySpelt
             } else {
-                os_log("Unable to resolve %{public}@", log: Log_Detective, song)
+                logger.log("Unable to resolve \(song, privacy: .public)")
                 return song
             }
         }

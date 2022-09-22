@@ -6,6 +6,7 @@ extension BottomBarView {
     
     var homeButton: some View {
         PlainOnTapButton(systemImage: "house") {
+            logger.log("Tapped home")
             viewStore.send(.reset(.home), animation: .default)
             viewStore.send(.resetFavoriteResult)
         }
@@ -14,6 +15,7 @@ extension BottomBarView {
     
     var searchButton: some View {
         PlainOnTapButton(systemImage: "magnifyingglass") {
+            logger.log("Tapped search")
             viewStore.send(.toggleSearchField, animation: .default)
         }
         .help("bottom_bar_tooltip_search")
@@ -21,6 +23,7 @@ extension BottomBarView {
     
     var randomButton: some View {
         PlainOnTapButton(systemImage: "dice") {
+            logger.log("Tapped random")
             viewStore.send(.makeRandomSearch)
             viewStore.send(.resetFavoriteResult)
         }
@@ -29,6 +32,7 @@ extension BottomBarView {
     
     var openAddButton: some View {
         PlainOnTapButton(systemImage: "plus.square") {
+            logger.log("Tapped open add")
             viewStore.send(.selectView(.add(.songs)), animation: .default)
         }
         .help("bottom_bar_tooltip_new")
@@ -36,6 +40,7 @@ extension BottomBarView {
     
     var closeAddButton: some View {
         PlainOnTapButton(systemImage: "minus.square") {
+            logger.log("Tapped close add")
             viewStore.send(.reset(.songs), animation: .default)
         }
     }
@@ -45,29 +50,16 @@ extension BottomBarView {
         switch viewStore.displayedView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
+                logger.log("Tapped song (add)")
                 viewStore.send(.reset(.add(.songs)), animation: .default)
             }
             .highlighting(DisplayedView.add(.songs) ==  viewStore.displayedView)
         default:
             PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
+                logger.log("Tapped song (home)")
                 viewStore.send(.selectView(.songs), animation: .default)
             }
             .highlighting(DisplayedView.songs == viewStore.displayedView)
-        }
-    }
-    
-    @ViewBuilder
-    var favoriteButton: some View {
-        if let success = viewStore.displayedFavorite {
-            PlainOnTapButton(systemImage: success ? "star.fill" : "star") {
-                viewStore.send(.toggleFavorite)
-            }
-        } else if let model = viewStore.model {
-            PlainOnTapButton(systemImage: model.isFavorite ? "star.fill" : "star") {
-                viewStore.send(.toggleFavorite)
-            }
-        } else {
-            EmptyView()
         }
     }
     
@@ -76,11 +68,13 @@ extension BottomBarView {
         switch viewStore.displayedView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
+                logger.log("Tapped album (add)")
                 viewStore.send(.reset(.add(.albums)), animation: .default)
             }
             .highlighting(DisplayedView.add(.albums) ==  viewStore.displayedView)
         default:
             PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
+                logger.log("Tapped album (home)")
                 viewStore.send(.selectView(.albums), animation: .default)
             }
             .highlighting(DisplayedView.albums == viewStore.displayedView)
@@ -92,16 +86,34 @@ extension BottomBarView {
         switch viewStore.displayedView {
         case .add:
             PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
+                logger.log("Tapped performance (add)")
                 viewStore.send(.reset(.add(.performances)), animation: .default)
             }
             .highlighting(DisplayedView.add(.performances) ==  viewStore.displayedView)
         default:
             PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
+                logger.log("Tapped performance (home)")
                 viewStore.send(.selectView(.performances), animation: .default)
             }
             .highlighting(DisplayedView.performances == viewStore.displayedView)
         }
-        
+    }
+    
+    @ViewBuilder
+    var favoriteButton: some View {
+        if let success = viewStore.displayedFavorite {
+            PlainOnTapButton(systemImage: success ? "star.fill" : "star") {
+                logger.log("Tapped favorite")
+                viewStore.send(.toggleFavorite)
+            }
+        } else if let model = viewStore.model {
+            PlainOnTapButton(systemImage: model.isFavorite ? "star.fill" : "star") {
+                logger.log("Tapped favorite")
+                viewStore.send(.toggleFavorite)
+            }
+        } else {
+            EmptyView()
+        }
     }
     
     var uploadButton: some View {
@@ -123,6 +135,7 @@ extension BottomBarView {
             default:
                 break
             }
+            logger.log("Tapped upload")
             viewStore.send(.upload(model.value))
             viewStore.send(.reset(displayedView))
         }
@@ -134,6 +147,7 @@ extension BottomBarView {
             guard let id = viewStore.selectedObjectID else {
                 return
             }
+            logger.log("Tapped edit")
             viewStore.send(.selectView(.add(.songs)))
             viewStore.send(.search(id))
         }

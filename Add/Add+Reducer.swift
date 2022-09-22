@@ -7,20 +7,23 @@ import Core
 public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
     switch action {
     case .selectRecordToAdd(let dylanRecordType):
+        logger.log("Setting record to add as \(dylanRecordType.rawValue, privacy: .public)")
         state.displayedView = .add(dylanRecordType)
     case .updateSong(let title, let author):
+        logger.log("Updating song: (Title: \(title, privacy: .public), Author: \(author, privacy: .public)")
         let detective = Detective()
         let uuid = detective.uuid(for: title)
         let sSong = sSong(uuid: uuid ?? "", title: title, author: author, isFavorite: state.song?.isFavorite ?? false)
         state.song = SongDisplayModel(song: sSong)
         return Effect(value: AddAction.updateSongUUID(uuid))
     case .updateSongUUID(let uuid):
+        logger.log("Updating song uuid to \(uuid ?? "nil", privacy: .public)")
         state.songUUID = uuid
     case .incrLBCount:
         var lbs = state.performance?.lbNumbers ?? []
         if lbs.last == 0 { return .none }
         let performanceEditor = PerformanceEditor(state.performance)
-        let sPerformance = performanceEditor.appendLBNumber(0)
+        let sPerformance = performanceEditor.appendLBNumber()
         return Effect(value: AddAction.updatePerformanceDisplayModel(sPerformance))
     case .incrSongCount:
         var songs = state.performanceSongs

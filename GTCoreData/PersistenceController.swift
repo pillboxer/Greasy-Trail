@@ -1,13 +1,8 @@
-//
-//  PersistenceController.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 06/07/2022.
-//
-
+import Core
 import CoreData
 import OSLog
-import GTLogging
+
+public let Log_CoreData = OSLog(subsystem: .subsystem, category: "Core Data")
 
 public class PersistenceController {
 

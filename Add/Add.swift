@@ -1,5 +1,9 @@
 import SwiftUI
 import ComposableArchitecture
+import Core
+import os
+
+public let logger = Logger(subsystem: .subsystem, category: "Performance editing")
 
 public struct AddView: View {
     

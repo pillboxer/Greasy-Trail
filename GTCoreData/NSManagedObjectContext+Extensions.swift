@@ -1,13 +1,8 @@
-//
-//  NSManagedObjectContext+Extensions.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 07/07/2022.
-//
-
 import CoreData
-import OSLog
-import GTLogging
+import os
+import Core
+
+let logger = Logger(subsystem: .subsystem, category: "")
 
 extension NSManagedObjectContext {
     // swiftlint:disable identifier_name
@@ -58,24 +53,16 @@ extension NSManagedObjectContext {
         }
     }
     
-    public func syncSave() {
-        syncPerform {
-            self.saveWithTry()
-        }
-    }
-    
     private func saveWithTry() {
         guard self.hasChanges else {
-            os_log("No changes to save, returning", log: Log_CoreData)
+            logger.log("No changes to save")
             return
         }
         do {
             try self.save()
         } catch {
-            os_log("Context unable to save. Error: %{public}@",
-                   log: Log_CoreData,
-                   type: .error,
-                   String(describing: error))
+            logger.log(level: .error,
+                       "Unable to save changes with error: \(String(describing: error), privacy: .public)")
         }
     }
     
