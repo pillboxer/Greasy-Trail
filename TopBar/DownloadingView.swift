@@ -1,5 +1,6 @@
 import SwiftUI
 import GTCloudKit
+import Core
 
 struct DownloadingView: View {
     
@@ -13,13 +14,11 @@ struct DownloadingView: View {
                     .resizable()
                     .aspectRatio(contentMode: ContentMode.fit)
                     .frame(width: 12, height: 12)
-                Text(String(formatted: "cloud_kit_fetching_in_progress", args: type.rawValue.capitalized))
-                    .font(.caption)
+                Text(tr("cloud_kit_fetching_in_progress", args: type.rawValue.capitalized))
                 Spacer()
                 ProgressView(value: progress)
                     .frame(width: 256)
                 Text(String(Int(progress * 100)) + "%")
-                    .font(.caption)
                     .frame(width: 36)
             }
         }

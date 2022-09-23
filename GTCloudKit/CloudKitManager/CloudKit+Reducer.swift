@@ -1,22 +1,16 @@
-//
-//  CloudKit+Reducer.swift
-//  GTCloudKit
-//
-//  Created by Henry Cooper on 13/09/2022.
-//
-
 import ComposableArchitecture
 import Detective
 import Model
+import Core
+import os
 
 private struct TimerID: Hashable {}
 
 public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvironment> { state, action, environment in
     switch action {
     case .start(let date):
-        return .run { send
-            in await send(.fetchSongs(date))
-        }
+        logger.log("Starting fetch of all records")
+        return .run { send in await send(.fetchSongs(date)) }
     case .fetchSongs(let date):
         return .run(operation: { send in
             for try await event in environment.client.fetchSongs(date) {
@@ -31,6 +25,8 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                 }
             }
         }, catch: { error, send in
+            let errorString = String(describing: error)
+            logger.log(level: .error, "Received failure whilst fetching songs: \(errorString, privacy: .public)")
             await send(.cloudKitClient(.failure(error)))
         })
     case .fetchAlbums(let date, let newValues):
@@ -48,6 +44,9 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                 }
             }
         }, catch: { error, send in
+            logger.log(
+                level: .error,
+                "Received failure whilst fetching albums: \(String(describing: error), privacy: .public)")
             await send(.cloudKitClient(.failure(error)))
         })
     case .fetchPerformances(let date, let newValues):
@@ -65,6 +64,9 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                 }
             }
         }, catch: { error, send in
+            logger.log(
+                level: .error,
+                "Received failure whilst fetching performances: \(String(describing: error), privacy: .public)")
             await send(.cloudKitClient(.failure(error)))
         })
     case .uploadPerformance(let model):
@@ -88,6 +90,9 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                 }
             }
         }, catch: { error, send in
+            logger.log(
+                level: .error,
+                "Received failure whilst uploading performance: \(String(describing: error), privacy: .public)")
             await send(.cloudKitClient(.failure(error)))
         })
         
@@ -99,6 +104,7 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
         state.mode = .downloading(progress: progress, type)
         return .none
     case .cloudKitClient(.success(.completeFetch(let newValues))):
+        logger.log("Successfully fetched all records")
         state.mode = .downloaded
         state.lastFetchDate = newValues ? Date() : state.lastFetchDate
         return Effect.timer(id: TimerID(), every: 3, on: DispatchQueue.main.eraseToAnyScheduler())
@@ -112,7 +118,6 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
     case .cloudKitClient(.failure(let error)):
         state.mode = .operationFailed(.init(error))
         return .none
-        
         // Completion
     case .completeDownload:
         state.mode = nil

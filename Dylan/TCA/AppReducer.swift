@@ -56,7 +56,11 @@ Reducer.combine(
     cloudKitReducer.pullback(
         state: \.cloudKitState,
         action: /AppAction.cloudKit,
-        environment: CloudKitEnvironment.init)
+        environment: CloudKitEnvironment.init),
+    commandMenuReducer.pullback(
+        state: \.commandMenuState,
+        action: /AppAction.commandMenu,
+        environment: { _ in () })
 )
 
 extension SearchEnvironment {

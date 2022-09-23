@@ -1,11 +1,5 @@
-//
-//  Detective+Performances.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 08/07/2022.
-//
-
-import OSLog
+import os
+import Core
 import CoreData
 import Combine
 import GTCoreData
@@ -15,6 +9,7 @@ import ComposableArchitecture
 public extension Detective {
     
     func fetch(performance date: Double) -> Effect<AnyModel?, Never> {
+        logger.log("Fetching performance at date \(date, privacy: .public)")
         let context = container.newBackgroundContext()
         
         return .future { completion in
@@ -33,6 +28,7 @@ public extension Detective {
     }
     
     func randomPerformance() -> Effect<PerformanceDisplayModel?, Never> {
+        logger.log("Fetching random performance")
         let context = container.newBackgroundContext()
         return .future { completion in
             context.performFetch(Performance.self) { [self] performances in
@@ -68,9 +64,9 @@ extension Detective {
         context.perform { [weak self] in
             self?.objects(Performance.self, including: song, context: context) { objects in
                 if let song = context.object(with: objectID) as? Song {
-                    os_log("%{public}@ found on %{public}@ performances(s)",
-                           song.title!,
-                           String(describing: objects.count))
+                    let title = song.title ?? ""
+                    let count = String(objects.count)
+                    logger.log("\(title, privacy: .public) found on \(count, privacy: .public) performance(s)")
                     let sPerformances = objects.compactMap { sPerformance(uuid: $0.uuid!,
                                                                           venue: $0.venue!,
                                                                           songs: [],
@@ -103,7 +99,9 @@ private extension Detective {
                                         date: performance.date,
                                         lbNumbers: performance.lbNumbers ?? [],
                                         isFavorite: performance.isFavorite)
-        return PerformanceDisplayModel(sPerformance: sPerformance)
+        let displayModel = PerformanceDisplayModel(sPerformance: sPerformance)
+        logger.log("Created Performance Display Model \(displayModel)")
+        return displayModel
         
     }
     

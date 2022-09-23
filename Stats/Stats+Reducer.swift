@@ -2,6 +2,10 @@ import ComposableArchitecture
 import CoreData
 import GTCoreData
 import Search
+import Core
+import os
+
+let logger = Logger(subsystem: .subsystem, category: "Stats")
 
 public let statsFeatureReducer: Reducer<StatsState, StatsFeatureAction, SearchEnvironment> =
 Reducer.combine(
@@ -21,6 +25,7 @@ public let statsReducer = Reducer<StatsState, StatsAction, Void> { state, action
         state.displayedView = displayedView
         return .none
     case .fetchMissingLBNumbers:
+        logger.log("Fetching missing LB numbers")
         state.isFetchingMissingLBCount = true
         return .future { promise in
             let context = PersistenceController.shared.newBackgroundContext()
@@ -41,6 +46,7 @@ public let statsReducer = Reducer<StatsState, StatsAction, Void> { state, action
         .receive(on: DispatchQueue.main.eraseToAnyScheduler())
         .eraseToEffect()
     case .completeFetch(let lbNumbers):
+        logger.log("Completed fetch with \(lbNumbers, privacy: .public) LB numbers")
         state.missingLBNumbers = lbNumbers
         state.isFetchingMissingLBCount = false
         return Effect(value: StatsAction.selectDisplayedView(.missingLBs))

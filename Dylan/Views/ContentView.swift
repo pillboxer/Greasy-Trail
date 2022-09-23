@@ -35,7 +35,7 @@ struct ContentView: View {
         var displayedView: DisplayedView
         var selectedPerformancePredicate: PerformancePredicate
         var mode: Mode?
-        var showingCloudKitError: Bool
+        var showingError: Bool
         var missingLBNumbers: [Int]?
     }
     
@@ -47,7 +47,7 @@ struct ContentView: View {
                              displayedView: $0.displayedView,
                              selectedPerformancePredicate: $0.selectedPerformancePredicate,
                              mode: $0.mode,
-                             showingCloudKitError: $0.showingCloudKitError,
+                             showingError: $0.showingError,
                              missingLBNumbers: $0.missingLBNumbers)}))
     }
     

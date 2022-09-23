@@ -1,12 +1,3 @@
-//
-//  ResultPerformance.swift
-//  ResultPerformance
-//
-//  Created by Henry Cooper on 08/08/2022.
-//
-
-// swiftlint: disable identifier_name
-
 import SwiftUI
 import Model
 import SongsList

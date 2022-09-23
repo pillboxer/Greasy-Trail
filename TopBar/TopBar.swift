@@ -1,37 +1,40 @@
-//
-//  TopBar.swift
-//  TopBar
-//
-//  Created by Henry Cooper on 16/09/2022.
-//
-
 import ComposableArchitecture
 import GTCloudKit
 import SwiftUI
 import Core
 
 public struct TopBarState: Equatable {
-    public var showingCloudKitError = false
+    public var showingError: Bool
     public var cloudKit: CloudKitState
+    public var isFetchingLogs: Bool
     
     var mode: Mode? {
-        cloudKit.mode
+        get {
+            cloudKit.mode
+        }
+        set {
+            cloudKit.mode = newValue
+        }
     }
     
     public init(cloudKitState: CloudKitState,
-                showingCloudKitError: Bool) {
+                showingError: Bool,
+                isFetchingLogs: Bool) {
         self.cloudKit = cloudKitState
-        self.showingCloudKitError = showingCloudKitError
+        self.isFetchingLogs = isFetchingLogs
+        self.showingError = showingError
     }
 }
 
 enum TopBarViewAction {
-    case toggleCloudKitError
+    case toggleError
     case refetch(Date?)
+    case reset
 }
 
 public enum TopBarAction: Equatable {
-    case toggleCloudKitError
+    case toggleError
+    case reset
 }
 
 public enum TopBarFeatureAction {
@@ -53,8 +56,12 @@ Reducer.combine(
 
 public let topBarReducer = Reducer<TopBarState, TopBarAction, Void> { state, action, _ in
     switch action {
-    case .toggleCloudKitError:
-        state.showingCloudKitError.toggle()
+    case .toggleError:
+        state.showingError.toggle()
+        return .none
+    case .reset:
+        state.showingError = false
+        state.mode = nil
         return .none
     }
 }
@@ -80,15 +87,13 @@ public struct TopBarView: View {
                 OperationSuccessView()
             case .uploading(progress: let progress):
                 UploadingView(progress: progress)
+            case .fetchingLogs:
+                FetchingLogsView()
             default:
                 EmptyView()
             }
         }
-        .onDisappear {
-            if viewStore.state.showingCloudKitError {
-                viewStore.send(.toggleCloudKitError)
-            }
-        }
+        .font(.caption)
         .frame(maxHeight: 36)
     }
 }
@@ -112,10 +117,12 @@ extension DylanRecordType {
 extension TopBarFeatureAction {
     init(_ action: TopBarViewAction) {
         switch action {
-        case .toggleCloudKitError:
-            self = .topBar(.toggleCloudKitError)
+        case .toggleError:
+            self = .topBar(.toggleError)
         case .refetch(let date):
             self = .cloudKit(.start(date: date))
+        case .reset:
+            self = .topBar(.reset)
         }
     }
 }

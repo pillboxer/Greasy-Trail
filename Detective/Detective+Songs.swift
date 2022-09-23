@@ -1,12 +1,4 @@
-//
-//  Detective+Songs.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 08/07/2022.
-//
-
 import Foundation
-import OSLog
 import CoreData
 import GTCoreData
 import Model
@@ -20,6 +12,7 @@ struct Misspellings: Codable {
 public extension Detective {
     
     func uuid(for song: String) -> String? {
+        logger.log("Fetching uuid for \(song, privacy: .public)")
         let songObject: NSManagedObject?
         songObject = fetch(song: song) ?? fetch(song: resolveSpellingOf(song: song))
         guard let song = songObject else {
@@ -57,6 +50,7 @@ public extension Detective {
     }
     
     func randomSong() -> Effect<SongDisplayModel?, Never> {
+        logger.log("Fetching random song")
         let context = container.newBackgroundContext()
         return .future { completion in
             context.performFetch(Song.self) { songs in
@@ -92,6 +86,7 @@ extension Detective {
 private extension Detective {
     
     func fetch(song title: String) -> Song? {
+        logger.log("Fetching song with title \(title, privacy: .public)")
         let context = container.newBackgroundContext()
         let regexPredicate = NSPredicate(format: "title =[c] %@", title)
         let titleBeforeParentheses = title.before(first: "(").trimmingCharacters(in: .whitespaces)

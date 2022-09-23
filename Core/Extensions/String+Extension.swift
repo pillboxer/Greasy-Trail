@@ -10,3 +10,7 @@ public extension String {
     }
     
 }
+
+public func tr(_ string: String, args: CVarArg...) -> String {
+    String(formatted: string, args: args)
+}

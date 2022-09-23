@@ -1,11 +1,5 @@
-//
-//  CKQuery+Extensions.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 25/06/2022.
-//
-
 import CloudKit
+import Core
 
 extension CKQuery {
 

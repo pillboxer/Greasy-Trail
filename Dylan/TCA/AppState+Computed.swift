@@ -34,7 +34,7 @@ extension AppState {
     var addState: AddState {
         get {
             return AddState(searchState: search,
-                     displayedView: displayedView)
+                            displayedView: displayedView)
         }
         set {
             self.search = newValue.search
@@ -49,7 +49,7 @@ extension AppState {
                 search: search,
                 displayedView: displayedView,
                 cloudKit: cloudKitState,
-            displayedFavorite: displayedFavorite)
+                displayedFavorite: displayedFavorite)
         }
         set {
             self.displayedView = newValue.displayedView
@@ -84,10 +84,12 @@ extension AppState {
     
     var topBarState: TopBarState {
         get {
-            return TopBarState(cloudKitState: cloudKitState, showingCloudKitError: showingCloudKitError)
+            return TopBarState(cloudKitState: cloudKitState,
+                               showingError: showingError,
+                               isFetchingLogs: isFetchingLogs)
         }
         set {
-            showingCloudKitError = newValue.showingCloudKitError
+            showingError = newValue.showingError
             cloudKitState = newValue.cloudKit
         }
     }
@@ -95,17 +97,25 @@ extension AppState {
     var statsState: StatsState {
         get {
             return StatsState(displayedView: displayedView,
-            isFetchingMissingLBCount: isFetchingMissingLBCount,
-            missingLBNumbers: missingLBNumbers,
-            search: search)
+                              isFetchingMissingLBCount: isFetchingMissingLBCount,
+                              missingLBNumbers: missingLBNumbers,
+                              search: search)
         }
         set {
             isFetchingMissingLBCount = newValue.isFetchingMissingLBCount
             missingLBNumbers = newValue.missingLBNumbers
             search = newValue.search
             displayedView = newValue.displayedView
-
+            
         }
     }
     
+    var commandMenuState: CommandMenuState {
+        get {
+            CommandMenuState(mode: mode)
+        }
+        set {
+            mode = newValue.mode
+        }
+    }
 }

@@ -1,8 +1,6 @@
 import CloudKit
-import OSLog
+import os
 import Core
-
-public let Log_CloudKit = OSLog(subsystem: .subsystem, category: "CloudKit Fetch")
 
 func fetchRecords(of type: DylanRecordType, after date: Date?) async throws -> [RecordType] {
     let predicate = NSPredicate(format: "modificationDate > %@", (date ?? .distantPast) as NSDate)
@@ -23,16 +21,18 @@ func getOrderedSongRecords(from record: RecordType) async throws -> [RecordType]
     // Ensure songs are in the correct order
     for id in ids {
         guard let result = dict[id] else {
-            os_log("ID was not found in song references. Continuing", log: Log_CloudKit, type: .error)
+            logger.log(
+                level: .error,
+                "ID \(id.recordName, privacy: .public) was not found in song references. Continuing"
+            )
             continue
         }
         guard let recordType = try? result.get() else {
             let title = record.string(for: .title) ?? record.string(for: .venue) ?? ""
             let badName = id.recordName
-            os_log("Unknown ID %{public}@ found in song records of %{public}@",
-                   log: Log_CloudKit,
-                   type: .error,
-                   badName, title)
+            logger.log(
+                level: .error,
+                "Unknown ID \(badName, privacy: .public) found in song records of \(title, privacy: .public)")
             continue
         }
         ordered.append(recordType)

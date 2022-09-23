@@ -9,6 +9,7 @@ import Stats
 import Core
 
 struct AppState: Equatable {
+    
     // Bottom Bar
     var isSearchFieldShowing = false
     var displayedView: DisplayedView = .home
@@ -26,7 +27,7 @@ struct AppState: Equatable {
     // CloudKit
     var mode: Mode?
     @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
-    var showingCloudKitError = false
+    var showingError = false
     
     // AllPerformances
     var selectedPerformancePredicate: PerformancePredicate = .sixties
@@ -34,4 +35,7 @@ struct AppState: Equatable {
     // Stats
     var isFetchingMissingLBCount = false
     var missingLBNumbers: [Int]?
+    
+    // Logs
+    var isFetchingLogs = false
 }

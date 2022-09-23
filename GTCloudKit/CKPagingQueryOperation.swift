@@ -31,9 +31,6 @@ class CKPagingQueryOperation {
             switch result {
             case .success(let cursor):
                 if let cursor = cursor {
-//                   os_log("Cursor received in CKPagingQueryOperation, attempting query with cursor",
-//                          log: Log_CloudKit,
-//                          type: .debug)
                    let operation = CKPagingQueryOperation(query: query,
                                                           cursor: cursor,
                                                           database: database,
@@ -42,16 +39,12 @@ class CKPagingQueryOperation {
                    operation.errorBlock = errorBlock
                    operation.start()
                } else {
-                   os_log("CKPagingQueryOperation complete, %{public}@ record(s) obtained",
-                          log: Log_CloudKit,
-                          String(describing: records.count))
                    pagingCompletionBlock?(records)
                }
             case .failure(let error):
-                os_log("Error received in CKPagingQueryOperation: %{public}@",
-                       log: Log_CloudKit,
-                       type: .error,
-                       String(describing: error))
+                logger.log(
+                    level: .error,
+                    "Error received in CKPagingQueryOperation: \(String(describing: error), privacy: .public)")
                 errorBlock?(error)
             }
         }

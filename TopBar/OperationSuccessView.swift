@@ -6,7 +6,6 @@ struct OperationSuccessView: View {
     var body: some View {
         HStack {
             Text("cloud_kit_update_success")
-                .font(.caption)
             Spacer()
             Image(systemName: "checkmark.circle.fill")
                 .resizable()

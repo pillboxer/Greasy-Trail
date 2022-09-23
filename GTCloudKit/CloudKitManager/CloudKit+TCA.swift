@@ -1,18 +1,12 @@
-//
-//  CloudKitManager+TCA.swift
-//  GTCloudKit
-//
-//  Created by Henry Cooper on 10/09/2022.
-//
-
 import ComposableArchitecture
-import GTCoreData
-import OSLog
 import CloudKit
 import Model
+import Core
+import os
 
 let DylanContainer = CKContainer(identifier: "iCloud.Dylan")
 let DylanDatabase = DylanContainer.publicCloudDatabase
+let logger = Logger(subsystem: .subsystem, category: "Cloud Kit")
 
 public struct CloudKitState: Equatable {
     public var mode: Mode?

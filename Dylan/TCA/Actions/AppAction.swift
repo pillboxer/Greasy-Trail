@@ -21,4 +21,6 @@ enum AppAction {
     case allPerformances(AllPerformancesFeatureAction)
     case topBar(TopBarFeatureAction)
     case stats(StatsFeatureAction)
+    case commandMenu(CommandMenuAction)
+    
 }

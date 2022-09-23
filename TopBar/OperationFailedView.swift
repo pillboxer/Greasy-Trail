@@ -18,24 +18,17 @@ struct OperationFailedView: View {
     
     var body: some View {
         HStack {
-            Text(viewStore.state.showingCloudKitError ?
-                 String(describing: error) : String(formatted: "cloud_kit_operation_error"))
-            .font(.caption)
-            Spacer()
-            PlainOnTapButton(systemImage: "arrow.clockwise.circle.fill") {
-                viewStore.send(.refetch(lastFetchDate))
+            PlainOnTapButton(systemImage: "xmark.circle") {
+                viewStore.send(.reset)
             }
-            .symbolRenderingMode(.hierarchical)
-            .foregroundStyle(.green)
+            Text(viewStore.state.showingError ?
+                 String(describing: error) : tr("operation_error"))
+            Spacer()
             PlainOnTapButton(systemImage: "exclamationmark.triangle.fill") {
-                let pasteboard = NSPasteboard.general
-                pasteboard.declareTypes([.string], owner: nil)
-                pasteboard.setString(String(describing: error), forType: .string)
-                viewStore.send(.toggleCloudKitError)
+                viewStore.send(.toggleError)
             }
             .symbolRenderingMode(.palette)
             .foregroundStyle(.black, .black, .yellow)
-            .aspectRatio(contentMode: ContentMode.fit)
             .frame(width: 12, height: 12)
         }
     }    

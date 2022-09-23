@@ -47,56 +47,65 @@ extension BottomBarView {
     
     @ViewBuilder
     var songButton: some View {
-        switch viewStore.displayedView {
-        case .add:
-            PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
-                logger.log("Tapped song (add)")
-                viewStore.send(.reset(.add(.songs)), animation: .default)
+        Group {
+            switch viewStore.displayedView {
+            case .add:
+                PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
+                    logger.log("Tapped song (add)")
+                    viewStore.send(.reset(.add(.songs)), animation: .default)
+                }
+                .highlighting(DisplayedView.add(.songs) ==  viewStore.displayedView)
+            default:
+                PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
+                    logger.log("Tapped song (home)")
+                    viewStore.send(.selectView(.songs), animation: .default)
+                }
+                .highlighting(DisplayedView.songs == viewStore.displayedView)
             }
-            .highlighting(DisplayedView.add(.songs) ==  viewStore.displayedView)
-        default:
-            PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
-                logger.log("Tapped song (home)")
-                viewStore.send(.selectView(.songs), animation: .default)
-            }
-            .highlighting(DisplayedView.songs == viewStore.displayedView)
         }
+        .help("bottom_bar_tooltip_songs")
     }
     
     @ViewBuilder
     var albumButton: some View {
-        switch viewStore.displayedView {
-        case .add:
-            PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
-                logger.log("Tapped album (add)")
-                viewStore.send(.reset(.add(.albums)), animation: .default)
+        Group {
+            switch viewStore.displayedView {
+            case .add:
+                PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
+                    logger.log("Tapped album (add)")
+                    viewStore.send(.reset(.add(.albums)), animation: .default)
+                }
+                .highlighting(DisplayedView.add(.albums) ==  viewStore.displayedView)
+            default:
+                PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
+                    logger.log("Tapped album (home)")
+                    viewStore.send(.selectView(.albums), animation: .default)
+                }
+                .highlighting(DisplayedView.albums == viewStore.displayedView)
             }
-            .highlighting(DisplayedView.add(.albums) ==  viewStore.displayedView)
-        default:
-            PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
-                logger.log("Tapped album (home)")
-                viewStore.send(.selectView(.albums), animation: .default)
-            }
-            .highlighting(DisplayedView.albums == viewStore.displayedView)
         }
+        .help("bottom_bar_tooltip_albums")
     }
     
     @ViewBuilder
     var performanceButton: some View {
-        switch viewStore.displayedView {
-        case .add:
-            PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
-                logger.log("Tapped performance (add)")
-                viewStore.send(.reset(.add(.performances)), animation: .default)
+        Group {
+            switch viewStore.displayedView {
+            case .add:
+                PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
+                    logger.log("Tapped performance (add)")
+                    viewStore.send(.reset(.add(.performances)), animation: .default)
+                }
+                .highlighting(DisplayedView.add(.performances) ==  viewStore.displayedView)
+            default:
+                PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
+                    logger.log("Tapped performance (home)")
+                    viewStore.send(.selectView(.performances), animation: .default)
+                }
+                .highlighting(DisplayedView.performances == viewStore.displayedView)
             }
-            .highlighting(DisplayedView.add(.performances) ==  viewStore.displayedView)
-        default:
-            PlainOnTapButton(systemImage: DylanWork.performances.imageName) {
-                logger.log("Tapped performance (home)")
-                viewStore.send(.selectView(.performances), animation: .default)
-            }
-            .highlighting(DisplayedView.performances == viewStore.displayedView)
         }
+        .help("bottom_bar_tooltip_performances")
     }
     
     @ViewBuilder

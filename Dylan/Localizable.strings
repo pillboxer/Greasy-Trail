@@ -8,9 +8,7 @@
 
 // Developer
 "developer_menu_title" = "Developer";
-"developer_menu_button_0" = "Delete all data";
-"developer_menu_button_1" = "Add alternate spelling";
-"developer_menu_button_2" = "Copy logs";
+"devloper_menu_bug_report" = "Send bug report...";
 
 //Misc
 "search_placeholder" = "Press return to search";
@@ -23,7 +21,6 @@
 
 // CloudKit
 "cloud_kit_update_success" = "Records updated successfully";
-"cloud_kit_operation_error" = "CloudKit operation failed (select yellow triangle for more details). Please try again";
 "cloud_kit_fetching_in_progress" = "Fetching latest %@ records - this may take a while";
 "cloud_kit_uploading_in_progress" = "Uploading";
 
@@ -53,7 +50,9 @@
 "edit_alert_failure" = "Unable to edit record. Received error: %@";
 
 // Errors
-
+"operation_error" = "Operation failed (select yellow triangle for more details). Please try again";
+"fetch_logs_error" = "Unable to fetch logs. Please try again";
+"open_email_error" = "Could not open your email client. We've copied the logs to your pasteboard";
 
 // Bottom Bar
 "bottom_bar_tooltip_random" = "You may like to gamble, you might like to dance";
@@ -61,6 +60,9 @@
 "bottom_bar_tooltip_progress" = "Searching for a gem";
 "bottom_bar_tooltip_house" = "It’s not a house, it’s a home";
 "bottom_bar_tooltip_add" = "New morning";
+"bottom_bar_tooltip_songs" = "Songs";
+"bottom_bar_tooltip_albums" = "Albums";
+"bottom_bar_tooltip_performances" = "Performances";
 
 // Adding
 "add_song_field_0" = "Title";
@@ -70,3 +72,19 @@
 "add_performance_field_1_placeholder" = "LB";
 "add_performance_field_2" = "Songs";
 "add_performance_field_2_placeholder" = "Song";
+
+// Bug Reporting
+"bug_report_to_address" = "henrycooper@outlook.com";
+"bug_report_subject" = "Greasy Trail Bug Reporting";
+"bug_report_body" = "
+Please describe as clearly as possible your issue (actual result):
+
+
+
+Please describe as clearly as possible what should have happened (expected result):
+
+
+
+
+
+";

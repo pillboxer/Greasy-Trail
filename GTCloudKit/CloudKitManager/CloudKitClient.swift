@@ -1,20 +1,13 @@
 import GTCoreData
 import Model
 import CloudKit
+import Core
 
 public struct CloudKitEnvironment {
     var client: CloudKitClient
     
     public init(client: CloudKitClient) {
         self.client = client
-    }
-}
-
-public struct GTError: Error, Equatable {
-    public let error: NSError
-    
-    public init(_ error: Error) {
-        self.error = error as NSError
     }
 }
 
@@ -220,14 +213,4 @@ extension CloudKitClient {
             }
         }
     }
-}
-
-public enum Mode: Equatable {
-    case downloaded
-    case downloading(progress: Double, DylanRecordType)
-    case operationFailed(GTError)
-    
-    case uploading(progress: Double)
-    case uploaded
-    case uploadFailed(GTError)
 }

@@ -8,18 +8,6 @@
 import CloudKit
 import Core
 
-public enum DylanRecordType: CKRecord.RecordType, CaseIterable {
-    case song = "Song"
-    case album = "Album"
-    case performance = "Performance"
-    case appMetadata =  "AppMetadata"
-    
-    public static var displayedTypes: [DylanRecordType] {
-        return [.song, .album, .performance]
-    }
-
-}
-
 public enum DylanReferenceType: CKRecord.RecordType {
     case albums = "albums"
     case songs = "songs"
@@ -54,9 +42,9 @@ enum CloudKitManagerError: Error {
     var errorDescription: String? {
         switch self {
         case .query(let code):
-            return String(formatted: "cloud_kit_query_error_\(code)")
+            return tr("cloud_kit_query_error_\(code)")
         case .unknown:
-            return String(formatted: "cloud_kit_upload_unknown")
+            return tr("cloud_kit_upload_unknown")
         }
     }
    
