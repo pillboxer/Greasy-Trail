@@ -42,18 +42,18 @@ public struct ResultPerformanceOverviewView: View {
                 }
                 Spacer()
             }
-            Text(formatter.dateString(of: model.date))
-            Spacer()
             HStack {
                 SongsListView(songs: model.songs) { title in
                     viewStore.send(.search(.init(title: title, type: .song)))
                 }
                 Spacer()
             }
+            HStack {
             if !model.lbNumbers.isEmpty {
                 HStack {
-                    Text("LB Numbers:")
+                    Text("lbs_list_title")
                         .font(.caption)
+                        .bold()
                     ScrollView(.horizontal) {
                         HStack {
                             ForEach(model.lbNumbers.sorted(), id: \.self) { lb in
@@ -67,6 +67,10 @@ public struct ResultPerformanceOverviewView: View {
                     }
                     Spacer()
                 }
+            }
+                Spacer()
+                Text(formatter.dateString(of: model.date))
+                    .font(.caption)
             }
         }
         .padding()

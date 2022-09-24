@@ -40,6 +40,4 @@ public extension SongDisplayModel {
 
 }
 
-extension SongDisplayModel: Equatable {
-
-}
+extension SongDisplayModel: Equatable {}

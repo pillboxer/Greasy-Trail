@@ -255,6 +255,10 @@
 		86FD4F6028DE44D7002537CE /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 869B37DB28A5AC4500ABE4FD /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86FD4F6528DE4510002537CE /* GTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6428DE4510002537CE /* GTError.swift */; };
 		86FD4F6728DE5CA9002537CE /* FetchingLogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6628DE5CA9002537CE /* FetchingLogsView.swift */; };
+		86FD4F6928DF48DA002537CE /* AllSongs+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6828DF48DA002537CE /* AllSongs+State.swift */; };
+		86FD4F6B28DF4B38002537CE /* AllSongs+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6A28DF4B38002537CE /* AllSongs+Action.swift */; };
+		86FD4F6D28DF4B63002537CE /* AllSongs+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6C28DF4B63002537CE /* AllSongs+Reducer.swift */; };
+		86FD4F7528DF5ED6002537CE /* RockSalt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86FD4F7228DF5E55002537CE /* RockSalt-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1041,6 +1045,10 @@
 		86FD4F5D28DE44A1002537CE /* DylanRecordType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DylanRecordType.swift; sourceTree = "<group>"; };
 		86FD4F6428DE4510002537CE /* GTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTError.swift; sourceTree = "<group>"; };
 		86FD4F6628DE5CA9002537CE /* FetchingLogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchingLogsView.swift; sourceTree = "<group>"; };
+		86FD4F6828DF48DA002537CE /* AllSongs+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllSongs+State.swift"; sourceTree = "<group>"; };
+		86FD4F6A28DF4B38002537CE /* AllSongs+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllSongs+Action.swift"; sourceTree = "<group>"; };
+		86FD4F6C28DF4B63002537CE /* AllSongs+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllSongs+Reducer.swift"; sourceTree = "<group>"; };
+		86FD4F7228DF5E55002537CE /* RockSalt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RockSalt-Regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1569,6 +1577,7 @@
 		866863E02865EB6200510DDF = {
 			isa = PBXGroup;
 			children = (
+				86FD4F7228DF5E55002537CE /* RockSalt-Regular.ttf */,
 				8634311E28B1491600092931 /* Add */,
 				865963A728A00F51003F43A4 /* AllPerformances */,
 				869B377028A58D8C00ABE4FD /* AllSongs */,
@@ -1698,6 +1707,9 @@
 			isa = PBXGroup;
 			children = (
 				86D9C2AD287DD00700D5A0D3 /* AllSongsView.swift */,
+				86FD4F6828DF48DA002537CE /* AllSongs+State.swift */,
+				86FD4F6C28DF4B63002537CE /* AllSongs+Reducer.swift */,
+				86FD4F6A28DF4B38002537CE /* AllSongs+Action.swift */,
 				869B377128A58D8C00ABE4FD /* AllSongs.h */,
 			);
 			path = AllSongs;
@@ -2861,6 +2873,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86FD4F7528DF5ED6002537CE /* RockSalt-Regular.ttf in Resources */,
 				8678FD312869F76700DF1E69 /* Localizable.strings in Resources */,
 				866863F12865EB6400510DDF /* Assets.xcassets in Resources */,
 			);
@@ -3155,6 +3168,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				86FD4F6928DF48DA002537CE /* AllSongs+State.swift in Sources */,
+				86FD4F6D28DF4B63002537CE /* AllSongs+Reducer.swift in Sources */,
+				86FD4F6B28DF4B38002537CE /* AllSongs+Action.swift in Sources */,
 				869B377A28A58D9200ABE4FD /* AllSongsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

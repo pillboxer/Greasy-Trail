@@ -5,6 +5,7 @@ import TopBar
 import GTCloudKit
 import AllPerformances
 import Stats
+import AllSongs
 
 extension AppState {
     
@@ -116,6 +117,17 @@ extension AppState {
         }
         set {
             mode = newValue.mode
+        }
+    }
+    
+    var allSongsState: AllSongsState {
+        get {
+            AllSongsState(search: search,
+                          selectedSongPredicate: selectedSongPredicate)
+        }
+        set {
+            selectedSongPredicate = newValue.selectedSongPredicate
+            search = newValue.search
         }
     }
 }

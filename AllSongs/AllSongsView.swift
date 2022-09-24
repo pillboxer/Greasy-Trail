@@ -7,18 +7,8 @@ import UI
 
 public struct AllSongsView: View {
     
-    fileprivate enum AllSongsAction {
-        case search(Search)
-        case selectID(objectIdentifier: ObjectIdentifier?)
-        case select(objectIdentifier: ObjectIdentifier?, id: NSManagedObjectID?)
-    }
-    
-    private struct AllSongsState: Equatable {
-        var selectedID: ObjectIdentifier?
-    }
-    
-    let store: Store<ObjectIdentifier?, SearchAction>
-    @ObservedObject private var viewStore: ViewStore<AllSongsState, AllSongsAction>
+    let store: Store<AllSongsState, AllSongsFeatureAction>
+    @ObservedObject private var viewStore: ViewStore<AllSongsState, AllSongsViewAction>
     
     @State public var sortOrder: [KeyPathComparator<Song>] = [
         .init(\.title, order: SortOrder.forward),
@@ -36,34 +26,52 @@ public struct AllSongsView: View {
                                                id: ids.1))
     }
     
-    public init(store: Store<ObjectIdentifier?, SearchAction>) {
+    public init(store: Store<AllSongsState, AllSongsFeatureAction>, predicate: NSPredicate) {
         self.store = store
-        self.viewStore = ViewStore(store.scope(state: { AllSongsState(selectedID: $0) },
-                                               action: SearchAction.init))
+        self.viewStore = ViewStore(store.scope(state: { $0 }, action: AllSongsFeatureAction.init))
+        _fetched = FetchRequest<Song>(entity: Song.entity(),
+                                             sortDescriptors: [NSSortDescriptor(key: "title", ascending: true)],
+                                             predicate: predicate)
     }
     
     public var body: some View {
-        return Table(tableData, sortOrder: $sortOrder) {
-            TableColumn(LocalizedStringKey("table_column_title_songs_0"),
-                        value: \.title!) { song in
-                let title = song.title!
-                Toggle(isOn: toggleBinding(on: song)) {
-                    Text(title)
-                        .padding(.leading, 4)
-                }
-                .padding(.top, 4)
-                .toggleStyle(CheckboxToggleStyle())
-            }
-            TableColumn(LocalizedStringKey("table_column_title_songs_1"),
-                        value: \.songAuthor) { song in
-                HStack {
-                    Text(song.songAuthor)
-                    Spacer()
-                    PlainOnTapButton(systemImage: "chevron.right.circle") {
-                        viewStore.send(.search(.init(id: song.objectID)))
+        VStack {
+            Text("songs_list_title")
+                .underline()
+                .font(.headline)
+                .padding(.top)
+            HStack {
+                ForEach(SongPredicate.allCases, id: \.rawValue) { predicate in
+                    PlainOnTapButton(text: predicate.rawValue) {
+                        let predicate = SongPredicate(rawValue: predicate.rawValue)!
+                        viewStore.send(.selectSongPredicate(predicate))
                     }
+                    .font(.caption.weight(predicate == viewStore.state.selectedSongPredicate ? .bold : .regular))
                 }
-                .contentShape(Rectangle())
+            }
+            .frame(height: 32)
+            Table(tableData, sortOrder: $sortOrder) {
+                TableColumn(LocalizedStringKey("table_column_title_songs_0"),
+                            value: \.title!) { song in
+                    let title = song.title!
+                    Toggle(isOn: toggleBinding(on: song)) {
+                        Text(title)
+                            .padding(.leading, 4)
+                    }
+                    .padding(.top, 4)
+                    .toggleStyle(CheckboxToggleStyle())
+                }
+                TableColumn(LocalizedStringKey("table_column_title_songs_1"),
+                            value: \.songAuthor) { song in
+                    HStack {
+                        Text(song.songAuthor)
+                        Spacer()
+                        PlainOnTapButton(systemImage: "chevron.right.circle") {
+                            viewStore.send(.search(.init(id: song.objectID)))
+                        }
+                    }
+                    .contentShape(Rectangle())
+                }
             }
         }
     }
@@ -83,16 +91,18 @@ private extension AllSongsView {
     
 }
 
-fileprivate extension SearchAction {
+fileprivate extension AllSongsFeatureAction {
     
-    init(action: AllSongsView.AllSongsAction) {
+    init(action: AllSongsViewAction) {
         switch action {
         case .search(let search):
-            self = .makeSearch(search)
+            self = .search(.makeSearch(search))
         case .selectID(let objectIdentifier):
-            self = .selectID(objectIdentifier: objectIdentifier)
+            self = .search(.selectID(objectIdentifier: objectIdentifier))
         case .select(objectIdentifier: let objectIdentifier, id: let id):
-            self = .select(objectIdentifier: objectIdentifier, objectID: id)
+            self = .search(.select(objectIdentifier: objectIdentifier, objectID: id))
+        case .selectSongPredicate(let predicate):
+            self = .allSongs(.selectSongPredicate(predicate))
         }
     }
 }

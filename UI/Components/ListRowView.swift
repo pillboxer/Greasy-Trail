@@ -1,10 +1,3 @@
-//
-//  ListRowView.swift
-//  Greasy Trail
-//
-//  Created by Henry Cooper on 13/07/2022.
-//
-
 import SwiftUI
 
 public struct ListRowView: View {
@@ -33,7 +26,6 @@ public struct ListRowView: View {
                 Text(headline).font(.headline)
                 if let onTap = onTap {
                     PlainOnTapButton(systemImage: "arrow.forward.circle", onTap: onTap)
-                        
                 }
             }
             if let subHeadline = subheadline {

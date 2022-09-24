@@ -38,13 +38,17 @@ public struct StatsView: View {
                 Spacer()
                 Text("v.\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")")
                     .italic()
+                    .font(.system(size: 24, weight: .ultraLight, design: .monospaced))
             }
+            Text("Greasy Trail")
+                .font(.custom("RockSalt-Regular", size: 36))
             Spacer()
             SearchFieldView(store: store.scope(
                 state: { $0.search },
                 action: { StatsFeatureAction.search($0) }
             ), font: .systemFont(ofSize: 28))
             .frame(width: 456)
+            Spacer()
             Spacer()
             HStack {
                 StatInfoView(songsCount: songs.count,
@@ -76,7 +80,7 @@ struct StatInfoView: View {
             Text("Performances: \(performancesCount)")
             Text("LB Count: \(lbCount)")
             HStack {
-                Text("Missing LB Numbers: \(15500 - lbCount)")
+                Text("Missing LB Numbers: \(15630 - lbCount)")
                 if viewStore.state.isFetchingMissingLBCount {
                     ProgressView()
                         .scaleEffect(0.4)

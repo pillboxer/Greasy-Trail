@@ -11,7 +11,7 @@
 "devloper_menu_bug_report" = "Send bug report...";
 
 //Misc
-"search_placeholder" = "Press return to search";
+"search_placeholder" = "Press enter to search ⏎";
 "searching_progress" = "Searching";
 "default_author" = "Bob Dylan";
 "results_information_title_first_appearance" = "First appearance";
@@ -28,6 +28,7 @@
 "table_column_title_songs_0" = "Title";
 "table_column_title_songs_1" = "Author";
 "songs_list_title" = "Songs";
+"song_author" = "Written by %@";
 
 // Albums
 "table_column_title_albums_0" = "Title";

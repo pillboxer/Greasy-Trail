@@ -1,10 +1,3 @@
-//
-//  ResultOverviewView.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 01/07/2022.
-//
-
 import SwiftUI
 import GTFormatter
 import UI
@@ -12,6 +5,8 @@ import Model
 import ComposableArchitecture
 import PerformancesList
 import Search
+import Core
+
 public struct ResultSongOverviewView: View {
     
     let store: Store<SearchState, SearchAction>
@@ -28,26 +23,33 @@ public struct ResultSongOverviewView: View {
         VStack {
             HStack {
                 Spacer()
-                Text(model.title)
-                    .font(.headline)
+                VStack {
+                    Text(model.title)
+                        .font(.headline)
+                        .padding(.bottom, 4)
+                }
                 Spacer()
             }
-            .padding(.bottom)
-            Spacer()
-            HStack {
-                if let performances = model.performances, !performances.isEmpty {
-                    PerformancesListView(performances: performances, store: store.scope(state: {
-                        $0.model
-                    }, action: {
-                        $0
-                    }))
+            if let performances = model.performances, !performances.isEmpty {
+                PerformancesListView(performances: performances, store: store.scope(state: {
+                    $0.model
+                }, action: {
+                    $0
+                }))
+            } else {
+                HStack {
+                Text("performances_list_empty")
+                    .font(.caption)
+                    Spacer()
                 }
+                Spacer()
             }
-            Text("results_information_title_song_author")
-                .font(.footnote)
-                .bold()
-            Text(model.author)
-                .font(.caption)
+            HStack {
+                Spacer()
+                Text(tr("song_author", model.author))
+                    .font(.caption)
+            }
+           
         }
         .padding()
     }

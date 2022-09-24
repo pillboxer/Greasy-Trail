@@ -14,7 +14,7 @@ struct DownloadingView: View {
                     .resizable()
                     .aspectRatio(contentMode: ContentMode.fit)
                     .frame(width: 12, height: 12)
-                Text(tr("cloud_kit_fetching_in_progress", args: type.rawValue.capitalized))
+                Text(tr("cloud_kit_fetching_in_progress", type.rawValue.capitalized))
                 Spacer()
                 ProgressView(value: progress)
                     .frame(width: 256)

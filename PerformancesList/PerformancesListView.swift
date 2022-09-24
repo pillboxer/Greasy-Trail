@@ -36,20 +36,23 @@ public struct PerformancesListView: View {
     
     public var body: some View {
         VStack(alignment: .leading) {
-            Text("performances_list_title").font(.title)
-                .padding(.bottom)
-            
-            List(performances, id: \.self) { performance in
-                let title = performance.venue
-                HStack(alignment: .top) {
-                    ListRowView(headline: title,
-                                subheadline: formatter.dateString(of: performance.date)) {
-                        viewStore.send(.search(.init(title: String(performance.date),
-                                                     type: .performance)))
+            Text("performances_list_title").font(.headline)
+                .underline()
+                .padding(.bottom, 8)
+            ScrollView {
+                LazyVStack(spacing: 16) {
+                    ForEach(performances, id: \.self) { performance in
+                        let title = performance.venue
+                        HStack {
+                            ListRowView(headline: title,
+                                        subheadline: formatter.dateString(of: performance.date)) {
+                                viewStore.send(.search(.init(title: String(performance.date),
+                                                             type: .performance)))
+                            }
+                            Spacer()
+                        }
                     }
                 }
-                Divider()
-                    .padding(.leading, 2)
             }
         }
     }

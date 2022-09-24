@@ -4,6 +4,7 @@ import AllPerformances
 import GTCloudKit
 import Add
 import BottomBar
+import AllSongs
 import CoreData
 import Stats
 import Core
@@ -31,6 +32,9 @@ struct AppState: Equatable {
     
     // AllPerformances
     var selectedPerformancePredicate: PerformancePredicate = .sixties
+    
+    // AllSongs
+    var selectedSongPredicate: SongPredicate = .all
     
     // Stats
     var isFetchingMissingLBCount = false

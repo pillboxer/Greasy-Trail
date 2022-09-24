@@ -34,6 +34,7 @@ struct ContentView: View {
         var model: AnyModel?
         var displayedView: DisplayedView
         var selectedPerformancePredicate: PerformancePredicate
+        var selectedSongPredicate: SongPredicate
         var mode: Mode?
         var showingError: Bool
         var missingLBNumbers: [Int]?
@@ -46,6 +47,7 @@ struct ContentView: View {
                              model: $0.search.model,
                              displayedView: $0.displayedView,
                              selectedPerformancePredicate: $0.selectedPerformancePredicate,
+                             selectedSongPredicate: $0.selectedSongPredicate,
                              mode: $0.mode,
                              showingError: $0.showingError,
                              missingLBNumbers: $0.missingLBNumbers)}))
@@ -59,12 +61,11 @@ struct ContentView: View {
                 Divider()
             }
             view(for: viewStore.displayedView)
-            Spacer()
             Divider()
             BottomBarView(store: store.scope(state: { $0.bottomBarState },
                                              action: { .bottomBar($0) }))
         }
-        .frame(width: 900, height: 600)
+        .frame(minWidth: 900, minHeight: 600)
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         .background(colorScheme == .dark ? Color(NSColor.windowBackgroundColor) : Color.white)
 
@@ -84,8 +85,9 @@ struct ContentView: View {
                 ResultView(store: store.scope(state: { $0.search },
                                               action: { .search($0) }))
             case .songs:
-                AllSongsView(store: store.scope(state: { $0.selectedID },
-                                                action: { .search($0) }))
+                AllSongsView(store: store.scope(state: { $0.allSongsState },
+                                                action: { .allSongs($0) }),
+                             predicate: viewStore.selectedSongPredicate.predicate)
             case .albums:
                 Text("Album")
             case .missingLBs:

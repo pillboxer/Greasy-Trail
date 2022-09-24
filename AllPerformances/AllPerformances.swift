@@ -44,6 +44,10 @@ public struct AllPerformancesView {
     
     public var body: some View {
         VStack {
+            Text("performances_list_title")
+                .underline()
+                .font(.headline)
+                .padding(.top)
             HStack {
                 ForEach(PerformancePredicate.allCases, id: \.rawValue) { decade in
                     PlainOnTapButton(text: decade.rawValue) {

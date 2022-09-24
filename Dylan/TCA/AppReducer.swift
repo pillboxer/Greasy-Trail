@@ -1,10 +1,3 @@
-//
-//  AppReducer.swift
-//
-//
-//  Created by Henry Cooper on 05/08/2022.
-//
-
 import Foundation
 
 import ComposableArchitecture
@@ -17,6 +10,7 @@ import Add
 import Model
 import TopBar
 import AllPerformances
+import AllSongs
 import Stats
 
 struct AppEnvironment {
@@ -60,7 +54,11 @@ Reducer.combine(
     commandMenuReducer.pullback(
         state: \.commandMenuState,
         action: /AppAction.commandMenu,
-        environment: { _ in () })
+        environment: { _ in () }),
+    allSongsFeatureReducer.pullback(
+        state: \.allSongsState,
+        action: /AppAction.allSongs,
+        environment: SearchEnvironment.init)
 )
 
 extension SearchEnvironment {

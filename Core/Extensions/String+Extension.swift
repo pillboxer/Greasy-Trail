@@ -11,6 +11,6 @@ public extension String {
     
 }
 
-public func tr(_ string: String, args: CVarArg...) -> String {
+public func tr(_ string: String, _ args: CVarArg...) -> String {
     String(formatted: string, args: args)
 }
