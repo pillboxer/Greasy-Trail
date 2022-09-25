@@ -26,5 +26,4 @@ public enum CloudKitAction {
     case uploadPerformance(PerformanceDisplayModel)
     case cloudKitClient(TaskResult<CloudKitClient.Event>)
     case completeDownload
-    case completeUpload
 }

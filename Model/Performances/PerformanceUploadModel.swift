@@ -10,7 +10,12 @@ public struct PerformanceUploadModel: Equatable {
     public let uuids: [String]
     public let dateFormat: PerformanceDateFormat
     
-    public init(recordName: String, venue: String, date: Double, lbs: [Int], uuids: [String], dateFormat: PerformanceDateFormat) {
+    public init(recordName: String,
+                venue: String,
+                date: Double,
+                lbs: [Int],
+                uuids: [String],
+                dateFormat: PerformanceDateFormat) {
         self.venue = venue
         self.lbs = lbs
         self.date = date

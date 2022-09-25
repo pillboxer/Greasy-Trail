@@ -108,26 +108,22 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
         logger.log("Successfully fetched all records")
         state.mode = .downloaded
         state.lastFetchDate = newValues ? Date() : state.lastFetchDate
-        return Effect.timer(id: TimerID(), every: 3, on: DispatchQueue.main.eraseToAnyScheduler())
+        return Effect(value: .completeDownload)
             .animation()
-            .map { _ in .completeDownload }
+            .delay(for: 3, scheduler: DispatchQueue.main)
+            .eraseToEffect()
     case .cloudKitClient(.success(.completeUpload)):
         state.mode = .uploaded
-        return Effect.timer(id: TimerID(), every: 3, on: DispatchQueue.main.eraseToAnyScheduler())
-            .map { _ in .completeUpload }
+        return Effect(value: .start(date: .now.addingTimeInterval(-3600)))
+            .animation()
+            .delay(for: 3, scheduler: DispatchQueue.main)
+            .eraseToEffect()
     case .cloudKitClient(.failure(let error)):
         state.mode = .operationFailed(.init(error))
         return .none
         // Completion
     case .completeDownload:
         state.mode = nil
-        return .cancel(id: TimerID())
-    case .completeUpload:
-        guard let mode = state.mode,
-              mode == .uploaded else {
-            return .none
-        }
-        state.mode = nil
-        return Effect(value: .start(date: .now.addingTimeInterval(-3600)))
+        return .none
     }
 }

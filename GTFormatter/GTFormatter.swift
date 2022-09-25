@@ -1,6 +1,6 @@
 import Foundation
-import Model
 import Core
+
 public class Formatter {
 
     private lazy var dateFormatter: DateFormatter = {

@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 import Core
-import Model
 
 @objc(Performance)
 public class Performance: NSManagedObject {
