@@ -1,11 +1,3 @@
-//
-//  Performance+CoreDataProperties.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 08/07/2022.
-//
-//
-
 import Foundation
 import CoreData
 
@@ -22,6 +14,7 @@ extension Performance: Favoritable {
     @NSManaged public var isFavorite: Bool
     @NSManaged public var markedAsDeleted: Bool
     @NSManaged public var uuid: String?
+    @NSManaged public var dateFormatString: String?
 
 }
 

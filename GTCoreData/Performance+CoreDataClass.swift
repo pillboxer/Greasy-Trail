@@ -1,15 +1,16 @@
-//
-//  Performance+CoreDataClass.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 07/07/2022.
-//
-//
-
 import Foundation
 import CoreData
+import Core
+import Model
 
 @objc(Performance)
 public class Performance: NSManagedObject {
+    
+    public var dateFormat: PerformanceDateFormat? {
+        guard let dateFormatString = dateFormatString else {
+            return nil
+        }
+        return PerformanceDateFormat(rawValue: dateFormatString)
+    }
 
 }

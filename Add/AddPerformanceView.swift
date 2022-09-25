@@ -1,6 +1,8 @@
 import SwiftUI
 import ComposableArchitecture
 import UI
+import Core
+import Model
 
 struct AddPerformanceView: View {
     
@@ -18,17 +20,24 @@ struct AddPerformanceView: View {
 extension AddPerformanceView {
     
     private var venue: Binding<String> {
-        viewStore.binding(get: { $0.performanceVenueField }, send: { .updatePerformanceVenue($0) })
+        viewStore.binding(get: { $0.performanceVenueField },
+                          send: { .updatePerformanceVenue($0) })
     }
     
     private var date: Binding<Date> {
-        viewStore.binding(get: { $0.performanceDateField }, send: { .updatePerformanceDate($0) })
+        viewStore.binding(get: { $0.performanceDateField },
+                          send: { .updatePerformanceDate($0) })
+    }
+    
+    private var dateFormat: Binding<PerformanceDateFormat> {
+        viewStore.binding(get: { $0.performanceDateFormat },
+                          send: { .updatePerformanceDateFormat($0) })
     }
     
     private var firstColumnView: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text("add_performance_field_0").font(.footnote)
+                Text("add_performance_field_0")
                 Spacer()
                 Image(systemName: "building.columns.fill")
             }
@@ -38,10 +47,15 @@ extension AddPerformanceView {
                 NSDatePickerRepresentable(date: date)
                     .frame(maxWidth: 80)
             }
-
+            Picker("Date Format", selection: dateFormat) { 
+                ForEach(PerformanceDateFormat.allCases, id: \.self) { format in
+                    Text(format.description)
+                }
+            }
+            .pickerStyle(.menu)
         }
         .padding()
-        
+        .font(.footnote)
     }
     
 }

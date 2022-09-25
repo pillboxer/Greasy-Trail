@@ -72,7 +72,7 @@ public struct AllPerformancesView {
                 TableColumn(LocalizedStringKey("table_column_title_performances_1"),
                             value: \.date) { performance in
                     HStack {
-                        Text(formatter.dateString(of: performance.date))
+                        Text(formatter.dateString(of: performance.date, in: performance.dateFormat ?? .full))
                         Spacer()
                         PlainOnTapButton(systemImage: "chevron.right.circle") {
                             viewStore.send(.search(.init(id: performance.objectID)))

@@ -78,7 +78,8 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                                                  venue: model.venue,
                                                  date: model.date,
                                                  lbs: model.lbNumbers,
-                                                 uuids: uuids)
+                                                 uuids: uuids,
+                                                 dateFormat: model.dateFormat)
         return .run(operation: { send in
             for try await event in environment.client.uploadPerformance(uploadModel) {
                 switch event {

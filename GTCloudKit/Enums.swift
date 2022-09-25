@@ -26,6 +26,7 @@ public enum DylanRecordField: String {
     case venue
     case date
     case lbNumbers = "LBNumbers"
+    case dateFormat
     
     // App Metadata
     case file

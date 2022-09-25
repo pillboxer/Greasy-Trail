@@ -69,7 +69,7 @@ public struct ResultPerformanceOverviewView: View {
                 }
             }
                 Spacer()
-                Text(formatter.dateString(of: model.date))
+                Text(formatter.dateString(of: model.date, in: model.dateFormat))
                     .font(.caption)
             }
         }

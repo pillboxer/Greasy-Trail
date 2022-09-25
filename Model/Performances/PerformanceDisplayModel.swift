@@ -57,6 +57,10 @@ public extension PerformanceDisplayModel {
     var lbNumbers: [Int] {
         sPerformance.lbNumbers
     }
+    
+    var dateFormat: PerformanceDateFormat {
+        sPerformance.dateFormat
+    }
 
     func officialURL() -> URL? {
         let formatter = DateFormatter()

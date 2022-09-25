@@ -17,7 +17,7 @@ struct AllPerformancesViewState: Equatable {
 }
 
 public enum PerformancePredicate: String, CaseIterable, Equatable {
-    case sixties = "1960s"
+    case fiftiesAndSixties = "1950s + 1960s"
     case seventies = "1970s"
     case eighties = "1980s"
     case nineties = "1990s"
@@ -30,8 +30,8 @@ public enum PerformancePredicate: String, CaseIterable, Equatable {
         let after: TimeInterval
         let before: TimeInterval
         switch self {
-        case .sixties:
-            after = -315619200
+        case .fiftiesAndSixties:
+            after = -631152001
             before = 0
         case .seventies:
             after = 0

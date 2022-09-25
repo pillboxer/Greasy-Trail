@@ -32,7 +32,7 @@ struct AllAlbumsView {
                     .gesture(doubleTap(objectID: album.objectID))
             }
             TableColumn(LocalizedStringKey("table_column_title_albums_1"), value: \.releaseDate) { album in
-                Text(formatter.dateString(of: album.releaseDate))
+                Text(formatter.dateString(of: album.releaseDate, in: .full))
                     .gesture(doubleTap(objectID: album.objectID))
             }
         }

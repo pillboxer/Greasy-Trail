@@ -1,4 +1,5 @@
 import Model
+import Core
 import Detective
 
 class PerformanceEditor {
@@ -22,6 +23,14 @@ class PerformanceEditor {
         sPerformance?.venue = venue
         return sPerformance
     }
+    
+    func editDateFormat(_ format: PerformanceDateFormat) -> sPerformance? {
+        logger.log("Editing format \(format.description, privacy: .public)")
+        var sPerformance = model?.sPerformance
+        sPerformance?.dateFormat = format
+        return sPerformance
+    }
+    
     
     func removeLB(at index: Int) -> sPerformance? {
         logger.log("Removing lb at index \(index, privacy: .public)")

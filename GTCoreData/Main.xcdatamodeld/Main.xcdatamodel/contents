@@ -20,6 +20,7 @@
     </entity>
     <entity name="Performance" representedClassName="Performance" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="dateFormatString" optional="YES" attributeType="String"/>
         <attribute name="isFavorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lbNumbers" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
         <attribute name="markedAsDeleted" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -44,7 +45,7 @@
     <elements>
         <element name="Album" positionX="-63" positionY="9" width="128" height="119"/>
         <element name="AppMetadata" positionX="-54" positionY="54" width="128" height="74"/>
-        <element name="Performance" positionX="-54" positionY="27" width="128" height="134"/>
+        <element name="Performance" positionX="-54" positionY="27" width="128" height="149"/>
         <element name="Song" positionX="-63" positionY="-18" width="128" height="134"/>
     </elements>
 </model>

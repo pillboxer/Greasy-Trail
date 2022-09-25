@@ -51,6 +51,10 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
         let performanceEditor = PerformanceEditor(state.performance)
         let sPerformance = performanceEditor.editVenue(string)
         return Effect(value: AddAction.updatePerformanceDisplayModel(sPerformance))
+    case .updatePerformanceDateFormat(let format):
+        let performanceEditor = PerformanceEditor(state.performance)
+        let sPerformance = performanceEditor.editDateFormat(format)
+        return Effect(value: AddAction.updatePerformanceDisplayModel(sPerformance))
     case .updatePerformanceDate(let date):
         let performanceEditor = PerformanceEditor(state.performance)
         let sPerformance = performanceEditor.editDate(date)

@@ -45,10 +45,12 @@ public struct PerformancesListView: View {
                         let title = performance.venue
                         HStack {
                             ListRowView(headline: title,
-                                        subheadline: formatter.dateString(of: performance.date)) {
-                                viewStore.send(.search(.init(title: String(performance.date),
-                                                             type: .performance)))
-                            }
+                                        subheadline: formatter.dateString(
+                                            of: performance.date,
+                                            in: performance.dateFormat)) {
+                                                viewStore.send(.search(.init(title: String(performance.date),
+                                                                             type: .performance)))
+                                            }
                             Spacer()
                         }
                     }

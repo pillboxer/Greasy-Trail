@@ -67,11 +67,13 @@ extension Detective {
                     let title = song.title ?? ""
                     let count = String(objects.count)
                     logger.log("\(title, privacy: .public) found on \(count, privacy: .public) performance(s)")
-                    let sPerformances = objects.compactMap { sPerformance(uuid: $0.uuid!,
-                                                                          venue: $0.venue!,
-                                                                          songs: [],
-                                                                          date: $0.date,
-                                                                          isFavorite: $0.isFavorite) }
+                    let sPerformances = objects.compactMap {
+                        sPerformance(uuid: $0.uuid!,
+                                     venue: $0.venue!,
+                                     songs: [],
+                                     date: $0.date,
+                                     isFavorite: $0.isFavorite,
+                                     dateFormat: $0.dateFormat ?? .full) }
                     let sorted = sPerformances.sorted { $0.date < $1.date }
                     completion(sorted)
                 } else {
@@ -98,7 +100,8 @@ private extension Detective {
                                         songs: sSongs,
                                         date: performance.date,
                                         lbNumbers: performance.lbNumbers ?? [],
-                                        isFavorite: performance.isFavorite)
+                                        isFavorite: performance.isFavorite,
+                                        dateFormat: performance.dateFormat ?? .full)
         let displayModel = PerformanceDisplayModel(sPerformance: sPerformance)
         logger.log("Created Performance Display Model \(displayModel)")
         return displayModel

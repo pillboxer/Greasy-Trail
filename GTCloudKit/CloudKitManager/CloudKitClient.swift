@@ -84,6 +84,7 @@ extension CloudKitClient {
                     let records = try await fetchRecords(of: .performance, after: date)
                     let venues = records.compactMap { $0.string(for: .venue) }
                     let dates = records.compactMap { $0.double(for: .date) }
+                    let dateFormats = records.map { $0.string(for: .dateFormat) }
                     let lbNumbers = records.map { $0.ints(for: .lbNumbers) }
                     let context = PersistenceController.shared.newBackgroundContext()
                     
@@ -94,6 +95,7 @@ extension CloudKitClient {
                         let venue = venues[index]
                         let date = dates[index]
                         let lbs = lbNumbers[index]
+                        let dateFormat = dateFormats[index]
                         let ordered = try await getOrderedSongRecords(from: record)
                         let songTitles = ordered.compactMap { $0.string(for: .title) }
                         let correspondingSongs: [Song] = songTitles.compactMap { title in
@@ -107,6 +109,7 @@ extension CloudKitClient {
                             performance.venue = venue
                             performance.date = date
                             performance.lbNumbers = lbs
+                            performance.dateFormatString = dateFormat
                             performance.uuid = record.recordID.recordName
                             let orderedSet = NSOrderedSet(array: correspondingSongs)
                             performance.songs = orderedSet
@@ -182,6 +185,7 @@ extension CloudKitClient {
             record["venue"] = model.venue
             record["date"] = model.date
             record["LBNumbers"] = model.lbs
+            record["dateFormat"] = model.dateFormat.rawValue
             
             let operation = CKModifyRecordsOperation(recordsToSave: [record])
             operation.qualityOfService = .userInitiated

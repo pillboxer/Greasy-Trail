@@ -1,7 +1,7 @@
 import Foundation
 
 // swiftlint:disable type_name
-public struct sAlbum: Codable, Equatable, Identifiable {
+public struct sAlbum: Decodable, Equatable, Identifiable {
 
     public let title: String
     let uuid: String

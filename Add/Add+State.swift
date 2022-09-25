@@ -12,6 +12,7 @@ public struct AddState: Equatable {
     var songUUID: String?
     var performanceVenueField = ""
     var performanceDateField = Date()
+    var performanceDateFormat: PerformanceDateFormat = .full
     var performanceLBs: [Int] = []
     var performanceSongs: [sSong] = []
     
@@ -54,11 +55,14 @@ public struct AddState: Equatable {
     var performance: PerformanceDisplayModel? {
         get {
             model?.value as? PerformanceDisplayModel
-            ?? PerformanceDisplayModel(sPerformance: sPerformance(uuid: "P\(UUID().uuidString)",
-                                                                  venue: "",
-                                                                  songs: [],
-                                                                  date: Date().timeIntervalSince1970,
-                                                                  isFavorite: false))
+            ?? PerformanceDisplayModel(
+                sPerformance:
+                    sPerformance(uuid: "P\(UUID().uuidString)",
+                                 venue: "",
+                                 songs: [],
+                                 date: Date().timeIntervalSince1970,
+                                 isFavorite: false,
+                                 dateFormat: .full))
         }
         set {
             guard let newValue = newValue else {
@@ -79,6 +83,7 @@ public struct AddState: Equatable {
             performanceSongs = model.songs
             performanceLBs = model.lbNumbers
             performanceVenueField = model.venue
+            performanceDateFormat = model.dateFormat
             performanceDateField = Date(timeIntervalSince1970: model.date)
         }
     }

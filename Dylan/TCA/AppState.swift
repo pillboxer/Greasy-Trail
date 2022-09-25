@@ -31,7 +31,7 @@ struct AppState: Equatable {
     var showingError = false
     
     // AllPerformances
-    var selectedPerformancePredicate: PerformancePredicate = .sixties
+    var selectedPerformancePredicate: PerformancePredicate = .fiftiesAndSixties
     
     // AllSongs
     var selectedSongPredicate: SongPredicate = .all

@@ -259,6 +259,7 @@
 		86FD4F6B28DF4B38002537CE /* AllSongs+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6A28DF4B38002537CE /* AllSongs+Action.swift */; };
 		86FD4F6D28DF4B63002537CE /* AllSongs+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6C28DF4B63002537CE /* AllSongs+Reducer.swift */; };
 		86FD4F7528DF5ED6002537CE /* RockSalt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86FD4F7228DF5E55002537CE /* RockSalt-Regular.ttf */; };
+		86FD4F7A28E0A3A0002537CE /* PerformanceDateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F7828E09907002537CE /* PerformanceDateFormat.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1049,6 +1050,7 @@
 		86FD4F6A28DF4B38002537CE /* AllSongs+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllSongs+Action.swift"; sourceTree = "<group>"; };
 		86FD4F6C28DF4B63002537CE /* AllSongs+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllSongs+Reducer.swift"; sourceTree = "<group>"; };
 		86FD4F7228DF5E55002537CE /* RockSalt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RockSalt-Regular.ttf"; sourceTree = "<group>"; };
+		86FD4F7828E09907002537CE /* PerformanceDateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceDateFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1728,6 +1730,7 @@
 		869B37DC28A5AC4500ABE4FD /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				86FD4F7828E09907002537CE /* PerformanceDateFormat.swift */,
 				86FD4F5B28DE4480002537CE /* Mode.swift */,
 				86FD4F5D28DE44A1002537CE /* DylanRecordType.swift */,
 				8656A30A28679BA50013F595 /* Extensions */,
@@ -3193,6 +3196,7 @@
 				86FD4F6528DE4510002537CE /* GTError.swift in Sources */,
 				86CD7A2C28A9424A00D2C219 /* UserDefaultsBacked.swift in Sources */,
 				868BCD0D28D51558000E5071 /* DisplayedView.swift in Sources */,
+				86FD4F7A28E0A3A0002537CE /* PerformanceDateFormat.swift in Sources */,
 				868BCD3B28D79C4B000E5071 /* Int+Extensions.swift in Sources */,
 				86E0491728D27FC700821096 /* DylanWork.swift in Sources */,
 				86FD4F5C28DE4480002537CE /* Mode.swift in Sources */,

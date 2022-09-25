@@ -16,6 +16,7 @@ public enum AddAction: Equatable {
     case setLB(lbNumber: Int, index: Int)
     case setSong(title: String, index: Int)
     case updatePerformanceVenue(String)
+    case updatePerformanceDateFormat(PerformanceDateFormat)
     case updatePerformanceDate(Date)
     case updatePerformanceDisplayModel(sPerformance?)
     case removeSong(at: Int)

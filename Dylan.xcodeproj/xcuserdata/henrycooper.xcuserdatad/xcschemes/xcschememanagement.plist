@@ -42,7 +42,7 @@
 		<key>Detective.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>34</integer>
+			<integer>35</integer>
 		</dict>
 		<key>Dylan.xcscheme_^#shared#^_</key>
 		<dict>
@@ -184,12 +184,12 @@
 		<key>SongsList.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>33</integer>
+			<integer>34</integer>
 		</dict>
 		<key>Stats.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>37</integer>
+			<integer>36</integer>
 		</dict>
 		<key>TableList.xcscheme_^#shared#^_</key>
 		<dict>
@@ -204,12 +204,12 @@
 		<key>TopBar.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>35</integer>
+			<integer>33</integer>
 		</dict>
 		<key>TwoColumnTable.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>36</integer>
+			<integer>37</integer>
 		</dict>
 		<key>UI.xcscheme_^#shared#^_</key>
 		<dict>
