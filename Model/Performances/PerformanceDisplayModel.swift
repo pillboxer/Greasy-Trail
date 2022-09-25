@@ -39,11 +39,12 @@ public extension PerformanceDisplayModel {
     }
     
     var songs: [sSong] {
-        sPerformance.songs.filter { $0.title != "BREAK"}
+        sPerformance.songs
     }
 
     var songTitles: [String] {
         songs.map { $0.title }
+            .filter { $0 != "BREAK" }
     }
 
     var venue: String {

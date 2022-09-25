@@ -114,7 +114,6 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
     case .cloudKitClient(.success(.completeUpload)):
         state.mode = .uploaded
         return Effect.timer(id: TimerID(), every: 3, on: DispatchQueue.main.eraseToAnyScheduler())
-            .animation()
             .map { _ in .completeUpload }
     case .cloudKitClient(.failure(let error)):
         state.mode = .operationFailed(.init(error))
@@ -124,8 +123,11 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
         state.mode = nil
         return .cancel(id: TimerID())
     case .completeUpload:
+        guard let mode = state.mode,
+              mode == .uploaded else {
+            return .none
+        }
         state.mode = nil
-        return Effect.timer(id: TimerID(), every: 3, on: DispatchQueue.main.eraseToAnyScheduler())
-            .map { _ in .start(date: .now.addingTimeInterval(-3600))}
+        return Effect(value: .start(date: .now.addingTimeInterval(-3600)))
     }
 }
