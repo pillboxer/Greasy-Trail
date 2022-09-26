@@ -19,6 +19,7 @@ public struct CloudKitState: Equatable {
 }
 
 public enum CloudKitAction {
+    case subscribeToDatabases
     case start(date: Date?)
     case fetchSongs(Date?)
     case fetchAlbums(Date?, Bool)

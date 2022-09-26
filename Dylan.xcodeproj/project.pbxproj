@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8609412528E1A3D30012614D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412428E1A3D30012614D /* AppDelegate.swift */; };
+		8609412728E1AAB70012614D /* Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412628E1AAB70012614D /* Deletable.swift */; };
+		8609412928E1C5CD0012614D /* AddAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412828E1C5CD0012614D /* AddAlbums.swift */; };
+		8609412B28E1C9140012614D /* Add+Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412A28E1C9140012614D /* Add+Album.swift */; };
 		860A3A5428BB7C7400D54074 /* BottomBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; };
 		860A3A5C28BB7C7400D54074 /* BottomBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 860A3A4E28BB7C7400D54074 /* BottomBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		860A3A5F28BB7C7400D54074 /* BottomBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; };
@@ -905,6 +909,10 @@
 
 /* Begin PBXFileReference section */
 		860712322868604300E54209 /* ReferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceType.swift; sourceTree = "<group>"; };
+		8609412428E1A3D30012614D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8609412628E1AAB70012614D /* Deletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deletable.swift; sourceTree = "<group>"; };
+		8609412828E1C5CD0012614D /* AddAlbums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlbums.swift; sourceTree = "<group>"; };
+		8609412A28E1C9140012614D /* Add+Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Add+Album.swift"; sourceTree = "<group>"; };
 		860A3A4C28BB7C7400D54074 /* BottomBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BottomBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860A3A4E28BB7C7400D54074 /* BottomBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BottomBar.h; sourceTree = "<group>"; };
 		860A3A5328BB7C7400D54074 /* BottomBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BottomBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1392,11 +1400,13 @@
 				8634312A28B1496400092931 /* Add.h */,
 				86179B8828C514A3006A248E /* Add+Action.swift */,
 				864151EB28C8E43F0031E6D6 /* Add+Performance.swift */,
+				8609412A28E1C9140012614D /* Add+Album.swift */,
 				8634312828B1494800092931 /* Add+Reducer.swift */,
 				86179B8628C5148A006A248E /* Add+State.swift */,
 				86179B8A28C51576006A248E /* Add.swift */,
 				86179B4B28C34A1E006A248E /* AddPerformanceView.swift */,
 				86179B4D28C34C5F006A248E /* AddSong.swift */,
+				8609412828E1C5CD0012614D /* AddAlbums.swift */,
 			);
 			path = Add;
 			sourceTree = "<group>";
@@ -1479,6 +1489,7 @@
 			isa = PBXGroup;
 			children = (
 				8618015D28D8B4C900AA11A0 /* Favoritable.swift */,
+				8609412628E1AAB70012614D /* Deletable.swift */,
 				86A60C67288C5B8D00813778 /* NSPredicate+Extensions.swift */,
 				868C12212876D6DD0054FF2D /* NSManagedObjectContext+Extensions.swift */,
 				868BAF7E2876D3640055576D /* Album+CoreDataClass.swift */,
@@ -1670,6 +1681,7 @@
 				866863F52865EB6400510DDF /* Dylan.entitlements */,
 				8678FD302869F76700DF1E69 /* Localizable.strings */,
 				866863EC2865EB6200510DDF /* DylanApp.swift */,
+				8609412428E1A3D30012614D /* AppDelegate.swift */,
 				86FD4F5628DE079D002537CE /* CommandMenu+Reducer.swift */,
 				866863F02865EB6400510DDF /* Assets.xcassets */,
 				86563C6E287CA8DF00104879 /* Other */,
@@ -3008,6 +3020,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8609412B28E1C9140012614D /* Add+Album.swift in Sources */,
 				86179B8B28C51576006A248E /* Add.swift in Sources */,
 				864151EC28C8E43F0031E6D6 /* Add+Performance.swift in Sources */,
 				86179B8928C514A3006A248E /* Add+Action.swift in Sources */,
@@ -3015,6 +3028,7 @@
 				86179B4C28C34A1E006A248E /* AddPerformanceView.swift in Sources */,
 				86179B4E28C34C5F006A248E /* AddSong.swift in Sources */,
 				86179B8728C5148B006A248E /* Add+State.swift in Sources */,
+				8609412928E1C5CD0012614D /* AddAlbums.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3059,6 +3073,7 @@
 				8659636C28A00B86003F43A4 /* Performance+CoreDataProperties.swift in Sources */,
 				8659636A28A00B86003F43A4 /* Song+CoreDataClass.swift in Sources */,
 				8659637228A00B86003F43A4 /* AppMetadata+CoreDataClass.swift in Sources */,
+				8609412728E1AAB70012614D /* Deletable.swift in Sources */,
 				8659643828A04081003F43A4 /* NSManagedObjectContext+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3172,6 +3187,7 @@
 				865792F5289B0D9E008E9886 /* AppAction.swift in Sources */,
 				86563C70287CA8FA00104879 /* TestHelper.swift in Sources */,
 				8659633628A00090003F43A4 /* AppReducer.swift in Sources */,
+				8609412528E1A3D30012614D /* AppDelegate.swift in Sources */,
 				866863EF2865EB6200510DDF /* ContentView.swift in Sources */,
 				86D9C2B6287DFFAE00D5A0D3 /* AllAlbumsView.swift in Sources */,
 				866863ED2865EB6200510DDF /* DylanApp.swift in Sources */,

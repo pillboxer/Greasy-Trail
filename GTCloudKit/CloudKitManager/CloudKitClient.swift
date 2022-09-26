@@ -2,6 +2,7 @@ import GTCoreData
 import Model
 import CloudKit
 import Core
+import ComposableArchitecture
 
 public struct CloudKitEnvironment {
     var client: CloudKitClient
@@ -16,6 +17,7 @@ public struct CloudKitClient {
     var fetchAlbums: @Sendable (_ after: Date?) -> AsyncThrowingStream<Event, Error>
     var fetchPerformances: @Sendable (_ after: Date?) -> AsyncThrowingStream<Event, Error>
     var uploadPerformance: @Sendable (_ model: PerformanceUploadModel) -> AsyncThrowingStream<Event, Error>
+    var subscribeToDatabases: @Sendable () -> Void
     
     public enum Event: Equatable {
         case updateFetchProgress(of: DylanRecordType, to: Double)
@@ -36,6 +38,8 @@ extension CloudKitClient {
             fetchPerformancesLive(after: date)
         }, uploadPerformance: { model in
             uploadPerformanceLive(from: model)
+        }, subscribeToDatabases: {
+            subscribeToDatabasesLive()
         }
     )
     
@@ -53,7 +57,7 @@ extension CloudKitClient {
                         await context.perform {
                             let title = titles[index] ?? "Unknown Title"
                             let author = authors[index]
-                            let predicate = NSPredicate(format: "title == %@", title)
+                            let predicate = NSPredicate(format: "uuid == %@", record.recordID.recordName)
                             let song: Song
                             if let existingSong = context.fetchAndWait(Song.self, with: predicate).first {
                                 song = existingSong
@@ -97,9 +101,9 @@ extension CloudKitClient {
                         let lbs = lbNumbers[index]
                         let dateFormat = dateFormats[index]
                         let ordered = try await getOrderedSongRecords(from: record)
-                        let songTitles = ordered.compactMap { $0.string(for: .title) }
-                        let correspondingSongs: [Song] = songTitles.compactMap { title in
-                            let predicate = NSPredicate(format: "title == %@", title)
+                        let songIDs = ordered.compactMap { $0.recordID.recordName }
+                        let correspondingSongs: [Song] = songIDs.compactMap { id in
+                            let predicate = NSPredicate(format: "uuid == %@", id)
                             return context.fetchAndWait(Song.self, with: predicate).first
                         }
                         await context.perform {
@@ -141,13 +145,13 @@ extension CloudKitClient {
                         let title = titles[index]
                         let releaseDate = releaseDates[index]
                         let ordered = try await getOrderedSongRecords(from: record)
-                        let songTitles = ordered.compactMap { $0.string(for: .title) }
-                        let correspondingSongs: [Song] = songTitles.compactMap { title in
-                            let predicate = NSPredicate(format: "title == %@", title)
+                        let songIDs = ordered.compactMap { $0.recordID.recordName }
+                        let correspondingSongs: [Song] = songIDs.compactMap { id in
+                            let predicate = NSPredicate(format: "uuid == %@", id)
                             return context.fetchAndWait(Song.self, with: predicate).first
                         }
                         await context.perform {
-                            let predicate = NSPredicate(format: "title == %@", title)
+                            let predicate = NSPredicate(format: "uuid == %@", record.recordID.recordName)
                             let existingAlbum = context.fetchAndWait(Album.self, with: predicate).first
                             let album = existingAlbum ?? Album(context: context)
                             album.title = title
@@ -217,4 +221,45 @@ extension CloudKitClient {
             }
         }
     }
+    
+    private static func subscribeToDatabasesLive() {
+        
+            let notification = CKSubscription.NotificationInfo()
+            notification.shouldSendContentAvailable = true
+            
+            let songSubscriptionID = NSLocalizedString("cloud_kit_subscription_songs", comment: "")
+            let songSubscription = CKQuerySubscription(recordType: DylanRecordType.song.rawValue,
+                                                       predicate: NSPredicate(value: true),
+                                                       subscriptionID: songSubscriptionID,
+                                                       options: [.firesOnRecordDeletion])
+            songSubscription.notificationInfo = notification
+            
+            let albumSubscriptionID = NSLocalizedString("cloud_kit_subscription_albums", comment: "")
+            let albumSubscription = CKQuerySubscription(recordType:
+                                                            DylanRecordType.album.rawValue,
+                                                        predicate: NSPredicate(value: true),
+                                                        subscriptionID: albumSubscriptionID,
+                                                        options: [.firesOnRecordDeletion])
+            albumSubscription.notificationInfo = notification
+            
+            let performanceSubscriptionID = NSLocalizedString("cloud_kit_subscription_performances", comment: "")
+            let performanceSubscription = CKQuerySubscription(recordType: DylanRecordType.performance.rawValue,
+                                                              predicate: NSPredicate(value: true),
+                                                              subscriptionID: performanceSubscriptionID,
+                                                              options: [.firesOnRecordDeletion])
+            performanceSubscription.notificationInfo = notification
+            let operation = CKModifySubscriptionsOperation(subscriptionsToSave: [songSubscription,
+                                                                                 albumSubscription,
+                                                                                 performanceSubscription])
+            
+            operation.modifySubscriptionsResultBlock = { result in
+                switch result {
+                case .failure(let error):
+                    logger.log(level: .error, "Could not subscribe to database. Error \(String(describing: error), privacy: .public)")
+                case .success:
+                    logger.log("Successfully subscribed to database")
+                }
+            }
+            DylanDatabase.add(operation)
+        }
 }

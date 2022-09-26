@@ -96,6 +96,10 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                 "Received failure whilst uploading performance: \(String(describing: error), privacy: .public)")
             await send(.cloudKitClient(.failure(error)))
         })
+    case .subscribeToDatabases:
+        return .fireAndForget {
+            environment.client.subscribeToDatabases()
+        }
         
         // Client
     case .cloudKitClient(.success(.updateUploadProgress(let progress))):

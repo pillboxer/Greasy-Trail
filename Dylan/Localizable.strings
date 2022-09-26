@@ -23,6 +23,9 @@
 "cloud_kit_update_success" = "Records updated successfully";
 "cloud_kit_fetching_in_progress" = "Fetching latest %@ records - this may take a while";
 "cloud_kit_uploading_in_progress" = "Uploading";
+"cloud_kit_subscription_songs" = "SONGS-V1";
+"cloud_kit_subscription_albums" = "ALBUMS-V1";
+"cloud_kit_subscription_performances" = "PERFORMANCES-V1";
 
 // Songs
 "table_column_title_songs_0" = "Title";
@@ -68,6 +71,9 @@
 // Adding
 "add_song_field_0" = "Title";
 "add_song_field_1" = "Author";
+"add_album_field_0" = "Title & Release Date";
+"add_album_field_1" = "Songs";
+"add_album_field_1_placeholder" = "Song";
 "add_performance_field_0" = "Venue & Date";
 "add_performance_field_1" = "LB Numbers";
 "add_performance_field_1_placeholder" = "LB";

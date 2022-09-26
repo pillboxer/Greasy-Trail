@@ -7,6 +7,7 @@ import GTCloudKit
 @main
 struct DylanApp: App {
     
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
     @ObservedObject private var viewStore: ViewStore<Void, CommandMenuAction>
     
@@ -26,6 +27,7 @@ struct DylanApp: App {
         WindowGroup {
             ContentView(store: appStore)
                 .onAppear {
+                    ViewStore(appStore).send(.cloudKit(.subscribeToDatabases))
                     ViewStore(appStore).send(.cloudKit(.start(date: lastFetchDate)))
                 }
         } .commands {
