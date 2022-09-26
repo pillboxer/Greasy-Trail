@@ -31,7 +31,6 @@ class PerformanceEditor {
         return sPerformance
     }
     
-    
     func removeLB(at index: Int) -> sPerformance? {
         logger.log("Removing lb at index \(index, privacy: .public)")
         var sPerformance = model?.sPerformance
@@ -56,10 +55,9 @@ class PerformanceEditor {
     func editSong(_ song: String, with index: Int) -> sPerformance? {
         logger.log("Editing \(song, privacy: .public) at index \(index, privacy: .public)")
         var sPerformance = model?.sPerformance
-        let trimmed = song.trimmingCharacters(in: .whitespacesAndNewlines)
         let detective = Detective()
-        let uuid = detective.uuid(for: trimmed)
-        let song = sSong(uuid: uuid ?? .invalid, title: trimmed, isFavorite: false)
+        let uuid = detective.uuid(for: song)
+        let song = sSong(uuid: uuid ?? .invalid, title: song, isFavorite: false)
         sPerformance?.songs[index] = song
         return sPerformance
     }

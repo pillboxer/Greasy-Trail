@@ -128,6 +128,8 @@ extension BottomBarFeatureAction {
         case .upload(let model):
             if let performance = model as? PerformanceDisplayModel {
                 self = .cloudKit(.uploadPerformance(performance))
+            } else if let album = model as? AlbumDisplayModel {
+                self = .cloudKit(.uploadAlbum(album))
             } else {
                 fatalError()
             }

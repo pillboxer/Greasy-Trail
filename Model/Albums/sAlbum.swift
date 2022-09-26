@@ -3,10 +3,10 @@ import Foundation
 // swiftlint:disable type_name
 public struct sAlbum: Decodable, Equatable, Identifiable {
 
-    public let title: String
-    let uuid: String
-    let songs: [sSong]
-    public let releaseDate: Double
+    public var title: String
+    public var uuid: String
+    public var songs: [sSong]
+    public var releaseDate: Double
     var isFavorite: Bool
 
     public var id: String {

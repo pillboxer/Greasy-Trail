@@ -69,6 +69,31 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                 "Received failure whilst fetching performances: \(String(describing: error), privacy: .public)")
             await send(.cloudKitClient(.failure(error)))
         })
+    case .uploadAlbum(let model):
+        let detective = Detective()
+        let titles = model.songs.map { $0.title }
+        let uuids = titles.compactMap { detective.uuid(for: $0) }
+        guard uuids.count == titles.count else { fatalError("One or more songs could not be found to upload") }
+        let uploadModel = AlbumUploadModel(recordName: model.uuid,
+                                           title: model.title,
+                                           releaseDate: model.releaseDate,
+                                           uuids: uuids)
+        return .run(operation: { send in
+            for try await event in environment.client.uploadAlbum(uploadModel) {
+                switch event {
+                case .updateUploadProgress(let progress):
+                    await send(.cloudKitClient(.success(.updateUploadProgress(to: progress))))
+                case .completeUpload:
+                    await send(.cloudKitClient(.success(.completeUpload)))
+                default: fatalError()
+                }
+            }
+        }, catch: { error, send in
+            logger.log(
+                level: .error,
+                "Received failure whilst uploading album: \(String(describing: error), privacy: .public)")
+            await send(.cloudKitClient(.failure(error)))
+        })
     case .uploadPerformance(let model):
         let detective = Detective()
         let titles = model.songs.map { $0.title }

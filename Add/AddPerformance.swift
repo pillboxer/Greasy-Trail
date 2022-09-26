@@ -57,7 +57,6 @@ extension AddPerformanceView {
         .padding()
         .font(.footnote)
     }
-    
 }
 
 extension AddPerformanceView {
@@ -115,7 +114,7 @@ extension AddPerformanceView {
             }
             let song = state.performanceSongs[index]
             return song.title
-        }, send: { .setSong(title: $0, index: index) })
+        }, send: { .setPerformanceSong(title: $0, index: index) })
     }
     
     private var thirdColumnView: some View {
@@ -125,7 +124,7 @@ extension AddPerformanceView {
                     Text("add_performance_field_2").font(.footnote)
                     Spacer()
                     PlainOnTapButton(systemImage: "plus.circle") {
-                        viewStore.send(.incrSongCount)
+                        viewStore.send(.incrPerformanceSongCount)
                     }
                 }
                 Divider().padding(.bottom)
@@ -136,13 +135,12 @@ extension AddPerformanceView {
                                                  textColor: viewStore.performanceSongs[index].uuid ==
                             .invalid ? .red : nil)
                         PlainOnTapButton(systemImage: "minus.circle") {
-                            viewStore.send(.removeSong(at: index))
+                            viewStore.send(.removePerformanceSong(at: index))
                         }
                     }
                 }
             }
             .padding()
-            
         }
     }
 }

@@ -34,6 +34,9 @@ extension AnyModel: Equatable {
         } else if let lhSong = lhs.value as? SongDisplayModel,
                   let rhSong = rhs.value as? SongDisplayModel {
             return lhSong == rhSong
+        } else if let lhAlbum = lhs.value as? AlbumDisplayModel,
+                  let rhAlbum = rhs.value as? AlbumDisplayModel {
+            return lhAlbum == rhAlbum
         }
         return true
     }

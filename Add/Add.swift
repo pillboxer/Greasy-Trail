@@ -24,7 +24,7 @@ public struct AddView: View {
                     case .performances:
                         AddPerformanceView()
                     case .albums:
-                        AddSongView()
+                        AddAlbumsView()
                     }
                 default:
                     EmptyView()

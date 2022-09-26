@@ -9,6 +9,8 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
     case .selectRecordToAdd(let dylanRecordType):
         logger.log("Setting record to add as \(dylanRecordType.rawValue, privacy: .public)")
         state.displayedView = .add(dylanRecordType)
+        
+    // Songs
     case .updateSong(let title, let author):
         logger.log("Updating song: (Title: \(title, privacy: .public), Author: \(author, privacy: .public)")
         let detective = Detective()
@@ -19,13 +21,38 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
     case .updateSongUUID(let uuid):
         logger.log("Updating song uuid to \(uuid ?? "nil", privacy: .public)")
         state.songUUID = uuid
+        
+    // Albums
+    case .setAlbumSong(let song, let index):
+        let albumEditor = AlbumEditor(state.album)
+        let sAlbum = albumEditor.editSong(song, with: index)
+        return Effect(value: .updateAlbumDisplayModel(sAlbum))
+    case .updateAlbumDisplayModel(let sAlbum):
+        guard let sAlbum = sAlbum else { return .none }
+        state.album = AlbumDisplayModel(album: sAlbum)
+    case .incrAlbumSongCount:
+        var songs = state.albumSongs
+        if songs.last?.title == "" { return .none }
+        let albumEditor = AlbumEditor(state.album)
+        let sAlbum = albumEditor.createSong()
+        return Effect(value: AddAction.updateAlbumDisplayModel(sAlbum))
+    case .updateAlbumTitle(let string):
+        let albumEditor = AlbumEditor(state.album)
+        let sPerformance = albumEditor.editTitle(string)
+        return Effect(value: AddAction.updateAlbumDisplayModel(sPerformance))
+    case .updateAlbumDate(let date):
+        let albumEditor = AlbumEditor(state.album)
+        let sAlbum = albumEditor.editDate(date)
+        return Effect(value: AddAction.updateAlbumDisplayModel(sAlbum))
+
+    // Performances
     case .incrLBCount:
         var lbs = state.performance?.lbNumbers ?? []
         if lbs.last == 0 { return .none }
         let performanceEditor = PerformanceEditor(state.performance)
         let sPerformance = performanceEditor.appendLBNumber()
         return Effect(value: AddAction.updatePerformanceDisplayModel(sPerformance))
-    case .incrSongCount:
+    case .incrPerformanceSongCount:
         var songs = state.performanceSongs
         if songs.last?.title == "" { return .none }
         let performanceEditor = PerformanceEditor(state.performance)
@@ -35,7 +62,7 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
         let performanceEditor = PerformanceEditor(state.performance)
         let sPerformance = performanceEditor.removeLB(at: index)
         return Effect(value: AddAction.updatePerformanceDisplayModel(sPerformance))
-    case .removeSong(let index):
+    case .removePerformanceSong(let index):
         let performanceEditor = PerformanceEditor(state.performance)
         let sPerformance = performanceEditor.removeSong(at: index)
         return Effect(value: AddAction.updatePerformanceDisplayModel(sPerformance))
@@ -43,7 +70,7 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
         let performanceEditor = PerformanceEditor(state.performance)
         let sPerformance = performanceEditor.setLB(lbNumber, at: index)
         return Effect(value: AddAction.updatePerformanceDisplayModel(sPerformance))
-    case .setSong(let song, let index):
+    case .setPerformanceSong(let song, let index):
         let performanceEditor = PerformanceEditor(state.performance)
         let sPerformance = performanceEditor.editSong(song, with: index)
         return Effect(value: AddAction.updatePerformanceDisplayModel(sPerformance))

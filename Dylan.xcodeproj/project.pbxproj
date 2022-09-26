@@ -11,6 +11,9 @@
 		8609412728E1AAB70012614D /* Deletable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412628E1AAB70012614D /* Deletable.swift */; };
 		8609412928E1C5CD0012614D /* AddAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412828E1C5CD0012614D /* AddAlbums.swift */; };
 		8609412B28E1C9140012614D /* Add+Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412A28E1C9140012614D /* Add+Album.swift */; };
+		8609412E28E1F1470012614D /* CloudKitClient+Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412D28E1F1470012614D /* CloudKitClient+Upload.swift */; };
+		8609413028E1F1B30012614D /* AlbumUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412F28E1F1B30012614D /* AlbumUploadModel.swift */; };
+		8609413228E1F24E0012614D /* CloudKitClient+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609413128E1F24E0012614D /* CloudKitClient+Fetch.swift */; };
 		860A3A5428BB7C7400D54074 /* BottomBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; };
 		860A3A5C28BB7C7400D54074 /* BottomBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 860A3A4E28BB7C7400D54074 /* BottomBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		860A3A5F28BB7C7400D54074 /* BottomBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 860A3A4C28BB7C7400D54074 /* BottomBar.framework */; };
@@ -32,7 +35,7 @@
 		8613E0F528CE075900D3DA06 /* AllPerformances+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8613E0F428CE075900D3DA06 /* AllPerformances+State.swift */; };
 		8613E0F728CE079300D3DA06 /* AllPerformances+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8613E0F628CE079300D3DA06 /* AllPerformances+Action.swift */; };
 		8613E0F928CE07AD00D3DA06 /* AllPerformances+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8613E0F828CE07AD00D3DA06 /* AllPerformances+Reducer.swift */; };
-		86179B4C28C34A1E006A248E /* AddPerformanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86179B4B28C34A1E006A248E /* AddPerformanceView.swift */; };
+		86179B4C28C34A1E006A248E /* AddPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86179B4B28C34A1E006A248E /* AddPerformance.swift */; };
 		86179B4E28C34C5F006A248E /* AddSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86179B4D28C34C5F006A248E /* AddSong.swift */; };
 		86179B7E28C5119E006A248E /* GTCloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */; };
 		86179B8728C5148B006A248E /* Add+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86179B8628C5148A006A248E /* Add+State.swift */; };
@@ -913,6 +916,9 @@
 		8609412628E1AAB70012614D /* Deletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deletable.swift; sourceTree = "<group>"; };
 		8609412828E1C5CD0012614D /* AddAlbums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlbums.swift; sourceTree = "<group>"; };
 		8609412A28E1C9140012614D /* Add+Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Add+Album.swift"; sourceTree = "<group>"; };
+		8609412D28E1F1470012614D /* CloudKitClient+Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitClient+Upload.swift"; sourceTree = "<group>"; };
+		8609412F28E1F1B30012614D /* AlbumUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUploadModel.swift; sourceTree = "<group>"; };
+		8609413128E1F24E0012614D /* CloudKitClient+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitClient+Fetch.swift"; sourceTree = "<group>"; };
 		860A3A4C28BB7C7400D54074 /* BottomBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BottomBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		860A3A4E28BB7C7400D54074 /* BottomBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BottomBar.h; sourceTree = "<group>"; };
 		860A3A5328BB7C7400D54074 /* BottomBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BottomBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -928,7 +934,7 @@
 		8613E0F428CE075900D3DA06 /* AllPerformances+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllPerformances+State.swift"; sourceTree = "<group>"; };
 		8613E0F628CE079300D3DA06 /* AllPerformances+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllPerformances+Action.swift"; sourceTree = "<group>"; };
 		8613E0F828CE07AD00D3DA06 /* AllPerformances+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllPerformances+Reducer.swift"; sourceTree = "<group>"; };
-		86179B4B28C34A1E006A248E /* AddPerformanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPerformanceView.swift; sourceTree = "<group>"; };
+		86179B4B28C34A1E006A248E /* AddPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPerformance.swift; sourceTree = "<group>"; };
 		86179B4D28C34C5F006A248E /* AddSong.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSong.swift; sourceTree = "<group>"; };
 		86179B8628C5148A006A248E /* Add+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Add+State.swift"; sourceTree = "<group>"; };
 		86179B8828C514A3006A248E /* Add+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Add+Action.swift"; sourceTree = "<group>"; };
@@ -1353,6 +1359,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8609412C28E1F13C0012614D /* CloudKitClient */ = {
+			isa = PBXGroup;
+			children = (
+				86E0490228D103CD00821096 /* CloudKitClient.swift */,
+				8609413128E1F24E0012614D /* CloudKitClient+Fetch.swift */,
+				8609412D28E1F1470012614D /* CloudKitClient+Upload.swift */,
+			);
+			path = CloudKitClient;
+			sourceTree = "<group>";
+		};
 		860A3A4D28BB7C7400D54074 /* BottomBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1404,7 +1420,7 @@
 				8634312828B1494800092931 /* Add+Reducer.swift */,
 				86179B8628C5148A006A248E /* Add+State.swift */,
 				86179B8A28C51576006A248E /* Add.swift */,
-				86179B4B28C34A1E006A248E /* AddPerformanceView.swift */,
+				86179B4B28C34A1E006A248E /* AddPerformance.swift */,
 				86179B4D28C34C5F006A248E /* AddSong.swift */,
 				8609412828E1C5CD0012614D /* AddAlbums.swift */,
 			);
@@ -1800,6 +1816,7 @@
 			children = (
 				866864032865ED8300510DDF /* sAlbum.swift */,
 				86C526A82870CF130035DD31 /* AlbumDisplayModel.swift */,
+				8609412F28E1F1B30012614D /* AlbumUploadModel.swift */,
 			);
 			path = Albums;
 			sourceTree = "<group>";
@@ -1826,7 +1843,10 @@
 		86CD7A0E28A93FFC00D2C219 /* GTCloudKit */ = {
 			isa = PBXGroup;
 			children = (
-				86CD7A3728A949D300D2C219 /* CloudKitManager */,
+				8609412C28E1F13C0012614D /* CloudKitClient */,
+				86C9991F28CCEF610004BBFD /* CloudKit+TCA.swift */,
+				86E0490028D103B100821096 /* CloudKit+Reducer.swift */,
+				868BCD1228D53273000E5071 /* CloudKit+Helper.swift */,
 				86CD7A3628A949C700D2C219 /* Extensions */,
 				86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */,
 				86CD7A0F28A93FFC00D2C219 /* GTCloudKit.h */,
@@ -1845,17 +1865,6 @@
 				8656A31428679CE40013F595 /* CKQuery+Extensions.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		86CD7A3728A949D300D2C219 /* CloudKitManager */ = {
-			isa = PBXGroup;
-			children = (
-				86C9991F28CCEF610004BBFD /* CloudKit+TCA.swift */,
-				86E0490028D103B100821096 /* CloudKit+Reducer.swift */,
-				86E0490228D103CD00821096 /* CloudKitClient.swift */,
-				868BCD1228D53273000E5071 /* CloudKit+Helper.swift */,
-			);
-			path = CloudKitManager;
 			sourceTree = "<group>";
 		};
 		86D9C2B4287DFF9100D5A0D3 /* Albums */ = {
@@ -3025,7 +3034,7 @@
 				864151EC28C8E43F0031E6D6 /* Add+Performance.swift in Sources */,
 				86179B8928C514A3006A248E /* Add+Action.swift in Sources */,
 				8634312928B1494800092931 /* Add+Reducer.swift in Sources */,
-				86179B4C28C34A1E006A248E /* AddPerformanceView.swift in Sources */,
+				86179B4C28C34A1E006A248E /* AddPerformance.swift in Sources */,
 				86179B4E28C34C5F006A248E /* AddSong.swift in Sources */,
 				86179B8728C5148B006A248E /* Add+State.swift in Sources */,
 				8609412928E1C5CD0012614D /* AddAlbums.swift in Sources */,
@@ -3127,6 +3136,7 @@
 				8659643C28A04147003F43A4 /* sAlbum.swift in Sources */,
 				8659643F28A04152003F43A4 /* AlbumDisplayModel.swift in Sources */,
 				8659643E28A0414E003F43A4 /* SongDisplayModel.swift in Sources */,
+				8609413028E1F1B30012614D /* AlbumUploadModel.swift in Sources */,
 				863430E028A9506F00092931 /* PerformanceUploadModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3262,10 +3272,12 @@
 				86CD7A2A28A9422300D2C219 /* UploadError.swift in Sources */,
 				86E0490128D103B200821096 /* CloudKit+Reducer.swift in Sources */,
 				86CD7A3428A949BA00D2C219 /* CKRecord+Extensions.swift in Sources */,
+				8609413228E1F24E0012614D /* CloudKitClient+Fetch.swift in Sources */,
 				868BCD1328D53273000E5071 /* CloudKit+Helper.swift in Sources */,
 				86CD7A3328A949BA00D2C219 /* CKDatabase+Extensions.swift in Sources */,
 				86C9992028CCEF610004BBFD /* CloudKit+TCA.swift in Sources */,
 				86CD7A2928A9422000D2C219 /* ReferenceType.swift in Sources */,
+				8609412E28E1F1470012614D /* CloudKitClient+Upload.swift in Sources */,
 				86E0490328D103CD00821096 /* CloudKitClient.swift in Sources */,
 				86CD7A3528A949BA00D2C219 /* CKQueryOperation+Extensions.swift in Sources */,
 			);

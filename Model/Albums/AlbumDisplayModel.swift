@@ -1,8 +1,8 @@
 import Foundation
 
 public struct AlbumDisplayModel: Model {
-
-    let album: sAlbum
+    
+    public let album: sAlbum
     public let uuid: String
     
     public init(album: sAlbum) {
@@ -11,9 +11,12 @@ public struct AlbumDisplayModel: Model {
     }
     
     public var uploadAllowed: Bool {
-        uuid != .invalid
+        let songUUIDs = songs.map { $0.uuid }
+        return uuid != .invalid
+        && !(songUUIDs.contains(.invalid))
+        
     }
-
+    
 }
 
 public extension AlbumDisplayModel {
@@ -21,15 +24,19 @@ public extension AlbumDisplayModel {
     var isFavorite: Bool {
         album.isFavorite
     }
-
+    
     var title: String {
         album.title
     }
-
+    
     var songs: [sSong] {
         album.songs
     }
-
+    
+    var releaseDate: Double {
+        album.releaseDate
+    }
+    
 }
 
 extension AlbumDisplayModel: Equatable {}
