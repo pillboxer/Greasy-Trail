@@ -19,6 +19,13 @@ class AlbumEditor {
         return sAlbum
     }
     
+    func removeSong(at index: Int) -> sAlbum? {
+        logger.log("Removing song at index \(index, privacy: .public)")
+        var sAlbum = model?.album
+        sAlbum?.songs.remove(at: index)
+        return sAlbum
+    }
+    
     func createSong() -> sAlbum? {
         logger.log("Creating new song")
         var sAlbum = model?.album

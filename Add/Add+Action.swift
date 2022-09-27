@@ -15,6 +15,7 @@ public enum AddAction: Equatable {
     case updateAlbumTitle(String)
     case updateAlbumDate(Date)
     case updateAlbumDisplayModel(sAlbum?)
+    case removeAlbumSong(at: Int)
     
     // Performances
     case updatePerformanceVenue(String)

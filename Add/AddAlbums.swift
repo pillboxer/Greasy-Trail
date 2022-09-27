@@ -72,7 +72,7 @@ extension AddAlbumsView {
                                                  textColor: viewStore.albumSongs[index].uuid ==
                             .invalid ? .red : nil)
                         PlainOnTapButton(systemImage: "minus.circle") {
-//                            viewStore.send(.removePerformanceSong(at: index))
+                            viewStore.send(.removeAlbumSong(at: index))
                         }
                     }
                 }

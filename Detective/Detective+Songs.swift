@@ -78,7 +78,6 @@ extension Detective {
                     callback(.success(AnyModel(displayModel)))
                 }
             }
-
         }
     }
 }

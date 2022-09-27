@@ -4,6 +4,7 @@ import Search
 public struct AllSongsState: Equatable {
     public var search: SearchState
     public var selectedSongPredicate: SongPredicate
+    
     public init(search: SearchState, selectedSongPredicate: SongPredicate) {
         self.search = search
         self.selectedSongPredicate = selectedSongPredicate

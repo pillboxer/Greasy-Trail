@@ -8,6 +8,7 @@ import AllSongs
 import CoreData
 import Stats
 import Core
+import AllAlbums
 
 struct AppState: Equatable {
     
@@ -35,6 +36,9 @@ struct AppState: Equatable {
     
     // AllSongs
     var selectedSongPredicate: SongPredicate = .all
+    
+    // AllAlbums
+    var selectedAlbumPredicate: AlbumPredicate = .all
     
     // Stats
     var isFetchingMissingLBCount = false

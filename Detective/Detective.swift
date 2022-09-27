@@ -25,6 +25,11 @@ public class Detective: ObservableObject {
         logger.log("Searching song by ID: \(id, privacy: .public)")
         return fetchSongModel(for: id)
     }
+    
+    public func search(album id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
+        logger.log("Searching album by ID \(id, privacy: .public)")
+        return fetchAlbumModel(for: id)
+    }
 
     public func search(song title: String) -> Effect<AnyModel?, Never> {
         logger.log("Searching song: \(title, privacy: .public)")

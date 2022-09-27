@@ -21,6 +21,7 @@ import TopBar
 import Model
 import AllPerformances
 import Stats
+import AllAlbums
 
 struct ContentView: View {
     
@@ -35,6 +36,7 @@ struct ContentView: View {
         var displayedView: DisplayedView
         var selectedPerformancePredicate: PerformancePredicate
         var selectedSongPredicate: SongPredicate
+        var selectedAlbumPredicate: AlbumPredicate
         var mode: Mode?
         var showingError: Bool
         var missingLBNumbers: [Int]?
@@ -48,6 +50,7 @@ struct ContentView: View {
                              displayedView: $0.displayedView,
                              selectedPerformancePredicate: $0.selectedPerformancePredicate,
                              selectedSongPredicate: $0.selectedSongPredicate,
+                             selectedAlbumPredicate: $0.selectedAlbumPredicate,
                              mode: $0.mode,
                              showingError: $0.showingError,
                              missingLBNumbers: $0.missingLBNumbers)}))
@@ -89,7 +92,9 @@ struct ContentView: View {
                                                 action: { .allSongs($0) }),
                              predicate: viewStore.selectedSongPredicate.predicate)
             case .albums:
-                Text("Album")
+                AllAlbumsView(store: store.scope(state: { $0.allAlbumsState },
+                                                 action: { .allAlbums($0)}),
+                              predicate: viewStore.selectedAlbumPredicate.predicate)
             case .missingLBs:
                 MissingLBsView(lbNumbers: viewStore.state.missingLBNumbers!)
             case .performances:

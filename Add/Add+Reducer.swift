@@ -44,6 +44,10 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
         let albumEditor = AlbumEditor(state.album)
         let sAlbum = albumEditor.editDate(date)
         return Effect(value: AddAction.updateAlbumDisplayModel(sAlbum))
+    case .removeAlbumSong(let index):
+        let albumEditor = AlbumEditor(state.album)
+        let sAlbum = albumEditor.removeSong(at: index)
+        return Effect(value: AddAction.updateAlbumDisplayModel(sAlbum))
 
     // Performances
     case .incrLBCount:

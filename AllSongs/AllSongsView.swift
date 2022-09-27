@@ -5,7 +5,7 @@ import ComposableArchitecture
 import Search
 import UI
 
-public struct AllSongsView: View {
+public struct AllSongsView: TableViewType {
     
     let store: Store<AllSongsState, AllSongsFeatureAction>
     @ObservedObject private var viewStore: ViewStore<AllSongsState, AllSongsViewAction>
@@ -76,8 +76,6 @@ public struct AllSongsView: View {
         }
     }
 }
-
-extension AllSongsView: TwoColumnTableViewType {}
 
 private extension AllSongsView {
     

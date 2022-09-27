@@ -12,6 +12,7 @@ import TopBar
 import AllPerformances
 import AllSongs
 import Stats
+import AllAlbums
 
 struct AppEnvironment {
     let search: (Search) -> Effect<AnyModel?, Never>
@@ -58,6 +59,10 @@ Reducer.combine(
     allSongsFeatureReducer.pullback(
         state: \.allSongsState,
         action: /AppAction.allSongs,
+        environment: SearchEnvironment.init),
+    allAlbumsFeatureReducer.pullback(
+        state: \.allAlbumsState ,
+        action: /AppAction.allAlbums,
         environment: SearchEnvironment.init)
 )
 

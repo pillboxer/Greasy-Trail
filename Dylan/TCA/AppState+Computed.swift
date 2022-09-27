@@ -6,19 +6,21 @@ import GTCloudKit
 import AllPerformances
 import Stats
 import AllSongs
+import AllAlbums
 
 extension AppState {
     
     var search: SearchState {
         get {
-            return SearchState(model: model,
-                               displayedView: displayedView,
-                               failedSearch: failedSearch,
-                               currentSearch: currentSearch,
-                               searchFieldText: searchFieldText,
-                               selectedID: selectedID,
-                               selectedObjectID: selectedObjectID,
-                               isSearching: isSearching)
+            return SearchState(
+                model: model,
+                displayedView: displayedView,
+                failedSearch: failedSearch,
+                currentSearch: currentSearch,
+                searchFieldText: searchFieldText,
+                selectedID: selectedID,
+                selectedObjectID: selectedObjectID,
+                isSearching: isSearching)
         }
         set {
             selectedID = newValue.selectedID
@@ -63,7 +65,9 @@ extension AppState {
     
     var allPerformancesState: AllPerformancesState {
         get {
-            return AllPerformancesState(search: search, selectedPerformancePredicate: selectedPerformancePredicate)
+            return AllPerformancesState(
+                search: search,
+                selectedPerformancePredicate: selectedPerformancePredicate)
         }
         set {
             search = newValue.search
@@ -73,7 +77,9 @@ extension AppState {
     
     var cloudKitState: CloudKitState {
         get {
-            return CloudKitState(mode: mode, lastFetchDate: lastFetchDate)
+            return CloudKitState(
+                mode: mode,
+                lastFetchDate: lastFetchDate)
         }
         set {
             mode = newValue.mode
@@ -128,6 +134,17 @@ extension AppState {
         set {
             selectedSongPredicate = newValue.selectedSongPredicate
             search = newValue.search
+        }
+    }
+    
+    var allAlbumsState: AllAlbumsState {
+        get {
+            AllAlbumsState(search: search,
+                           albumPredicate: selectedAlbumPredicate)
+        }
+        set {
+            search = newValue.search
+            selectedAlbumPredicate = newValue.albumPredicate
         }
     }
 }

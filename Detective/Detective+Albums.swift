@@ -15,6 +15,20 @@ import ComposableArchitecture
 
 extension Detective {
     
+    func fetchAlbumModel(for id: NSManagedObjectID) -> Effect<AnyModel?, Never> {
+        let context = container.newBackgroundContext()
+        return .future { callback in
+            context.perform { [self] in
+                guard let object = context.object(with: id) as? Album,
+                      let songs = object.songs?.array as? [Song] else {
+                    return callback(.success(nil))
+                }
+                let model = createAlbumDisplayModel(from: object, with: songs)
+                callback(.success(AnyModel(model)))
+            }
+        }
+    }
+    
     func fetch(album title: String) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
         return .future { completion in
@@ -63,5 +77,6 @@ public extension Detective {
             }
         }
     }
+    
     
 }

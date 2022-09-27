@@ -9,7 +9,7 @@ import ComposableArchitecture
 
 let logger = Logger(subsystem: .subsystem, category: "All Performances")
 
-public struct AllPerformancesView {
+public struct AllPerformancesView: TableViewType {
     
     let store: Store<AllPerformancesState, AllPerformancesFeatureAction>
     let formatter = GTFormatter.Formatter()
@@ -84,15 +84,6 @@ public struct AllPerformancesView {
                 }
                 .width(56)
             }
-        }
-    }
-}
-
-extension AllPerformancesView: TwoColumnTableViewType {
-    
-    public func doubleTap(objectID: NSManagedObjectID) -> _EndedGesture<TapGesture> {
-        TapGesture(count: 2).onEnded { _ in
-            viewStore.send(.search(.init(id: objectID)))
         }
     }
 }

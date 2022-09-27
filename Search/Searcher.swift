@@ -29,7 +29,8 @@ public class Searcher {
         guard let title = search.title else {
             if let id = search.id {
                 return [detective.search(song: id),
-                        detective.search(performance: id)]
+                        detective.search(performance: id),
+                        detective.search(album: id)]
                     .publisher
                     .flatMap(maxPublishers: .max(1)) { $0 }
                     .compactMap { $0 }
