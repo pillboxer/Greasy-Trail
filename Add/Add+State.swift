@@ -35,7 +35,12 @@ public struct AddState: Equatable {
     
     var song: SongDisplayModel? {
         get {
-            model?.value as? SongDisplayModel
+            model?.value as? SongDisplayModel ??
+            SongDisplayModel(
+                song: sSong(uuid: "S\(UUID().uuidString)",
+                            title: "",
+                            author: "",
+                            isFavorite: false))
         }
         set {
             guard let newValue = newValue else {
@@ -48,12 +53,12 @@ public struct AddState: Equatable {
     var album: AlbumDisplayModel? {
         get {
             model?.value as? AlbumDisplayModel
-            ?? AlbumDisplayModel(album:
-                                    sAlbum(uuid: "A\(UUID().uuidString)",
-                                           title: "",
-                                           songs: [],
-                                           releaseDate: Date().timeIntervalSince1970,
-                                           isFavorite: false))
+            ?? AlbumDisplayModel(
+                album: sAlbum(uuid: "A\(UUID().uuidString)",
+                              title: "",
+                              songs: [],
+                              releaseDate: Date().timeIntervalSince1970,
+                              isFavorite: false))
         }
         set {
             guard let newValue = newValue else {

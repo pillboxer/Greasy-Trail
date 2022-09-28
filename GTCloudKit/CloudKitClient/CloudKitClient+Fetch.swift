@@ -46,7 +46,7 @@ extension CloudKitClient {
                     continuation.yield(.updateFetchProgress(of: .performance, to: 0))
                     let records = try await fetchRecords(of: .performance, after: date)
                     let venues = records.compactMap { $0.string(for: .venue) }
-                    let dates = records.compactMap { $0.double(for: .date) }
+                    let dates = records.compactMap { $0.double(for: .date)?.rounded() }
                     let dateFormats = records.map { $0.string(for: .dateFormat) }
                     let lbNumbers = records.map { $0.ints(for: .lbNumbers) }
                     let context = PersistenceController.shared.newBackgroundContext()
