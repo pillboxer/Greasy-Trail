@@ -9,6 +9,10 @@ private struct TimerID: Hashable {}
 public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvironment> { state, action, environment in
     switch action {
     case .start(let date):
+        if let mode = state.mode, !mode.canFetch {
+            logger.log("Attempted to start but not able to fetch. Give up")
+            return .none
+        }
         logger.log("Starting fetch of all records")
         return .run { send in await send(.fetchSongs(date)) }
     case .fetchSongs(let date):

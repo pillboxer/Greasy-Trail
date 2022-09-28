@@ -7,4 +7,13 @@ public enum Mode: Equatable {
     case fetchingLogs
     case couldNotFetchLogs
     case couldNotOpenEmail
+    
+    public var canFetch: Bool {
+        switch self {
+        case .downloading:
+            return false
+        default:
+            return true
+        }
+    }
 }
