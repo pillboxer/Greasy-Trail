@@ -29,12 +29,12 @@ public extension Detective {
         }
     }
     
-    func fetchModel(for title: String) -> Effect<AnyModel?, Never> {
+    func fetchModel(for query: String) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
         
         return .future { completion in
             context.perform { [self] in
-                guard let song = fetch(song: title) ?? fetch(song: resolveSpellingOf(song: title)) else {
+                guard let song = fetch(song: query) ?? fetch(song: resolveSpellingOf(song: query)) else {
                     return completion(.success(nil))
                 }
                 let id = song.objectID
@@ -84,13 +84,12 @@ extension Detective {
 
 private extension Detective {
     
-    func fetch(song title: String) -> Song? {
-        logger.log("Fetching song with title \(title, privacy: .public)")
+    func fetch(song query: String) -> Song? {
+        logger.log("Fetching song with query \(query, privacy: .public)")
         let context = container.newBackgroundContext()
-        let regexPredicate = NSPredicate(format: "title =[c] %@", title)
-        let titleBeforeParentheses = title.before(first: "(").trimmingCharacters(in: .whitespaces)
-        let matchPredicate = NSPredicate(format: "title =[c] %@", titleBeforeParentheses)
-        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [regexPredicate, matchPredicate])
+        let titlePredicate = NSPredicate(format: "title =[c] %@", query)
+        let baseSongUUIDPredicate = NSPredicate(format: "uuid = %@", query)
+        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [baseSongUUIDPredicate, titlePredicate])
         let song = context.fetchAndWait(Song.self, with: predicate).first
         return song
     }
@@ -123,12 +122,14 @@ private extension Detective {
         let title = song.title!
         let author = song.songAuthor
         let isFavorite = song.isFavorite
+        let baseSongUUID = song.baseSongUUID
         fetchPerformancesThatInclude(song: song) { performances in
             let sSong = sSong(uuid: uuid,
                               title: title,
                               author: author,
                               performances: performances,
-                              isFavorite: isFavorite)
+                              isFavorite: isFavorite,
+                              baseSongUUID: baseSongUUID)
             completion(SongDisplayModel(song: sSong))
         }
     }

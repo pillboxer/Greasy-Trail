@@ -6,6 +6,17 @@ import os
 
 private struct TimerID: Hashable {}
 
+private enum UploadError: Error, CustomStringConvertible {
+    case invalidBaseSongUUID(String)
+    
+    var description: String {
+        switch self {
+        case .invalidBaseSongUUID(let string):
+            return tr("invalid_base_uuid_error", string)
+        }
+    }
+}
+
 public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvironment> { state, action, environment in
     switch action {
     case .start(let date):
@@ -125,6 +136,33 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
                 "Received failure whilst uploading performance: \(String(describing: error), privacy: .public)")
             await send(.cloudKitClient(.failure(error)))
         })
+    case.uploadSong(let model):
+        let detective = Detective()
+        let uuid = detective.uuid(for: model.baseSongUUID ?? "" )
+        if let base = model.baseSongUUID, uuid == nil {
+            state.mode = .operationFailed(GTError(UploadError.invalidBaseSongUUID(base)))
+            return .none
+        }
+        let uploadModel = SongUploadModel(recordName: model.uuid,
+                                          title: model.title,
+                                          author: model.author,
+                                          baseSongUUID: uuid)
+        return .run(operation: { send in
+            for try await event in environment.client.uploadSong(uploadModel) {
+                switch event {
+                case .updateUploadProgress(let progress):
+                    await send(.cloudKitClient(.success(.updateUploadProgress(to: progress))))
+                case .completeUpload:
+                    await send(.cloudKitClient(.success(.completeUpload)))
+                default: fatalError()
+                }
+            }
+        }, catch: { error, send in
+            logger.log(
+                level: .error,
+                "Received failure whilst uploading song: \(String(describing: error), privacy: .public)")
+            await send(.cloudKitClient(.failure(error)))
+        })
     case .subscribeToDatabases:
         return .fireAndForget {
             environment.client.subscribeToDatabases()
@@ -142,13 +180,11 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
         state.mode = .downloaded
         state.lastFetchDate = newValues ? Date() : state.lastFetchDate
         return Effect(value: .completeDownload)
-            .animation()
             .delay(for: 3, scheduler: DispatchQueue.main)
             .eraseToEffect()
     case .cloudKitClient(.success(.completeUpload)):
         state.mode = .uploaded
         return Effect(value: .start(date: .now.addingTimeInterval(-3600)))
-            .animation()
             .delay(for: 3, scheduler: DispatchQueue.main)
             .eraseToEffect()
     case .cloudKitClient(.failure(let error)):

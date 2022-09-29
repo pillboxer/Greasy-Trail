@@ -14,7 +14,7 @@ class AlbumEditor {
         var sAlbum = model?.album
         let detective = Detective()
         let uuid = detective.uuid(for: song)
-        let song = sSong(uuid: uuid ?? .invalid, title: song, isFavorite: false)
+        let song = sSong(uuid: uuid ?? .invalid, title: song, isFavorite: false, baseSongUUID: nil)
         sAlbum?.songs[index] = song
         return sAlbum
     }
@@ -29,7 +29,7 @@ class AlbumEditor {
     func createSong() -> sAlbum? {
         logger.log("Creating new song")
         var sAlbum = model?.album
-        let newSong = sSong(uuid: .invalid, title: "", isFavorite: false)
+        let newSong = sSong(uuid: .invalid, title: "", isFavorite: false, baseSongUUID: nil)
         sAlbum?.songs.append(newSong)
         return sAlbum
     }

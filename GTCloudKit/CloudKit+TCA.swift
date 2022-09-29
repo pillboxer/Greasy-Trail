@@ -31,4 +31,5 @@ public enum CloudKitAction {
     
     case uploadAlbum(AlbumDisplayModel)
     case uploadPerformance(PerformanceDisplayModel)
+    case uploadSong(SongDisplayModel)
 }

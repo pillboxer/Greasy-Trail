@@ -6,8 +6,7 @@ public enum AddAction: Equatable {
     case selectRecordToAdd(DylanWork)
 
     // Songs
-    case updateSong(title: String, author: String)
-    case updateSongUUID(String?)
+    case updateSong(title: String, author: String, baseSongTitle: String)
     
     // Albums
     case setAlbumSong(title: String, index: Int)

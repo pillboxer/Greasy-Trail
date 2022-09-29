@@ -3,20 +3,22 @@ import Foundation
 public struct SongDisplayModel: Model {
 
     private let song: sSong
-    public let uuid: String
     
     public init(song: sSong) {
         self.song = song
-        self.uuid = song.uuid
     }
     
     public var uploadAllowed: Bool {
-        uuid != .invalid
+        uuid != .invalid && !title.isEmpty
     }
 
 }
 
 public extension SongDisplayModel {
+    
+    var uuid: String {
+        song.uuid
+    }
     
     var isFavorite: Bool {
         song.isFavorite
@@ -34,8 +36,8 @@ public extension SongDisplayModel {
         song.performances
     }
 
-    var firstPerformance: sPerformance? {
-        performances?.first
+    var baseSongUUID: String? {
+        song.baseSongUUID
     }
 
 }

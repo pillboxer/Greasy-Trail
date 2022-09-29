@@ -16,11 +16,11 @@ extension CloudKitClient {
                                                    action: .none)
                 refs.append(reference)
             }
-            record["songs"] = refs
-            record["venue"] = model.venue
-            record["date"] = model.date
-            record["LBNumbers"] = model.lbs
-            record["dateFormat"] = model.dateFormat.rawValue
+            record[DylanRecordField.songs.rawValue] = refs
+            record[DylanRecordField.venue.rawValue] = model.venue
+            record[DylanRecordField.date.rawValue] = model.date
+            record[DylanRecordField.lbNumbers.rawValue] = model.lbs
+            record[DylanRecordField.dateFormat.rawValue] = model.dateFormat.rawValue
             
             uploadRecords([record], with: continuation)
         }
@@ -38,9 +38,9 @@ extension CloudKitClient {
                                                    action: .none)
                 refs.append(reference)
             }
-            record["songs"] = refs
-            record["title"] = model.title
-            record["releaseDate"] = model.releaseDate
+            record[DylanRecordField.songs.rawValue] = refs
+            record[DylanRecordField.title.rawValue] = model.title
+            record[DylanRecordField.releaseDate.rawValue] = model.releaseDate
             
             uploadRecords([record], with: continuation)
         }
@@ -79,4 +79,16 @@ extension CloudKitClient {
                 }
             }
         }
+    
+    static func uploadSongLive(from model: SongUploadModel) -> AsyncThrowingStream<Event, Error> {
+        .init { continuation in
+            continuation.yield(.updateUploadProgress(to: 0))
+            let record = CKRecord(recordType: DylanRecordType.song.rawValue,
+                                  recordID: CKRecord.ID(recordName: model.recordName))
+            record[DylanRecordField.title.rawValue] = model.title
+            record[DylanRecordField.author.rawValue] = model.author
+            record[DylanRecordField.baseSongUUID.rawValue] = model.baseSongUUID
+            uploadRecords([record], with: continuation)
+        }
+    }
 }

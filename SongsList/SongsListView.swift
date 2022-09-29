@@ -23,7 +23,7 @@ public struct SongsListView: View {
                         HStack {
                             let index = (songs.firstIndex(of: song) ?? 0)
                             ListSongView(index: index, title: song.title, author: song.author, onTap: {
-                                onTap(song.title)
+                                onTap(song.baseSongUUID ?? song.title)
                             })
                             Spacer()
                         }

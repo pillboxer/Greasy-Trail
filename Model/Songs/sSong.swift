@@ -8,17 +8,20 @@ public struct sSong: Decodable {
     public let author: String
     public let isFavorite: Bool
     let performances: [sPerformance]?
+    public let baseSongUUID: String?
     
     public init(uuid: String,
                 title: String,
                 author: String = NSLocalizedString("default_author", comment: ""),
                 performances: [sPerformance]? = nil,
-                isFavorite: Bool) {
+                isFavorite: Bool,
+                baseSongUUID: String?) {
         self.uuid = uuid
         self.title = title
         self.author = author
         self.performances = performances
         self.isFavorite = isFavorite
+        self.baseSongUUID = baseSongUUID
     }
 }
 

@@ -57,7 +57,7 @@ class PerformanceEditor {
         var sPerformance = model?.sPerformance
         let detective = Detective()
         let uuid = detective.uuid(for: song)
-        let song = sSong(uuid: uuid ?? .invalid, title: song, isFavorite: false)
+        let song = sSong(uuid: uuid ?? .invalid, title: song, isFavorite: false, baseSongUUID: nil)
         sPerformance?.songs[index] = song
         return sPerformance
     }
@@ -65,7 +65,7 @@ class PerformanceEditor {
     func createSong() -> sPerformance? {
         logger.log("Creating new song")
         var sPerformance = model?.sPerformance
-        let newSong = sSong(uuid: .invalid, title: "", isFavorite: false)
+        let newSong = sSong(uuid: .invalid, title: "", isFavorite: false, baseSongUUID: nil)
         sPerformance?.songs.append(newSong)
         return sPerformance
     }

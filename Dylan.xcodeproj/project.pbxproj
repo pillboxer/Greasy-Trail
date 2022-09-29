@@ -90,6 +90,7 @@
 		864151EA28C7ED190031E6D6 /* NSDatePickerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151E928C7ED190031E6D6 /* NSDatePickerRepresentable.swift */; };
 		864151EC28C8E43F0031E6D6 /* Add+Performance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 864151EB28C8E43F0031E6D6 /* Add+Performance.swift */; };
 		86475ABC28E36A53006B28E5 /* AllAlbums+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86475ABB28E36A53006B28E5 /* AllAlbums+Reducer.swift */; };
+		86475ABE28E638A0006B28E5 /* SongUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86475ABD28E638A0006B28E5 /* SongUploadModel.swift */; };
 		86563C70287CA8FA00104879 /* TestHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86563C6F287CA8FA00104879 /* TestHelper.swift */; };
 		865792F5289B0D9E008E9886 /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865792F4289B0D9E008E9886 /* AppAction.swift */; };
 		86596332289D6636003F43A4 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8659630E289D64B9003F43A4 /* AppState.swift */; };
@@ -241,7 +242,6 @@
 		86CD7A2428A9404000D2C219 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A31628679D960013F595 /* Enums.swift */; };
 		86CD7A2828A9421900D2C219 /* RecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8656A31028679C540013F595 /* RecordType.swift */; };
 		86CD7A2928A9422000D2C219 /* ReferenceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 860712322868604300E54209 /* ReferenceType.swift */; };
-		86CD7A2A28A9422300D2C219 /* UploadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86D9C2D7288402C600D5A0D3 /* UploadError.swift */; };
 		86CD7A2B28A9422700D2C219 /* DatabaseType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86CD7A2528A9413100D2C219 /* DatabaseType.swift */; };
 		86CD7A2C28A9424A00D2C219 /* UserDefaultsBacked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865C451B287615BD0056E01A /* UserDefaultsBacked.swift */; };
 		86CD7A2D28A942FD00D2C219 /* Model.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8659642328A03FDF003F43A4 /* Model.framework */; };
@@ -999,6 +999,7 @@
 		864151E928C7ED190031E6D6 /* NSDatePickerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSDatePickerRepresentable.swift; sourceTree = "<group>"; };
 		864151EB28C8E43F0031E6D6 /* Add+Performance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Add+Performance.swift"; sourceTree = "<group>"; };
 		86475ABB28E36A53006B28E5 /* AllAlbums+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllAlbums+Reducer.swift"; sourceTree = "<group>"; };
+		86475ABD28E638A0006B28E5 /* SongUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongUploadModel.swift; sourceTree = "<group>"; };
 		86563C5228782AE100104879 /* Detective+Songs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detective+Songs.swift"; sourceTree = "<group>"; };
 		86563C5428782B2500104879 /* Detective+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detective+Albums.swift"; sourceTree = "<group>"; };
 		86563C5628782BA600104879 /* Detective+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detective+Performances.swift"; sourceTree = "<group>"; };
@@ -1106,7 +1107,6 @@
 		86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CKQueryOperation+Extensions.swift"; sourceTree = "<group>"; };
 		86D9C2CB2881C1D100D5A0D3 /* PerformancesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformancesListView.swift; sourceTree = "<group>"; };
 		86D9C2D52884027900D5A0D3 /* PerformanceUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceUploadModel.swift; sourceTree = "<group>"; };
-		86D9C2D7288402C600D5A0D3 /* UploadError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadError.swift; sourceTree = "<group>"; };
 		86DEC39628B91DA000A875C5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		86E0490028D103B100821096 /* CloudKit+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Reducer.swift"; sourceTree = "<group>"; };
 		86E0490228D103CD00821096 /* CloudKitClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitClient.swift; sourceTree = "<group>"; };
@@ -1541,7 +1541,6 @@
 				86CD7A2528A9413100D2C219 /* DatabaseType.swift */,
 				8656A31028679C540013F595 /* RecordType.swift */,
 				860712322868604300E54209 /* ReferenceType.swift */,
-				86D9C2D7288402C600D5A0D3 /* UploadError.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1892,6 +1891,7 @@
 			children = (
 				866863FF2865ED3800510DDF /* sSong.swift */,
 				8668641D28670A9800510DDF /* SongDisplayModel.swift */,
+				86475ABD28E638A0006B28E5 /* SongUploadModel.swift */,
 			);
 			path = Songs;
 			sourceTree = "<group>";
@@ -3250,6 +3250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8659643928A04110003F43A4 /* sSong.swift in Sources */,
+				86475ABE28E638A0006B28E5 /* SongUploadModel.swift in Sources */,
 				8659644028A04295003F43A4 /* PerformanceDisplayModel.swift in Sources */,
 				8659642E28A04025003F43A4 /* Model.swift in Sources */,
 				8659643A28A0411B003F43A4 /* sPerformance.swift in Sources */,
@@ -3388,7 +3389,6 @@
 				86CD7A3228A9485700D2C219 /* CKQuery+Extensions.swift in Sources */,
 				86CD7A2428A9404000D2C219 /* Enums.swift in Sources */,
 				86CD7A2B28A9422700D2C219 /* DatabaseType.swift in Sources */,
-				86CD7A2A28A9422300D2C219 /* UploadError.swift in Sources */,
 				86E0490128D103B200821096 /* CloudKit+Reducer.swift in Sources */,
 				86CD7A3428A949BA00D2C219 /* CKRecord+Extensions.swift in Sources */,
 				8609413228E1F24E0012614D /* CloudKitClient+Fetch.swift in Sources */,

@@ -93,7 +93,8 @@ private extension Detective {
             sSongs.append(sSong(uuid: song.uuid!,
                                 title: song.title!,
                                 author: song.songAuthor,
-                                isFavorite: song.isFavorite))
+                                isFavorite: song.isFavorite,
+                                baseSongUUID: song.baseSongUUID))
         }
         let sPerformance = sPerformance(uuid: performance.uuid!,
                                         venue: performance.venue!,

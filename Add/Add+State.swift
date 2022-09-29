@@ -4,12 +4,14 @@ import GTFormatter
 import Search
 import BottomBar
 import Core
+import Detective
 
 public struct AddState: Equatable {
     
     var songTitleField = ""
     var songAuthorField = ""
-    var songUUID: String?
+    var baseSongTitle = ""
+    var isInvalidBaseSongUUID = false
     
     var albumTitleField = ""
     var albumDateField = Date()
@@ -40,7 +42,8 @@ public struct AddState: Equatable {
                 song: sSong(uuid: "S\(UUID().uuidString)",
                             title: "",
                             author: "",
-                            isFavorite: false))
+                            isFavorite: false,
+                            baseSongUUID: nil))
         }
         set {
             guard let newValue = newValue else {
@@ -94,7 +97,8 @@ public struct AddState: Equatable {
         if let model = model?.value as? SongDisplayModel {
             songTitleField = model.title
             songAuthorField = model.author
-            songUUID = model.uuid
+            baseSongTitle = model.baseSongUUID ?? ""
+            isInvalidBaseSongUUID = Detective().uuid(for: baseSongTitle) == nil
         } else if let model = model?.value as? PerformanceDisplayModel {
             performanceSongs = model.songs
             performanceLBs = model.lbNumbers

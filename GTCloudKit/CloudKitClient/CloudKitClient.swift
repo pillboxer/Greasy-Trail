@@ -18,6 +18,7 @@ public struct CloudKitClient {
     var fetchPerformances: @Sendable (_ after: Date?) -> AsyncThrowingStream<Event, Error>
     var uploadPerformance: @Sendable (_ model: PerformanceUploadModel) -> AsyncThrowingStream<Event, Error>
     var uploadAlbum: @Sendable (_ model: AlbumUploadModel) -> AsyncThrowingStream<Event, Error>
+    var uploadSong: @Sendable (_ model: SongUploadModel) -> AsyncThrowingStream<Event, Error>
     var subscribeToDatabases: @Sendable () -> Void
     
     public enum Event: Equatable {
@@ -41,6 +42,8 @@ extension CloudKitClient {
             uploadPerformanceLive(from: model)
         }, uploadAlbum: { model in
             uploadAlbumLive(from: model)
+        }, uploadSong: { model in
+            uploadSongLive(from: model)
         }, subscribeToDatabases: {
             subscribeToDatabasesLive()
         }

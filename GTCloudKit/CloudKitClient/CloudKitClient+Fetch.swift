@@ -1,4 +1,5 @@
 import GTCoreData
+import GTFormatter
 
 extension CloudKitClient {
     
@@ -10,12 +11,14 @@ extension CloudKitClient {
                     let records = try await fetchRecords(of: .song, after: date)
                     let titles = records.map { $0.string(for: .title) }
                     let authors = records.map { $0.string(for: .author) }
+                    let baseSongUUIDs = records.map { $0.string(for: .baseSongUUID) }
                     let context = PersistenceController.shared.newBackgroundContext()
                     for (index, record) in records.enumerated() {
                         continuation.yield(.updateFetchProgress(of: .song, to: Double(index) / Double(records.count)))
                         await context.perform {
                             let title = titles[index] ?? "Unknown Title"
                             let author = authors[index]
+                            let baseSongUUID = baseSongUUIDs[index]
                             let predicate = NSPredicate(format: "uuid == %@", record.recordID.recordName)
                             let song: Song
                             if let existingSong = context.fetchAndWait(Song.self, with: predicate).first {
@@ -23,6 +26,7 @@ extension CloudKitClient {
                             } else {
                                 song = Song(context: context)
                             }
+                            song.baseSongUUID = baseSongUUID
                             song.title = title
                             song.author = author
                             song.uuid = record.recordID.recordName

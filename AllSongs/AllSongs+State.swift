@@ -24,7 +24,7 @@ public enum SongPredicate: String, CaseIterable, Equatable {
         case .favorites:
             return NSPredicate(format: "isFavorite = true")
         default:
-            return NSPredicate(value: true)
+            return NSPredicate(format: "baseSongUUID = nil")
         }
     }
 }

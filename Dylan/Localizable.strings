@@ -57,6 +57,7 @@
 "operation_error" = "Operation failed (select yellow triangle for more details). Please try again";
 "fetch_logs_error" = "Unable to fetch logs. Please try again";
 "open_email_error" = "Could not open your email client. We've copied the logs to your pasteboard";
+"invalid_base_uuid_error" = "Could not find valid UUID for %@. Please try again";
 
 // Bottom Bar
 "bottom_bar_tooltip_random" = "You may like to gamble, you might like to dance";
@@ -71,6 +72,7 @@
 // Adding
 "add_song_field_0" = "Title";
 "add_song_field_1" = "Author";
+"add_song_field_2" = "Pointing to";
 "add_album_field_0" = "Title & Release Date";
 "add_album_field_1" = "Songs";
 "add_album_field_1_placeholder" = "Song";

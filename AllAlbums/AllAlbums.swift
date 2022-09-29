@@ -111,4 +111,3 @@ fileprivate extension AllAlbumsFeatureAction {
         }
     }
 }
-

@@ -50,7 +50,8 @@ extension Detective {
         let sSongs = songs.compactMap { sSong(uuid: $0.uuid!,
                                               title: $0.title!,
                                               author: $0.songAuthor,
-                                              isFavorite: $0.isFavorite) }
+                                              isFavorite: $0.isFavorite,
+                                              baseSongUUID: $0.baseSongUUID) }
         let sAlbum = sAlbum(uuid: album.uuid!,
                             title: album.title!,
                             songs: sSongs,
@@ -77,6 +78,4 @@ public extension Detective {
             }
         }
     }
-    
-    
 }

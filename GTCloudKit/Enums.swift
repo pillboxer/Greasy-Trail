@@ -27,12 +27,13 @@ public enum DylanRecordField: String {
     case date
     case lbNumbers = "LBNumbers"
     case dateFormat
+    case baseSongUUID
     
     // App Metadata
     case file
     case name
 
-    case modificationDate
+    case songs
 }
 
 enum CloudKitManagerError: Error {

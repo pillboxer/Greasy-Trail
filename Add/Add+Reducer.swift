@@ -11,16 +11,15 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
         state.displayedView = .add(dylanRecordType)
         
     // Songs
-    case .updateSong(let title, let author):
+    case .updateSong(let title, let author, let baseSong):
         logger.log("Updating song: (Title: \(title, privacy: .public), Author: \(author, privacy: .public)")
-        let detective = Detective()
-        let uuid = detective.uuid(for: title)
-        let sSong = sSong(uuid: uuid ?? "", title: title, author: author, isFavorite: state.song?.isFavorite ?? false)
+        let sSong = sSong(uuid: UUID().uuidString,
+                          title: title,
+                          author: author,
+                          isFavorite: false,
+                          baseSongUUID: baseSong)
         state.song = SongDisplayModel(song: sSong)
-        return Effect(value: AddAction.updateSongUUID(uuid))
-    case .updateSongUUID(let uuid):
-        logger.log("Updating song uuid to \(uuid ?? "nil", privacy: .public)")
-        state.songUUID = uuid
+        return .none
         
     // Albums
     case .setAlbumSong(let song, let index):
@@ -101,6 +100,11 @@ func findSongEffect(string: String) -> Effect<sSong, Never> {
     let detective = Detective()
     return detective.fetchModel(for: string)
         .compactMap { $0?.value as? SongDisplayModel }
-        .map { sSong(uuid: $0.uuid, title: $0.title, author: $0.author, isFavorite: $0.isFavorite)}
+        .map { sSong(uuid: $0.uuid,
+                     title: $0.title,
+                     author: $0.author,
+                     isFavorite: $0.isFavorite,
+                     baseSongUUID: $0.baseSongUUID)
+        }
         .eraseToEffect()
 }

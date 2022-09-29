@@ -20,6 +20,7 @@ extension Song: Favoritable {
     @NSManaged public var uuid: String?
     @NSManaged public var markedAsDeleted: Bool
     @NSManaged public var isFavorite: Bool
+    @NSManaged public var baseSongUUID: String?
 
 }
 
