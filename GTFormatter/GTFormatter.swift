@@ -5,7 +5,6 @@ public class Formatter {
 
     private lazy var dateFormatter: DateFormatter = {
        let formatter = DateFormatter()
-        formatter.timeZone = .init(identifier: "GMT")
         return formatter
     }()
     

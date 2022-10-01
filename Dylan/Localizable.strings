@@ -11,6 +11,7 @@
 "devloper_menu_bug_report" = "Send bug report...";
 
 //Misc
+"search_example" = "Try \"Tangled Up In Blue\" or \"15 April 2007\"";
 "search_placeholder" = "Press enter to search ⏎";
 "searching_progress" = "Searching";
 "default_author" = "Bob Dylan";
@@ -91,8 +92,6 @@ Please describe as clearly as possible your issue (actual result):
 
 
 Please describe as clearly as possible what should have happened (expected result):
-
-
 
 
 

@@ -17,15 +17,23 @@ import Search
 public struct ResultView: View {
     
     let store: Store<SearchState, SearchAction>
-    @ObservedObject private var viewStore: ViewStore<AnyModel?, Never>
+    @ObservedObject private var viewStore: ViewStore<ResultViewState, Never>
     
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
-        self.viewStore = ViewStore(store.actionless.scope(state: { $0.model }))
+        self.viewStore = ViewStore(store.actionless.scope(state: { ResultViewState(
+            model: $0.model,
+            currentSearchTitle: $0.currentSearch?.title)
+        }))
+    }
+    
+    struct ResultViewState: Equatable {
+        let model: AnyModel?
+        let currentSearchTitle: String?
     }
     
     private var model: AnyModel? {
-        viewStore.state
+        viewStore.model
     }
     
     public var body: some View {
@@ -36,7 +44,15 @@ public struct ResultView: View {
         } else if let model = model?.value as? PerformanceDisplayModel {
             ResultPerformanceOverviewView(store: store, model: model)
         } else {
-            Text("Show failure")
+            VStack {
+                HStack {
+                    Spacer()
+                    Text("No results found for \(viewStore.currentSearchTitle ?? "search")")
+                    Spacer()
+                }
+            }
+            .font(.caption)
+            .frame(maxHeight: .infinity)
         }
     }
 }
