@@ -2,7 +2,7 @@ import Foundation
 import Core
 
 // swiftlint:disable type_name
-public struct sPerformance: Decodable {
+public struct sPerformance: Decodable, Equatable {
 
     public var uuid: String
     public var venue: String

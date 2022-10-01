@@ -3,6 +3,7 @@ import Detective
 import Model
 import Core
 import os
+import CloudKit
 
 private struct TimerID: Hashable {}
 
@@ -19,6 +20,26 @@ private enum UploadError: Error, CustomStringConvertible {
 
 public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvironment> { state, action, environment in
     switch action {
+    case .fetchAdminMetadata:
+        return .run(operation: { send in
+            for try await event in environment.client.fetchAdminMetadata() {
+                switch event {
+                case .adminCheckPassed:
+                    await send(.cloudKitClient(.success(.adminCheckPassed)))
+                default:
+                    fatalError("Received unknown event whilst fetching songs")
+                }
+            }
+        }, catch: { error, send in
+            let errorString = String(describing: error)
+            logger.log(level: .error, "Received failure whilst checking admin status: \(errorString, privacy: .public)")
+            if let error = error as? CKError, error.code == .permissionFailure {
+                print("permission error")
+            } else {
+                await send(.cloudKitClient(.failure(error)))
+            }
+        })
+      
     case .start(let date):
         if let mode = state.mode, !mode.canFetch {
             logger.log("Attempted to start but not able to fetch. Give up")
@@ -139,7 +160,7 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
     case.uploadSong(let model):
         let detective = Detective()
         let uuid = detective.uuid(for: model.baseSongUUID ?? "" )
-        if let base = model.baseSongUUID, uuid == nil {
+        if let base = model.baseSongUUID, !base.isEmpty, uuid == nil {
             state.mode = .operationFailed(GTError(UploadError.invalidBaseSongUUID(base)))
             return .none
         }
@@ -193,6 +214,9 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
         // Completion
     case .completeDownload:
         state.mode = nil
+        return .none
+    case .cloudKitClient(.success(.adminCheckPassed)):
+        state.displaysAdminFunctionality = true
         return .none
     }
 }

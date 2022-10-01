@@ -4,16 +4,21 @@ import Search
 public struct AllPerformancesState: Equatable {
     public var search: SearchState
     public var selectedPerformancePredicate: PerformancePredicate
+    public var displaysAdminFunctionality: Bool
     
-    public init(search: SearchState, selectedPerformancePredicate: PerformancePredicate) {
+    public init(search: SearchState,
+                selectedPerformancePredicate: PerformancePredicate,
+                displaysAdminFunctionality: Bool) {
         self.search = search
         self.selectedPerformancePredicate = selectedPerformancePredicate
+        self.displaysAdminFunctionality = displaysAdminFunctionality
     }
 }
 
 struct AllPerformancesViewState: Equatable {
     var selectedID: ObjectIdentifier?
     var selectedDecade: PerformancePredicate
+    var displaysAdminFunctionality: Bool
 }
 
 public enum PerformancePredicate: String, CaseIterable, Equatable {

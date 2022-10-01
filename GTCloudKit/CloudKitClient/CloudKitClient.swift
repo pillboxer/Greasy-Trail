@@ -13,6 +13,7 @@ public struct CloudKitEnvironment {
 }
 
 public struct CloudKitClient {
+    var fetchAdminMetadata: @Sendable () -> AsyncThrowingStream<Event, Error>
     var fetchSongs: @Sendable (_ after: Date?) -> AsyncThrowingStream<Event, Error>
     var fetchAlbums: @Sendable (_ after: Date?) -> AsyncThrowingStream<Event, Error>
     var fetchPerformances: @Sendable (_ after: Date?) -> AsyncThrowingStream<Event, Error>
@@ -26,13 +27,16 @@ public struct CloudKitClient {
         case updateUploadProgress(to: Double)
         case completeFetch(newValues: Bool)
         case completeUpload
+        case adminCheckPassed
     }
 }
 
 extension CloudKitClient {
     
     public static let live = CloudKitClient(
-        fetchSongs: { date in
+        fetchAdminMetadata: {
+            fetchAdminMetadataLive()
+        }, fetchSongs: { date in
             fetchSongsLive(after: date)
         }, fetchAlbums: { date in
             fetchAlbumsLive(after: date)

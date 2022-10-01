@@ -67,7 +67,8 @@ extension AppState {
         get {
             return AllPerformancesState(
                 search: search,
-                selectedPerformancePredicate: selectedPerformancePredicate)
+                selectedPerformancePredicate: selectedPerformancePredicate,
+                displaysAdminFunctionality: displaysAdminFunctionality)
         }
         set {
             search = newValue.search
@@ -79,13 +80,15 @@ extension AppState {
         get {
             return CloudKitState(
                 mode: mode,
-                lastFetchDate: lastFetchDate)
+                lastFetchDate: lastFetchDate,
+                displaysAdminFunctionality: displaysAdminFunctionality)
         }
         set {
             mode = newValue.mode
             if let date = newValue.lastFetchDate {
                 lastFetchDate = date
             }
+            displaysAdminFunctionality = newValue.displaysAdminFunctionality
         }
     }
     

@@ -34,7 +34,8 @@ public struct AllPerformancesView: TableViewType {
         self.predicate = predicate
         self.viewStore = ViewStore(store.scope(state: {
             AllPerformancesViewState(selectedID: $0.search.selectedID,
-                                     selectedDecade: $0.selectedPerformancePredicate) },
+                                     selectedDecade: $0.selectedPerformancePredicate,
+                                     displaysAdminFunctionality: $0.displaysAdminFunctionality) },
                                                action: AllPerformancesFeatureAction.init))
         _fetched = FetchRequest<Performance>(entity: Performance.entity(),
                                              sortDescriptors: [NSSortDescriptor(key: "date",
@@ -62,12 +63,16 @@ public struct AllPerformancesView: TableViewType {
                 TableColumn(LocalizedStringKey("table_column_title_performances_0"),
                             value: \.venue!) { performance in
                     let venue = performance.venue!
+                    if viewStore.displaysAdminFunctionality {
                     Toggle(isOn: toggleBinding(on: performance)) {
                         Text(venue)
                             .padding(.leading, 4)
                     }
                     .padding(.top, 4)
                     .toggleStyle(CheckboxToggleStyle())
+                    } else {
+                        Text(venue)
+                    }
                 }
                 TableColumn(LocalizedStringKey("table_column_title_performances_1"),
                             value: \.date) { performance in

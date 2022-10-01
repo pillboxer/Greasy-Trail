@@ -1,14 +1,14 @@
 import Foundation
 
 // swiftlint:disable type_name
-public struct sSong: Decodable {
+public struct sSong: Decodable, Equatable {
     
     public let uuid: String
-    public let title: String
-    public let author: String
+    public var title: String
+    public var author: String
     public let isFavorite: Bool
     let performances: [sPerformance]?
-    public let baseSongUUID: String?
+    public var baseSongUUID: String?
     
     public init(uuid: String,
                 title: String,
@@ -23,14 +23,6 @@ public struct sSong: Decodable {
         self.isFavorite = isFavorite
         self.baseSongUUID = baseSongUUID
     }
-}
-
-extension sSong: Equatable {
-
-    public static func == (lhs: sSong, rhs: sSong) -> Bool {
-        lhs.title == rhs.title
-    }
-
 }
 
 extension sSong: Identifiable, Hashable {

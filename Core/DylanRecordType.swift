@@ -5,9 +5,5 @@ public enum DylanRecordType: CKRecord.RecordType, CaseIterable {
     case album = "Album"
     case performance = "Performance"
     case appMetadata =  "AppMetadata"
-    
-    public static var displayedTypes: [DylanRecordType] {
-        return [.song, .album, .performance]
-    }
-
+    case adminMetadata = "AdminMetadata"
 }

@@ -9,6 +9,7 @@ public struct BottomBarState: Equatable {
     public var isSearchFieldShowing: Bool
     public var displayedView: DisplayedView
     public var displayedFavorite: Bool?
+    
     // Search
     public var search: SearchState
     
@@ -51,4 +52,5 @@ public struct BottomBarViewState: Equatable {
     public var model: AnyModel?
     public var displayedView: DisplayedView
     public var selectedObjectID: NSManagedObjectID?
+    public var isDownloading: Bool
 }

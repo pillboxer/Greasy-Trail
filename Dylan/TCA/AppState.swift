@@ -17,6 +17,7 @@ struct AppState: Equatable {
     var displayedView: DisplayedView = .home
     var displayedFavorite: Bool?
     var searchFieldText = ""
+    var displaysAdminFunctionality = false
 
     // Search
     var model: AnyModel?

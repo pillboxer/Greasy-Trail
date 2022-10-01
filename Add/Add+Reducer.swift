@@ -13,12 +13,14 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
     // Songs
     case .updateSong(let title, let author, let baseSong):
         logger.log("Updating song: (Title: \(title, privacy: .public), Author: \(author, privacy: .public)")
-        let sSong = sSong(uuid: UUID().uuidString,
-                          title: title,
-                          author: author,
-                          isFavorite: false,
-                          baseSongUUID: baseSong)
-        state.song = SongDisplayModel(song: sSong)
+        var songModel = state.song
+        var song = songModel?.song
+        song?.title = title
+        song?.author = author
+        song?.baseSongUUID = baseSong
+        if let song = song {
+            state.song = SongDisplayModel(song: song)
+        }
         return .none
         
     // Albums

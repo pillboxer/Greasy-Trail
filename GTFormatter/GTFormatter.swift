@@ -21,8 +21,8 @@ public class Formatter {
     }
 
     public func date(from string: String) -> Double? {
-        let formats = ["MMMM d YYYY",
-                       "d MMMM YYYY",
+        let formats = ["MMMM d yyyy",
+                       "d MMMM yyyy",
                        "MM/dd/yyyy",
                        "dd/MM/yyyy"]
         for format in formats {

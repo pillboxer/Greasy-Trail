@@ -2,7 +2,7 @@ import Foundation
 
 public struct SongDisplayModel: Model {
 
-    private let song: sSong
+    public let song: sSong
     
     public init(song: sSong) {
         self.song = song

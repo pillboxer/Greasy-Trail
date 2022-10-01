@@ -8,6 +8,8 @@ import os
 import Search
 import Model
 
+// swiftlint: disable cyclomatic_complexity
+
 let logger = Logger(subsystem: .subsystem, category: "Bottom Bar")
 
 public struct BottomBarView: View {
@@ -30,6 +32,7 @@ public struct BottomBarView: View {
             case .songs, .albums, .performances:
                 selectedWorkButtons
             case .home:
+                refreshButton
                 Spacer()
                 recordButtons
             case .missingLBs:
@@ -105,10 +108,14 @@ extension BottomBarViewState {
         self.displayedView = bottomBarState.search.displayedView
         self.selectedObjectID = bottomBarState.search.selectedObjectID
         self.displayedFavorite = bottomBarState.displayedFavorite
+        self.isDownloading = !(bottomBarState.cloudKit.mode?.canFetch ?? true)
     }
 }
 
 extension BottomBarFeatureAction {
+    
+    @UserDefaultsBacked(key: "last_fetch_date") static var lastFetchDate: Date?
+    
     init(_ action: BottomViewAction) {
         switch action {
         case .reset(let displayedView):
@@ -125,6 +132,8 @@ extension BottomBarFeatureAction {
             self = .bottom(.toggleFavorite)
         case .resetFavoriteResult:
             self = .bottom(.resetFavoriteResult)
+        case .refresh:
+            self = .cloudKit(.start(date: Self.lastFetchDate))
         case .upload(let model):
             if let performance = model as? PerformanceDisplayModel {
                 self = .cloudKit(.uploadPerformance(performance))

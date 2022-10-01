@@ -45,6 +45,13 @@ extension BottomBarView {
         }
     }
     
+    var refreshButton: some View {
+        PlainOnTapButton(systemImage: "arrow.clockwise.circle") {
+            viewStore.send(.refresh)
+        }
+        .disabled(viewStore.isDownloading)
+    }
+    
     @ViewBuilder
     var songButton: some View {
         Group {

@@ -23,6 +23,7 @@ enum BottomViewAction {
     case resetFavoriteResult
     case search(NSManagedObjectID)
     case upload(Model)
+    case refresh
 }
 
 public enum BottomBarFeatureAction {

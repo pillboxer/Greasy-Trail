@@ -48,6 +48,7 @@ public struct StatsView: View {
                 action: { StatsFeatureAction.search($0) }
             ), font: .systemFont(ofSize: 28))
             .frame(width: 456)
+            Text("Try \"Like a Rolling Stone\" or \"April 15 2007\"")
             Spacer()
             Spacer()
             HStack {

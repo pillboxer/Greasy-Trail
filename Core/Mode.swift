@@ -10,7 +10,7 @@ public enum Mode: Equatable {
     
     public var canFetch: Bool {
         switch self {
-        case .downloading:
+        case .downloading, .uploading:
             return false
         default:
             return true

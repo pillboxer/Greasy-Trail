@@ -11,10 +11,12 @@ let logger = Logger(subsystem: .subsystem, category: "Cloud Kit")
 public struct CloudKitState: Equatable {
     public var mode: Mode?
     public var lastFetchDate: Date?
+    public var displaysAdminFunctionality: Bool
     
-    public init(mode: Mode?, lastFetchDate: Date?) {
+    public init(mode: Mode?, lastFetchDate: Date?, displaysAdminFunctionality: Bool) {
         self.mode = mode
         self.lastFetchDate = lastFetchDate
+        self.displaysAdminFunctionality = displaysAdminFunctionality
     }
 }
 
@@ -22,6 +24,7 @@ public enum CloudKitAction {
     case subscribeToDatabases
     case start(date: Date?)
     
+    case fetchAdminMetadata
     case fetchSongs(Date?)
     case fetchAlbums(Date?, Bool)
     case fetchPerformances(Date?, Bool)

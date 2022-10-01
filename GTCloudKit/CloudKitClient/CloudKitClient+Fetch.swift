@@ -1,5 +1,5 @@
 import GTCoreData
-import GTFormatter
+import Detective
 
 extension CloudKitClient {
     
@@ -128,6 +128,19 @@ extension CloudKitClient {
                     continuation.yield(.updateFetchProgress(of: .album, to: 1))
                     continuation.yield(.completeFetch(newValues: !records.isEmpty))
                     continuation.finish()
+                } catch let error {
+                    continuation.finish(throwing: error)
+                }
+            }
+        }
+    }
+    
+    static func fetchAdminMetadataLive() -> AsyncThrowingStream<Event, Error> {
+        .init { continuation in
+            Task {
+                do {
+                    _ = try await fetchRecords(of: .adminMetadata)
+                    continuation.yield(.adminCheckPassed)
                 } catch let error {
                     continuation.finish(throwing: error)
                 }
