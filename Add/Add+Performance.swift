@@ -73,7 +73,8 @@ class PerformanceEditor {
     func editDate(_ date: Date) -> sPerformance? {
         logger.log("Editing date to \(date, privacy: .public)")
         var sPerformance = model?.sPerformance
-        let calendar = Calendar(identifier: .gregorian)
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .init(identifier: "UTC")!
         sPerformance?.date = calendar.startOfDay(for: date).timeIntervalSince1970
         return sPerformance
     }

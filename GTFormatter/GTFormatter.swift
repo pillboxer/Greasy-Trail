@@ -2,14 +2,15 @@ import Foundation
 import Core
 
 public class Formatter {
-
+    
     private lazy var dateFormatter: DateFormatter = {
-       let formatter = DateFormatter()
+        let formatter = DateFormatter()
+        formatter.timeZone = .init(identifier: "UTC")
         return formatter
     }()
     
     public init() {}
-
+    
     public func dateString(of double: Double?, in format: PerformanceDateFormat) -> String {
         guard let double = double else {
             return "Unknown date"
@@ -18,7 +19,7 @@ public class Formatter {
         let date = Date(timeIntervalSince1970: double)
         return dateFormatter.string(from: date)
     }
-
+    
     public func date(from string: String) -> Double? {
         let formats = ["MMMM d yyyy",
                        "d MMMM yyyy",
@@ -32,5 +33,5 @@ public class Formatter {
         }
         return nil
     }
-
+    
 }
