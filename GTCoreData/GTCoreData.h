@@ -1,9 +1,4 @@
 //
-//  GTCoreData.h
-//  GTCoreData
-//
-//  Created by Henry Cooper on 07/08/2022.
-//
 
 #import <Foundation/Foundation.h>
 
