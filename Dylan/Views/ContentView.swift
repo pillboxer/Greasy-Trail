@@ -22,6 +22,7 @@ import Model
 import AllPerformances
 import Stats
 import AllAlbums
+import Payments
 
 struct ContentView: View {
     
@@ -100,7 +101,10 @@ struct ContentView: View {
             case .performances:
                 AllPerformancesView(store: store.scope(state: { $0.allPerformancesState },
                                                        action: { .allPerformances($0)}),
-                                    predicate: viewStore.selectedPerformancePredicate.predicate) 
+                                    predicate: viewStore.selectedPerformancePredicate.predicate)
+            case .donate:
+                DonationView(store: store.scope(state: { $0.paymentsState },
+                                                action: { .payments($0) }))
             }
         }
     }

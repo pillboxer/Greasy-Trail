@@ -1,5 +1,4 @@
 import Foundation
-
 import ComposableArchitecture
 import Search
 import CasePaths
@@ -13,6 +12,7 @@ import AllPerformances
 import AllSongs
 import Stats
 import AllAlbums
+import Payments
 
 struct AppEnvironment {
     let search: (Search) -> Effect<AnyModel?, Never>
@@ -63,7 +63,11 @@ Reducer.combine(
     allAlbumsFeatureReducer.pullback(
         state: \.allAlbumsState ,
         action: /AppAction.allAlbums,
-        environment: SearchEnvironment.init)
+        environment: SearchEnvironment.init),
+    paymentsFeatureReducer.pullback(
+        state: \.paymentsState,
+        action: /AppAction.payments,
+        environment: CloudKitEnvironment.init)
 )
 
 extension SearchEnvironment {

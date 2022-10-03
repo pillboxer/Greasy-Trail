@@ -1,11 +1,12 @@
 import CloudKit
-import os
 import Core
 
-func fetchRecords(of type: DylanRecordType, after date: Date? = nil) async throws -> [RecordType] {
+func fetchRecords(of type: DylanRecordType,
+                  after date: Date? = nil,
+                  database: CKDatabase = DylanDatabase) async throws -> [RecordType] {
     let predicate = NSPredicate(format: "modificationDate > %@", (date ?? .distantPast) as NSDate)
     let query = CKQuery(recordType: type, predicate: predicate)
-    let array = try await DylanDatabase.fetchPagedResults(with: query)
+    let array = try await database.fetchPagedResults(with: query)
     let records = array.compactMap { try? $0.result.get() }
     return records
 }

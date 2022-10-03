@@ -40,8 +40,8 @@ public struct StatsView: View {
                     .italic()
                     .font(.system(size: 24, weight: .ultraLight, design: .monospaced))
             }
-            Text("Greasy Trail")
-                .font(.custom("RockSalt-Regular", size: 36))
+            Text("product_name")
+                .font(.system(size: 36, weight: .semibold, design: .serif))
             Spacer()
             SearchFieldView(store: store.scope(
                 state: { $0.search },

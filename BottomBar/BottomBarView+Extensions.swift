@@ -61,7 +61,7 @@ extension BottomBarView {
                     logger.log("Tapped song (add)")
                     viewStore.send(.reset(.add(.songs)), animation: .default)
                 }
-                .highlighting(DisplayedView.add(.songs) ==  viewStore.displayedView)
+                .highlighting(DisplayedView.add(.songs) == viewStore.displayedView)
             default:
                 PlainOnTapButton(systemImage: DylanWork.songs.imageName) {
                     logger.log("Tapped song (home)")
@@ -167,5 +167,13 @@ extension BottomBarView {
             viewStore.send(.selectView(.add(.songs)))
             viewStore.send(.search(id))
         }
+    }
+    
+    var donateButton: some View {
+        PlainOnTapButton(systemImage: "heart.fill") {
+            viewStore.send(.selectView(.donate), animation: .default)
+        }
+        .symbolRenderingMode(.hierarchical)
+        .foregroundStyle(.pink)
     }
 }

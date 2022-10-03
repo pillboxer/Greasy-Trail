@@ -6,6 +6,7 @@ public enum DisplayedView: Equatable {
     case performances
     case missingLBs
     case result
+    case donate
     
     public var isAdding: Bool {
         switch self {
@@ -67,6 +68,8 @@ public extension DisplayedView {
             return "missingLBs"
         case .result:
             return "result"
+        case .donate:
+            return "donate"
         }
     }
     

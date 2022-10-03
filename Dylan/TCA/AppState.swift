@@ -9,6 +9,7 @@ import CoreData
 import Stats
 import Core
 import AllAlbums
+import StoreKit
 
 struct AppState: Equatable {
     
@@ -47,4 +48,8 @@ struct AppState: Equatable {
     
     // Logs
     var isFetchingLogs = false
+    
+    // IAP
+    var products: [Product] = []
+    var amountDonated: Double = 0
 }

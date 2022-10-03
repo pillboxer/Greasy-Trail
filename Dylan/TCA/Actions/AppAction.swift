@@ -1,10 +1,3 @@
-//
-//  AppAction.swift
-//  Greasy Trail
-//
-//  Created by Henry Cooper on 03/08/2022.
-//
-
 import Search
 import Add
 import BottomBar
@@ -14,6 +7,7 @@ import TopBar
 import Stats
 import AllSongs
 import AllAlbums
+import Payments
 
 enum AppAction {
     case search(SearchAction)
@@ -26,5 +20,6 @@ enum AppAction {
     case topBar(TopBarFeatureAction)
     case stats(StatsFeatureAction)
     case commandMenu(CommandMenuAction)
+    case payments(PaymentsFeatureAction)
     
 }

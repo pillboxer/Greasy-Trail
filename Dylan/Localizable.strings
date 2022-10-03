@@ -1,16 +1,9 @@
-/* 
-  Localizable.strings
-  Dylan
-
-  Created by Henry Cooper on 27/06/2022.
-  
-*/
-
 // Developer
 "developer_menu_title" = "Developer";
 "devloper_menu_bug_report" = "Send bug report...";
 
 //Misc
+"product_name" = "Greasy Trail";
 "search_example" = "Try \"Tangled Up In Blue\" or \"15 April 2007\"";
 "search_placeholder" = "Press enter to search ⏎";
 "searching_progress" = "Searching";
@@ -19,6 +12,8 @@
 "results_information_title_song_author" = "Written by";
 "search_failed" = "No results found for %@";
 "generic_ok" = "OK";
+"donate_plea" = "If you find this software useful, please consider supporting its development";
+"donate_thanks" = "%@    You've contributed %@! Thank you so much for your support    %@";
 
 // CloudKit
 "cloud_kit_update_success" = "Records updated successfully";

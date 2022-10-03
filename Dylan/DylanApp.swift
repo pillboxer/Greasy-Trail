@@ -20,15 +20,19 @@ struct DylanApp: App {
                                                      cloudKitClient: .live))
     
     init() {
-        viewStore = ViewStore(appStore.stateless.scope(state: { $0 }, action: { .commandMenu($0) }))
+        viewStore = ViewStore(
+            appStore.stateless.scope(
+                state: { $0 },
+                action: { .commandMenu($0) }))
     }
     
     var body: some Scene {
         WindowGroup {
             ContentView(store: appStore)
                 .task {
-                    ViewStore(appStore).send(.cloudKit(.fetchAdminMetadata))
                     ViewStore(appStore).send(.cloudKit(.subscribeToDatabases))
+                    ViewStore(appStore).send(.payments(.payments(.start)))
+                    ViewStore(appStore).send(.cloudKit(.fetchAdminMetadata))
                     ViewStore(appStore).send(.cloudKit(.start(date: lastFetchDate)))
                 }
         } .commands {

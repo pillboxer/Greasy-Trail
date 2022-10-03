@@ -13,7 +13,6 @@
 		8609412B28E1C9140012614D /* Add+Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412A28E1C9140012614D /* Add+Album.swift */; };
 		8609412E28E1F1470012614D /* CloudKitClient+Upload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412D28E1F1470012614D /* CloudKitClient+Upload.swift */; };
 		8609413028E1F1B30012614D /* AlbumUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412F28E1F1B30012614D /* AlbumUploadModel.swift */; };
-		8609413228E1F24E0012614D /* CloudKitClient+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609413128E1F24E0012614D /* CloudKitClient+Fetch.swift */; };
 		8609413B28E237060012614D /* AllAlbums.h in Headers */ = {isa = PBXBuildFile; fileRef = 8609413A28E237060012614D /* AllAlbums.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8609413E28E237060012614D /* AllAlbums.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8609413828E237060012614D /* AllAlbums.framework */; };
 		8609413F28E237060012614D /* AllAlbums.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8609413828E237060012614D /* AllAlbums.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -191,6 +190,19 @@
 		869B380128A91CFB00ABE4FD /* ResultPerformance.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8659644828A1B35A003F43A4 /* ResultPerformance.framework */; };
 		869B380528A91D0800ABE4FD /* ResultSongOverview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8659649628A42F88003F43A4 /* ResultSongOverview.framework */; };
 		86BCAEEB28CBDF4D00B671D6 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 86BCAEEA28CBDF4D00B671D6 /* ComposableArchitecture */; };
+		86C6206728F1FEBE002C7A58 /* PurchaseUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6206628F1FEBE002C7A58 /* PurchaseUploadModel.swift */; };
+		86C6206928F200EE002C7A58 /* Decimal+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6206828F200EE002C7A58 /* Decimal+Extensions.swift */; };
+		86C6206C28F207F8002C7A58 /* CloudKit+Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6206B28F207F8002C7A58 /* CloudKit+Songs.swift */; };
+		86C6206E28F20913002C7A58 /* CloudKit+Albums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6206D28F20913002C7A58 /* CloudKit+Albums.swift */; };
+		86C6207028F209C9002C7A58 /* CloudKit+AdminMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6206F28F209C9002C7A58 /* CloudKit+AdminMetadata.swift */; };
+		86C6207228F20A8B002C7A58 /* CloudKit+Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6207128F20A8B002C7A58 /* CloudKit+Purchase.swift */; };
+		86C6207328F20B2C002C7A58 /* GTCloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */; };
+		86C6207428F20B2C002C7A58 /* GTCloudKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		86C6207828F20C4E002C7A58 /* CloudKit+Performances.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6207728F20C4E002C7A58 /* CloudKit+Performances.swift */; };
+		86C6207A28F20D1F002C7A58 /* CloudKit+Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6207928F20D1F002C7A58 /* CloudKit+Subscription.swift */; };
+		86C6207C28F2159B002C7A58 /* Payments+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6207B28F2159B002C7A58 /* Payments+Action.swift */; };
+		86C6207E28F215F9002C7A58 /* Payments+Donation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6207D28F215F9002C7A58 /* Payments+Donation.swift */; };
+		86C6208028F2161F002C7A58 /* Payments+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C6207F28F2161F002C7A58 /* Payments+Reducer.swift */; };
 		86C9991D28CCEEF10004BBFD /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 86C9991C28CCEEF10004BBFD /* ComposableArchitecture */; };
 		86C9992028CCEF610004BBFD /* CloudKit+TCA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C9991F28CCEF610004BBFD /* CloudKit+TCA.swift */; };
 		86CB743828CBE13800FFEA6C /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 86CB743728CBE13800FFEA6C /* ComposableArchitecture */; };
@@ -251,6 +263,14 @@
 		86FBD87228E9CE9F000A8C49 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 869B37DB28A5AC4500ABE4FD /* Core.framework */; };
 		86FBD87328E9CE9F000A8C49 /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 869B37DB28A5AC4500ABE4FD /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		86FBD87728E9D6B6000A8C49 /* Main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 86C526D52875F55C0035DD31 /* Main.xcdatamodeld */; };
+		86FBD87928EAF7B1000A8C49 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FBD87828EAF7B1000A8C49 /* StoreKit.framework */; };
+		86FBD88228EAF858000A8C49 /* Payments.h in Headers */ = {isa = PBXBuildFile; fileRef = 86FBD88128EAF858000A8C49 /* Payments.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86FBD88528EAF858000A8C49 /* Payments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FBD87F28EAF858000A8C49 /* Payments.framework */; };
+		86FBD88628EAF858000A8C49 /* Payments.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 86FBD87F28EAF858000A8C49 /* Payments.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		86FBD88B28EAF862000A8C49 /* Payments+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FBD88A28EAF862000A8C49 /* Payments+State.swift */; };
+		86FBD88E28EB0F37000A8C49 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FBD87828EAF7B1000A8C49 /* StoreKit.framework */; };
+		86FBD89028EB0F55000A8C49 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 86FBD88F28EB0F55000A8C49 /* ComposableArchitecture */; };
+		86FBD89128EB0F55000A8C49 /* ComposableArchitecture in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 86FBD88F28EB0F55000A8C49 /* ComposableArchitecture */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		86FD4F4028DA4FD5002537CE /* Search+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F3F28DA4FD5002537CE /* Search+Reducer.swift */; };
 		86FD4F4228DA504B002537CE /* Search+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F4128DA504B002537CE /* Search+Action.swift */; };
 		86FD4F4428DA5223002537CE /* Stats+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F4328DA5223002537CE /* Stats+Reducer.swift */; };
@@ -693,6 +713,13 @@
 			remoteGlobalIDString = 8659649528A42F88003F43A4;
 			remoteInfo = ResultSongOverview;
 		};
+		86C6207528F20B2C002C7A58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 866863E12865EB6200510DDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86CD7A0C28A93FFC00D2C219;
+			remoteInfo = GTCloudKit;
+		};
 		86CB745F28CCD16600FFEA6C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 866863E12865EB6200510DDF /* Project object */;
@@ -756,6 +783,13 @@
 			remoteGlobalIDString = 869B37DA28A5AC4500ABE4FD;
 			remoteInfo = Core;
 		};
+		86FBD88328EAF858000A8C49 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 866863E12865EB6200510DDF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 86FBD87E28EAF858000A8C49;
+			remoteInfo = Payments;
+		};
 		86FD4F4D28DA5C20002537CE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 866863E12865EB6200510DDF /* Project object */;
@@ -808,6 +842,7 @@
 				8609413F28E237060012614D /* AllAlbums.framework in Embed Frameworks */,
 				869B377628A58D8C00ABE4FD /* AllSongs.framework in Embed Frameworks */,
 				869B37F728A7EAAB00ABE4FD /* Result.framework in Embed Frameworks */,
+				86FBD88628EAF858000A8C49 /* Payments.framework in Embed Frameworks */,
 				869B37BB28A5998C00ABE4FD /* SearchField.framework in Embed Frameworks */,
 				86CD7A1428A93FFC00D2C219 /* GTCloudKit.framework in Embed Frameworks */,
 				869B37E228A5AC4500ABE4FD /* Core.framework in Embed Frameworks */,
@@ -861,6 +896,18 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		86FBD89228EB0F55000A8C49 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				86C6207428F20B2C002C7A58 /* GTCloudKit.framework in Embed Frameworks */,
+				86FBD89128EB0F55000A8C49 /* ComposableArchitecture in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		86FD4F4F28DA5C20002537CE /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -884,7 +931,6 @@
 		8609412A28E1C9140012614D /* Add+Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Add+Album.swift"; sourceTree = "<group>"; };
 		8609412D28E1F1470012614D /* CloudKitClient+Upload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitClient+Upload.swift"; sourceTree = "<group>"; };
 		8609412F28E1F1B30012614D /* AlbumUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumUploadModel.swift; sourceTree = "<group>"; };
-		8609413128E1F24E0012614D /* CloudKitClient+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKitClient+Fetch.swift"; sourceTree = "<group>"; };
 		8609413828E237060012614D /* AllAlbums.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AllAlbums.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8609413A28E237060012614D /* AllAlbums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllAlbums.h; sourceTree = "<group>"; };
 		8609414328E237270012614D /* AllAlbums+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllAlbums+State.swift"; sourceTree = "<group>"; };
@@ -1018,6 +1064,17 @@
 		86C526D82875F5B00035DD31 /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		86C526DC28760AAA0035DD31 /* Song+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song+CoreDataClass.swift"; sourceTree = "<group>"; };
 		86C526DD28760AAA0035DD31 /* Song+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Song+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		86C6206628F1FEBE002C7A58 /* PurchaseUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseUploadModel.swift; sourceTree = "<group>"; };
+		86C6206828F200EE002C7A58 /* Decimal+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Extensions.swift"; sourceTree = "<group>"; };
+		86C6206B28F207F8002C7A58 /* CloudKit+Songs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Songs.swift"; sourceTree = "<group>"; };
+		86C6206D28F20913002C7A58 /* CloudKit+Albums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Albums.swift"; sourceTree = "<group>"; };
+		86C6206F28F209C9002C7A58 /* CloudKit+AdminMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+AdminMetadata.swift"; sourceTree = "<group>"; };
+		86C6207128F20A8B002C7A58 /* CloudKit+Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Purchase.swift"; sourceTree = "<group>"; };
+		86C6207728F20C4E002C7A58 /* CloudKit+Performances.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Performances.swift"; sourceTree = "<group>"; };
+		86C6207928F20D1F002C7A58 /* CloudKit+Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+Subscription.swift"; sourceTree = "<group>"; };
+		86C6207B28F2159B002C7A58 /* Payments+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payments+Action.swift"; sourceTree = "<group>"; };
+		86C6207D28F215F9002C7A58 /* Payments+Donation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payments+Donation.swift"; sourceTree = "<group>"; };
+		86C6207F28F2161F002C7A58 /* Payments+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payments+Reducer.swift"; sourceTree = "<group>"; };
 		86C9991F28CCEF610004BBFD /* CloudKit+TCA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CloudKit+TCA.swift"; sourceTree = "<group>"; };
 		86CD7A0D28A93FFC00D2C219 /* GTCloudKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTCloudKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CD7A0F28A93FFC00D2C219 /* GTCloudKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTCloudKit.h; sourceTree = "<group>"; };
@@ -1040,6 +1097,11 @@
 		86FBD84E28E9CDA1000A8C49 /* GTFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GTFormatter.swift; sourceTree = "<group>"; };
 		86FBD85A28E9CE54000A8C49 /* GTCoreData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GTCoreData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86FBD85C28E9CE54000A8C49 /* GTCoreData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTCoreData.h; sourceTree = "<group>"; };
+		86FBD87828EAF7B1000A8C49 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		86FBD87F28EAF858000A8C49 /* Payments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Payments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86FBD88128EAF858000A8C49 /* Payments.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Payments.h; sourceTree = "<group>"; };
+		86FBD88A28EAF862000A8C49 /* Payments+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payments+State.swift"; sourceTree = "<group>"; };
+		86FBD89328EB32F3000A8C49 /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		86FD4F3F28DA4FD5002537CE /* Search+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search+Reducer.swift"; sourceTree = "<group>"; };
 		86FD4F4128DA504B002537CE /* Search+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Search+Action.swift"; sourceTree = "<group>"; };
 		86FD4F4328DA5223002537CE /* Stats+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stats+Reducer.swift"; sourceTree = "<group>"; };
@@ -1231,6 +1293,8 @@
 				869B37F628A7EAAB00ABE4FD /* Result.framework in Frameworks */,
 				8659644E28A1B35A003F43A4 /* ResultPerformance.framework in Frameworks */,
 				860A3A5F28BB7C7400D54074 /* BottomBar.framework in Frameworks */,
+				86FBD87928EAF7B1000A8C49 /* StoreKit.framework in Frameworks */,
+				86FBD88528EAF858000A8C49 /* Payments.framework in Frameworks */,
 				8659642928A03FDF003F43A4 /* Model.framework in Frameworks */,
 				86646A2628A435BC00B4099E /* PerformancesList.framework in Frameworks */,
 				8659646028A1B3D4003F43A4 /* UI.framework in Frameworks */,
@@ -1327,6 +1391,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		86FBD87C28EAF858000A8C49 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86FBD89028EB0F55000A8C49 /* ComposableArchitecture in Frameworks */,
+				86C6207328F20B2C002C7A58 /* GTCloudKit.framework in Frameworks */,
+				86FBD88E28EB0F37000A8C49 /* StoreKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -1342,7 +1416,6 @@
 			isa = PBXGroup;
 			children = (
 				86E0490228D103CD00821096 /* CloudKitClient.swift */,
-				8609413128E1F24E0012614D /* CloudKitClient+Fetch.swift */,
 				8609412D28E1F1470012614D /* CloudKitClient+Upload.swift */,
 			);
 			path = CloudKitClient;
@@ -1458,6 +1531,7 @@
 			children = (
 				868BCD3A28D79C4B000E5071 /* Int+Extensions.swift */,
 				860E2E162896A9AB006F968F /* String+Extension.swift */,
+				86C6206828F200EE002C7A58 /* Decimal+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1527,6 +1601,7 @@
 		8659642428A03FDF003F43A4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				86C6206528F1FEAF002C7A58 /* Purchases */,
 				860E2E22289721C2006F968F /* Model.swift */,
 				86C526A62870CEF50035DD31 /* Albums */,
 				86C526A72870CEFB0035DD31 /* Songs */,
@@ -1592,16 +1667,18 @@
 				865963A728A00F51003F43A4 /* AllPerformances */,
 				869B377028A58D8C00ABE4FD /* AllSongs */,
 				860A3A4D28BB7C7400D54074 /* BottomBar */,
+				86FBD89328EB32F3000A8C49 /* Configuration.storekit */,
 				869B37DC28A5AC4500ABE4FD /* Core */,
 				8637E0E828D507C700A5A519 /* Detective */,
 				866863EB2865EB6200510DDF /* Dylan */,
-				86FBD84428E9CD97000A8C49 /* GTFormatter */,
-				86FBD85B28E9CE54000A8C49 /* GTCoreData */,
 				866863FB2865EC0500510DDF /* Frameworks */,
 				86A60C5E288C56AC00813778 /* Greasy-Trail-Info.plist */,
 				86CD7A0E28A93FFC00D2C219 /* GTCloudKit */,
+				86FBD85B28E9CE54000A8C49 /* GTCoreData */,
+				86FBD84428E9CD97000A8C49 /* GTFormatter */,
 				8659642428A03FDF003F43A4 /* Model */,
 				86BCAEE528CBDE2B00B671D6 /* Packages */,
+				86FBD88028EAF858000A8C49 /* Payments */,
 				86646A2128A435BC00B4099E /* PerformancesList */,
 				866863EA2865EB6200510DDF /* Products */,
 				869B37F128A7EAAB00ABE4FD /* Result */,
@@ -1612,8 +1689,8 @@
 				869B37B528A5998C00ABE4FD /* SearchField */,
 				8659646E28A1B466003F43A4 /* SongsList */,
 				868BCD1E28D7979B000E5071 /* Stats */,
-				8637E0BC28D4F5B700A5A519 /* TopBar */,
 				865963B928A00FBF003F43A4 /* TableViewType */,
+				8637E0BC28D4F5B700A5A519 /* TopBar */,
 				8659645B28A1B3D4003F43A4 /* UI */,
 			);
 			sourceTree = "<group>";
@@ -1647,6 +1724,7 @@
 				8609413828E237060012614D /* AllAlbums.framework */,
 				86FBD84328E9CD97000A8C49 /* GTFormatter.framework */,
 				86FBD85A28E9CE54000A8C49 /* GTCoreData.framework */,
+				86FBD87F28EAF858000A8C49 /* Payments.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1670,6 +1748,7 @@
 		866863FB2865EC0500510DDF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				86FBD87828EAF7B1000A8C49 /* StoreKit.framework */,
 				86DEC39628B91DA000A875C5 /* XCTest.framework */,
 				866863FC2865EC0500510DDF /* CloudKit.framework */,
 			);
@@ -1802,17 +1881,30 @@
 			path = Performances;
 			sourceTree = "<group>";
 		};
+		86C6206528F1FEAF002C7A58 /* Purchases */ = {
+			isa = PBXGroup;
+			children = (
+				86C6206628F1FEBE002C7A58 /* PurchaseUploadModel.swift */,
+			);
+			path = Purchases;
+			sourceTree = "<group>";
+		};
 		86CD7A0E28A93FFC00D2C219 /* GTCloudKit */ = {
 			isa = PBXGroup;
 			children = (
-				8609412C28E1F13C0012614D /* CloudKitClient */,
-				86C9991F28CCEF610004BBFD /* CloudKit+TCA.swift */,
-				86E0490028D103B100821096 /* CloudKit+Reducer.swift */,
-				868BCD1228D53273000E5071 /* CloudKit+Helper.swift */,
-				86CD7A3628A949C700D2C219 /* Extensions */,
-				86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */,
 				86CD7A0F28A93FFC00D2C219 /* GTCloudKit.h */,
+				86C6206F28F209C9002C7A58 /* CloudKit+AdminMetadata.swift */,
+				86C6206D28F20913002C7A58 /* CloudKit+Albums.swift */,
+				868BCD1228D53273000E5071 /* CloudKit+Helper.swift */,
+				86C6207928F20D1F002C7A58 /* CloudKit+Subscription.swift */,
+				86C6207728F20C4E002C7A58 /* CloudKit+Performances.swift */,
+				86C6207128F20A8B002C7A58 /* CloudKit+Purchase.swift */,
+				86E0490028D103B100821096 /* CloudKit+Reducer.swift */,
+				86C6206B28F207F8002C7A58 /* CloudKit+Songs.swift */,
+				86C9991F28CCEF610004BBFD /* CloudKit+TCA.swift */,
 				8656A31628679D960013F595 /* Enums.swift */,
+				8609412C28E1F13C0012614D /* CloudKitClient */,
+				86CD7A3628A949C700D2C219 /* Extensions */,
 				8656A30D28679BE60013F595 /* Protocols */,
 			);
 			path = GTCloudKit;
@@ -1821,6 +1913,7 @@
 		86CD7A3628A949C700D2C219 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				86D9C2C6288155CB00D5A0D3 /* CKPagingQueryOperation.swift */,
 				8656A30B28679BC00013F595 /* CKDatabase+Extensions.swift */,
 				86D9C2C82881604F00D5A0D3 /* CKQueryOperation+Extensions.swift */,
 				8656A31228679C880013F595 /* CKRecord+Extensions.swift */,
@@ -1873,6 +1966,18 @@
 				86FBD85C28E9CE54000A8C49 /* GTCoreData.h */,
 			);
 			path = GTCoreData;
+			sourceTree = "<group>";
+		};
+		86FBD88028EAF858000A8C49 /* Payments */ = {
+			isa = PBXGroup;
+			children = (
+				86FBD88128EAF858000A8C49 /* Payments.h */,
+				86FBD88A28EAF862000A8C49 /* Payments+State.swift */,
+				86C6207F28F2161F002C7A58 /* Payments+Reducer.swift */,
+				86C6207D28F215F9002C7A58 /* Payments+Donation.swift */,
+				86C6207B28F2159B002C7A58 /* Payments+Action.swift */,
+			);
+			path = Payments;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2059,6 +2164,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				86FBD85D28E9CE54000A8C49 /* GTCoreData.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86FBD87A28EAF858000A8C49 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86FBD88228EAF858000A8C49 /* Payments.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2471,6 +2584,7 @@
 				8609413D28E237060012614D /* PBXTargetDependency */,
 				86FBD84828E9CD98000A8C49 /* PBXTargetDependency */,
 				86FBD85F28E9CE54000A8C49 /* PBXTargetDependency */,
+				86FBD88428EAF858000A8C49 /* PBXTargetDependency */,
 			);
 			name = "Greasy Trail";
 			packageProductDependencies = (
@@ -2660,6 +2774,29 @@
 			productReference = 86FBD85A28E9CE54000A8C49 /* GTCoreData.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		86FBD87E28EAF858000A8C49 /* Payments */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 86FBD88728EAF858000A8C49 /* Build configuration list for PBXNativeTarget "Payments" */;
+			buildPhases = (
+				86FBD87A28EAF858000A8C49 /* Headers */,
+				86FBD87B28EAF858000A8C49 /* Sources */,
+				86FBD87C28EAF858000A8C49 /* Frameworks */,
+				86FBD87D28EAF858000A8C49 /* Resources */,
+				86FBD89228EB0F55000A8C49 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				86C6207628F20B2C002C7A58 /* PBXTargetDependency */,
+			);
+			name = Payments;
+			packageProductDependencies = (
+				86FBD88F28EB0F55000A8C49 /* ComposableArchitecture */,
+			);
+			productName = Payments;
+			productReference = 86FBD87F28EAF858000A8C49 /* Payments.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2761,6 +2898,10 @@
 					86FBD85928E9CE54000A8C49 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
+					86FBD87E28EAF858000A8C49 = {
+						CreatedOnToolsVersion = 13.4.1;
+						LastSwiftMigration = 1340;
+					};
 				};
 			};
 			buildConfigurationList = 866863E42865EB6200510DDF /* Build configuration list for PBXProject "Dylan" */;
@@ -2805,6 +2946,7 @@
 				8609413728E237060012614D /* AllAlbums */,
 				86FBD84228E9CD97000A8C49 /* GTFormatter */,
 				86FBD85928E9CE54000A8C49 /* GTCoreData */,
+				86FBD87E28EAF858000A8C49 /* Payments */,
 			);
 		};
 /* End PBXProject section */
@@ -2995,6 +3137,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		86FBD87D28EAF858000A8C49 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -3141,6 +3290,7 @@
 				8659643928A04110003F43A4 /* sSong.swift in Sources */,
 				86475ABE28E638A0006B28E5 /* SongUploadModel.swift in Sources */,
 				8659644028A04295003F43A4 /* PerformanceDisplayModel.swift in Sources */,
+				86C6206728F1FEBE002C7A58 /* PurchaseUploadModel.swift in Sources */,
 				8659642E28A04025003F43A4 /* Model.swift in Sources */,
 				8659643A28A0411B003F43A4 /* sPerformance.swift in Sources */,
 				8659643C28A04147003F43A4 /* sAlbum.swift in Sources */,
@@ -3253,6 +3403,7 @@
 				86FD4F5E28DE44A1002537CE /* DylanRecordType.swift in Sources */,
 				86FD4F6528DE4510002537CE /* GTError.swift in Sources */,
 				86CD7A2C28A9424A00D2C219 /* UserDefaultsBacked.swift in Sources */,
+				86C6206928F200EE002C7A58 /* Decimal+Extensions.swift in Sources */,
 				868BCD0D28D51558000E5071 /* DisplayedView.swift in Sources */,
 				86FD4F7A28E0A3A0002537CE /* PerformanceDateFormat.swift in Sources */,
 				868BCD3B28D79C4B000E5071 /* Int+Extensions.swift in Sources */,
@@ -3274,13 +3425,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				86CD7A2828A9421900D2C219 /* RecordType.swift in Sources */,
+				86C6207828F20C4E002C7A58 /* CloudKit+Performances.swift in Sources */,
+				86C6206E28F20913002C7A58 /* CloudKit+Albums.swift in Sources */,
 				86CD7A1D28A9400B00D2C219 /* CKPagingQueryOperation.swift in Sources */,
 				86CD7A3228A9485700D2C219 /* CKQuery+Extensions.swift in Sources */,
+				86C6207228F20A8B002C7A58 /* CloudKit+Purchase.swift in Sources */,
+				86C6206C28F207F8002C7A58 /* CloudKit+Songs.swift in Sources */,
 				86CD7A2428A9404000D2C219 /* Enums.swift in Sources */,
 				86CD7A2B28A9422700D2C219 /* DatabaseType.swift in Sources */,
 				86E0490128D103B200821096 /* CloudKit+Reducer.swift in Sources */,
+				86C6207A28F20D1F002C7A58 /* CloudKit+Subscription.swift in Sources */,
 				86CD7A3428A949BA00D2C219 /* CKRecord+Extensions.swift in Sources */,
-				8609413228E1F24E0012614D /* CloudKitClient+Fetch.swift in Sources */,
+				86C6207028F209C9002C7A58 /* CloudKit+AdminMetadata.swift in Sources */,
 				868BCD1328D53273000E5071 /* CloudKit+Helper.swift in Sources */,
 				86CD7A3328A949BA00D2C219 /* CKDatabase+Extensions.swift in Sources */,
 				86C9992028CCEF610004BBFD /* CloudKit+TCA.swift in Sources */,
@@ -3317,6 +3473,17 @@
 				86FBD86C28E9CE6B000A8C49 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				86FBD86F28E9CE6B000A8C49 /* Song+CoreDataClass.swift in Sources */,
 				86FBD86E28E9CE6B000A8C49 /* PersistenceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		86FBD87B28EAF858000A8C49 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86C6207E28F215F9002C7A58 /* Payments+Donation.swift in Sources */,
+				86C6207C28F2159B002C7A58 /* Payments+Action.swift in Sources */,
+				86FBD88B28EAF862000A8C49 /* Payments+State.swift in Sources */,
+				86C6208028F2161F002C7A58 /* Payments+Reducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3623,6 +3790,11 @@
 			target = 8659649528A42F88003F43A4 /* ResultSongOverview */;
 			targetProxy = 869B380728A91D0800ABE4FD /* PBXContainerItemProxy */;
 		};
+		86C6207628F20B2C002C7A58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86CD7A0C28A93FFC00D2C219 /* GTCloudKit */;
+			targetProxy = 86C6207528F20B2C002C7A58 /* PBXContainerItemProxy */;
+		};
 		86CB746028CCD16600FFEA6C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 865963FF28A01676003F43A4 /* Search */;
@@ -3667,6 +3839,11 @@
 			isa = PBXTargetDependency;
 			target = 869B37DA28A5AC4500ABE4FD /* Core */;
 			targetProxy = 86FBD87428E9CE9F000A8C49 /* PBXContainerItemProxy */;
+		};
+		86FBD88428EAF858000A8C49 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 86FBD87E28EAF858000A8C49 /* Payments */;
+			targetProxy = 86FBD88328EAF858000A8C49 /* PBXContainerItemProxy */;
 		};
 		86FD4F4E28DA5C20002537CE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -5446,6 +5623,73 @@
 			};
 			name = Release;
 		};
+		86FBD88828EAF858000A8C49 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZUT4ATB28X;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sixeye.Payments;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		86FBD88928EAF858000A8C49 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = ZUT4ATB28X;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.sixeye.Payments;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -5692,6 +5936,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		86FBD88728EAF858000A8C49 /* Build configuration list for PBXNativeTarget "Payments" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				86FBD88828EAF858000A8C49 /* Debug */,
+				86FBD88928EAF858000A8C49 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -5772,6 +6025,10 @@
 			productName = ComposableArchitecture;
 		};
 		86CB745928CCD0BF00FFEA6C /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ComposableArchitecture;
+		};
+		86FBD88F28EB0F55000A8C49 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ComposableArchitecture;
 		};

@@ -7,6 +7,7 @@ import AllPerformances
 import Stats
 import AllSongs
 import AllAlbums
+import Payments
 
 extension AppState {
     
@@ -52,7 +53,8 @@ extension AppState {
                 search: search,
                 displayedView: displayedView,
                 cloudKit: cloudKitState,
-                displayedFavorite: displayedFavorite)
+                displayedFavorite: displayedFavorite,
+                hasLoadedInAppPurchases: !products.isEmpty)
         }
         set {
             self.displayedView = newValue.displayedView
@@ -81,13 +83,15 @@ extension AppState {
             return CloudKitState(
                 mode: mode,
                 lastFetchDate: lastFetchDate,
-                displaysAdminFunctionality: displaysAdminFunctionality)
+                displaysAdminFunctionality: displaysAdminFunctionality,
+                amountDonated: amountDonated)
         }
         set {
             mode = newValue.mode
             if let date = newValue.lastFetchDate {
                 lastFetchDate = date
             }
+            amountDonated = newValue.amountDonated
             displaysAdminFunctionality = newValue.displaysAdminFunctionality
         }
     }
@@ -131,8 +135,7 @@ extension AppState {
     
     var allSongsState: AllSongsState {
         get {
-            AllSongsState(search: search,
-                          selectedSongPredicate: selectedSongPredicate)
+            AllSongsState(search: search, selectedSongPredicate: selectedSongPredicate)
         }
         set {
             selectedSongPredicate = newValue.selectedSongPredicate
@@ -142,12 +145,21 @@ extension AppState {
     
     var allAlbumsState: AllAlbumsState {
         get {
-            AllAlbumsState(search: search,
-                           albumPredicate: selectedAlbumPredicate)
+            AllAlbumsState(search: search, albumPredicate: selectedAlbumPredicate)
         }
         set {
             search = newValue.search
             selectedAlbumPredicate = newValue.albumPredicate
+        }
+    }
+    
+    var paymentsState: PaymentsState {
+        get {
+            PaymentsState(products: products, cloudKit: cloudKitState, amountDonated: amountDonated)
+        }
+        set {
+            products = newValue.products
+            cloudKitState = newValue.cloudKit
         }
     }
 }

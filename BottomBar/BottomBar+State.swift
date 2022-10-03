@@ -9,6 +9,7 @@ public struct BottomBarState: Equatable {
     public var isSearchFieldShowing: Bool
     public var displayedView: DisplayedView
     public var displayedFavorite: Bool?
+    var hasLoadedInAppPurchases: Bool
     
     // Search
     public var search: SearchState
@@ -36,12 +37,14 @@ public struct BottomBarState: Equatable {
                 search: SearchState,
                 displayedView: DisplayedView,
                 cloudKit: CloudKitState,
-                displayedFavorite: Bool?) {
+                displayedFavorite: Bool?,
+                hasLoadedInAppPurchases: Bool) {
         self.isSearchFieldShowing = isSearchFieldShowing
         self.search = search
         self.displayedView = displayedView
         self.cloudKit = cloudKit
         self.displayedFavorite = displayedFavorite
+        self.hasLoadedInAppPurchases = hasLoadedInAppPurchases
     }
 }
 
@@ -53,4 +56,5 @@ public struct BottomBarViewState: Equatable {
     public var displayedView: DisplayedView
     public var selectedObjectID: NSManagedObjectID?
     public var isDownloading: Bool
+    public var hasLoadedInAppPurchases: Bool
 }

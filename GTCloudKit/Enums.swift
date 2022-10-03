@@ -1,10 +1,3 @@
-//
-//  ConvenienceEnums.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 25/06/2022.
-//
-
 import CloudKit
 import Core
 
@@ -32,6 +25,10 @@ public enum DylanRecordField: String {
     // App Metadata
     case file
     case name
+    
+    // Purchase
+    case amount
+    case type
 
     case songs
 }

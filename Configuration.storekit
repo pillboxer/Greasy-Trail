@@ -1,0 +1,78 @@
+{
+  "identifier" : "C35FD80E",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "1.49",
+      "familyShareable" : false,
+      "internalID" : "33DB38B1",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "Small Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.sixeye.Dylan.gt.tip.s",
+      "referenceName" : "Small Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "47B59676",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "Medium Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.sixeye.Dylan.gt.tip.m",
+      "referenceName" : "Medium Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "92A75E1E",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "Large Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.sixeye.Dylan.gt.tip.l",
+      "referenceName" : "Large Tip",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "19.99",
+      "familyShareable" : false,
+      "internalID" : "5E21A11C",
+      "localizations" : [
+        {
+          "description" : "",
+          "displayName" : "Super Deluxe Tip",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "com.sixeye.Dylan.gt.tip.xl",
+      "referenceName" : "Super Deluxe Tip",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_storefront" : "GBR"
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 1,
+    "minor" : 2
+  }
+}

@@ -1,10 +1,3 @@
-//
-//  CKRecord+Extensions.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 25/06/2022.
-//
-
 import CloudKit
 
 extension CKRecord: RecordType {
@@ -23,6 +16,10 @@ extension CKRecord: RecordType {
 
    public func double(for field: DylanRecordField) -> Double? {
         retrieve(type: Double.self, fromPath: field.rawValue)
+    }
+    
+    public func int(for field: DylanRecordField) -> Int? {
+        retrieve(type: Int.self, fromPath: field.rawValue)
     }
 
    public func ints(for field: DylanRecordField) -> [Int]? {

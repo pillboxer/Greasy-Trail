@@ -25,6 +25,8 @@ public struct BottomBarView: View {
     public var body: some View {
         HStack {
             switch viewStore.displayedView {
+            case .donate:
+                homeButton
             case .add:
                addButtons
             case .result:
@@ -38,6 +40,9 @@ public struct BottomBarView: View {
             case .missingLBs:
                 homeButton
                 Spacer()
+            }
+            if viewStore.hasLoadedInAppPurchases, viewStore.displayedView != .donate {
+                donateButton
             }
             if viewStore.isSearching {
                 ProgressView()
@@ -109,6 +114,7 @@ extension BottomBarViewState {
         self.selectedObjectID = bottomBarState.search.selectedObjectID
         self.displayedFavorite = bottomBarState.displayedFavorite
         self.isDownloading = !(bottomBarState.cloudKit.mode?.canFetch ?? true)
+        self.hasLoadedInAppPurchases = bottomBarState.hasLoadedInAppPurchases
     }
 }
 

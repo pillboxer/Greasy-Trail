@@ -1,10 +1,3 @@
-//
-//  RecordType.swift
-//  Dylan
-//
-//  Created by Henry Cooper on 25/06/2022.
-//
-
 import CloudKit
 
 public protocol RecordType {
@@ -12,6 +5,7 @@ public protocol RecordType {
     func string(for field: DylanRecordField) -> String?
     func ints(for field: DylanRecordField) -> [Int]?
     func double(for field: DylanRecordField) -> Double?
+    func int(for field: DylanRecordField) -> Int?
     func data(for field: DylanRecordField) -> Data?
     func references(of referenceType: DylanReferenceType) -> [ReferenceType]
     var modificationDate: Date? { get }
@@ -28,6 +22,10 @@ extension RecordType {
     }
     
     func double(for field: DylanRecordField) -> Double? {
+        nil
+    }
+    
+    func int(for field: DylanRecordField) -> Int? {
         nil
     }
     
