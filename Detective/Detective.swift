@@ -31,19 +31,24 @@ public class Detective: ObservableObject {
         return fetchAlbumModel(for: id)
     }
 
-    public func search(song title: String) -> Effect<AnyModel?, Never> {
-        logger.log("Searching song: \(title, privacy: .public)")
-        return fetchModel(for: title)
+    public func search(song string: String) -> Effect<AnyModel?, Never> {
+        logger.log("Searching song: \(string, privacy: .public)")
+        return fetchSongModel(for: string)
     }
 
-    public func search(album title: String) -> Effect<AnyModel?, Never> {
-        logger.log("Searching album: \(title, privacy: .public)")
-        return fetch(album: title)
+    public func search(album string: String) -> Effect<AnyModel?, Never> {
+        logger.log("Searching album: \(string, privacy: .public)")
+        return fetchAlbumModel(for: string)
     }
 
     public func search(performance date: Double) -> Effect<AnyModel?, Never> {
         logger.log("Searching date: \(date, privacy: .public)")
-        return fetch(performance: date)
+        return fetchPerformanceModel(for: date)
+    }
+    
+    public func search(performance uuid: String) -> Effect<AnyModel?, Never> {
+        logger.log("Searching uuid: \(uuid, privacy: .public)")
+        return fetchPerformanceModel(for: uuid)
     }
     
     func objects<T: NSManagedObject>(_ object: T.Type,

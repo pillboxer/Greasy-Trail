@@ -17,7 +17,7 @@ extension CloudKitClient {
                         continuation.yield(.updateFetchProgress(of: .song, to: Double(index) / Double(records.count)))
                         await context.perform {
                             let title = titles[index] ?? "Unknown Title"
-                            let author = authors[index]
+                            let author = (authors[index]?.isEmpty ?? true) ? nil : authors[index]
                             let baseSongUUID = baseSongUUIDs[index]
                             let predicate = NSPredicate(format: "uuid == %@", record.recordID.recordName)
                             let song: Song

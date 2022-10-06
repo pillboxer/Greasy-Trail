@@ -48,6 +48,7 @@ public struct Search: Equatable {
     public var title: String?
     public var type: DylanSearchType?
     public var id: NSManagedObjectID?
+    public var uuid: String?
 
     public init(title: String, type: DylanSearchType?) {
         self.title = title
@@ -56,5 +57,9 @@ public struct Search: Equatable {
 
     public init(id: NSManagedObjectID) {
         self.id = id
+    }
+    
+    public init(uuid: String) {
+        self.uuid = uuid
     }
 }

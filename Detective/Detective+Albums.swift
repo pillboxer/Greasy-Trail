@@ -29,11 +29,13 @@ extension Detective {
         }
     }
     
-    func fetch(album title: String) -> Effect<AnyModel?, Never> {
+    func fetchAlbumModel(for string: String) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
         return .future { completion in
             // Fetch album with given title
-            let predicate = NSPredicate(format: "title =[c] %@", title)
+            let titlePredicate = NSPredicate(format: "title =[c] %@", string)
+            let uuidPrediate = NSPredicate(format: "uuid =[c] %@", string)
+            let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, uuidPrediate])
             context.performFetch(Album.self, with: predicate) { [self] albums in
                 guard let first = albums.first,
                       let songs = first.songs?.array as? [Song] else {
@@ -41,7 +43,6 @@ extension Detective {
                 }
                 let model = createAlbumDisplayModel(from: first, with: songs)
                 completion(.success(AnyModel(model)))
-
             }
         }
     }

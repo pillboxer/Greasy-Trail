@@ -25,31 +25,23 @@ public class Searcher {
     }
     
     public func search(_ search: Search) -> Effect<AnyModel?, Never> {
-        
         guard let title = search.title else {
-            if let id = search.id {
+            if let uuid = search.uuid {
+                return [detective.search(song: uuid),
+                        detective.search(album: uuid),
+                        detective.search(performance: uuid)].erased()
+            } else if let id = search.id {
                 return [detective.search(song: id),
                         detective.search(performance: id),
-                        detective.search(album: id)]
-                    .publisher
-                    .flatMap(maxPublishers: .max(1)) { $0 }
-                    .compactMap { $0 }
-                    .replaceEmpty(with: nil)
-                    .eraseToEffect()
+                        detective.search(album: id)].erased()
             } else {
                 fatalError()
             }
         }
-        
         guard let type = search.type else {
             return [self.search(Search(title: title, type: .album)),
                     self.search(Search(title: title, type: .song)),
-                    self.search(Search(title: title, type: .performance))]
-                .publisher
-                .flatMap(maxPublishers: .max(1)) { $0 }
-                .compactMap { $0 }
-                .replaceEmpty(with: nil)
-                .eraseToEffect()
+                    self.search(Search(title: title, type: .performance))].erased()
         }
         switch type {
         case .album:
@@ -58,12 +50,21 @@ public class Searcher {
             return detective.search(song: title)
         case .performance:
             if let toFetch = Double(title) ?? formatter.date(from: title) {
-                return detective.fetch(performance: toFetch)
-            } else {
-                return Just(nil)
-                    .eraseToEffect()
-            }
+                return detective.fetchPerformanceModel(for: toFetch)
+            } else { return Just(nil) .eraseToEffect() }
         }
+    }
+}
+
+private extension Array where Element == Effect<AnyModel?, Never> {
+    
+    func erased() -> Effect<AnyModel?, Never> {
+        self
+            .publisher
+            .flatMap(maxPublishers: .max(1)) { $0 }
+            .compactMap { $0 }
+            .replaceEmpty(with: nil)
+            .eraseToEffect()
     }
     
 }

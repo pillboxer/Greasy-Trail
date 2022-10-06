@@ -100,7 +100,7 @@ public let addReducer = Reducer<AddState, AddAction, Void> { state, action, _ in
 
 func findSongEffect(string: String) -> Effect<sSong, Never> {
     let detective = Detective()
-    return detective.fetchModel(for: string)
+    return detective.fetchSongModel(for: string)
         .compactMap { $0?.value as? SongDisplayModel }
         .map { sSong(uuid: $0.uuid,
                      title: $0.title,

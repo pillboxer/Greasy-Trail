@@ -29,7 +29,7 @@ public extension Detective {
         }
     }
     
-    func fetchModel(for query: String) -> Effect<AnyModel?, Never> {
+    func fetchSongModel(for query: String) -> Effect<AnyModel?, Never> {
         let context = container.newBackgroundContext()
         
         return .future { completion in

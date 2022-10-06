@@ -8,13 +8,32 @@ import ComposableArchitecture
 
 public extension Detective {
     
-    func fetch(performance date: Double) -> Effect<AnyModel?, Never> {
+    func fetchPerformanceModel(for date: Double) -> Effect<AnyModel?, Never> {
         logger.log("Fetching performance at date \(date, privacy: .public)")
         let context = container.newBackgroundContext()
         
         return .future { completion in
             context.perform {
                 let predicate = NSPredicate(format: "date == %d", Int(date))
+                context.performFetch(Performance.self, with: predicate) { [self] performances in
+                    guard let first = performances.first,
+                          let songs = first.songs?.array as? [Song] else {
+                        return completion(.success(nil))
+                    }
+                    let displayModel = createPerformanceDisplayModel(from: first, with: songs)
+                    completion(.success(AnyModel(displayModel)))
+                }
+            }
+        }
+    }
+    
+    func fetchPerformanceModel(for uuid: String) -> Effect<AnyModel?, Never> {
+        logger.log("Fetching performance with uuid \(uuid, privacy: .public)")
+        let context = container.newBackgroundContext()
+        
+        return .future { completion in
+            context.perform {
+                let predicate = NSPredicate(format: "uuid =[c] %@", uuid)
                 context.performFetch(Performance.self, with: predicate) { [self] performances in
                     guard let first = performances.first,
                           let songs = first.songs?.array as? [Song] else {

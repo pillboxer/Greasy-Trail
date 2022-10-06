@@ -48,8 +48,7 @@ public struct PerformancesListView: View {
                                         subheadline: formatter.dateString(
                                             of: performance.date,
                                             in: performance.dateFormat)) {
-                                                viewStore.send(.search(.init(title: String(performance.date),
-                                                                             type: .performance)))
+                                                viewStore.send(.search(.init(uuid: performance.uuid)))
                                             }
                             Spacer()
                         }
