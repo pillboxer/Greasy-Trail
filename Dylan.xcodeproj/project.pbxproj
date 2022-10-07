@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86013F2228F0806600BC392D /* RockSalt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86013F2128F0806600BC392D /* RockSalt-Regular.ttf */; };
 		8609412528E1A3D30012614D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412428E1A3D30012614D /* AppDelegate.swift */; };
 		8609412928E1C5CD0012614D /* AddAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412828E1C5CD0012614D /* AddAlbums.swift */; };
 		8609412B28E1C9140012614D /* Add+Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412A28E1C9140012614D /* Add+Album.swift */; };
@@ -268,7 +269,6 @@
 		86FD4F6928DF48DA002537CE /* AllSongs+State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6828DF48DA002537CE /* AllSongs+State.swift */; };
 		86FD4F6B28DF4B38002537CE /* AllSongs+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6A28DF4B38002537CE /* AllSongs+Action.swift */; };
 		86FD4F6D28DF4B63002537CE /* AllSongs+Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F6C28DF4B63002537CE /* AllSongs+Reducer.swift */; };
-		86FD4F7528DF5ED6002537CE /* RockSalt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86FD4F7228DF5E55002537CE /* RockSalt-Regular.ttf */; };
 		86FD4F7A28E0A3A0002537CE /* PerformanceDateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86FD4F7828E09907002537CE /* PerformanceDateFormat.swift */; };
 /* End PBXBuildFile section */
 
@@ -876,6 +876,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		86013F2128F0806600BC392D /* RockSalt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RockSalt-Regular.ttf"; sourceTree = "<group>"; };
 		860712322868604300E54209 /* ReferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceType.swift; sourceTree = "<group>"; };
 		8609412428E1A3D30012614D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8609412628E1AAB70012614D /* Deletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deletable.swift; sourceTree = "<group>"; };
@@ -1053,7 +1054,6 @@
 		86FD4F6828DF48DA002537CE /* AllSongs+State.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllSongs+State.swift"; sourceTree = "<group>"; };
 		86FD4F6A28DF4B38002537CE /* AllSongs+Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllSongs+Action.swift"; sourceTree = "<group>"; };
 		86FD4F6C28DF4B63002537CE /* AllSongs+Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AllSongs+Reducer.swift"; sourceTree = "<group>"; };
-		86FD4F7228DF5E55002537CE /* RockSalt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RockSalt-Regular.ttf"; sourceTree = "<group>"; };
 		86FD4F7828E09907002537CE /* PerformanceDateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceDateFormat.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1330,6 +1330,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86013F2028F0800E00BC392D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				86013F2128F0806600BC392D /* RockSalt-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		8609412C28E1F13C0012614D /* CloudKitClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -1578,6 +1586,8 @@
 		866863E02865EB6200510DDF = {
 			isa = PBXGroup;
 			children = (
+				86013F2028F0800E00BC392D /* Fonts */,
+				86FBD89328EB32F3000A8C49 /* Configuration.storekit */,
 				8634311E28B1491600092931 /* Add */,
 				8609413928E237060012614D /* AllAlbums */,
 				865963A728A00F51003F43A4 /* AllPerformances */,
@@ -1599,7 +1609,6 @@
 				860A3A7828BBC13400D54074 /* ResultAlbum */,
 				8659644928A1B35A003F43A4 /* ResultPerformance */,
 				8659649728A42F88003F43A4 /* ResultSongOverview */,
-				86FD4F7228DF5E55002537CE /* RockSalt-Regular.ttf */,
 				8659640128A01676003F43A4 /* Search */,
 				869B37B528A5998C00ABE4FD /* SearchField */,
 				8659646E28A1B466003F43A4 /* SongsList */,
@@ -2925,7 +2934,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86FD4F7528DF5ED6002537CE /* RockSalt-Regular.ttf in Resources */,
+				86013F2228F0806600BC392D /* RockSalt-Regular.ttf in Resources */,
 				8678FD312869F76700DF1E69 /* Localizable.strings in Resources */,
 				866863F12865EB6400510DDF /* Assets.xcassets in Resources */,
 			);
