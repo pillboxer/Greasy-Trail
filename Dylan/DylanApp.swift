@@ -26,7 +26,7 @@ struct DylanApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView(store: appStore)
-                .onAppear {
+                .task {
                     ViewStore(appStore).send(.cloudKit(.fetchAdminMetadata))
                     ViewStore(appStore).send(.cloudKit(.subscribeToDatabases))
                     ViewStore(appStore).send(.cloudKit(.start(date: lastFetchDate)))

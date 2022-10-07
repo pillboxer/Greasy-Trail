@@ -82,7 +82,7 @@ extension BottomBarView {
                     logger.log("Tapped album (add)")
                     viewStore.send(.reset(.add(.albums)), animation: .default)
                 }
-                .highlighting(DisplayedView.add(.albums) ==  viewStore.displayedView)
+                .highlighting(DisplayedView.add(.albums) == viewStore.displayedView)
             default:
                 PlainOnTapButton(systemImage: DylanWork.albums.imageName) {
                     logger.log("Tapped album (home)")

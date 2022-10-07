@@ -35,6 +35,7 @@ public let bottomBarReducer = Reducer<BottomBarState, BottomBarAction, Void> { s
     case .selectDisplayedView(let displayedView):
         logger.log("Setting displayed view to \(displayedView.rawValue, privacy: .public)")
         state.displayedView = displayedView
+        return Effect(value: .resetFavoriteResult)
     case .toggleFavorite:
         let uuid = state.searchState.model?.uuid
         return .run { send in
