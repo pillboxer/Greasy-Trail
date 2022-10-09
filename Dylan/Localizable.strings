@@ -2,6 +2,16 @@
 "developer_menu_title" = "Developer";
 "developer_menu_bug_report" = "Send bug report...";
 
+// Menu
+"about_menu_title" = "About Greasy Trail";
+"acknowledgements" = "
+Thanks to:
+
+Olof Björner
+Louise Stevens
+Point•Free
+";
+
 //Misc
 "product_name" = "Greasy Trail";
 "search_example" = "Try \"Tangled Up In Blue\" or \"15 April 2007\"";

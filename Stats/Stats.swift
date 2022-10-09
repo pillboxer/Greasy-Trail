@@ -81,6 +81,7 @@ struct StatInfoView: View {
             Text("Albums: \(albumsCount)")
             Text("Performances: \(performancesCount)")
             Text("LB Count: \(lbCount)")
+            #if DEBUG
             HStack {
                 Text("Missing LB Numbers: \(15630 - lbCount)")
                 if viewStore.state.isFetchingMissingLBCount {
@@ -92,7 +93,7 @@ struct StatInfoView: View {
                     }
                 }
             }
+            #endif
         }
     }
-    
 }
