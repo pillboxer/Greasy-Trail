@@ -38,6 +38,21 @@ struct DylanApp: App {
                 }
         }.commands {
             CommandGroup(replacing: .newItem, addition: {})
+            CommandGroup(replacing: .appInfo) {
+                Button("about_menu_title") {
+                    let style = NSMutableParagraphStyle()
+                    style.alignment = .center
+                    NSApplication.shared.orderFrontStandardAboutPanel(
+                        options: [
+                            NSApplication.AboutPanelOptionKey.credits: NSAttributedString(
+                                string: tr("acknowledgements"),
+                                attributes: [.font: NSFont.boldSystemFont(ofSize: NSFont.smallSystemFontSize),
+                                             .paragraphStyle: style]
+                            )
+                        ]
+                    )
+                }
+            }
             CommandGroup(after: .help) {
                 Button("developer_menu_bug_report") {
                     viewStore.send(.copyLogs)

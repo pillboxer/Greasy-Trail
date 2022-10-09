@@ -94,5 +94,4 @@ struct StatInfoView: View {
             }
         }
     }
-    
 }
