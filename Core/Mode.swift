@@ -8,7 +8,7 @@ public enum Mode: Equatable {
     case couldNotFetchLogs
     case couldNotOpenEmail
     
-    public var canFetch: Bool {
+    public var canStartNewOperation: Bool {
         switch self {
         case .downloading, .uploading:
             return false

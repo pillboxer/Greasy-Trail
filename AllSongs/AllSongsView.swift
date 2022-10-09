@@ -54,12 +54,16 @@ public struct AllSongsView: TableViewType {
                 TableColumn(LocalizedStringKey("table_column_title_songs_0"),
                             value: \.title!) { song in
                     let title = song.title!
+                    if viewStore.displaysAdminFunctionality {
                     Toggle(isOn: toggleBinding(on: song)) {
                         Text(title)
                             .padding(.leading, 4)
                     }
                     .padding(.top, 4)
                     .toggleStyle(CheckboxToggleStyle())
+                    } else {
+                        Text(title)
+                    }
                 }
                 TableColumn(LocalizedStringKey("table_column_title_songs_1"),
                             value: \.songAuthor) { song in

@@ -28,9 +28,9 @@ public struct BottomBarView: View {
             case .donate:
                 homeButton
             case .add:
-               addButtons
+                addButtons
             case .result:
-               resultButtons
+                resultButtons
             case .songs, .albums, .performances:
                 selectedWorkButtons
             case .home:
@@ -98,7 +98,9 @@ private extension BottomBarView {
         }
         searchButton
         randomButton
-        openAddButton
+        if viewStore.displaysAdminFunctionality {
+            openAddButton
+        }
         Spacer()
         recordButtons
     }
@@ -113,8 +115,9 @@ extension BottomBarViewState {
         self.displayedView = bottomBarState.search.displayedView
         self.selectedObjectID = bottomBarState.search.selectedObjectID
         self.displayedFavorite = bottomBarState.displayedFavorite
-        self.isDownloading = !(bottomBarState.cloudKit.mode?.canFetch ?? true)
+        self.isDownloading = !(bottomBarState.cloudKit.mode?.canStartNewOperation ?? true)
         self.hasLoadedInAppPurchases = bottomBarState.hasLoadedInAppPurchases
+        self.displaysAdminFunctionality = bottomBarState.displaysAdminFunctionality
     }
 }
 

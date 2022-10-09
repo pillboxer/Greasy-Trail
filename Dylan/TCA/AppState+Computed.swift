@@ -54,7 +54,8 @@ extension AppState {
                 displayedView: displayedView,
                 cloudKit: cloudKitState,
                 displayedFavorite: displayedFavorite,
-                hasLoadedInAppPurchases: !products.isEmpty)
+                hasLoadedInAppPurchases: !products.isEmpty,
+                displaysAdminFunctionality: displaysAdminFunctionality)
         }
         set {
             self.displayedView = newValue.displayedView
@@ -126,16 +127,19 @@ extension AppState {
     
     var commandMenuState: CommandMenuState {
         get {
-            CommandMenuState(mode: mode)
+            CommandMenuState(mode: mode, alert: alert)
         }
         set {
             mode = newValue.mode
+            alert = newValue.alert
         }
     }
     
     var allSongsState: AllSongsState {
         get {
-            AllSongsState(search: search, selectedSongPredicate: selectedSongPredicate)
+            AllSongsState(search: search,
+                          selectedSongPredicate: selectedSongPredicate,
+                          displaysAdminFunctionality: displaysAdminFunctionality)
         }
         set {
             selectedSongPredicate = newValue.selectedSongPredicate
@@ -145,7 +149,9 @@ extension AppState {
     
     var allAlbumsState: AllAlbumsState {
         get {
-            AllAlbumsState(search: search, albumPredicate: selectedAlbumPredicate)
+            AllAlbumsState(search: search,
+                           albumPredicate: selectedAlbumPredicate,
+                           displaysAdminFunctionality: displaysAdminFunctionality)
         }
         set {
             search = newValue.search

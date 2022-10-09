@@ -3,6 +3,7 @@ import ComposableArchitecture
 import Search
 import Core
 import GTCloudKit
+import GTCoreData
 
 @main
 struct DylanApp: App {
@@ -35,10 +36,14 @@ struct DylanApp: App {
                     ViewStore(appStore).send(.cloudKit(.fetchAdminMetadata))
                     ViewStore(appStore).send(.cloudKit(.start(date: lastFetchDate)))
                 }
-        } .commands {
+        }.commands {
+            CommandGroup(replacing: .newItem, addition: {})
             CommandGroup(after: .help) {
-                Button("devloper_menu_bug_report") {
+                Button("developer_menu_bug_report") {
                     viewStore.send(.copyLogs)
+                }
+                Button("delete_menu_button") {
+                    ViewStore(appStore).send(.commandMenu(.toggleDeleteAlert))
                 }
             }
         }

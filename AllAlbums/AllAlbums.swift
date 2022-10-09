@@ -34,7 +34,8 @@ public struct AllAlbumsView: TableViewType {
         self.viewStore = ViewStore(store.scope(state: {
             AllAlbumsViewState(
                 selectedID: $0.search.selectedID,
-                selectedPredicate: $0.albumPredicate)
+                selectedPredicate: $0.albumPredicate,
+                displaysAdminFunctionality: $0.displaysAdminFunctionality)
         }, action: AllAlbumsFeatureAction.init))
         _fetched = FetchRequest<Album>(
             entity: Album.entity(),
@@ -62,12 +63,16 @@ public struct AllAlbumsView: TableViewType {
                 TableColumn(LocalizedStringKey("table_column_title_albums_0"),
                             value: \.title!) { album in
                     let title = album.title!
+                    if viewStore.displaysAdminFunctionality {
                     Toggle(isOn: toggleBinding(on: album)) {
                         Text(title)
                             .padding(.leading, 4)
                     }
                     .padding(.top, 4)
                     .toggleStyle(CheckboxToggleStyle())
+                    } else {
+                        Text(title)
+                    }
                 }
                 TableColumn(LocalizedStringKey("table_column_title_albums_1"),
                             value: \.releaseDate) { album in

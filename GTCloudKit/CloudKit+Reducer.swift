@@ -27,7 +27,7 @@ public let cloudKitReducer = Reducer<CloudKitState, CloudKitAction, CloudKitEnvi
     case .fetchPurchases:
         return fetchPurchases(environment: environment)
     case .start(let date):
-        if let mode = state.mode, !mode.canFetch {
+        if let mode = state.mode, !mode.canStartNewOperation {
             logger.log("Attempted to start but not able to fetch. Give up")
             return .none
         }

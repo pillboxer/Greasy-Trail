@@ -4,10 +4,12 @@ import Search
 public struct AllSongsState: Equatable {
     public var search: SearchState
     public var selectedSongPredicate: SongPredicate
+    public var displaysAdminFunctionality: Bool
     
-    public init(search: SearchState, selectedSongPredicate: SongPredicate) {
+    public init(search: SearchState, selectedSongPredicate: SongPredicate, displaysAdminFunctionality: Bool) {
         self.search = search
         self.selectedSongPredicate = selectedSongPredicate
+        self.displaysAdminFunctionality = displaysAdminFunctionality
     }
     
     public var selectedID: ObjectIdentifier? {

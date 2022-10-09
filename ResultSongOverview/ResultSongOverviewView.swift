@@ -27,6 +27,16 @@ public struct ResultSongOverviewView: View {
                     Text(model.title)
                         .font(.headline)
                         .padding(.bottom, 4)
+                    Group {
+                        if let performances = model.performances, !performances.isEmpty {
+                            performances.count == 1
+                            ? Text(tr("performance_count_singular"))
+                            : Text(tr("performance_count", String(performances.count)))
+                        } else {
+                            Text("performances_list_empty")
+                        }
+                    }
+                    .font(.caption)
                 }
                 Spacer()
             }
@@ -36,20 +46,13 @@ public struct ResultSongOverviewView: View {
                 }, action: {
                     $0
                 }))
-            } else {
-                HStack {
-                Text("performances_list_empty")
-                    .font(.caption)
-                    Spacer()
-                }
-                Spacer()
             }
+            Spacer()
             HStack {
                 Spacer()
                 Text(tr("song_author", model.author))
-                    .font(.caption)
             }
-           
+            .font(.caption)
         }
         .padding()
     }

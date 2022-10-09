@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		86013F2228F0806600BC392D /* RockSalt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86013F2128F0806600BC392D /* RockSalt-Regular.ttf */; };
 		8609412528E1A3D30012614D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412428E1A3D30012614D /* AppDelegate.swift */; };
 		8609412928E1C5CD0012614D /* AddAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412828E1C5CD0012614D /* AddAlbums.swift */; };
 		8609412B28E1C9140012614D /* Add+Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8609412A28E1C9140012614D /* Add+Album.swift */; };
@@ -923,7 +922,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		86013F2128F0806600BC392D /* RockSalt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "RockSalt-Regular.ttf"; sourceTree = "<group>"; };
 		860712322868604300E54209 /* ReferenceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceType.swift; sourceTree = "<group>"; };
 		8609412428E1A3D30012614D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8609412628E1AAB70012614D /* Deletable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deletable.swift; sourceTree = "<group>"; };
@@ -1404,14 +1402,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		86013F2028F0800E00BC392D /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				86013F2128F0806600BC392D /* RockSalt-Regular.ttf */,
-			);
-			path = Fonts;
-			sourceTree = "<group>";
-		};
 		8609412C28E1F13C0012614D /* CloudKitClient */ = {
 			isa = PBXGroup;
 			children = (
@@ -1661,7 +1651,6 @@
 		866863E02865EB6200510DDF = {
 			isa = PBXGroup;
 			children = (
-				86013F2028F0800E00BC392D /* Fonts */,
 				8634311E28B1491600092931 /* Add */,
 				8609413928E237060012614D /* AllAlbums */,
 				865963A728A00F51003F43A4 /* AllPerformances */,
@@ -3075,7 +3064,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86013F2228F0806600BC392D /* RockSalt-Regular.ttf in Resources */,
 				8678FD312869F76700DF1E69 /* Localizable.strings in Resources */,
 				866863F12865EB6400510DDF /* Assets.xcassets in Resources */,
 			);
@@ -5047,7 +5035,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Dylan/Preview Content\"";
 				DEVELOPMENT_TEAM = ZUT4ATB28X;
@@ -5081,7 +5069,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 7;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Dylan/Preview Content\"";
 				DEVELOPMENT_TEAM = ZUT4ATB28X;

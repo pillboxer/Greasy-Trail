@@ -9,6 +9,7 @@ import CoreData
 import Stats
 import Core
 import AllAlbums
+import ComposableArchitecture
 import StoreKit
 
 struct AppState: Equatable {
@@ -52,4 +53,8 @@ struct AppState: Equatable {
     // IAP
     var products: [Product] = []
     var amountDonated: Double = 0
+    
+    // Alert
+    var alert: AlertState<CommandMenuAction>?
+
 }

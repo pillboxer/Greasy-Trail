@@ -28,7 +28,7 @@ struct ContentView: View {
     
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     let store: Store<AppState, AppAction>
-    @ObservedObject private var viewStore: ViewStore<ContentViewState, Never>
+    @ObservedObject private var viewStore: ViewStore<ContentViewState, CommandMenuAction>
     @State private var selectedID: String?
     
     struct ContentViewState: Equatable {
@@ -41,11 +41,12 @@ struct ContentView: View {
         var mode: Mode?
         var showingError: Bool
         var missingLBNumbers: [Int]?
+        var alert: AlertState<CommandMenuAction>?
     }
     
     init(store: Store<AppState, AppAction>) {
         self.store = store
-        self.viewStore = ViewStore(store.actionless.scope(state: {
+        self.viewStore = ViewStore(store.scope(state: {
             ContentViewState(selectedID: $0.selectedID,
                              model: $0.search.model,
                              displayedView: $0.displayedView,
@@ -54,7 +55,9 @@ struct ContentView: View {
                              selectedAlbumPredicate: $0.selectedAlbumPredicate,
                              mode: $0.mode,
                              showingError: $0.showingError,
-                             missingLBNumbers: $0.missingLBNumbers)}))
+                             missingLBNumbers: $0.missingLBNumbers,
+                             alert: $0.alert)},
+                                               action: { .commandMenu($0) }))
     }
     
     var body: some View {
@@ -72,7 +75,8 @@ struct ContentView: View {
         .frame(minWidth: 900, minHeight: 600)
         .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         .background(colorScheme == .dark ? Color(NSColor.windowBackgroundColor) : Color.white)
-
+        .alert(self.store.scope(state: \.alert, action: { .commandMenu($0)}),
+               dismiss: .toggleDeleteAlert)
     }
     
     @ViewBuilder

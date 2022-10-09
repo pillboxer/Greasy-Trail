@@ -5,6 +5,8 @@ import OSLog
 public let Log_CoreData = OSLog(subsystem: .subsystem, category: "Core Data")
 
 public class PersistenceController {
+    
+    @UserDefaultsBacked(key: "last_fetch_date") var lastFetchDate: Date?
 
     public static let shared = PersistenceController()
 
@@ -44,26 +46,20 @@ public class PersistenceController {
     public func newBackgroundContext() -> NSManagedObjectContext {
         container.newBackgroundContext()
     }
-
-    public func reset() {
-
+    
+    public func reset() async throws {
         let context = newBackgroundContext()
-        let entityNames = self.container.managedObjectModel.entities.map({ $0.name!})
-        context.perform {
-            entityNames.forEach { entityName in
-                let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        let entityNames = self.container.managedObjectModel.entities.map({ $0.name! })
+        try await context.perform {
+            for entity in entityNames {
+                let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
                 let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
-
                 do {
                     try context.execute(deleteRequest)
-                    try context.save()
-                } catch {
-                    os_log("Could not delete all items: %{public}@",
-                           log: Log_CoreData,
-                           type: .error,
-                           String(describing: error))
                 }
             }
         }
+        await context.asyncSave()
+        self.lastFetchDate = .distantPast
     }
 }
