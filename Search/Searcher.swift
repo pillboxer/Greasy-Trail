@@ -61,8 +61,8 @@ private extension Array where Element == Effect<AnyModel?, Never> {
     func erased() -> Effect<AnyModel?, Never> {
         self
             .publisher
-            .flatMap(maxPublishers: .max(1)) { $0 }
-            .compactMap { $0 }
+            .flatMap { $0 }
+            .filter { $0 != nil }
             .replaceEmpty(with: nil)
             .eraseToEffect()
     }

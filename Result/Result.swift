@@ -22,12 +22,14 @@ public struct ResultView: View {
     public init(store: Store<SearchState, SearchAction>) {
         self.store = store
         self.viewStore = ViewStore(store.actionless.scope(state: { ResultViewState(
+            failedSearch: $0.failedSearch,
             model: $0.model,
             currentSearchTitle: $0.currentSearch?.title)
         }))
     }
     
     struct ResultViewState: Equatable {
+        let failedSearch: Search?
         let model: AnyModel?
         let currentSearchTitle: String?
     }
@@ -37,22 +39,25 @@ public struct ResultView: View {
     }
     
     public var body: some View {
-        if let model = model?.value as? SongDisplayModel {
-            ResultSongOverviewView(store: store, model: model)
-        } else if let model = model?.value as? AlbumDisplayModel {
-            ResultAlbumOverviewView(store: store, model: model)
-        } else if let model = model?.value as? PerformanceDisplayModel {
-            ResultPerformanceOverviewView(store: store, model: model)
-        } else {
-            VStack {
-                HStack {
-                    Spacer()
-                    Text("No results found for \(viewStore.currentSearchTitle ?? "search")")
-                    Spacer()
+        VStack {
+            if let model = model?.value as? SongDisplayModel {
+                ResultSongOverviewView(store: store, model: model)
+            } else if let model = model?.value as? AlbumDisplayModel {
+                ResultAlbumOverviewView(store: store, model: model)
+            } else if let model = model?.value as? PerformanceDisplayModel {
+                ResultPerformanceOverviewView(store: store, model: model)
+            } else if viewStore.failedSearch != nil {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text("No results found for \(viewStore.currentSearchTitle ?? "search")")
+                        Spacer()
+                    }
                 }
+                .font(.caption)
+                .frame(maxHeight: .infinity)
             }
-            .font(.caption)
-            .frame(maxHeight: .infinity)
         }
+        .frame(maxHeight: .infinity)
     }
 }

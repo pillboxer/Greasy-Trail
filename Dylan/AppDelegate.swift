@@ -51,6 +51,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+          return true
+      }
+    
     func deleteMarkedDeletables() {
         var deleteables: [Deletable] = []
         let context = PersistenceController.shared.newBackgroundContext()
@@ -61,7 +65,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         deleteables.append(contentsOf: markedSongs + markedAlbums + markedPerformances)
         os_log("%@ objects ready for delete", log: Log_CoreData, String(describing: deleteables.count))
         deleteables.forEach { context.delete($0) }
-
     }
     
 }

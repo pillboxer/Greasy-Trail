@@ -70,6 +70,7 @@ public class NSTextFieldCoordinator: NSObject, NSTextFieldDelegate {
     public func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
         if commandSelector == #selector(NSResponder.insertNewline(_:)) {
             textField.onCommit?()
+            textField.text.wrappedValue = ""
             return true
         }
         return false

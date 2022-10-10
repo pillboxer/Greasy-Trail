@@ -21,6 +21,8 @@ public struct SearchEnvironment {
 public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment> { state, action, environment in
     switch action {
     case .makeSearch(let search):
+        state.failedSearch = nil
+        state.model = nil
         state.isSearching = true
         state.currentSearch = search
         return searchEffect(search: search, environment: environment)
@@ -28,7 +30,7 @@ public let searchReducer = Reducer<SearchState, SearchAction, SearchEnvironment>
         state.isSearching = false
         state.model = model ?? state.model
         state.failedSearch = model == nil ? search : nil
-        return Effect(value: .selectDisplayedView(.result, model))
+        return Effect.task { .selectDisplayedView(.result, model)  }.animation()
     case .reset(let displayedView):
         state.currentSearch = nil
         state.failedSearch = nil

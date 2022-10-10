@@ -78,6 +78,7 @@ private extension BottomBarView {
     @ViewBuilder
     var resultButtons: some View {
         homeButton
+        searchButtonView
         randomButton
         favoriteButton
         Spacer()
@@ -90,19 +91,25 @@ private extension BottomBarView {
         if viewStore.selectedObjectID != nil {
             editButton
         }
-        if viewStore.isSearchFieldShowing {
-            SearchView(store: store.scope(state: { $0.search },
-                                          action: { .search($0) }))
-            .transition(.move(edge: .leading))
-            .frame(width: 256)
-        }
-        searchButton
+        searchButtonView
         randomButton
         if viewStore.displaysAdminFunctionality {
             openAddButton
         }
         Spacer()
         recordButtons
+    }
+    
+    private var searchButtonView: some View {
+        Group {
+            if viewStore.isSearchFieldShowing {
+                SearchView(store: store.scope(state: { $0.search },
+                                              action: { .search($0) }))
+                .transition(.move(edge: .leading))
+                .frame(width: 256)
+            }
+            searchButton
+        }
     }
     
 }
